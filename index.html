@@ -918,38 +918,52 @@
             .lp-toast, .lp-toast.lp-toast-out, .lp-total-pop, .learning-points-pill.lp-flash::after, .quiz-success-pulse { animation: none !important; }
         }
     
-        /* FEEDBACK MODAL — mobile performance optimization */
+        /* FEEDBACK MODAL — mobile Safari: one native vertical scroller only */
         @media (max-width: 640px) {
             #feedback-modal {
                 align-items: flex-start !important;
                 justify-content: center !important;
-                padding: max(12px, env(safe-area-inset-top)) 0 max(12px, env(safe-area-inset-bottom)) !important;
+                padding: max(12px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) !important;
                 background: rgba(15, 23, 42, .68) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                transition-duration: 180ms !important;
-                overscroll-behavior: contain;
+                transition: opacity 120ms linear !important;
+
+                /* IMPORTANT: this is the ONLY vertical scroller on mobile. */
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                overscroll-behavior-y: auto !important;
+                touch-action: pan-y !important;
             }
             #feedback-modal > div {
                 width: calc(100% - 20px) !important;
                 max-width: none !important;
-                max-height: calc(100dvh - 24px) !important;
+                max-height: none !important;
+                height: auto !important;
+                min-height: 0 !important;
                 margin: 0 auto !important;
                 padding: 1.15rem !important;
                 border-radius: 20px !important;
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                -webkit-overflow-scrolling: touch;
-                box-shadow: 0 12px 32px rgba(15, 23, 42, .28) !important;
-                transition-duration: 180ms !important;
+
+                /* No nested scroller: iOS Safari can lock vertical swipes otherwise. */
+                overflow: visible !important;
+                -webkit-overflow-scrolling: auto !important;
+                overscroll-behavior: auto !important;
+                contain: none !important;
+                touch-action: pan-y !important;
+
+                box-shadow: 0 10px 28px rgba(15, 23, 42, .24) !important;
+                transition: none !important;
                 transform: none !important;
-                contain: layout paint;
             }
             #feedback-modal > div > .absolute {
                 display: none !important;
             }
             #feedback-modal form {
                 gap: 0 !important;
+                overflow: visible !important;
+                touch-action: pan-y !important;
             }
             #feedback-modal form.space-y-5 > :not([hidden]) ~ :not([hidden]) {
                 margin-top: .9rem !important;
@@ -963,8 +977,14 @@
             #feedback-modal textarea {
                 font-size: 16px !important; /* prevents iOS input zoom/reflow */
             }
+            #feedback-modal button,
+            #feedback-modal select,
+            #feedback-modal input,
+            #feedback-modal textarea {
+                touch-action: manipulation !important;
+            }
             #feedback-modal .feedback-star {
-                transition: color 120ms linear !important;
+                transition: none !important;
             }
         }
 
@@ -6615,6 +6635,8 @@
         clearFeedbackStatus();
         modal.classList.remove('hidden');
         modal.classList.add('flex');
+        // Mobile Safari: reset the single modal scroller without touching body scroll.
+        modal.scrollTop = 0;
         requestAnimationFrame(() => {
             modal.classList.remove('opacity-0');
             const card = modal.querySelector(':scope > div');
