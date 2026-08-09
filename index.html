@@ -985,6 +985,100 @@
             }
             #feedback-modal .feedback-star {
                 transition: none !important;
+                padding: .2rem !important;
+            }
+
+            /* Compact mobile typography: keep form readable without feeling oversized. */
+            #feedback-modal > div {
+                padding: .85rem !important;
+                border-radius: 16px !important;
+            }
+            #feedback-modal .relative.z-10 > .flex.items-start.justify-between {
+                margin-bottom: .75rem !important;
+                gap: .55rem !important;
+            }
+            #feedback-modal .w-11.h-11 {
+                width: 2rem !important;
+                height: 2rem !important;
+                border-radius: .7rem !important;
+            }
+            #feedback-modal .w-11.h-11 .lucide {
+                width: .9rem !important;
+                height: .9rem !important;
+            }
+            #feedback-modal h3 {
+                font-size: 1rem !important;
+                line-height: 1.2 !important;
+            }
+            #feedback-modal h3 + p {
+                font-size: .68rem !important;
+                line-height: 1.35 !important;
+                margin-top: .2rem !important;
+            }
+            #feedback-modal .text-\[10px\].font-bold.uppercase {
+                font-size: .52rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: .15rem !important;
+            }
+            #feedback-modal label {
+                font-size: .68rem !important;
+                line-height: 1.25 !important;
+                margin-bottom: .35rem !important;
+            }
+            #feedback-modal form.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+                margin-top: .65rem !important;
+            }
+            #feedback-modal .grid.gap-4 {
+                gap: .65rem !important;
+            }
+            #feedback-modal #feedback-rating {
+                gap: .05rem !important;
+                flex-wrap: wrap !important;
+            }
+            #feedback-modal .feedback-star .lucide {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+            }
+            #feedback-modal #feedback-rating-label {
+                font-size: .62rem !important;
+                margin-left: .35rem !important;
+            }
+            #feedback-modal select,
+            #feedback-modal input,
+            #feedback-modal textarea {
+                /* 16px prevents Safari auto-zoom; compactness comes from padding/line-height. */
+                font-size: 16px !important;
+                line-height: 1.2 !important;
+                padding: .58rem .7rem !important;
+                border-radius: .65rem !important;
+            }
+            #feedback-modal textarea {
+                min-height: 58px !important;
+            }
+            #feedback-modal #feedback-status {
+                font-size: .68rem !important;
+                padding: .55rem .7rem !important;
+            }
+            #feedback-modal #feedback-submit {
+                font-size: .75rem !important;
+                padding: .62rem .85rem !important;
+                border-radius: .7rem !important;
+            }
+            #feedback-modal #feedback-submit .lucide {
+                width: .85rem !important;
+                height: .85rem !important;
+            }
+            #feedback-modal form > div:last-child > p {
+                font-size: .56rem !important;
+                line-height: 1.35 !important;
+            }
+            #feedback-modal button[aria-label="Close"] {
+                padding: .45rem !important;
+                border-radius: .6rem !important;
+            }
+            #feedback-modal button[aria-label="Close"] .lucide {
+                width: 1rem !important;
+                height: 1rem !important;
             }
         }
 
