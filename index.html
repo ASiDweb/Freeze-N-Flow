@@ -1108,9 +1108,13 @@
             }
             nav > div > div > div[aria-label="Go to home"] > span {
                 font-size: .88rem !important;
-                line-height: 1.1 !important;
+                line-height: 1.08 !important;
                 letter-spacing: -.02em !important;
-                white-space: nowrap !important;
+                white-space: normal !important;
+                width: 4.75rem !important;
+                max-width: 4.75rem !important;
+                flex: 0 0 4.75rem !important;
+                overflow: visible !important;
             }
 
             /* A little more room for the brand without changing desktop */
@@ -1132,6 +1136,13 @@
             #hero-section {
                 padding-top: 4.25rem !important;
                 padding-bottom: 4.5rem !important;
+                min-height: 640px !important;
+                min-height: calc(100svh - 5rem) !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            #hero-section > #tour-hero {
+                width: 100% !important;
             }
             #tour-hero > .inline-flex {
                 font-size: .66rem !important;
