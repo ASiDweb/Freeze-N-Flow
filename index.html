@@ -503,7 +503,8 @@
         /* Keep the invisible overlay only to block accidental clicks during the tour.
            No extra focus frame / rectangular cut-out is drawn. */
         #tour-overlay {
-            background: transparent !important;
+            /* Dim everything except the lifted target (target sits above this layer). */
+            background: rgba(2, 6, 23, .38) !important;
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
         }
@@ -528,6 +529,18 @@
             }
         }
 
+        /* TOUR FIXED COPY POSITION: explanation stays bottom-center on every step. */
+        #tour-popover {
+            top: auto !important;
+            bottom: 24px !important;
+        }
+        @media (max-width: 640px) {
+            #tour-popover {
+                top: auto !important;
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 14px) !important;
+            }
+        }
+
         /* TOUR PERFORMANCE PASS: compositor-only motion, shorter on mobile. */
         #tour-popover { transition-duration: .22s !important; }
         @media (max-width: 640px) {
@@ -539,6 +552,80 @@
             }
             .dark .tour-highlighted {
                 filter: saturate(1.06) contrast(1.035) brightness(1.045) !important;
+            }
+        }
+
+
+        /* TOUR MOBILE COMPACT PASS: small fixed card, concise copy, clearer target. */
+        @media (max-width: 640px) {
+            #tour-popover {
+                width: calc(100% - 28px) !important;
+                max-width: 350px !important;
+                padding: 13px 14px 12px !important;
+                border-radius: 18px !important;
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+                box-shadow: 0 18px 40px -22px rgba(0,0,0,.58) !important;
+            }
+            #tour-dots-container {
+                margin-bottom: 9px !important;
+                gap: 4px !important;
+                row-gap: 4px !important;
+            }
+            #tour-dots-container .tour-dot {
+                height: 5px !important;
+            }
+            .tour-dot.active { width: 14px !important; }
+            .tour-dot.inactive { width: 5px !important; }
+            #tour-popover > div:nth-child(2) {
+                margin-bottom: 5px !important;
+            }
+            #tour-popover > div:nth-child(2) > div:first-child {
+                width: 28px !important;
+                height: 28px !important;
+                border-radius: 9px !important;
+                flex: 0 0 28px !important;
+            }
+            #tour-popover > div:nth-child(2) > div:first-child .lucide {
+                width: 14px !important;
+                height: 14px !important;
+            }
+            #tour-title {
+                font-size: 15px !important;
+                line-height: 1.2 !important;
+                letter-spacing: -.015em !important;
+            }
+            #tour-desc {
+                font-size: 11.5px !important;
+                line-height: 1.42 !important;
+                margin-bottom: 10px !important;
+                padding-left: 36px !important;
+            }
+            #tour-popover > div:last-child {
+                padding-top: 9px !important;
+                gap: 7px !important;
+            }
+            #tour-skip,
+            #tour-prev,
+            #tour-next {
+                font-size: 11px !important;
+            }
+            #tour-skip { padding: 4px 2px !important; }
+            #tour-prev {
+                padding: 7px 10px !important;
+                border-radius: 10px !important;
+            }
+            #tour-next {
+                padding: 7px 12px !important;
+                border-radius: 10px !important;
+            }
+            #tour-next-icon {
+                width: 12px !important;
+                height: 12px !important;
+            }
+            .tour-highlighted {
+                transform: translateY(-3px) scale(1.008) !important;
+                filter: saturate(1.12) contrast(1.055) brightness(1.055) !important;
+                box-shadow: 0 18px 40px -24px rgba(0,0,0,.68), 0 12px 30px -22px rgba(124,58,237,.72) !important;
             }
         }
 
@@ -4139,66 +4226,101 @@
         const tourSteps = [
             {
                 target: 'tour-hero', view: 'home',
-                title: 'Welcome to Freeze N\' Flow!',
-                desc: 'Start here, then move to Learn or Quiz Arena. The top tools also let you switch language, sound, theme, and reopen this tour whenever you need it.',
-                titleMs: 'Selamat Datang ke Freeze N\' Flow!',
-                descMs: 'Mulakan di sini, kemudian masuk ke Learn atau Quiz Arena. Alat di bahagian atas juga membolehkan anda menukar bahasa, bunyi, tema dan membuka semula tour ini bila-bila masa.'
+                title: 'Welcome to Freeze N\' Flow',
+                desc: 'Start here, then choose Learn or Quiz Arena.',
+                titleMs: 'Selamat Datang ke Freeze N\' Flow',
+                descMs: 'Mulakan di sini, kemudian pilih Learn atau Quiz Arena.'
             },
             {
-                target: 'tour-intro', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-tabs',
-                title: 'One Learning Flow for All Four Modules',
-                desc: 'This Learn page is the main laboratory. Choose any of the four tabs. Every module follows the same flow: learning objective, Did You Know?, practice quiz, Control Center, particle simulation with equation, then live explanation and experiment summary. The progress tracker records your completion automatically.',
-                titleMs: 'Satu Aliran Pembelajaran untuk Empat Modul',
-                descMs: 'Halaman Learn ialah makmal utama. Pilih mana-mana daripada empat tab. Setiap modul menggunakan aliran yang sama: objektif pembelajaran, Did You Know?, kuiz latihan, Control Center, simulasi zarah bersama persamaan, kemudian Live Explanation dan Experiment Summary. Penjejak kemajuan merekodkan penyelesaian anda secara automatik.'
+                target: 'tour-tabs', view: 'learn', tab: 'vapor-pressure',
+                title: 'Choose a Topic',
+                desc: 'Switch between the four colligative-property modules here.',
+                titleMs: 'Pilih Topik',
+                descMs: 'Tukar antara empat modul sifat koligatif di sini.'
+            },
+            {
+                target: 'tour-objective-vp', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-learning-vp',
+                title: 'Learning Objective',
+                desc: 'Check what you should understand before experimenting.',
+                titleMs: 'Objektif Pembelajaran',
+                descMs: 'Lihat perkara yang perlu difahami sebelum bereksperimen.'
             },
             {
                 target: 'tour-fact-vp', view: 'learn', tab: 'vapor-pressure',
-                title: 'Animated Did You Know?',
-                desc: 'These real-world facts include small animations. Select Next Fact to reveal them in sequence rather than randomly.',
-                titleMs: 'Did You Know? Beranimasi',
-                descMs: 'Fakta dunia sebenar ini disertakan animasi kecil. Tekan Next Fact untuk melihat fakta mengikut turutan, bukan secara rawak.'
+                title: 'Did You Know?',
+                desc: 'Explore short real-world facts and animations.',
+                titleMs: 'Did You Know?',
+                descMs: 'Terokai fakta dunia sebenar dan animasi ringkas.'
+            },
+            {
+                target: 'tour-quiz-vp', view: 'learn', tab: 'vapor-pressure',
+                title: 'Quiz Time',
+                desc: 'Answer the short practice questions for this topic.',
+                titleMs: 'Quiz Time',
+                descMs: 'Jawab soalan latihan ringkas untuk topik ini.'
+            },
+            {
+                target: 'tour-controls-vp', view: 'learn', tab: 'vapor-pressure',
+                title: 'Control Center',
+                desc: 'Choose the solution type, adjust temperature, pause or reset.',
+                titleMs: 'Control Center',
+                descMs: 'Pilih jenis larutan, laras suhu, pause atau reset.'
+            },
+            {
+                target: 'tour-simulation-stage-vp', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-sim-vp',
+                title: 'Particle Simulation',
+                desc: 'Compare solvent and solution particles with their equations.',
+                titleMs: 'Simulasi Zarah',
+                descMs: 'Bandingkan zarah solvent dan solution bersama persamaannya.'
+            },
+            {
+                target: 'tour-explanation-vp', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-insights-vp',
+                title: 'Live Explanation',
+                desc: 'Read the science behind what the simulation is showing.',
+                titleMs: 'Live Explanation',
+                descMs: 'Baca penerangan sains di sebalik simulasi yang dipaparkan.'
+            },
+            {
+                target: 'tour-summary-vp', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-insights-vp',
+                title: 'Experiment Summary',
+                desc: 'Review the observation and real-life application.',
+                titleMs: 'Experiment Summary',
+                descMs: 'Semak pemerhatian dan aplikasi dunia sebenar.'
             },
             {
                 target: 'tour-learning-points', view: 'learn', tab: 'vapor-pressure', fallbackTarget: 'tour-intro',
                 title: 'Learning Points',
-                desc: 'You earn Learning Points while exploring facts, using the simulation controls, and answering quizzes correctly. Select this card to see your points breakdown.',
+                desc: 'Your points increase automatically as you learn and interact.',
                 titleMs: 'Learning Points',
-                descMs: 'Anda memperoleh Learning Points apabila meneroka fakta, menggunakan kawalan simulasi dan menjawab kuiz dengan betul. Tekan kad ini untuk melihat pecahan mata anda.'
+                descMs: 'Mata bertambah secara automatik semasa anda belajar dan berinteraksi.'
             },
             {
                 target: 'qa-setup', view: 'quiz',
                 title: 'Quiz Arena',
-                desc: 'When you are ready, enter a nickname and take the full 16-question challenge with timers, scoring, feedback, answer review, and Hall of Fame results.',
+                desc: 'Enter a nickname and take the full challenge.',
                 titleMs: 'Quiz Arena',
-                descMs: 'Apabila sudah bersedia, masukkan nickname dan jawab cabaran penuh 16 soalan dengan timer, markah, maklum balas, semakan jawapan dan keputusan Hall of Fame.'
+                descMs: 'Masukkan nickname dan jawab cabaran penuh.'
             },
             {
                 target: 'tour-live-competition', view: 'quiz', fallbackTarget: 'qa-setup',
                 title: 'Live Competition',
-                desc: 'For classroom play, a host creates a room code and students join from their own devices. Everyone can answer together while the live ranking updates.',
+                desc: 'Create or join a room for a live class competition.',
                 titleMs: 'Live Competition',
-                descMs: 'Untuk aktiviti kelas, host menghasilkan room code dan pelajar masuk menggunakan peranti masing-masing. Semua boleh menjawab serentak sambil ranking langsung dikemas kini.'
+                descMs: 'Cipta atau sertai room untuk pertandingan kelas secara langsung.'
             },
             {
                 target: 'certificate-unlock-area', view: 'quiz', modal: 'badges', fallbackTarget: 'badges-grid',
-                title: 'Badges + Certificate',
-                desc: 'Your achievement area collects unlocked badges and tracks the Certificate of Completion. The certificate becomes available after all four learning modules and Quiz Arena are completed.',
-                titleMs: 'Badges + Sijil',
-                descMs: 'Bahagian pencapaian mengumpulkan badge yang telah dibuka dan menjejak Certificate of Completion. Sijil akan tersedia selepas keempat-empat modul pembelajaran dan Quiz Arena diselesaikan.'
+                title: 'Badges & Certificate',
+                desc: 'Track badges and unlock the certificate after completion.',
+                titleMs: 'Badges & Sijil',
+                descMs: 'Jejak badge dan buka sijil selepas semua syarat selesai.'
             },
             {
                 target: 'tour-feedback-button', view: 'quiz', fallbackTarget: 'quiz-arena-section',
-                title: 'Share Your Feedback',
-                desc: 'Use Give Feedback at the bottom of the page to rate the experience and share what worked well or what could be improved.',
-                titleMs: 'Kongsi Maklum Balas',
-                descMs: 'Gunakan Give Feedback di bahagian bawah halaman untuk memberi rating serta berkongsi perkara yang baik atau cadangan penambahbaikan.'
-            },
-            {
-                target: 'tour-hero', view: 'home',
-                title: 'You\'re Ready to Explore!',
-                desc: 'That is the whole journey without repeating the same module layout. Pick a topic, experiment, learn from the explanations, complete Quiz Arena, and unlock your achievements.',
-                titleMs: 'Anda Dah Bersedia!',
-                descMs: 'Itulah keseluruhan perjalanan tanpa mengulang penerangan susun atur modul yang sama. Pilih topik, cuba eksperimen, fahami penerangan, lengkapkan Quiz Arena dan buka pencapaian anda.'
+                title: 'Give Feedback',
+                desc: 'Share a quick rating or suggestion here.',
+                titleMs: 'Beri Maklum Balas',
+                descMs: 'Kongsi rating atau cadangan ringkas di sini.'
             }
         ];
 
@@ -4253,6 +4375,15 @@
                 assignTourId(controls, `tour-controls-${key}`);
                 assignTourId(simulation, `tour-sim-${key}`);
                 assignTourId(right, `tour-insights-${key}`);
+
+                // Precise tour targets: spotlight the exact component, not a whole column.
+                assignTourId(controls?.querySelector('.solute-picker-inline'), `tour-solution-picker-${key}`);
+                assignTourId(controls?.querySelector('.controls-body'), `tour-control-actions-${key}`);
+                assignTourId(simulation?.querySelector('.simulation-stage'), `tour-simulation-stage-${key}`);
+
+                const insightCards = right ? Array.from(right.children).filter(el => el.classList?.contains('notion-card')) : [];
+                if (insightCards[0]) assignTourId(insightCards[0], `tour-explanation-${key}`);
+                if (insightCards[1]) assignTourId(insightCards[1], `tour-summary-${key}`);
             });
         }
 
@@ -4384,17 +4515,13 @@
 
         function positionTourPopover(targetRect) {
             const popover = document.getElementById('tour-popover');
-            if (!popover || !targetRect) return;
-            const targetCenter = targetRect.top + (targetRect.height / 2);
-            const putPopoverOnTop = targetCenter > window.innerHeight * 0.58;
-
-            if (putPopoverOnTop) {
-                popover.style.top = window.innerWidth < 640 ? '74px' : '88px';
-                popover.style.bottom = 'auto';
-            } else {
-                popover.style.top = 'auto';
-                popover.style.bottom = window.innerWidth < 640 ? '14px' : '24px';
-            }
+            if (!popover) return;
+            // Keep the explanation card in one predictable place for the entire tour.
+            // Only the highlighted target moves; the copy never jumps above/below it.
+            popover.style.top = 'auto';
+            popover.style.bottom = window.innerWidth < 640
+                ? 'calc(env(safe-area-inset-bottom, 0px) + 14px)'
+                : '24px';
         }
 
         function positionTourFocusFrame(target, movePopover = true) {
@@ -4476,7 +4603,7 @@
 
                 const before = targetEl.getBoundingClientRect();
                 const topSafe = 82;
-                const bottomSafe = window.innerHeight - (window.innerWidth < 640 ? 205 : 185);
+                const bottomSafe = window.innerHeight - (window.innerWidth < 640 ? 165 : 185);
                 const needsScroll = before.top < topSafe || before.bottom > bottomSafe;
 
                 const reveal = () => {
