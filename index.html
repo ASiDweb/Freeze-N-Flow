@@ -1930,26 +1930,25 @@
 </div>
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
+<div class="relative flex-1 min-h-[150px] flex flex-col">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-vp-pure"></canvas>
 </div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3 shadow-sm">
+<div class="text-[9px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-1.5">Solvent Equation</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5" id="vp-solvent-equation-formula"></div>
+<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-solvent-equation-explanation"></div>
+</div>
+</div>
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
+<div class="relative flex-1 min-h-[150px] flex flex-col">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</span>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-vp-solution"></canvas>
 </div>
-</div>
-<div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
-<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-3">Equation</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3">
-<div class="text-[10px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-2">Solvent</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-2" id="vp-solvent-equation-formula"></div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-solvent-equation-explanation"></div>
-</div>
-<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3">
-<div class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-2">Solution</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-2" id="vp-equation-formula"></div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-equation-explanation"></div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3 shadow-sm">
+<div class="text-[9px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-1.5">Solution Equation</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5" id="vp-equation-formula"></div>
+<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-equation-explanation"></div>
 </div>
 </div>
 </div>
@@ -2076,26 +2075,25 @@
 </div>
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
+<div class="relative flex-1 min-h-[150px] flex flex-col">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-pure"></canvas>
 </div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3 shadow-sm">
+<div class="text-[9px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-1.5">Solvent Equation</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">\(P_{\text{solvent}}^\circ(T_b^\circ)=P_{\text{external}}\)</div>
+<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(T_b^\circ\)</strong> = boiling point of the pure solvent.</div>
+</div>
+</div>
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
+<div class="relative flex-1 min-h-[150px] flex flex-col">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</span>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-solution"></canvas>
 </div>
-</div>
-<div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
-<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-3">Equation</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3">
-<div class="text-[10px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-2">Solvent</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(P_{\text{solvent}}^\circ(T_b^\circ)=P_{\text{external}}\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(T_b^\circ\)</strong> = boiling point of the pure solvent.</div>
-</div>
-<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3">
-<div class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-2">Solution</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(K_b\)</strong> = molal boiling-point elevation constant; <strong>\(m\)</strong> = molality of the non-volatile solute; <strong>\(T_b\)</strong> = boiling point of the solution.</div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3 shadow-sm">
+<div class="text-[9px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-1.5">Solution Equation</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
+<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(K_b\)</strong> = molal boiling-point elevation constant; <strong>\(m\)</strong> = molality of the non-volatile solute; <strong>\(T_b\)</strong> = boiling point of the solution.</div>
 </div>
 </div>
 </div>
