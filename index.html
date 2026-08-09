@@ -6474,7 +6474,13 @@
 
             const targetPure = Math.round(clampValue(3 + Math.pow(temp01, 1.15) * 15, 3, 18));
             const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.56;
-            const targetSolution = Math.round(clampValue(targetPure * solutionVapourFactor, 2, 24));
+            // Non-volatile solution must show visibly fewer vapour molecules than the pure solvent
+            // at the same temperature. Keep the target itself lower so the physics engine does
+            // not fight a later visual correction. Volatile solution remains free to contribute
+            // additional vapour through both volatile components.
+            const targetSolution = currentSolute === 'Ethanol'
+                ? Math.round(clampValue(targetPure * solutionVapourFactor, 2, 24))
+                : Math.max(1, Math.min(targetPure - 1, Math.floor(targetPure * 0.55)));
 
             const thermal = {
                 liquidSpeed: 22 + 28 * Math.sqrt(0.15 + temp01 * 0.85),
@@ -6662,7 +6668,9 @@
             };
 
             function gasTarget(tempValue, boilingPoint, volatileBoost = 1) {
-                const ambient = 1 + clampValue((tempValue - 35) / 25, 0, 1) * 2;
+                // Keep a small visible vapour population even at low temperature so the
+                // pure-solvent/solution difference can be demonstrated clearly from 20 °C.
+                const ambient = 2 + clampValue((tempValue - 35) / 25, 0, 1) * 2;
                 const nearBoil = clampValue((tempValue - (boilingPoint - 15)) / 15, 0, 1) * 4;
                 const boiling = tempValue >= boilingPoint ? 7 + (tempValue - boilingPoint) * 0.55 : 0;
                 return Math.round(clampValue((ambient + nearBoil + boiling) * volatileBoost, 1, 24));
@@ -6682,15 +6690,42 @@
             }
 
             const targetPure = gasTarget(temp, bpPure, 1);
-            const targetSolution = gasTarget(temp, bpSol, 0.78);
+            const rawSolutionTarget = gasTarget(temp, bpSol, 0.78);
+            // At the same temperature, a non-volatile solution must have visibly fewer
+            // vapour molecules than the pure solvent. Maintain at least a one-particle gap
+            // and roughly a 25% visual separation as the vapour population grows.
+            const minimumGap = Math.max(1, Math.ceil(targetPure * 0.25));
+            const targetSolution = Math.max(0, Math.min(rawSolutionTarget, targetPure - minimumGap));
             const pureBubbleRate = boilingBubbleRate(temp, bpPure, 1);
             const solutionBubbleRate = boilingBubbleRate(temp, bpSol, 1);
             const pureIntensity = clampValue((temp - (bpPure - 4)) / 12, 0, 1);
             const solutionIntensity = clampValue((temp - (bpSol - 4)) / 12, 0, 1);
 
+            function enforceBoilingVapourGap() {
+                const pureGasCount = bpState.pure.particles.filter(p => p.type === 'gas').length;
+                // Never let the solution visually catch up with the pure solvent. This is a
+                // qualitative teaching model for boiling-point elevation by a non-volatile solute.
+                const allowedSolutionGas = pureGasCount > 0
+                    ? Math.max(0, Math.min(targetSolution, Math.floor(pureGasCount * 0.75)))
+                    : 0;
+                const solutionGas = bpState.solution.particles.filter(p => p.type === 'gas');
+                const excess = Math.max(0, solutionGas.length - allowedSolutionGas);
+                for (let i = 0; i < excess; i++) {
+                    const p = solutionGas[i];
+                    p.type = 'solvent';
+                    p.liquidType = 'solvent';
+                    p.color = '#2563eb';
+                    p.radius = p.baseRadius || 4;
+                    p.x = clampValue(p.x, p.radius + 2, solObj.width - p.radius - 2);
+                    p.y = liquidLevelSol + p.radius + 2 + (i % 4) * 5;
+                    p.vy = Math.abs(p.vy || thermal.liquidSpeed * 0.3);
+                }
+            }
+
             const advance = makeFrameStepper((dt) => {
                 stepChamber(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermal, phaseForBoiling(bpState.pure, targetPure, bpPure, 1));
                 stepChamber(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseForBoiling(bpState.solution, targetSolution, bpSol, 0.82));
+                enforceBoilingVapourGap();
                 updateBoilingBubbles(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, pureBubbleRate, pureIntensity);
                 updateBoilingBubbles(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, solutionBubbleRate, solutionIntensity);
             });
