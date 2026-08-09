@@ -1063,10 +1063,16 @@
 
         /* QUIZ ANSWER REVIEW — horizontal one-card-at-a-time carousel */
         .qa-review-carousel {
-            display: flex;
+            display: grid !important;
+            grid-auto-flow: column !important;
+            grid-auto-columns: 100% !important;
+            grid-template-rows: minmax(0, auto) !important;
             gap: 1rem;
-            overflow-x: auto;
-            overflow-y: hidden;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -1077,9 +1083,10 @@
         }
         .qa-review-carousel::-webkit-scrollbar { display: none; }
         .qa-review-card {
-            flex: 0 0 100%;
-            width: 100%;
-            min-width: 0;
+            width: 100% !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
             scroll-snap-align: start;
             scroll-snap-stop: always;
             max-height: min(560px, 64vh);
@@ -4324,6 +4331,23 @@
                 if (!container) return;
                 container.innerHTML = '';
 
+                // Force a true horizontal one-question-per-page track on every browser/desktop.
+                // Inline layout prevents older/global CSS from turning the review back into a vertical stack.
+                Object.assign(container.style, {
+                    display: 'grid',
+                    gridAutoFlow: 'column',
+                    gridAutoColumns: '100%',
+                    gridTemplateRows: 'minmax(0, auto)',
+                    gap: window.matchMedia('(max-width: 640px)').matches ? '0.75rem' : '1rem',
+                    width: '100%',
+                    maxWidth: '100%',
+                    minWidth: '0',
+                    overflowX: 'auto',
+                    overflowY: 'hidden',
+                    scrollSnapType: 'x mandatory',
+                    scrollBehavior: 'smooth'
+                });
+
                 this.state.answers.forEach((answer, index) => {
                     const card = document.createElement('div');
                     const statusClass = answer.isCorrect
@@ -4331,6 +4355,14 @@
                         : 'border-red-200 dark:border-red-500/30 bg-red-50/70 dark:bg-red-500/10';
                     card.className = `qa-review-card p-5 rounded-2xl border ${statusClass}`;
                     card.dataset.reviewIndex = String(index);
+                    Object.assign(card.style, {
+                        width: '100%',
+                        minWidth: '100%',
+                        maxWidth: '100%',
+                        boxSizing: 'border-box',
+                        scrollSnapAlign: 'start',
+                        scrollSnapStop: 'always'
+                    });
 
                     const statusText = answer.isCorrect ? 'Correct' : (answer.timedOut ? 'Time Expired' : 'Incorrect');
                     const statusTextClass = answer.isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
