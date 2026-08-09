@@ -1849,9 +1849,10 @@
 <i class="w-5 h-5" data-lucide="target"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
-<p class="text-[13px] text-slate-700 dark:text-slate-300">
-                                    State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.
-                                </p>
+<ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
+<li>State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution.</li>
+<li>Calculate the vapour composition above a solution containing a volatile solute and solvent.</li>
+</ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter" id="tour-fact-vp">
 <div class="flex items-center justify-between mb-4">
@@ -1915,11 +1916,11 @@
 <div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
 <div class="flex items-center gap-1.5 whitespace-nowrap">
 <span class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50"></span>
-<span>Solvent (Water)</span>
+<span>Solvent</span>
 </div>
 <div class="flex items-center gap-1.5 whitespace-nowrap">
 <span class="w-2.5 h-2.5 rounded-full bg-amberSolute shadow-sm shadow-amber-500/50"></span>
-<span>Non-Volatile Solute</span>
+<span id="vp-solute-legend-label">Non-Volatile Solute</span>
 </div>
 <div class="flex items-center gap-1.5 whitespace-nowrap">
 <span class="w-2.5 h-2.5 rounded-full bg-stemPurple-500 shadow-sm shadow-stemPurple-500/50"></span>
@@ -1938,9 +1939,19 @@
 </div>
 </div>
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
-<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
+<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-3">Equation</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3">
+<div class="text-[10px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-2">Solvent</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-2" id="vp-solvent-equation-formula"></div>
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-solvent-equation-explanation"></div>
+</div>
+<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3">
+<div class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-2">Solution</div>
 <div class="text-sm font-bold text-slate-900 dark:text-white mb-2" id="vp-equation-formula"></div>
 <div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-equation-explanation"></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1986,9 +1997,10 @@
 <i class="w-5 h-5" data-lucide="target"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
-<p class="text-[13px] text-slate-700 dark:text-slate-300">
-                                    Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.
-                                </p>
+<ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
+<li>Calculate the boiling-point elevation of a solution containing a non-volatile solute.</li>
+<li>Determine the molar mass of an unknown non-volatile solute from boiling-point elevation data.</li>
+</ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter">
 <div class="flex items-center justify-between mb-4">
@@ -2019,7 +2031,7 @@
 <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Select Solute</label>
 <div class="solute-grid">
 <button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Glucose" onclick="setSolute('Glucose')">Glucose</button>
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Ethanol" onclick="setSolute('Ethanol')">Ethanol</button>
+<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Sucrose" onclick="setSolute('Sucrose')">Sucrose</button>
 </div>
 </div>
 </div>
@@ -2048,13 +2060,18 @@
 </div>
 </div>
 <div class="simulation-card flex-1 p-4 lg:p-7 flex flex-col min-h-[380px] component-card">
-<div class="flex items-center justify-between border-b border-slate-100 dark:border-white/5 pb-4 mb-5">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-5">
 <div class="flex items-center space-x-2.5">
 <span class="relative flex h-2.5 w-2.5">
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-stemPurple-400 opacity-75"></span>
 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-stemPurple-500"></span>
 </span>
 <span class="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-heading">Boiling Point</span>
+</div>
+<div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span><span>Solvent</span></div>
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-amberSolute"></span><span>Non-Volatile Solute</span></div>
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-stemPurple-500"></span><span>Gas</span></div>
 </div>
 </div>
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
@@ -2068,15 +2085,19 @@
 </div>
 </div>
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
-<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\Delta T_b = K_bm\)<br/>\(\Delta T_b = T_b - T_b^\circ\)<br/>\(T_b &gt; T_b^\circ\;\text{and}\;\Delta T_b &gt; 0\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-<strong>where;</strong><br/>
-<strong>\(K_b\)</strong> = molal boiling point elevation constant of the solvent (°C kg mol<sup>−1</sup>)<br/>
-<strong>\(m\)</strong> = molality of solution (mol kg<sup>−1</sup>)<br/>
-<strong>\(T_b^\circ\)</strong> = Boiling point of pure solvent (°C)<br/>
-<strong>\(T_b\)</strong> = Boiling point of solution (°C)
-                                    </div>
+<div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-3">Equation</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3">
+<div class="text-[10px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-2">Solvent</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(P_{\text{solvent}}^\circ(T_b^\circ)=P_{\text{external}}\)</div>
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(T_b^\circ\)</strong> = boiling point of the pure solvent.</div>
+</div>
+<div class="rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3">
+<div class="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-2">Solution</div>
+<div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(K_b\)</strong> = molal boiling-point elevation constant; <strong>\(m\)</strong> = molality of the non-volatile solute; <strong>\(T_b\)</strong> = boiling point of the solution.</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2089,8 +2110,8 @@
 </div>
 <div class="space-y-4 text-[13px] text-slate-700 dark:text-slate-300" id="explanation-bp-simple">
 <p>A liquid boils when its vapour pressure becomes equal to the external pressure.</p>
-<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.</p>
-<p>Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.</p>
+<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute such as glucose or sucrose lowers the solvent vapour pressure, so a higher temperature is needed.</p>
+<p>The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.</p>
 </div>
 </div>
 <div class="p-7 notion-card">
@@ -2101,7 +2122,7 @@
 <div class="space-y-5 text-[13px] text-slate-700 dark:text-slate-300">
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 mb-1.5 font-heading">Observation</h4>
-<p>A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.</p>
+<p>Solutions containing non-volatile solutes such as glucose or sucrose boil at a higher temperature than the pure solvent.</p>
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
@@ -2122,9 +2143,10 @@
 <i class="w-5 h-5" data-lucide="target"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
-<p class="text-[13px] text-slate-700 dark:text-slate-300">
-                                    Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.
-                                </p>
+<ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
+<li>Calculate the freezing-point depression of a solution.</li>
+<li>Determine the molar mass of an unknown solute from freezing-point depression data.</li>
+</ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter">
 <div class="flex items-center justify-between mb-4">
@@ -2232,7 +2254,7 @@
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
-<p>People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.</p>
+<p>Antifreeze is added to vehicle cooling systems in cold climates so the coolant remains liquid at temperatures where the pure solvent could freeze.</p>
 </div>
 </div>
 
@@ -2249,9 +2271,10 @@
 <i class="w-5 h-5" data-lucide="target"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
-<p class="text-[13px] text-slate-700 dark:text-slate-300">
-                                    Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.
-                                </p>
+<ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
+<li>Explain osmosis through a semipermeable membrane.</li>
+<li>Relate osmotic pressure to the concentration of solute particles in a solution.</li>
+</ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter">
 <div class="flex items-center justify-between mb-4">
@@ -2309,8 +2332,8 @@
 <div class="simulation-card flex-1 p-4 lg:p-7 flex flex-col min-h-[380px] component-card">
 <div class="simulation-stage simulation-stage-single flex-1 grid grid-cols-1 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] flex flex-col shadow-inner">
 <div class="simulation-panel flex-1 relative h-full min-h-[150px]">
-<div class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent (Left)</div>
-<div class="absolute top-2.5 right-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution (Right)</div>
+<div class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</div>
+<div class="absolute top-2.5 right-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</div>
 <canvas class="w-full h-full rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 shadow-sm" id="canvas-osmosis"></canvas>
 </div>
 </div>
@@ -2324,7 +2347,7 @@
 <div class="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
 <div class="bg-slate-50 dark:bg-[#060A12] p-4 rounded-[14px] border border-slate-100 dark:border-white/5 shadow-sm">
 <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold font-heading tracking-wider">Net Directional Flux</span>
-<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">Left → Right</div>
+<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">Solvent → Solution</div>
 </div>
 </div>
 </div>
@@ -3328,7 +3351,6 @@
                 { text: "Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.", icon: "cooking-pot", scene: "pulse", art: "pressure-cooker" }
             ],
             'fp': [
-                { text: "Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.", icon: "car", scene: "snow-road", art: "salt-road" },
                 { text: "Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.", icon: "ice-cream-bowl", scene: "chill", art: "ice-cream" },
                 { text: "Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.", icon: "fish", scene: "chill", art: "antifreeze-fish" },
                 { text: "Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.", icon: "wine", scene: "chill", art: "cold-bottle" },
@@ -5320,7 +5342,7 @@
                 { question: "For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?", options: ["0.512 °C", "1.86 °C", "100.512 °C", "0.0512 °C"], answer: 0 }
             ],
             'fp': [
-                { question: "Why is salt spread on icy roads in winter?", options: ["It provides heat", "It lowers the freezing point", "It creates friction"], answer: 1 },
+                { question: "Compared with a pure solvent, a solution containing a non-volatile solute generally freezes at:", options: ["A lower temperature", "The same temperature", "A higher temperature"], answer: 0 },
                 { question: "When a solution freezes, the solid that forms is typically:", options: ["Pure solute", "Pure solvent (ice)", "A mixture of both"], answer: 1 },
                 { question: "For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?", options: ["0.93 °C", "1.86 °C", "0.50 °C", "3.72 °C"], answer: 0 }
             ],
@@ -5343,7 +5365,7 @@
                 "Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C."
             ],
             fp: [
-                "Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.",
+                "A non-volatile solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.",
                 "During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.",
                 "Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C."
             ],
@@ -5509,24 +5531,33 @@
         });
 
         function updateEquationPanels() {
+            const vpSolventFormula = document.getElementById('vp-solvent-equation-formula');
+            const vpSolventExplanation = document.getElementById('vp-solvent-equation-explanation');
             const vpFormula = document.getElementById('vp-equation-formula');
             const vpExplanation = document.getElementById('vp-equation-explanation');
+            const vpLegend = document.getElementById('vp-solute-legend-label');
+
+            if (vpSolventFormula && vpSolventExplanation) {
+                vpSolventFormula.innerHTML = '\\(P_{\\text{solvent}} = P_A^\\circ\\)';
+                vpSolventExplanation.innerHTML = '<strong>\\(P_A^\\circ\\)</strong> = vapour pressure of the pure solvent at the selected temperature.';
+            }
+
             if (vpFormula && vpExplanation) {
                 if (currentSolute === 'Ethanol') {
-                    vpFormula.innerHTML = '\\(P_{\\text{total}} = P_A + P_B\\)<br>\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>1 atm = 760 torr';
-                    vpExplanation.innerHTML = '<strong>\\(P_{\\text{total}}\\)</strong> = total vapour pressure of the mixture;<br><strong>\\(P_A\\)</strong> = partial vapour pressure of component A;<br><strong>\\(P_B\\)</strong> = partial vapour pressure of component B;<br><strong>\\(X_A\\)</strong> = mole fraction of component A in the liquid;<br><strong>\\(X_B\\)</strong> = mole fraction of component B in the liquid;<br><strong>\\(P_A^\\circ\\)</strong> = vapour pressure of pure component A;<br><strong>\\(P_B^\\circ\\)</strong> = vapour pressure of pure component B.';
+                    if (vpLegend) vpLegend.textContent = 'Volatile Solute';
+                    vpFormula.innerHTML = '\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>\\(P_{\\text{total}} = P_A + P_B\\)';
+                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> and <strong>\\(P_B\\)</strong> are the partial vapour pressures of the solvent and volatile ethanol. Both components contribute to the vapour phase.';
                 } else {
-                    vpFormula.innerHTML = '\\(P_A = X_A P_A^\\circ\\)<br>1 atm = 760 torr';
-                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> = vapour pressure of solvent A in the solution;<br><strong>\\(X_A\\)</strong> = mole fraction of solvent A;<br><strong>\\(P_A^\\circ\\)</strong> = vapour pressure of pure solvent A.';
+                    if (vpLegend) vpLegend.textContent = 'Non-Volatile Solute';
+                    vpFormula.innerHTML = '\\(P_A = X_A P_A^\\circ\\)<br>\\(\\Delta P = P_A^\\circ - P_A\\)';
+                    vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> is the mole fraction of solvent in the glucose solution. Glucose is non-volatile, so only the solvent contributes to the vapour pressure.';
                 }
             }
             if (window.MathJax && window.MathJax.typesetPromise) {
-                const equationNodes = [vpFormula, vpExplanation].filter(Boolean);
+                const equationNodes = [vpSolventFormula, vpSolventExplanation, vpFormula, vpExplanation].filter(Boolean);
                 window.MathJax.typesetPromise(equationNodes).catch(() => {});
                 if (window.matchMedia('(max-width: 767px)').matches) {
-                    requestAnimationFrame(() => {
-                        window.MathJax?.typesetPromise?.(equationNodes).catch(() => {});
-                    });
+                    requestAnimationFrame(() => window.MathJax?.typesetPromise?.(equationNodes).catch(() => {}));
                 }
             }
         }
@@ -5974,14 +6005,23 @@
 
         function initializeVapourBucket(bucket, canvasObj, liquidLevel, includeSolute, conc, seed) {
             resetBucketRuntime(bucket, seed);
-            const region = { xMin: 5, xMax: canvasObj.width - 5, yMin: liquidLevel + 5, yMax: canvasObj.height - 5 };
-            for (let i = 0; i < 80; i++) {
-                spawnParticle(bucket, region, 4, '#2563eb', 'solvent', 18, 32);
+            const liquidRegion = { xMin: 5, xMax: canvasObj.width - 5, yMin: liquidLevel + 5, yMax: canvasObj.height - 5 };
+            const gasRegion = { xMin: 7, xMax: canvasObj.width - 7, yMin: 7, yMax: Math.max(12, liquidLevel - 7) };
+            const initialGasCount = includeSolute ? (currentSolute === 'Ethanol' ? 4 : 1) : 3;
+            const totalSolventMolecules = 80;
+
+            for (let i = 0; i < totalSolventMolecules - initialGasCount; i++) {
+                spawnParticle(bucket, liquidRegion, 4, '#2563eb', 'solvent', 18, 32);
+            }
+            for (let i = 0; i < initialGasCount; i++) {
+                const gas = spawnParticle(bucket, gasRegion, 3.2, '#7c3aed', 'gas', 30, 46);
+                gas.liquidType = 'solvent';
+                gas.baseRadius = 4;
             }
             if (includeSolute) {
                 const solRadius = currentSolute === 'Ethanol' ? 4 : (currentSolute === 'Glucose' ? 5 : 7);
                 for (let i = 0; i < Math.round(conc * 8); i++) {
-                    spawnParticle(bucket, region, solRadius, '#f59e0b', 'solute', 12, 22);
+                    spawnParticle(bucket, liquidRegion, solRadius, '#f59e0b', 'solute', 12, 22);
                 }
             }
             ensureUniqueParticleIds(bucket.particles);
@@ -6013,7 +6053,7 @@
             }
 
             const targetPure = Math.round(clampValue(3 + Math.pow(temp01, 1.15) * 15, 3, 18));
-            const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.68;
+            const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.56;
             const targetSolution = Math.round(clampValue(targetPure * solutionVapourFactor, 2, 24));
 
             const thermal = {
@@ -6036,9 +6076,28 @@
                 };
             }
 
+            function enforceNonVolatileVapourGap() {
+                if (currentSolute !== 'Glucose') return;
+                const pureGasCount = vpState.pure.particles.filter(p => p.type === 'gas').length;
+                const allowedSolutionGas = Math.max(1, Math.floor(pureGasCount * 0.62));
+                const solutionGas = vpState.solution.particles.filter(p => p.type === 'gas');
+                const excess = Math.max(0, solutionGas.length - allowedSolutionGas);
+                for (let i = 0; i < excess; i++) {
+                    const p = solutionGas[i];
+                    p.type = 'solvent';
+                    p.liquidType = 'solvent';
+                    p.color = '#2563eb';
+                    p.radius = p.baseRadius || 4;
+                    p.x = clampValue(p.x, p.radius + 2, solObj.width - p.radius - 2);
+                    p.y = liquidLevelSol + p.radius + 2 + (i % 4) * 5;
+                    p.vy = Math.abs(p.vy || thermal.liquidSpeed * 0.3);
+                }
+            }
+
             const advance = makeFrameStepper((dt) => {
                 stepChamber(vpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermal, phaseSettings(vpState.pure, targetPure, 1));
                 stepChamber(vpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseSettings(vpState.solution, targetSolution, solutionVapourFactor));
+                enforceNonVolatileVapourGap();
             });
 
             function drawVP(now = performance.now()) {
@@ -6071,14 +6130,23 @@
 
         function initializeBoilingBucket(bucket, canvasObj, liquidLevel, includeSolute, molality, seed) {
             resetBucketRuntime(bucket, seed);
-            const region = { xMin: 5, xMax: canvasObj.width - 5, yMin: liquidLevel + 5, yMax: canvasObj.height - 5 };
-            for (let i = 0; i < 60; i++) {
-                spawnParticle(bucket, region, 4, '#2563eb', 'solvent', 19, 34);
+            const liquidRegion = { xMin: 5, xMax: canvasObj.width - 5, yMin: liquidLevel + 5, yMax: canvasObj.height - 5 };
+            const gasRegion = { xMin: 7, xMax: canvasObj.width - 7, yMin: 7, yMax: Math.max(12, liquidLevel - 7) };
+            const initialGasCount = includeSolute ? 1 : 2;
+            const totalSolventMolecules = 60;
+
+            for (let i = 0; i < totalSolventMolecules - initialGasCount; i++) {
+                spawnParticle(bucket, liquidRegion, 4, '#2563eb', 'solvent', 19, 34);
+            }
+            for (let i = 0; i < initialGasCount; i++) {
+                const gas = spawnParticle(bucket, gasRegion, 3.2, '#7c3aed', 'gas', 34, 50);
+                gas.liquidType = 'solvent';
+                gas.baseRadius = 4;
             }
             if (includeSolute) {
-                const solRadius = currentSolute === 'Ethanol' ? 4 : (currentSolute === 'Glucose' ? 5 : 7);
+                const solRadius = currentSolute === 'Glucose' ? 5 : 7;
                 for (let i = 0; i < Math.round(molality * 6); i++) {
-                    spawnParticle(bucket, region, solRadius, '#f59e0b', 'solute', 12, 22);
+                    spawnParticle(bucket, liquidRegion, solRadius, '#f59e0b', 'solute', 12, 22);
                 }
             }
             ensureUniqueParticleIds(bucket.particles);
@@ -6144,12 +6212,10 @@
             updateText('label-bp-temp', temp.toFixed(1) + ' °C');
             const bpPure = 100.00;
 
-            // A volatile water–ethanol mixture boils below pure water. For the educational
-            // mixture represented here, ~92 °C gives a clear and scientifically plausible
-            // bubble-point separation while glucose retains normal boiling-point elevation.
-            const bpSol = currentSolute === 'Ethanol'
-                ? 92.00
-                : bpPure + (molality * 0.512 * Math.max(0, currentSoluteFactor));
+            // Boiling-point elevation is shown only for non-volatile solutes.
+            // The fixed visual represents a smaller effective particle amount for sucrose.
+            const effectiveParticleFactor = currentSolute === 'Sucrose' ? 0.53 : 1.0;
+            const bpSol = bpPure + (molality * 0.512 * effectiveParticleFactor);
             const deltaTb = bpSol - bpPure;
             updateText('metrics-bp-tb', bpSol.toFixed(2) + ' °C');
             updateText('metrics-bp-dt', (deltaTb >= 0 ? '+' : '') + deltaTb.toFixed(2) + ' °C');
@@ -6191,22 +6257,22 @@
                 return {
                     evapProbability: clampValue((0.045 + proximity * 0.16 + (temp >= boilingPoint ? 0.09 : 0)) * volatileBoost * (1 + clampValue(error, -0.55, 0.9) * 0.85), 0.015, 0.55),
                     condenseProbability: clampValue((0.52 - proximity * 0.15) * (1 - clampValue(error, -0.7, 0.7) * 0.5), 0.16, 0.76),
-                    allowVolatileSolute: currentSolute === 'Ethanol',
-                    volatileSoluteEvapFactor: currentSolute === 'Ethanol' ? 1.8 : 0,
-                    volatileSoluteCondenseFactor: currentSolute === 'Ethanol' ? 0.82 : 1
+                    allowVolatileSolute: false,
+                    volatileSoluteEvapFactor: 0,
+                    volatileSoluteCondenseFactor: 1
                 };
             }
 
             const targetPure = gasTarget(temp, bpPure, 1);
-            const targetSolution = gasTarget(temp, bpSol, currentSolute === 'Ethanol' ? 1.2 : 0.96);
+            const targetSolution = gasTarget(temp, bpSol, 0.78);
             const pureBubbleRate = boilingBubbleRate(temp, bpPure, 1);
-            const solutionBubbleRate = boilingBubbleRate(temp, bpSol, currentSolute === 'Ethanol' ? 1.18 : 1);
+            const solutionBubbleRate = boilingBubbleRate(temp, bpSol, 1);
             const pureIntensity = clampValue((temp - (bpPure - 4)) / 12, 0, 1);
             const solutionIntensity = clampValue((temp - (bpSol - 4)) / 12, 0, 1);
 
             const advance = makeFrameStepper((dt) => {
                 stepChamber(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermal, phaseForBoiling(bpState.pure, targetPure, bpPure, 1));
-                stepChamber(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseForBoiling(bpState.solution, targetSolution, bpSol, currentSolute === 'Ethanol' ? 1.25 : 0.95));
+                stepChamber(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseForBoiling(bpState.solution, targetSolution, bpSol, 0.82));
                 updateBoilingBubbles(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, pureBubbleRate, pureIntensity);
                 updateBoilingBubbles(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, solutionBubbleRate, solutionIntensity);
             });
@@ -6406,7 +6472,8 @@
                 fpState.solution.particles = [];
                 fpState.solution.lastConc = conc;
                 const region = { xMin: 1, xMax: solObj.width - 1, yMin: 1, yMax: solObj.height - 1 };
-                for (let i = 0; i < 49; i++) {
+                // Keep all solvent molecules visible, then add solute particles on top.
+                for (let i = 0; i < 56; i++) {
                     spawnParticle(fpState.solution, region, 4, '#2563eb', 'solvent', 0.55, 1.30);
                 }
                 const solRadius = currentSolute === 'Glucose' ? 5 : 7;
@@ -6756,7 +6823,7 @@
 
         function switchTab(tabId) {
             activeTabId = tabId;
-            const validSolutes = (tabId === 'vapor-pressure' || tabId === 'boiling-point')
+            const validSolutes = tabId === 'vapor-pressure'
                 ? ['Glucose', 'Ethanol']
                 : ['Glucose', 'Sucrose'];
             if (!validSolutes.includes(currentSolute)) {
@@ -7176,6 +7243,34 @@
         "3 stars":"3 bintang",
         "4 stars":"4 bintang",
         "5 stars":"5 bintang"
+    });
+    Object.assign(translations, {
+        "Volatile Solute":"Zat Terlarut Meruap",
+        "State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan.",
+        "Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Kira komposisi wap di atas larutan yang mengandungi zat terlarut meruap dan pelarut.",
+        "Calculate the boiling-point elevation of a solution containing a non-volatile solute.":"Kira peningkatan takat didih bagi larutan yang mengandungi zat terlarut tidak meruap.",
+        "Determine the molar mass of an unknown non-volatile solute from boiling-point elevation data.":"Tentukan jisim molar zat terlarut tidak meruap yang tidak diketahui daripada data peningkatan takat didih.",
+        "Calculate the freezing-point depression of a solution.":"Kira penurunan takat beku sesuatu larutan.",
+        "Determine the molar mass of an unknown solute from freezing-point depression data.":"Tentukan jisim molar zat terlarut yang tidak diketahui daripada data penurunan takat beku.",
+        "Explain osmosis through a semipermeable membrane.":"Terangkan osmosis melalui membran separa telap.",
+        "Relate osmotic pressure to the concentration of solute particles in a solution.":"Hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.",
+        "A non-volatile solute such as glucose or sucrose lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa atau sukrosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.",
+        "The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.":"Zat terlarut tidak meruap kekal dalam fasa cecair. Oleh itu, larutan menyamai tekanan luar hanya pada suhu yang lebih tinggi daripada takat didih pelarut tulen.",
+        "Solutions containing non-volatile solutes such as glucose or sucrose boil at a higher temperature than the pure solvent.":"Larutan yang mengandungi zat terlarut tidak meruap seperti glukosa atau sukrosa mendidih pada suhu yang lebih tinggi daripada pelarut tulen.",
+        "Antifreeze is added to vehicle cooling systems in cold climates so the coolant remains liquid at temperatures where the pure solvent could freeze.":"Antibeku ditambahkan ke dalam sistem penyejukan kenderaan di kawasan sejuk supaya bahan penyejuk kekal cair pada suhu yang boleh membekukan pelarut tulen.",
+        "Compared with a pure solvent, a solution containing a non-volatile solute generally freezes at:":"Berbanding pelarut tulen, larutan yang mengandungi zat terlarut tidak meruap secara amnya membeku pada:",
+        "A lower temperature":"Suhu yang lebih rendah",
+        "The same temperature":"Suhu yang sama",
+        "A higher temperature":"Suhu yang lebih tinggi",
+        "A non-volatile solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.":"Zat terlarut tidak meruap menyebabkan penurunan takat beku, maka larutan membeku pada suhu yang lebih rendah daripada pelarut tulen.",
+        "Solvent → Solution":"Pelarut → Larutan",
+        "vapour pressure of the pure solvent at the selected temperature.":"tekanan wap pelarut tulen pada suhu yang dipilih.",
+        "are the partial vapour pressures of the solvent and volatile ethanol. Both components contribute to the vapour phase.":"ialah tekanan wap separa pelarut dan etanol meruap. Kedua-dua komponen menyumbang kepada fasa wap.",
+        "is the mole fraction of solvent in the glucose solution. Glucose is non-volatile, so only the solvent contributes to the vapour pressure.":"ialah pecahan mol pelarut dalam larutan glukosa. Glukosa tidak meruap, maka hanya pelarut menyumbang kepada tekanan wap.",
+        "boiling point of the pure solvent.":"takat didih pelarut tulen.",
+        "molal boiling-point elevation constant":"pemalar peningkatan takat didih molal",
+        "molality of the non-volatile solute":"kemolalan zat terlarut tidak meruap",
+        "boiling point of the solution.":"takat didih larutan."
     });
     const originalText = new WeakMap();
     const originalAttrs = new WeakMap();
