@@ -1779,6 +1779,51 @@
             }
         }
 
+        /* MOBILE SIMULATION / EQUATION SEPARATION
+           Keep each canvas and its equation card visually distinct on narrow screens. */
+        @media (max-width: 767px) {
+            #tour-sim-vp .simulation-stage-dual,
+            #tour-sim-bp .simulation-stage-dual {
+                aspect-ratio: auto !important;
+                min-height: 0 !important;
+            }
+
+            #tour-sim-vp .simulation-panel,
+            #tour-sim-bp .simulation-panel {
+                height: auto !important;
+                min-height: 0 !important;
+            }
+
+            #tour-sim-vp .simulation-panel > .relative.flex-1,
+            #tour-sim-bp .simulation-panel > .relative.flex-1 {
+                flex: 0 0 auto !important;
+                height: 18.5rem !important;
+                min-height: 18.5rem !important;
+            }
+
+            #tour-sim-vp .simulation-panel > .relative.flex-1 > canvas,
+            #tour-sim-bp .simulation-panel > .relative.flex-1 > canvas {
+                width: 100% !important;
+                height: 100% !important;
+                flex: none !important;
+                display: block !important;
+            }
+
+            /* The equation is a separate card, not an extension of the canvas. */
+            #tour-sim-vp .simulation-panel > .relative.flex-1 + div,
+            #tour-sim-bp .simulation-panel > .relative.flex-1 + div {
+                margin-top: 1.15rem !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+
+            /* Give the second simulation a clean break after the first equation. */
+            #tour-sim-vp .simulation-panel + .simulation-panel,
+            #tour-sim-bp .simulation-panel + .simulation-panel {
+                margin-top: .85rem !important;
+            }
+        }
+
         /* PHONE BUGFIXES: keep lesson layout unchanged, but preserve native vertical scrolling
            over the canvases and keep the Vapour Pressure equation readable on narrow screens. */
         @media (max-width: 767px) {
