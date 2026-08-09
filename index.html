@@ -2028,9 +2028,8 @@
 </div>
 <div class="solute-picker-inline">
 <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Select Solute</label>
-<div class="solute-grid">
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Glucose" onclick="setSolute('Glucose')">Glucose</button>
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Sucrose" onclick="setSolute('Sucrose')">Sucrose</button>
+<div class="solute-grid" style="grid-template-columns: minmax(0, 1fr);">
+<button class="solute-btn py-2 px-2 text-[12px] font-semibold w-full" data-solute="Glucose" onclick="setSolute('Glucose')">Glucose</button>
 </div>
 </div>
 </div>
@@ -2108,7 +2107,7 @@
 </div>
 <div class="space-y-4 text-[13px] text-slate-700 dark:text-slate-300" id="explanation-bp-simple">
 <p>A liquid boils when its vapour pressure becomes equal to the external pressure.</p>
-<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute such as glucose or sucrose lowers the solvent vapour pressure, so a higher temperature is needed.</p>
+<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.</p>
 <p>The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.</p>
 </div>
 </div>
@@ -2120,7 +2119,7 @@
 <div class="space-y-5 text-[13px] text-slate-700 dark:text-slate-300">
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 mb-1.5 font-heading">Observation</h4>
-<p>Solutions containing non-volatile solutes such as glucose or sucrose boil at a higher temperature than the pure solvent.</p>
+<p>A glucose solution boils at a higher temperature than the pure solvent because glucose is non-volatile.</p>
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
@@ -2175,7 +2174,7 @@
 <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Select Solute</label>
 <div class="solute-grid">
 <button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Glucose" onclick="setSolute('Glucose')">Glucose</button>
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Sucrose" onclick="setSolute('Sucrose')">Sucrose</button>
+<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Ethanol" onclick="setSolute('Ethanol')">Ethanol</button>
 </div>
 </div>
 </div>
@@ -2204,6 +2203,16 @@
 </div>
 </div>
 <div class="simulation-card flex-1 p-4 lg:p-7 flex flex-col min-h-[380px] component-card">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-5">
+<div class="flex items-center space-x-2.5">
+<span class="relative flex h-2.5 w-2.5"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500"></span></span>
+<span class="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-heading">Freezing Point</span>
+</div>
+<div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50"></span><span>Solvent</span></div>
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-amberSolute shadow-sm shadow-amber-500/50"></span><span>Solute</span></div>
+</div>
+</div>
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
@@ -2311,9 +2320,9 @@
 <div>
 <div class="flex justify-between items-center mb-3">
 <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-osmosis-speed">Flow Rate Speed</label>
-<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-osmosis-speed">1x</span>
+<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-osmosis-speed">0x</span>
 </div>
-<input aria-label="Adjust Flow Rate Speed" class="w-full" id="input-osmosis-speed" max="10" min="1" step="1" type="range" value="1"/>
+<input aria-label="Adjust Flow Rate Speed" class="w-full" id="input-osmosis-speed" max="10" min="0" step="1" type="range" value="0"/>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -2328,6 +2337,17 @@
 </div>
 </div>
 <div class="simulation-card flex-1 p-4 lg:p-7 flex flex-col min-h-[380px] component-card">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-5">
+<div class="flex items-center space-x-2.5">
+<span class="relative flex h-2.5 w-2.5"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-stemPurple-500"></span></span>
+<span class="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-heading">Osmosis</span>
+</div>
+<div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50"></span><span>Solvent</span></div>
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-amberSolute shadow-sm shadow-amber-500/50"></span><span>Non-Volatile Solute</span></div>
+<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-3 h-0 border-t-2 border-dashed border-emerald-500"></span><span>Semi-Permeable Membrane</span></div>
+</div>
+</div>
 <div class="simulation-stage simulation-stage-single flex-1 grid grid-cols-1 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] flex flex-col shadow-inner">
 <div class="simulation-panel flex-1 relative h-full min-h-[150px]">
 <div class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</div>
@@ -2345,7 +2365,7 @@
 <div class="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
 <div class="bg-slate-50 dark:bg-[#060A12] p-4 rounded-[14px] border border-slate-100 dark:border-white/5 shadow-sm">
 <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold font-heading tracking-wider">Net Directional Flux</span>
-<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">Solvent → Solution</div>
+<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">High Water Concentration → Low Water Concentration</div>
 </div>
 </div>
 </div>
@@ -5335,12 +5355,12 @@
                 { question: "A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?", options: ["20 kPa", "25 kPa", "5 kPa", "31.25 kPa"], answer: 0 }
             ],
             'bp': [
-                { question: "Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?", options: ["Glucose (more moles)", "Sucrose (less moles)", "They are identical"], answer: 0 },
+                { question: "Why does adding glucose raise the boiling point of a solvent?", options: ["Glucose lowers the solvent vapour pressure, so more heating is needed to reach external pressure", "Glucose increases the external pressure", "Glucose evaporates first and heats the solvent"], answer: 0 },
                 { question: "To make a solution boil, its vapor pressure must equal:", options: ["The atmospheric pressure", "The freezing point", "The osmotic pressure"], answer: 0 },
                 { question: "For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?", options: ["0.512 °C", "1.86 °C", "100.512 °C", "0.0512 °C"], answer: 0 }
             ],
             'fp': [
-                { question: "Compared with a pure solvent, a solution containing a non-volatile solute generally freezes at:", options: ["A lower temperature", "The same temperature", "A higher temperature"], answer: 0 },
+                { question: "Compared with a pure solvent, a solution containing a dissolved solute generally freezes at:", options: ["A lower temperature", "The same temperature", "A higher temperature"], answer: 0 },
                 { question: "When a solution freezes, the solid that forms is typically:", options: ["Pure solute", "Pure solvent (ice)", "A mixture of both"], answer: 1 },
                 { question: "For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?", options: ["0.93 °C", "1.86 °C", "0.50 °C", "3.72 °C"], answer: 0 }
             ],
@@ -5358,12 +5378,12 @@
                 "Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa."
             ],
             bp: [
-                "Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.",
+                "Glucose is non-volatile and lowers the solvent vapour pressure. The solution therefore needs a higher temperature before its vapour pressure equals the external pressure.",
                 "Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.",
                 "Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C."
             ],
             fp: [
-                "A non-volatile solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.",
+                "A dissolved solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.",
                 "During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.",
                 "Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C."
             ],
@@ -5571,7 +5591,7 @@
             currentSolute = soluteName;
             if (soluteName === 'Glucose') currentSoluteFactor = 1.0;
             if (soluteName === 'Sucrose') currentSoluteFactor = 0.53;
-            if (soluteName === 'Ethanol') currentSoluteFactor = -2.0; 
+            if (soluteName === 'Ethanol') currentSoluteFactor = 1.0; 
             syncSoluteButtonState();
             
             if(learningProgress[activeTabId]) {
@@ -6142,7 +6162,7 @@
                 gas.baseRadius = 4;
             }
             if (includeSolute) {
-                const solRadius = currentSolute === 'Glucose' ? 5 : 7;
+                const solRadius = 5;
                 for (let i = 0; i < Math.round(molality * 6); i++) {
                     spawnParticle(bucket, liquidRegion, solRadius, '#f59e0b', 'solute', 12, 22);
                 }
@@ -6210,10 +6230,8 @@
             updateText('label-bp-temp', temp.toFixed(1) + ' °C');
             const bpPure = 100.00;
 
-            // Boiling-point elevation is shown only for non-volatile solutes.
-            // The fixed visual represents a smaller effective particle amount for sucrose.
-            const effectiveParticleFactor = currentSolute === 'Sucrose' ? 0.53 : 1.0;
-            const bpSol = bpPure + (molality * 0.512 * effectiveParticleFactor);
+            // Boiling-point elevation is demonstrated with glucose as the fixed non-volatile solute.
+            const bpSol = bpPure + (molality * 0.512);
             const deltaTb = bpSol - bpPure;
             updateText('metrics-bp-tb', bpSol.toFixed(2) + ' °C');
             updateText('metrics-bp-dt', (deltaTb >= 0 ? '+' : '') + deltaTb.toFixed(2) + ' °C');
@@ -6474,7 +6492,7 @@
                 for (let i = 0; i < 56; i++) {
                     spawnParticle(fpState.solution, region, 4, '#2563eb', 'solvent', 0.55, 1.30);
                 }
-                const solRadius = currentSolute === 'Glucose' ? 5 : 7;
+                const solRadius = currentSolute === 'Ethanol' ? 4 : 5;
                 for (let i = 0; i < Math.round(conc * 7); i++) {
                     spawnParticle(fpState.solution, region, solRadius, '#f59e0b', 'solute', 0.28, 0.68);
                 }
@@ -6551,10 +6569,6 @@
                     }
                     ctxObj.ctx.beginPath(); ctxObj.ctx.arc(p.x, p.y, p.radius, 0, TWO_PI);
                     ctxObj.ctx.fillStyle = '#f59e0b'; ctxObj.ctx.fill();
-                    if (currentSolute === 'Sucrose') {
-                        ctxObj.ctx.beginPath(); ctxObj.ctx.arc(p.x + p.radius * 0.8, p.y - p.radius * 0.5, p.radius * 0.8, 0, TWO_PI);
-                        ctxObj.ctx.fillStyle = '#d97706'; ctxObj.ctx.fill();
-                    }
                 });
 
                 drawFrostBorder(ctxObj.ctx, ctxObj.width, ctxObj.height, approach * 0.85 + crystalProgress * 0.3);
@@ -6577,7 +6591,7 @@
             if (!osmObj) return;
 
             const conc = 2.0;
-            const speedMultiplier = parseFloat(document.getElementById('input-osmosis-speed')?.value || 1);
+            const speedMultiplier = parseFloat(document.getElementById('input-osmosis-speed')?.value || 0);
             const membraneX = osmObj.width / 2;
             const floorY = osmObj.height;
             const maxDisplacement = conc * 20 * currentSoluteFactor;
@@ -6611,21 +6625,39 @@
             let currentWaterRight = osmObj.height * 0.5;
 
             function updateWaterLevels(dt) {
-                const flowRate = 0.075 * clampValue(speedMultiplier, 1, 10);
-                osmosisState.progress += (1 - osmosisState.progress) * flowRate * dt;
-                if (osmosisState.progress > 0.9995) osmosisState.progress = 1;
+                // 0 = no net osmosis. Once the learner moves the slider, the
+                // water-level change increases linearly with the selected flow rate.
+                const flowSetting = clampValue(speedMultiplier, 0, 10);
+                if (flowSetting > 0 && osmosisState.progress < 1) {
+                    const progressPerSecond = 0.022 * flowSetting;
+                    osmosisState.progress = clampValue(
+                        osmosisState.progress + progressPerSecond * dt,
+                        0,
+                        1
+                    );
+                }
 
                 const startLeft = osmObj.height * 0.5;
                 const startRight = osmObj.height * 0.5;
+                // Left = higher water concentration (pure solvent), so its level falls.
+                // Right = lower water concentration (solution), so its level rises.
                 currentWaterLeft = startLeft + (maxDisplacement / 2) * osmosisState.progress;
                 currentWaterRight = startRight - (maxDisplacement / 2) * osmosisState.progress;
             }
 
             function stepOsmosisParticle(p, dt) {
                 const waterTop = p.side === 'left' ? currentWaterLeft : currentWaterRight;
-                const motionScale = 1 + (clampValue(speedMultiplier, 1, 10) - 1) * 0.055;
+                const flowSetting = clampValue(speedMultiplier, 0, 10);
+                const flowIntensity = flowSetting / 10;
+                const motionScale = 1 + flowIntensity * 0.5;
                 const baseSpeed = p.type === 'solute' ? 16 : 25;
                 applySmoothThermalMotion(p, baseSpeed * motionScale, dt, p.type === 'solute' ? 5.2 : 7.0);
+
+                // Represent the NET osmotic flux visually as one-way movement only:
+                // high water concentration (left) → low water concentration (right).
+                if (p.type === 'solvent' && p.side === 'left' && flowSetting > 0 && osmosisState.progress < 1) {
+                    p.vx += 18 * flowIntensity * dt;
+                }
 
                 const oldX = p.x;
                 p.x += p.vx * dt;
@@ -6653,17 +6685,27 @@
                 const crossedRightToLeft = oldX >= membraneX && p.x < membraneX;
                 if (crossedLeftToRight || crossedRightToLeft) {
                     if (p.type === 'solute') {
+                        // Solute cannot cross the semipermeable membrane.
                         p.x = crossedLeftToRight ? membraneX - p.radius - 0.2 : membraneX + p.radius + 0.2;
                         p.vx *= -1;
+                    } else if (crossedRightToLeft) {
+                        // Keep the teaching visual strictly one-way: no solvent crosses
+                        // from the low-water-concentration side back to the high side.
+                        p.x = membraneX + p.radius + 0.2;
+                        p.vx = Math.abs(p.vx);
                     } else {
-                        // Crossing is only possible through membrane that is submerged on both sides.
-                        // This prevents a molecule from entering the air gap on the lower-water side.
+                        // Left → right solvent crossing only. At slider = 0, crossing is disabled.
                         const commonSubmergedTop = Math.max(currentWaterLeft, currentWaterRight);
                         const membraneIsWetHere = p.y - p.radius >= commonSubmergedTop;
-                        const passProbability = crossedLeftToRight ? 0.88 : 0.58;
+                        const passProbability = (flowSetting <= 0 || osmosisState.progress >= 1)
+                            ? 0
+                            : clampValue(0.18 + 0.075 * flowSetting, 0, 0.93);
                         if (!membraneIsWetHere || bucketRandom(osmosisState) >= passProbability) {
-                            p.x = crossedLeftToRight ? membraneX - p.radius - 0.2 : membraneX + p.radius + 0.2;
-                            p.vx *= -1;
+                            p.x = membraneX - p.radius - 0.2;
+                            p.vx = -Math.abs(p.vx);
+                        } else {
+                            p.x = membraneX + p.radius + 0.2;
+                            p.vx = Math.abs(p.vx);
                         }
                     }
                 }
@@ -6783,7 +6825,8 @@
             const vpTempEl = document.getElementById('input-vp-temp'); if (vpTempEl) vpTempEl.value = "20.0";
             const bpTempEl = document.getElementById('input-bp-temp'); if (bpTempEl) bpTempEl.value = "20.0";
             const fpTempEl = document.getElementById('input-fp-temp'); if (fpTempEl) fpTempEl.value = "20.0";
-            const osmoSpeedEl = document.getElementById('input-osmosis-speed'); if (osmoSpeedEl) osmoSpeedEl.value = "1";
+            const osmoSpeedEl = document.getElementById('input-osmosis-speed'); if (osmoSpeedEl) osmoSpeedEl.value = "0";
+            updateText('label-osmosis-speed', '0x');
             vpState.pure.particles = []; vpState.solution.particles = [];
             bpState.pure.particles = []; bpState.solution.particles = [];
             fpState.pure.particles = []; fpState.solution.particles = [];
@@ -6823,7 +6866,11 @@
             activeTabId = tabId;
             const validSolutes = tabId === 'vapor-pressure'
                 ? ['Glucose', 'Ethanol']
-                : ['Glucose', 'Sucrose'];
+                : tabId === 'boiling-point'
+                    ? ['Glucose']
+                    : tabId === 'freezing-point'
+                        ? ['Glucose', 'Ethanol']
+                        : ['Glucose', 'Sucrose'];
             if (!validSolutes.includes(currentSolute)) {
                 currentSolute = 'Glucose';
                 currentSoluteFactor = 1.0;
@@ -6872,8 +6919,12 @@
             runFreezingPointSim();
         });
         document.getElementById('input-osmosis-speed')?.addEventListener('input', (e) => {
-            learningProgress['osmosis'].controlAdjusted = true;
-            updateProgressUI();
+            const flowValue = clampValue(parseFloat(e.target.value || 0), 0, 10);
+            updateText('label-osmosis-speed', `${flowValue}x`);
+            if (flowValue > 0) {
+                learningProgress['osmosis'].controlAdjusted = true;
+                updateProgressUI();
+            }
             runOsmosisSim();
         });
 
@@ -7252,7 +7303,7 @@
         "Determine the molar mass of an unknown solute from freezing-point depression data.":"Tentukan jisim molar zat terlarut yang tidak diketahui daripada data penurunan takat beku.",
         "Explain osmosis through a semipermeable membrane.":"Terangkan osmosis melalui membran separa telap.",
         "Relate osmotic pressure to the concentration of solute particles in a solution.":"Hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.",
-        "A non-volatile solute such as glucose or sucrose lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa atau sukrosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.",
+        "A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.",
         "The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.":"Zat terlarut tidak meruap kekal dalam fasa cecair. Oleh itu, larutan menyamai tekanan luar hanya pada suhu yang lebih tinggi daripada takat didih pelarut tulen.",
         "Solutions containing non-volatile solutes such as glucose or sucrose boil at a higher temperature than the pure solvent.":"Larutan yang mengandungi zat terlarut tidak meruap seperti glukosa atau sukrosa mendidih pada suhu yang lebih tinggi daripada pelarut tulen.",
         "Antifreeze is added to vehicle cooling systems in cold climates so the coolant remains liquid at temperatures where the pure solvent could freeze.":"Antibeku ditambahkan ke dalam sistem penyejukan kenderaan di kawasan sejuk supaya bahan penyejuk kekal cair pada suhu yang boleh membekukan pelarut tulen.",
@@ -7261,7 +7312,7 @@
         "The same temperature":"Suhu yang sama",
         "A higher temperature":"Suhu yang lebih tinggi",
         "A non-volatile solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.":"Zat terlarut tidak meruap menyebabkan penurunan takat beku, maka larutan membeku pada suhu yang lebih rendah daripada pelarut tulen.",
-        "Solvent → Solution":"Pelarut → Larutan",
+        "Solvent → Solution":"Pelarut → Larutan","High Water Concentration → Low Water Concentration":"Kepekatan Air Tinggi → Kepekatan Air Rendah",
         "vapour pressure of the pure solvent at the selected temperature.":"tekanan wap pelarut tulen pada suhu yang dipilih.",
         "are the partial vapour pressures of the solvent and volatile ethanol. Both components contribute to the vapour phase.":"ialah tekanan wap separa pelarut dan etanol meruap. Kedua-dua komponen menyumbang kepada fasa wap.",
         "is the mole fraction of solvent in the glucose solution. Glucose is non-volatile, so only the solvent contributes to the vapour pressure.":"ialah pecahan mol pelarut dalam larutan glukosa. Glukosa tidak meruap, maka hanya pelarut menyumbang kepada tekanan wap.",
