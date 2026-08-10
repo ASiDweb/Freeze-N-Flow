@@ -1942,7 +1942,835 @@
                 -webkit-overflow-scrolling: touch;
             }
         }
-    </style>
+    
+
+        /* ============================================================
+           VP/BP PRESSURE COMPARISON REFINEMENT
+           Separate temperatures for pure solvent vs solution in VP.
+           Dynamic P external / P internal indicators near each chamber.
+           ============================================================ */
+        #tour-controls-vp .vp-controls-note {
+            max-width: 36rem;
+        }
+        .vp-panel-heading,
+        .bp-panel-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: .65rem;
+        }
+        .vp-panel-temperature-control {
+            padding: .75rem;
+            border-radius: 13px;
+            border: 1px solid rgba(148,163,184,.18);
+            background: rgba(255,255,255,.72);
+            margin-bottom: .65rem;
+        }
+        .dark .vp-panel-temperature-control {
+            background: rgba(11,18,32,.72);
+            border-color: rgba(255,255,255,.07);
+        }
+        .vp-temperature-stepper {
+            grid-template-columns: 34px minmax(0,1fr) 34px !important;
+            gap: .55rem !important;
+        }
+        .vp-temperature-stepper .temperature-step-button {
+            width: 34px !important;
+            min-width: 34px !important;
+            height: 34px !important;
+            min-height: 34px !important;
+            border-radius: 10px !important;
+        }
+        .vp-pressure-indicator {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: .5rem;
+            margin-bottom: .7rem;
+        }
+        .vp-pressure-indicator > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .45rem;
+            min-width: 0;
+            padding: .55rem .65rem;
+            border-radius: 11px;
+            border: 1px solid rgba(148,163,184,.18);
+            background: rgba(255,255,255,.78);
+        }
+        .dark .vp-pressure-indicator > div {
+            background: rgba(15,23,42,.78);
+            border-color: rgba(255,255,255,.07);
+        }
+        .vp-pressure-indicator span {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: rgb(100 116 139);
+            white-space: nowrap;
+        }
+        .dark .vp-pressure-indicator span { color: rgb(148 163 184); }
+        .vp-pressure-indicator strong {
+            font-size: 10px;
+            line-height: 1;
+            font-weight: 800;
+            color: rgb(15 23 42);
+            white-space: nowrap;
+        }
+        .dark .vp-pressure-indicator strong { color: rgb(241 245 249); }
+
+        @media (min-width: 1101px) {
+            #tour-controls-vp .controls-body.vp-master-controls {
+                grid-template-columns: minmax(0,1fr) auto !important;
+                align-items: center !important;
+            }
+            #tour-controls-vp .vp-controls-note {
+                grid-column: 1 !important;
+                grid-row: 1 !important;
+                padding-right: 1rem;
+            }
+            #tour-controls-vp .control-action-row {
+                grid-column: 2 !important;
+                grid-row: 1 !important;
+            }
+            #tour-sim-vp .simulation-panel,
+            #tab-content-boiling-point .simulation-panel {
+                align-self: stretch;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #tour-controls-vp .vp-controls-note {
+                font-size: .67rem !important;
+                line-height: 1.45 !important;
+            }
+            #tour-sim-vp .simulation-stage-dual,
+            #tab-content-boiling-point .simulation-stage-dual {
+                gap: 1.15rem !important;
+            }
+            .vp-panel-heading,
+            .bp-panel-heading {
+                font-size: 10px;
+                margin-bottom: .55rem;
+            }
+            .vp-panel-temperature-control {
+                padding: .65rem;
+                margin-bottom: .55rem;
+            }
+            .vp-pressure-indicator {
+                gap: .4rem;
+                margin-bottom: .65rem;
+            }
+            .vp-pressure-indicator > div {
+                padding: .48rem .55rem;
+            }
+            .vp-pressure-indicator span { font-size: 8px; }
+            .vp-pressure-indicator strong { font-size: 9px; }
+        }
+
+
+
+        /* BOILING POINT — local legends + tidy formula term rows */
+        #tab-content-boiling-point .bp-local-legend {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .45rem .9rem;
+            margin: -.1rem 0 .65rem;
+            padding: .5rem .65rem;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,.16);
+            background: rgba(255,255,255,.66);
+            font-size: 10px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: rgb(71 85 105);
+        }
+        .dark #tab-content-boiling-point .bp-local-legend {
+            background: rgba(15,23,42,.68);
+            border-color: rgba(255,255,255,.07);
+            color: rgb(203 213 225);
+        }
+        #tab-content-boiling-point .bp-local-legend > div {
+            display: inline-flex;
+            align-items: center;
+            gap: .38rem;
+            white-space: nowrap;
+        }
+        #tab-content-boiling-point .bp-legend-dot {
+            width: .58rem;
+            height: .58rem;
+            border-radius: 999px;
+            flex: 0 0 auto;
+            box-shadow: 0 0 0 2px rgba(255,255,255,.28);
+        }
+        #tab-content-boiling-point .bp-formula-terms {
+            display: grid;
+            gap: .32rem;
+            font-size: 10px;
+            line-height: 1.35;
+        }
+        #tab-content-boiling-point .bp-formula-terms > div {
+            display: grid;
+            grid-template-columns: max-content minmax(0,1fr);
+            align-items: baseline;
+            gap: .45rem;
+            min-width: 0;
+        }
+        #tab-content-boiling-point .bp-formula-terms strong {
+            color: rgb(30 41 59);
+            white-space: nowrap;
+        }
+        .dark #tab-content-boiling-point .bp-formula-terms strong { color: rgb(226 232 240); }
+        #tab-content-boiling-point .bp-formula-terms span {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        @media (max-width: 767px) {
+            #tab-content-boiling-point .bp-local-legend {
+                font-size: 10px !important;
+                gap: .4rem .75rem !important;
+                margin-bottom: .7rem !important;
+                padding: .5rem .6rem !important;
+            }
+            #tab-content-boiling-point .bp-legend-dot {
+                width: .62rem;
+                height: .62rem;
+            }
+            #tab-content-boiling-point .bp-formula-card {
+                margin-top: .75rem !important;
+            }
+            #tab-content-boiling-point .bp-formula-terms {
+                font-size: 10px !important;
+                gap: .38rem !important;
+            }
+        }
+
+        /* ============================================================
+           VAPOUR PRESSURE — SPLIT SOLVENT / SOLUTION EXPERIMENTS
+           Each side is a complete experiment with its own controls.
+           ============================================================ */
+        #tab-content-vapor-pressure .simulation-column {
+            min-width: 0;
+        }
+        .vp-experiment-stack {
+            display: grid;
+            gap: 1.25rem;
+        }
+        .vp-experiment-card {
+            border-radius: 22px;
+            border: 1px solid rgba(226,232,240,.92);
+            background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.96));
+            box-shadow: 0 18px 42px rgba(15,23,42,.08);
+            padding: 1.15rem;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .dark .vp-experiment-card {
+            border-color: rgba(255,255,255,.075);
+            background: linear-gradient(180deg, rgba(19,30,50,.97), rgba(11,18,32,.97));
+            box-shadow: 0 22px 50px rgba(2,6,23,.34);
+        }
+        .vp-experiment-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .95rem;
+        }
+        .vp-section-kicker {
+            display: block;
+            font: 800 .58rem/1.1 'Poppins', sans-serif;
+            letter-spacing: .13em;
+            margin-bottom: .25rem;
+        }
+        .vp-section-title {
+            font: 800 1.08rem/1.15 'Poppins', sans-serif;
+            letter-spacing: -.02em;
+        }
+        .vp-section-subtitle {
+            margin-top: .28rem;
+            font-size: .72rem;
+            line-height: 1.45;
+            max-width: 31rem;
+        }
+        .vp-mode-pill {
+            flex: 0 0 auto;
+            padding: .45rem .68rem;
+            border-radius: 999px;
+            font: 800 .6rem/1 'Poppins', sans-serif;
+            letter-spacing: .055em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .vp-mode-pill-solvent {
+            color: rgb(37 99 235);
+            background: rgba(37,99,235,.09);
+            border: 1px solid rgba(37,99,235,.18);
+        }
+        .vp-mode-pill-solution {
+            color: rgb(217 119 6);
+            background: rgba(245,158,11,.09);
+            border: 1px solid rgba(245,158,11,.20);
+        }
+        .dark .vp-mode-pill-solvent { color: rgb(147 197 253); background: rgba(37,99,235,.13); }
+        .dark .vp-mode-pill-solution { color: rgb(251 191 36); background: rgba(245,158,11,.11); }
+
+        .vp-local-control-center {
+            padding: .9rem;
+            border-radius: 16px;
+            border: 1px solid rgba(148,163,184,.18);
+            background: rgba(248,250,252,.82);
+            margin-bottom: .95rem;
+        }
+        .dark .vp-local-control-center {
+            border-color: rgba(255,255,255,.07);
+            background: rgba(15,23,42,.58);
+        }
+        .vp-local-control-heading {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-bottom: .75rem;
+            font: 800 .69rem/1.15 'Poppins', sans-serif;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            color: rgb(30 41 59);
+        }
+        .dark .vp-local-control-heading { color: rgb(226 232 240); }
+        .vp-local-control-body {
+            display: grid;
+            gap: .75rem;
+        }
+        .vp-control-block {
+            min-width: 0;
+        }
+        .vp-control-label {
+            font: 800 .61rem/1.15 'Poppins', sans-serif;
+            letter-spacing: .085em;
+            text-transform: uppercase;
+            color: rgb(100 116 139);
+        }
+        .dark .vp-control-label { color: rgb(148 163 184); }
+        .vp-control-value {
+            font-size: .72rem;
+            font-weight: 800;
+        }
+        .vp-solution-solute-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: .45rem;
+            padding: .35rem;
+            border-radius: 13px;
+            background: rgba(15,23,42,.05);
+            border: 1px solid rgba(148,163,184,.14);
+        }
+        .dark .vp-solution-solute-grid {
+            background: rgba(2,6,23,.42);
+            border-color: rgba(255,255,255,.06);
+        }
+        .vp-solute-choice {
+            min-width: 0;
+            padding: .68rem .55rem !important;
+            border-radius: 10px !important;
+            font-size: .67rem !important;
+            line-height: 1.15 !important;
+            white-space: nowrap;
+        }
+        .vp-control-hint {
+            margin-top: .45rem;
+            font-size: .62rem;
+            line-height: 1.4;
+            color: rgb(100 116 139);
+        }
+        .dark .vp-control-hint { color: rgb(148 163 184); }
+        .vp-local-actions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: .55rem;
+        }
+        .vp-secondary-action,
+        .vp-primary-action {
+            min-height: 2.65rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .65rem .8rem;
+            font-size: .72rem;
+            font-weight: 750;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+        .vp-secondary-action {
+            color: rgb(51 65 85);
+            background: rgb(241 245 249);
+            border: 1px solid rgb(226 232 240);
+        }
+        .dark .vp-secondary-action {
+            color: rgb(226 232 240);
+            background: rgb(30 41 59);
+            border-color: rgb(51 65 85);
+        }
+        .vp-primary-action {
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            box-shadow: 0 8px 18px rgba(124,58,237,.18);
+        }
+        .vp-secondary-action:hover, .vp-primary-action:hover { transform: translateY(-1px); }
+
+        .vp-topic-strip {
+            padding: .15rem .15rem .78rem;
+            margin-bottom: .8rem;
+            border-bottom: 1px solid rgba(148,163,184,.17);
+        }
+        .vp-topic-name {
+            display: flex;
+            align-items: center;
+            gap: .52rem;
+            font: 800 .68rem/1.2 'Poppins', sans-serif;
+            letter-spacing: .075em;
+            text-transform: uppercase;
+            color: rgb(71 85 105);
+            margin-bottom: .5rem;
+        }
+        .dark .vp-topic-name { color: rgb(203 213 225); }
+        .vp-topic-dot,
+        .vp-legend-dot {
+            width: .6rem;
+            height: .6rem;
+            border-radius: 999px;
+            flex: 0 0 auto;
+        }
+        .vp-mini-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .42rem .9rem;
+            font-size: .66rem;
+            font-weight: 650;
+            color: rgb(71 85 105);
+        }
+        .dark .vp-mini-legend { color: rgb(203 213 225); }
+        .vp-mini-legend > div {
+            display: inline-flex;
+            align-items: center;
+            gap: .36rem;
+            min-width: 0;
+        }
+        .vp-chamber-wrap {
+            height: 16.5rem;
+            min-height: 16.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid rgba(226,232,240,.9);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+        }
+        .dark .vp-chamber-wrap {
+            background: #0B1220;
+            border-color: rgba(255,255,255,.06);
+        }
+        .vp-chamber-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: pan-y;
+            cursor: crosshair;
+        }
+        .vp-equation-card {
+            margin-top: .9rem;
+            padding: .85rem .9rem;
+            border-radius: 14px;
+            background: rgba(255,255,255,.88);
+            border: 1px solid rgba(148,163,184,.16);
+        }
+        .dark .vp-equation-card {
+            background: rgba(11,18,32,.88);
+            border-color: rgba(255,255,255,.06);
+        }
+        .vp-equation-solvent { border-color: rgba(37,99,235,.16); }
+        .vp-equation-solution { border-color: rgba(245,158,11,.18); }
+        .vp-equation-title {
+            font: 800 .58rem/1.15 'Poppins', sans-serif;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            margin-bottom: .4rem;
+        }
+        .vp-equation-formula {
+            font-size: .9rem;
+            font-weight: 750;
+            line-height: 1.55;
+            margin-bottom: .35rem;
+        }
+        .vp-equation-copy {
+            font-size: .65rem;
+            line-height: 1.48;
+        }
+
+        @media (min-width: 768px) {
+            .vp-local-control-body {
+                grid-template-columns: minmax(0,1fr) minmax(13rem,.72fr);
+                align-items: end;
+            }
+            .vp-solution-experiment .vp-local-control-body {
+                grid-template-columns: minmax(0,1.12fr) minmax(0,.88fr);
+            }
+            .vp-solution-experiment .vp-local-actions {
+                grid-column: 1 / -1;
+                max-width: 19rem;
+                justify-self: end;
+                width: 100%;
+            }
+            .vp-solvent-experiment .vp-local-actions {
+                grid-column: 2;
+                grid-row: 1;
+            }
+        }
+        @media (max-width: 767px) {
+            .vp-experiment-stack { gap: 1rem; }
+            .vp-experiment-card { padding: .82rem; border-radius: 18px; }
+            .vp-experiment-heading { gap: .6rem; margin-bottom: .75rem; }
+            .vp-section-title { font-size: .94rem; }
+            .vp-section-subtitle { font-size: .65rem; }
+            .vp-mode-pill { font-size: .52rem; padding: .38rem .5rem; max-width: 9.5rem; overflow: hidden; text-overflow: ellipsis; }
+            .vp-local-control-center { padding: .72rem; margin-bottom: .78rem; }
+            .vp-local-control-heading { font-size: .62rem; margin-bottom: .65rem; }
+            .vp-solute-choice { font-size: .59rem !important; padding: .62rem .35rem !important; }
+            .vp-control-hint { font-size: .58rem; }
+            .vp-chamber-wrap { height: 16rem; min-height: 16rem; }
+            .vp-mini-legend { font-size: .6rem; gap: .35rem .68rem; }
+            .vp-pressure-indicator { margin-bottom: .72rem; }
+            .vp-equation-card { margin-top: .85rem; }
+        }
+
+
+        /* VP SOLUTION CONTROL — clean vertical hierarchy */
+        .vp-solution-experiment .vp-local-control-body {
+            grid-template-columns: minmax(0, 1fr) !important;
+            align-items: stretch !important;
+        }
+        .vp-solution-experiment .vp-solute-control-block,
+        .vp-solution-experiment .vp-local-control-body > .vp-control-block,
+        .vp-solution-experiment .vp-local-actions {
+            grid-column: 1 !important;
+            width: 100% !important;
+            max-width: none !important;
+            justify-self: stretch !important;
+        }
+        .vp-solution-experiment .vp-local-actions {
+            margin-top: .05rem;
+        }
+
+        /* VP SOLUTE SELECTOR — identical typography for both choices */
+        .vp-solution-solute-grid .vp-solute-choice,
+        .vp-solution-solute-grid .vp-solute-choice[aria-pressed="true"],
+        .vp-solution-solute-grid .vp-solute-choice[aria-pressed="false"] {
+            font-family: 'Inter', sans-serif !important;
+            font-size: .72rem !important;
+            font-weight: 700 !important;
+            line-height: 1.15 !important;
+            letter-spacing: -0.01em !important;
+            font-style: normal !important;
+            text-transform: none !important;
+            text-shadow: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        @media (min-width: 768px) {
+            .vp-solution-solute-grid .vp-solute-choice,
+            .vp-solution-solute-grid .vp-solute-choice[aria-pressed="true"],
+            .vp-solution-solute-grid .vp-solute-choice[aria-pressed="false"] {
+                font-size: .78rem !important;
+                font-weight: 700 !important;
+            }
+        }
+</style>
+
+<style id="fp-osmosis-no-solution-type-layout">
+/* FP + Osmosis: no solution selector; keep desktop controls balanced. */
+@media (min-width: 768px) {
+  #tab-content-freezing-point .simulation-controls-card,
+  #tab-content-osmosis .simulation-controls-card {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, .62fr) !important;
+    column-gap: 1rem !important;
+    row-gap: .9rem !important;
+    align-items: end !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-title-row,
+  #tab-content-osmosis .simulation-controls-card .control-title-row {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .controls-body > div:first-child,
+  #tab-content-osmosis .simulation-controls-card .controls-body > div:first-child {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    min-width: 0 !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-action-row,
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    justify-self: end !important;
+    align-self: end !important;
+  }
+}
+</style>
+
+<style id="fp-osmosis-control-bar-polish-final">
+/* FINAL POLISH — Freezing Point + Osmosis control centers only.
+   Removes the empty selector row and rebuilds a compact premium toolbar. */
+
+/* Shared reset for these two tabs so older grid-area rules cannot reserve blank rows. */
+#tab-content-freezing-point .simulation-controls-card,
+#tab-content-osmosis .simulation-controls-card {
+  grid-template-areas: none !important;
+  grid-auto-rows: auto !important;
+}
+#tab-content-freezing-point .simulation-controls-card .control-title-row,
+#tab-content-osmosis .simulation-controls-card .control-title-row,
+#tab-content-freezing-point .simulation-controls-card .controls-body,
+#tab-content-osmosis .simulation-controls-card .controls-body {
+  grid-area: auto !important;
+}
+
+/* Desktop / tablet: title, divider, then one clean horizontal control toolbar. */
+@media (min-width: 768px) {
+  #tab-content-freezing-point .simulation-controls-card,
+  #tab-content-osmosis .simulation-controls-card {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+    align-items: start !important;
+    padding: 1.3rem 1.5rem 1.25rem !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .controls-header,
+  #tab-content-osmosis .simulation-controls-card .controls-header {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .control-title-row,
+  #tab-content-osmosis .simulation-controls-card .control-title-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: .7rem !important;
+    width: 100% !important;
+    padding: 0 0 .9rem !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .control-title-row h3,
+  #tab-content-osmosis .simulation-controls-card .control-title-row h3 {
+    font-size: 15px !important;
+    line-height: 1.15 !important;
+    letter-spacing: .055em !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .control-title-row .lucide,
+  #tab-content-osmosis .simulation-controls-card .control-title-row .lucide {
+    width: 1.15rem !important;
+    height: 1.15rem !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .controls-body,
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto !important;
+    align-items: end !important;
+    gap: 1.15rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: .95rem 0 0 !important;
+    border-top: 1px solid rgba(148,163,184,.20) !important;
+  }
+  .dark #tab-content-freezing-point .simulation-controls-card .controls-body,
+  .dark #tab-content-osmosis .simulation-controls-card .controls-body {
+    border-top-color: rgba(255,255,255,.08) !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .controls-body > div:first-child,
+  #tab-content-osmosis .simulation-controls-card .controls-body > div:first-child {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    align-self: end !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .controls-body > div:first-child > .flex,
+  #tab-content-osmosis .simulation-controls-card .controls-body > div:first-child > .flex {
+    margin-bottom: .65rem !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .controls-body label,
+  #tab-content-osmosis .simulation-controls-card .controls-body label {
+    font-size: 11px !important;
+    line-height: 1 !important;
+    letter-spacing: .08em !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card #label-fp-temp,
+  #tab-content-osmosis .simulation-controls-card #label-osmosis-speed {
+    font-size: 12px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .temperature-stepper {
+    grid-template-columns: 44px minmax(170px, 1fr) 44px !important;
+    gap: .7rem !important;
+    align-items: center !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .temperature-step-button {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+  }
+
+  #tab-content-osmosis .simulation-controls-card #input-osmosis-speed {
+    width: 100% !important;
+    min-width: 180px !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .control-action-row,
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 116px) !important;
+    gap: .65rem !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-self: end !important;
+    align-self: end !important;
+  }
+
+  #tab-content-freezing-point .simulation-controls-card .control-action-row > button,
+  #tab-content-osmosis .simulation-controls-card .control-action-row > button {
+    width: 116px !important;
+    min-height: 44px !important;
+    padding: .7rem .85rem !important;
+    font-size: 12px !important;
+    border-radius: 13px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Narrow desktop/tablet: keep toolbar tidy instead of squeezing. */
+@media (min-width: 768px) and (max-width: 980px) {
+  #tab-content-freezing-point .simulation-controls-card .controls-body,
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: .85rem !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-action-row,
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-self: start !important;
+  }
+}
+
+/* Mobile: compact stack with no ghost selector spacing. */
+@media (max-width: 767px) {
+  #tab-content-freezing-point .simulation-controls-card,
+  #tab-content-osmosis .simulation-controls-card {
+    display: block !important;
+    padding: 1.15rem !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .controls-header,
+  #tab-content-osmosis .simulation-controls-card .controls-header {
+    display: block !important;
+    margin: 0 !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-title-row,
+  #tab-content-osmosis .simulation-controls-card .control-title-row {
+    padding: 0 0 .75rem !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .controls-body,
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    display: block !important;
+    margin: 0 !important;
+    padding-top: .85rem !important;
+    border-top: 1px solid rgba(148,163,184,.18) !important;
+  }
+  .dark #tab-content-freezing-point .simulation-controls-card .controls-body,
+  .dark #tab-content-osmosis .simulation-controls-card .controls-body {
+    border-top-color: rgba(255,255,255,.07) !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-action-row,
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .55rem !important;
+    margin-top: .85rem !important;
+    width: 100% !important;
+  }
+  #tab-content-freezing-point .simulation-controls-card .control-action-row > button,
+  #tab-content-osmosis .simulation-controls-card .control-action-row > button {
+    min-height: 42px !important;
+    padding: .68rem .75rem !important;
+  }
+}
+</style>
+
+
+<style id="mobile-fact-visual-fit-fix">
+/* Mobile Did You Know visual fit — keep every mini animation contained in its own box */
+@media (max-width: 640px) {
+    .fact-mini-visual {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 72px !important;
+        min-height: 72px !important;
+        max-height: 72px !important;
+        margin: 0 0 12px 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        border-radius: 14px !important;
+        contain: layout paint !important;
+        isolation: isolate !important;
+    }
+
+    .fact-mini-visual > svg.fact-art {
+        position: absolute !important;
+        inset: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        transform: none !important;
+    }
+
+    /* Keep animated SVG content clipped by the illustration viewport rather than hanging outside it. */
+    .fact-mini-visual > svg.fact-art > * {
+        transform-box: fill-box;
+    }
+}
+</style>
+
 </head>
 <body class="bg-gradient-to-b from-[#EEF5FF] via-[#F8FAFC] to-[#FFFFFF] bg-fixed text-slate-800 dark:bg-none dark:bg-[#0B1220] dark:text-slate-200 antialiased transition-colors duration-500 min-h-screen flex flex-col">
 <!-- Global Toast Container for Badges -->
@@ -2405,89 +3233,119 @@
 </div>
 </div>
 <div class="p-7 notion-card" id="tour-quiz-vp"><div class="flex items-center space-x-2.5 text-stemPurple-600 dark:text-stemPurple-400 mb-5"><i class="w-5 h-5" data-lucide="circle-help"></i><h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Quiz time!</h3></div><div id="quiz-vp"></div></div></div>
-<div class="simulation-column simulation-integrated-shell lg:col-span-6 flex flex-col"><div class="p-7 component-card simulation-controls-card" id="tour-controls-vp">
-<div class="controls-header">
-<div class="control-title-row">
-<i class="w-5 h-5 text-stemPurple-500" data-lucide="sliders"></i>
-<h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
-</div>
-<div class="solute-picker-inline">
-<label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Select Solution Type</label>
-<div class="solute-grid">
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Glucose" onclick="setSolute('Glucose')">Non-Volatile Solution</button>
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold" data-solute="Ethanol" onclick="setSolute('Ethanol')">Volatile Solution</button>
-</div>
-</div>
-</div>
-<div class="controls-body">
+<div class="simulation-column lg:col-span-6 flex flex-col">
+<div class="vp-experiment-stack" id="tour-sim-vp">
+
+<!-- PURE SOLVENT EXPERIMENT -->
+<section class="vp-experiment-card vp-solvent-experiment">
+<div class="vp-experiment-heading">
 <div>
-<div class="flex justify-between items-center mb-3">
-<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-vp-temp">Temperature</label>
-<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-vp-temp">20.0 °C</span>
+<span class="vp-section-kicker text-brand-600 dark:text-brand-300">PART 1</span>
+<h3 class="vp-section-title text-slate-900 dark:text-white">Pure Solvent</h3>
+<p class="vp-section-subtitle text-slate-500 dark:text-slate-400">Only solvent molecules can escape into the vapour phase.</p>
 </div>
-<div class="temperature-stepper">
-<button aria-label="Decrease temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp', -0.1)" type="button">−</button>
-<input aria-label="Adjust Temperature" class="w-full" id="input-vp-temp" max="120" min="20" step="0.1" type="range" value="20.0"/>
-<button aria-label="Increase temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp', 0.1)" type="button">+</button>
+<span class="vp-mode-pill vp-mode-pill-solvent">SOLVENT</span>
+</div>
+
+<div class="vp-local-control-center" id="tour-controls-vp">
+<div class="vp-local-control-heading">
+<i class="w-4 h-4 text-stemPurple-500" data-lucide="sliders"></i>
+<span>Control Center</span>
+</div>
+<div class="vp-local-control-body">
+<div class="vp-control-block">
+<div class="flex justify-between items-center mb-2">
+<label class="vp-control-label" for="input-vp-temp-pure">Temperature</label>
+<span class="vp-control-value text-brand-600 dark:text-brand-300" id="label-vp-temp-pure">20.0 °C</span>
+</div>
+<div class="temperature-stepper vp-temperature-stepper">
+<button aria-label="Decrease pure solvent temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp-pure', -0.1)" type="button">−</button>
+<input aria-label="Adjust pure solvent temperature" class="w-full" id="input-vp-temp-pure" max="120" min="20" step="0.1" type="range" value="20.0"/>
+<button aria-label="Increase pure solvent temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp-pure', 0.1)" type="button">+</button>
 </div>
 </div>
-<div class="control-action-row">
-<button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
-<i class="w-4 h-4 play-icon" data-lucide="pause"></i>
-<span class="play-text">Pause</span>
-</button>
-<button class="w-full py-3.5 px-4 btn-modern text-[13px] font-semibold flex items-center justify-center space-x-2" onclick="resetExperiment()">
-<i class="w-4 h-4" data-lucide="rotate-ccw"></i>
-<span>Reset</span>
-</button>
-</div>
-</div>
-</div>
-<div class="simulation-card flex-1 p-4 lg:p-7 flex flex-col min-h-[380px] component-card" id="tour-sim-vp">
-<div class="simulation-topic-header flex flex-col items-start gap-2.5 border-b border-slate-100 dark:border-white/5 pb-4 mb-5">
-<div class="flex items-center space-x-2.5">
-<span class="relative flex h-2.5 w-2.5"><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500"></span></span>
-<span class="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-heading">Vapour Pressure</span>
-</div>
-<div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
-<div class="flex items-center gap-1.5 whitespace-nowrap">
-<span class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50"></span>
-<span>Solvent</span>
-</div>
-<div class="flex items-center gap-1.5 whitespace-nowrap">
-<span class="w-2.5 h-2.5 rounded-full bg-amberSolute shadow-sm shadow-amber-500/50"></span>
-<span id="vp-solute-legend-label">Non-Volatile Solute</span>
-</div>
-<div class="flex items-center gap-1.5 whitespace-nowrap">
-<span class="w-2.5 h-2.5 rounded-full bg-stemPurple-500 shadow-sm shadow-stemPurple-500/50"></span>
-<span>Gas</span>
+<div class="vp-local-actions">
+<button class="vp-secondary-action" onclick="toggleVPSectionPause('pure')" type="button"><span id="vp-pure-pause-icon">Ⅱ</span><span id="vp-pure-pause-text">Pause</span></button>
+<button class="vp-primary-action" onclick="resetVPSection('pure')" type="button"><i class="w-4 h-4" data-lucide="rotate-ccw"></i><span>Reset</span></button>
 </div>
 </div>
 </div>
-<div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
-<div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
-<div class="relative flex-1 min-h-[150px] flex flex-col">
-<span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
-<canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-vp-pure"></canvas>
-</div>
-<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3 shadow-sm">
-<div class="text-[9px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-1.5">Solvent Equation</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5" id="vp-solvent-equation-formula"></div>
-<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-solvent-equation-explanation"></div>
+
+<div class="vp-topic-strip">
+<div class="vp-topic-name"><span class="vp-topic-dot bg-brand-500"></span><span>Vapour Pressure — Pure Solvent</span></div>
+<div class="vp-mini-legend" aria-label="Pure solvent particle colour legend">
+<div><span class="vp-legend-dot bg-brand-500"></span><span>Solvent</span></div>
+<div><span class="vp-legend-dot bg-stemPurple-500"></span><span>Vapour</span></div>
 </div>
 </div>
-<div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
-<div class="relative flex-1 min-h-[150px] flex flex-col">
-<span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</span>
-<canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-vp-solution"></canvas>
+
+<div class="vp-chamber-wrap"><canvas class="vp-chamber-canvas" id="canvas-vp-pure"></canvas></div>
+<div class="vp-equation-card vp-equation-solvent">
+<div class="vp-equation-title text-brand-600 dark:text-brand-300">Solvent Equation</div>
+<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-solvent-equation-formula"></div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-solvent-equation-explanation"></div>
 </div>
-<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3 shadow-sm">
-<div class="text-[9px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-1.5">Solution Equation</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5" id="vp-equation-formula"></div>
-<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed" id="vp-equation-explanation"></div>
+</section>
+
+<!-- SOLUTION EXPERIMENT -->
+<section class="vp-experiment-card vp-solution-experiment">
+<div class="vp-experiment-heading">
+<div>
+<span class="vp-section-kicker text-amber-600 dark:text-amber-400">PART 2</span>
+<h3 class="vp-section-title text-slate-900 dark:text-white">Solution</h3>
+<p class="vp-section-subtitle text-slate-500 dark:text-slate-400">Choose the solute type, then observe which particles contribute to vapour pressure.</p>
+</div>
+<span class="vp-mode-pill vp-mode-pill-solution" id="vp-solution-panel-title">Non-Volatile Solute</span>
+</div>
+
+<div class="vp-local-control-center">
+<div class="vp-local-control-heading">
+<i class="w-4 h-4 text-stemPurple-500" data-lucide="sliders"></i>
+<span>Control Center</span>
+</div>
+<div class="vp-local-control-body">
+<div class="vp-control-block vp-solute-control-block">
+<label class="vp-control-label block mb-2">Select Solute Type</label>
+<div class="vp-solution-solute-grid">
+<button class="solute-btn vp-solute-choice" data-solute="Glucose" onclick="setSolute('Glucose')">Non-Volatile Solute</button>
+<button class="solute-btn vp-solute-choice" data-solute="Ethanol" onclick="setSolute('Ethanol')">Volatile Solute</button>
+</div>
+</div>
+<div class="vp-control-block">
+<div class="flex justify-between items-center mb-2">
+<label class="vp-control-label" for="input-vp-temp-solution">Temperature</label>
+<span class="vp-control-value text-amber-600 dark:text-amber-400" id="label-vp-temp-solution">20.0 °C</span>
+</div>
+<div class="temperature-stepper vp-temperature-stepper">
+<button aria-label="Decrease solution temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp-solution', -0.1)" type="button">−</button>
+<input aria-label="Adjust solution temperature" class="w-full" id="input-vp-temp-solution" max="120" min="20" step="0.1" type="range" value="20.0"/>
+<button aria-label="Increase solution temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-vp-temp-solution', 0.1)" type="button">+</button>
+</div>
+</div>
+<div class="vp-local-actions">
+<button class="vp-secondary-action" onclick="toggleVPSectionPause('solution')" type="button"><span id="vp-solution-pause-icon">Ⅱ</span><span id="vp-solution-pause-text">Pause</span></button>
+<button class="vp-primary-action" onclick="resetVPSection('solution')" type="button"><i class="w-4 h-4" data-lucide="rotate-ccw"></i><span>Reset</span></button>
 </div>
 </div>
 </div>
+
+<div class="vp-topic-strip">
+<div class="vp-topic-name"><span class="vp-topic-dot bg-amber-500"></span><span>Vapour Pressure — Solution</span></div>
+<div class="vp-mini-legend" aria-label="Solution particle colour legend">
+<div><span class="vp-legend-dot bg-brand-500"></span><span>Solvent</span></div>
+<div><span class="vp-legend-dot bg-amberSolute"></span><span id="vp-solute-legend-label">Non-Volatile Solute</span></div>
+<div><span class="vp-legend-dot bg-stemPurple-500"></span><span id="vp-vapour-legend-label">Vapour</span></div>
+</div>
+</div>
+
+<div class="vp-chamber-wrap"><canvas class="vp-chamber-canvas" id="canvas-vp-solution"></canvas></div>
+<div class="vp-equation-card vp-equation-solution">
+<div class="vp-equation-title text-amber-600 dark:text-amber-400">Solution Equation</div>
+<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-equation-formula"></div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-equation-explanation"></div>
+</div>
+</section>
+
 </div>
 </div>
 <div class="lg:col-span-3 space-y-8"><div class="p-7 notion-card relative" id="tour-explanation-vp">
@@ -2498,9 +3356,9 @@
 </div>
 </div>
 <div class="space-y-4 text-[13px] text-slate-700 dark:text-slate-300" id="explanation-vp-simple">
-<p>According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.</p>
-<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">For a non-volatile solute, the solute reduces the mole fraction of the solvent.</p>
-<p>Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.</p>
+<p><strong>Pure solvent:</strong> only solvent molecules are present, so only solvent molecules can enter the vapour phase.</p>
+<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5"><strong>Non-volatile solute:</strong> the solute remains in the liquid; only the solvent contributes to vapour pressure.</p>
+<p><strong>Volatile solute:</strong> both the solvent and volatile solute can enter the vapour phase, so both partial pressures contribute to the total vapour pressure.</p>
 </div>
 </div>
 <div class="p-7 notion-card">
@@ -2511,7 +3369,7 @@
 <div class="space-y-5 text-[13px] text-slate-700 dark:text-slate-300">
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 mb-1.5 font-heading">Observation</h4>
-<p>Glucose lowers the vapour pressure of water. Ethanol is volatile and contributes its own vapour, so the mixture may produce more vapour than pure water.</p>
+<p>A non-volatile solute lowers the solvent vapour pressure. A volatile solute contributes its own vapour, so the total vapour pressure can be higher than in the non-volatile case.</p>
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
@@ -2562,12 +3420,6 @@
 <i class="w-5 h-5 text-stemPurple-500" data-lucide="sliders"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
 </div>
-<div class="solute-picker-inline">
-<label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Solution Type</label>
-<div class="solute-grid" style="grid-template-columns: minmax(0, 1fr);">
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold w-full" data-solute="Glucose" onclick="setSolute('Glucose')">Volatile Solution</button>
-</div>
-</div>
 </div>
 <div class="controls-body">
 <div>
@@ -2602,33 +3454,42 @@
 </span>
 <span class="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-heading">Boiling Point</span>
 </div>
-<div aria-label="Particle colour legend" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
-<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span><span>Solvent</span></div>
-<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-amberSolute"></span><span>Non-Volatile Solute</span></div>
-<div class="flex items-center gap-1.5 whitespace-nowrap"><span class="w-2.5 h-2.5 rounded-full bg-stemPurple-500"></span><span>Gas</span></div>
-</div>
+
 </div>
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
-<div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
-<div class="relative flex-1 min-h-[150px] flex flex-col">
-<span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
-<canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-pure"></canvas>
+<div class="simulation-panel bp-pressure-panel flex flex-col relative h-full min-h-[150px]">
+<div class="bp-panel-heading text-brand-600 dark:text-brand-300">Boiling Point of Pure Solvent</div>
+<div class="bp-local-legend" aria-label="Pure solvent particle colour legend">
+  <div><span class="bp-legend-dot bg-brand-500"></span><span>Solvent</span></div>
+  <div><span class="bp-legend-dot bg-stemPurple-500"></span><span>Vapour</span></div>
 </div>
-<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3 shadow-sm">
-<div class="text-[9px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-1.5">Solvent Equation</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">\(P_{\text{solvent}}^\circ(T_b^\circ)=P_{\text{external}}\)</div>
-<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(T_b^\circ\)</strong> = boiling point of the pure solvent.</div>
+<div class="relative flex-1 min-h-[150px] flex flex-col"><canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-pure"></canvas></div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-brand-500/15 p-3 shadow-sm bp-formula-card">
+  <div class="text-[9px] font-extrabold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading mb-1.5">Solvent Equation</div>
+  <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(T_b^\circ\)</div>
+  <div class="bp-formula-terms text-slate-600 dark:text-slate-400">
+    <div><strong>\(T_b^\circ\)</strong><span>= boiling point of the pure solvent</span></div>
+  </div>
 </div>
 </div>
-<div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
-<div class="relative flex-1 min-h-[150px] flex flex-col">
-<span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</span>
-<canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-solution"></canvas>
+<div class="simulation-panel bp-pressure-panel flex flex-col relative h-full min-h-[150px]">
+<div class="bp-panel-heading text-amber-600 dark:text-amber-400">Boiling Point of Solution</div>
+<div class="bp-local-legend" aria-label="Solution particle colour legend">
+  <div><span class="bp-legend-dot bg-brand-500"></span><span>Solvent</span></div>
+  <div><span class="bp-legend-dot bg-amberSolute"></span><span>Non-Volatile Solute</span></div>
+  <div><span class="bp-legend-dot bg-stemPurple-500"></span><span>Vapour</span></div>
 </div>
-<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3 shadow-sm">
-<div class="text-[9px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-1.5">Solution Equation</div>
-<div class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
-<div class="text-[10px] text-slate-600 dark:text-slate-400 leading-relaxed"><strong>\(K_b\)</strong> = molal boiling-point elevation constant; <strong>\(m\)</strong> = molality of the non-volatile solute; <strong>\(T_b\)</strong> = boiling point of the solution.</div>
+<div class="relative flex-1 min-h-[150px] flex flex-col"><canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-bp-solution"></canvas></div>
+<div class="mt-3 rounded-xl bg-white dark:bg-[#0B1220] border border-amber-500/15 p-3 shadow-sm bp-formula-card">
+  <div class="text-[9px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading mb-1.5">Solution Equation</div>
+  <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
+  <div class="bp-formula-terms text-slate-600 dark:text-slate-400">
+    <div><strong>\(\Delta T_b\)</strong><span>= boiling-point elevation</span></div>
+    <div><strong>\(K_b\)</strong><span>= molal boiling-point elevation constant</span></div>
+    <div><strong>\(m\)</strong><span>= molality of the solution</span></div>
+    <div><strong>\(T_b^\circ\)</strong><span>= boiling point of the pure solvent</span></div>
+    <div><strong>\(T_b\)</strong><span>= boiling point of the solution</span></div>
+  </div>
 </div>
 </div>
 </div>
@@ -2643,7 +3504,7 @@
 </div>
 <div class="space-y-4 text-[13px] text-slate-700 dark:text-slate-300" id="explanation-bp-simple">
 <p>A liquid boils when its vapour pressure becomes equal to the external pressure.</p>
-<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.</p>
+<p class="font-semibold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 py-0.5">A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.</p>
 <p>The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.</p>
 </div>
 </div>
@@ -2705,12 +3566,6 @@
 <div class="control-title-row">
 <i class="w-5 h-5 text-stemPurple-500" data-lucide="sliders"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
-</div>
-<div class="solute-picker-inline">
-<label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Solution Type</label>
-<div class="solute-grid" style="grid-template-columns: minmax(0, 1fr);">
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold w-full" data-solute="Ethanol" onclick="setSolute('Ethanol')">Volatile Solution</button>
-</div>
 </div>
 </div>
 <div class="controls-body">
@@ -2842,12 +3697,6 @@
 <div class="control-title-row">
 <i class="w-5 h-5 text-stemPurple-500" data-lucide="sliders"></i>
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
-</div>
-<div class="solute-picker-inline">
-<label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading">Solution Type</label>
-<div class="solute-grid" style="grid-template-columns: minmax(0, 1fr);">
-<button class="solute-btn py-2 px-2 text-[12px] font-semibold w-full" data-solute="Glucose" onclick="setSolute('Glucose')">Volatile Solution</button>
-</div>
 </div>
 </div>
 <div class="controls-body">
@@ -3293,6 +4142,8 @@
         let activeTabId = 'vapor-pressure';
         let currentSolute = 'Glucose';
         let currentSoluteFactor = 1.0; 
+        let vpPurePaused = false;
+        let vpSolutionPaused = false;
         let animationFrameId = null;
         let isPaused = false;
         let isGuidedTourActive = false;
@@ -4190,6 +5041,16 @@
                 markup = markup.replace('class="fact-art', 'class="fact-art realistic-illustration');
             }
             visual.innerHTML = markup;
+
+            // Keep Did You Know mini-illustrations proportionally fitted inside their card on phones.
+            const factSvg = visual.querySelector('svg.fact-art');
+            if (factSvg) {
+                factSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                factSvg.style.width = '100%';
+                factSvg.style.height = '100%';
+                factSvg.style.display = 'block';
+                factSvg.style.overflow = 'hidden';
+            }
         }
 
         function nextFact(topic, isInitial = false) {
@@ -6128,6 +6989,9 @@
             const vpFormula = document.getElementById('vp-equation-formula');
             const vpExplanation = document.getElementById('vp-equation-explanation');
             const vpLegend = document.getElementById('vp-solute-legend-label');
+            const vpVapourLegend = document.getElementById('vp-vapour-legend-label');
+            const vpPanelTitle = document.getElementById('vp-solution-panel-title');
+            const vpBehaviourHint = document.getElementById('vp-solute-behaviour-hint');
 
             if (vpSolventFormula && vpSolventExplanation) {
                 vpSolventFormula.innerHTML = '\\(P_{\\text{solvent}} = P_A^\\circ\\)';
@@ -6137,10 +7001,16 @@
             if (vpFormula && vpExplanation) {
                 if (currentSolute === 'Ethanol') {
                     if (vpLegend) vpLegend.textContent = 'Volatile Solute';
+                    if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
+                    if (vpPanelTitle) vpPanelTitle.textContent = 'Volatile Solute';
+                    if (vpBehaviourHint) vpBehaviourHint.textContent = 'Both the solvent and the volatile solute can enter the vapour phase.';
                     vpFormula.innerHTML = '\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>\\(P_{\\text{total}} = P_A + P_B\\)';
                     vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> and <strong>\\(P_B\\)</strong> are the partial vapour pressures of the solvent and the volatile component. Both volatile components contribute to the vapour phase.';
                 } else {
                     if (vpLegend) vpLegend.textContent = 'Non-Volatile Solute';
+                    if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
+                    if (vpPanelTitle) vpPanelTitle.textContent = 'Non-Volatile Solute';
+                    if (vpBehaviourHint) vpBehaviourHint.textContent = 'The solute stays in the liquid. Only solvent molecules enter the vapour phase.';
                     vpFormula.innerHTML = '\\(P_A = X_A P_A^\\circ\\)<br>\\(\\Delta P = P_A^\\circ - P_A\\)';
                     vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> is the mole fraction of solvent in the non-volatile solution. The non-volatile solute does not contribute to the vapour phase, so only the solvent contributes to the vapour pressure.';
                 }
@@ -6175,6 +7045,41 @@
             
             updateEquationPanels();
             initSimulations();
+        }
+
+        function updateVPPauseUI(section) {
+            const paused = section === 'pure' ? vpPurePaused : vpSolutionPaused;
+            const icon = document.getElementById(section === 'pure' ? 'vp-pure-pause-icon' : 'vp-solution-pause-icon');
+            const text = document.getElementById(section === 'pure' ? 'vp-pure-pause-text' : 'vp-solution-pause-text');
+            if (icon) icon.textContent = paused ? '▶' : 'Ⅱ';
+            if (text) text.textContent = paused ? 'Play' : 'Pause';
+        }
+
+        function toggleVPSectionPause(section) {
+            if (section === 'pure') vpPurePaused = !vpPurePaused;
+            else vpSolutionPaused = !vpSolutionPaused;
+            updateVPPauseUI(section);
+            if (learningProgress['vapor-pressure']) {
+                learningProgress['vapor-pressure'].controlAdjusted = true;
+                updateProgressUI();
+            }
+        }
+
+        function resetVPSection(section) {
+            const isPure = section === 'pure';
+            const input = document.getElementById(isPure ? 'input-vp-temp-pure' : 'input-vp-temp-solution');
+            if (input) input.value = '20.0';
+            if (isPure) {
+                vpPurePaused = false;
+                vpState.pure.particles = [];
+                updateVPPauseUI('pure');
+            } else {
+                vpSolutionPaused = false;
+                vpState.solution.particles = [];
+                updateVPPauseUI('solution');
+            }
+            if (input) input.dispatchEvent(new Event('input', { bubbles: true }));
+            else runVaporPressureSim();
         }
 
         function togglePlayPause() {
@@ -6619,6 +7524,117 @@
             ensureUniqueParticleIds(bucket.particles);
         }
 
+        function pureSolventVapourPressureAtm(tempC) {
+            const t = clampValue(Number(tempC) || 20, 0, 120);
+            // Antoine equation for water; returns saturation vapour pressure in atm.
+            const c = t <= 99
+                ? { A: 8.07131, B: 1730.63, C: 233.426 }
+                : { A: 8.14019, B: 1810.94, C: 244.485 };
+            const mmHg = Math.pow(10, c.A - (c.B / (c.C + t)));
+            return clampValue(mmHg / 760, 0, 3);
+        }
+
+        function volatileSoluteVapourPressureAtm(tempC) {
+            const t = clampValue(Number(tempC) || 20, 0, 120);
+            // Antoine equation for ethanol; used only as the volatile-solute teaching model.
+            const c = t <= 78
+                ? { A: 8.20417, B: 1642.89, C: 230.300 }
+                : { A: 7.68117, B: 1332.04, C: 199.200 };
+            const mmHg = Math.pow(10, c.A - (c.B / (c.C + t)));
+            return clampValue(mmHg / 760, 0, 5);
+        }
+
+        function vapourPressureSolutionAtm(tempC) {
+            const pure = pureSolventVapourPressureAtm(tempC);
+            if (currentSolute === 'Ethanol') {
+                // Idealized volatile binary mixture: both components contribute.
+                const xSolvent = 0.72;
+                const xVolatile = 0.28;
+                return xSolvent * pure + xVolatile * volatileSoluteVapourPressureAtm(tempC);
+            }
+            // Non-volatile solute: only the solvent contributes, at a reduced mole fraction.
+            return 0.78 * pure;
+        }
+
+        function updatePressureIndicator(id, valueAtm) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const value = Math.max(0, Number(valueAtm) || 0);
+            el.textContent = `${value.toFixed(value < 0.10 ? 3 : 2)} atm`;
+        }
+
+        function formatPressureAtm(valueAtm) {
+            const value = Math.max(0, Number(valueAtm) || 0);
+            return `${value.toFixed(value < 0.10 ? 3 : 2)} atm`;
+        }
+
+        function drawVPPressureOverlay(ctx, width, height, liquidY, internalAtm) {
+            if (!ctx || !Number.isFinite(width) || !Number.isFinite(liquidY)) return;
+
+            const compact = width < 360;
+            const fontSize = compact ? 9 : 10.5;
+            const padX = compact ? 7 : 9;
+            const pillH = compact ? 22 : 25;
+            const radius = pillH / 2;
+
+            ctx.save();
+            ctx.font = `800 ${fontSize}px Poppins, Inter, sans-serif`;
+            ctx.textBaseline = 'middle';
+            ctx.lineWidth = 1.25;
+
+            const roundRectPath = (x, y, w, h, r) => {
+                const rr = Math.min(r, w / 2, h / 2);
+                ctx.beginPath();
+                ctx.moveTo(x + rr, y);
+                ctx.arcTo(x + w, y, x + w, y + h, rr);
+                ctx.arcTo(x + w, y + h, x, y + h, rr);
+                ctx.arcTo(x, y + h, x, y, rr);
+                ctx.arcTo(x, y, x + w, y, rr);
+                ctx.closePath();
+            };
+
+            const drawPill = (text, x, y, fg, bg, border) => {
+                const w = Math.ceil(ctx.measureText(text).width + padX * 2);
+                roundRectPath(x, y, w, pillH, radius);
+                ctx.fillStyle = bg;
+                ctx.fill();
+                ctx.strokeStyle = border;
+                ctx.stroke();
+                ctx.fillStyle = fg;
+                ctx.fillText(text, x + padX, y + pillH / 2 + .3);
+                return { x, y, w, h: pillH };
+            };
+
+            // P external sits at the liquid surface (pressure acting on the surface).
+            const externalText = 'P external  1.00 atm';
+            const externalW = Math.ceil(ctx.measureText(externalText).width + padX * 2);
+            const externalX = Math.max(8, width - externalW - 9);
+            const externalY = Math.max(8, liquidY - pillH - 5);
+            const external = drawPill(externalText, externalX, externalY, '#a5f3fc', 'rgba(8, 47, 73, .94)', 'rgba(103, 232, 249, 1)');
+
+            // P internal is shown inside the liquid/solution body.
+            const internalText = `P internal  ${formatPressureAtm(internalAtm)}`;
+            const internalW = Math.ceil(ctx.measureText(internalText).width + padX * 2);
+            const internalX = Math.max(8, width - internalW - 9);
+            const internalY = Math.min(height - pillH - 8, liquidY + 10);
+            drawPill(internalText, internalX, internalY, '#fbcfe8', 'rgba(80, 7, 36, .95)', 'rgba(249, 168, 212, 1)');
+
+            // A bright surface marker makes the P external reference unambiguous.
+            ctx.strokeStyle = 'rgba(103, 232, 249, 1)';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            const anchorX = Math.min(width - 14, external.x + external.w * .76);
+            ctx.moveTo(anchorX, external.y + external.h);
+            ctx.lineTo(anchorX, liquidY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(anchorX, liquidY, compact ? 2.2 : 2.7, 0, Math.PI * 2);
+            ctx.fillStyle = '#67e8f9';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
         function runVaporPressureSim() {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             const pureObj = setupCanvas('canvas-vp-pure');
@@ -6626,86 +7642,91 @@
             if (!pureObj || !solObj) return;
 
             const conc = 1.0;
-            const temp = readTemperatureValue('input-vp-temp');
-            updateText('label-vp-temp', temp.toFixed(1) + ' °C');
+            const tempPure = readTemperatureValue('input-vp-temp-pure');
+            const tempSolution = readTemperatureValue('input-vp-temp-solution');
+            updateText('label-vp-temp-pure', tempPure.toFixed(1) + ' °C');
+            updateText('label-vp-temp-solution', tempSolution.toFixed(1) + ' °C');
+
+            const pureInternalPressureAtm = pureSolventVapourPressureAtm(tempPure);
+            const solutionInternalPressureAtm = vapourPressureSolutionAtm(tempSolution);
+            // Legacy DOM pressure fields may not exist; pressure is now rendered inside each chamber.
+            updateText('vp-pure-p-external', '1.00 atm');
+            updateText('vp-solution-p-external', '1.00 atm');
+            updatePressureIndicator('vp-pure-p-internal', pureInternalPressureAtm);
+            updatePressureIndicator('vp-solution-p-internal', solutionInternalPressureAtm);
+
             const liquidLevelPure = pureObj.height * 0.45;
             const liquidLevelSol = solObj.height * 0.45;
-            const temp01 = clampValue((temp - 20) / 100, 0, 1);
+            const temp01Pure = clampValue((tempPure - 20) / 100, 0, 1);
+            const temp01Solution = clampValue((tempSolution - 20) / 100, 0, 1);
 
             prepareBucket(vpState.pure, 0x51A7E001);
             prepareBucket(vpState.solution, 0x51A7E002);
             if (vpState.pure.particles.length === 0) {
                 initializeVapourBucket(vpState.pure, pureObj, liquidLevelPure, false, conc, 0x51A7E001);
             }
-            if (vpState.solution.particles.length === 0 || vpState.solution.lastConc !== conc) {
+            if (vpState.solution.particles.length === 0 || vpState.solution.lastConc !== conc || vpState.solution.lastSolute !== currentSolute) {
                 vpState.solution.particles = [];
                 vpState.solution.lastConc = conc;
+                vpState.solution.lastSolute = currentSolute;
                 initializeVapourBucket(vpState.solution, solObj, liquidLevelSol, true, conc, 0x51A7E002);
-                vpState.solution.lastConc = conc;
             }
 
-            const targetPure = Math.round(clampValue(3 + Math.pow(temp01, 1.15) * 15, 3, 18));
-            const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.56;
-            // Non-volatile solution must show visibly fewer vapour molecules than the pure solvent
-            // at the same temperature. Keep the target itself lower so the physics engine does
-            // not fight a later visual correction. Volatile solution remains free to contribute
-            // additional vapour through both volatile components.
+            function gasTargetForTemperature(temp01) {
+                return Math.round(clampValue(3 + Math.pow(temp01, 1.15) * 15, 3, 18));
+            }
+
+            const targetPure = gasTargetForTemperature(temp01Pure);
+            const solutionBaseline = gasTargetForTemperature(temp01Solution);
             const targetSolution = currentSolute === 'Ethanol'
-                ? Math.round(clampValue(targetPure * solutionVapourFactor, 2, 24))
-                : Math.max(1, Math.min(targetPure - 1, Math.floor(targetPure * 0.55)));
+                ? Math.round(clampValue(solutionBaseline * 1.45, 2, 24))
+                : Math.max(1, Math.floor(solutionBaseline * 0.55));
 
-            const thermal = {
-                liquidSpeed: 22 + 28 * Math.sqrt(0.15 + temp01 * 0.85),
-                soluteSpeed: 15 + 18 * Math.sqrt(0.15 + temp01 * 0.85),
-                gasSpeed: 34 + 34 * Math.sqrt(0.18 + temp01 * 0.82),
-                liquidNoise: 6 + temp01 * 5,
-                gasNoise: 8 + temp01 * 6
-            };
+            function thermalFor(temp01) {
+                return {
+                    liquidSpeed: 22 + 28 * Math.sqrt(0.15 + temp01 * 0.85),
+                    soluteSpeed: 15 + 18 * Math.sqrt(0.15 + temp01 * 0.85),
+                    gasSpeed: 34 + 34 * Math.sqrt(0.18 + temp01 * 0.82),
+                    liquidNoise: 6 + temp01 * 5,
+                    gasNoise: 8 + temp01 * 6
+                };
+            }
+            const thermalPure = thermalFor(temp01Pure);
+            const thermalSolution = thermalFor(temp01Solution);
 
-            function phaseSettings(bucket, targetGas, vapourMultiplier) {
+            function phaseSettings(bucket, targetGas, vapourMultiplier, temp01, allowVolatile) {
                 const gasCount = bucket.particles.reduce((sum, p) => sum + (p.type === 'gas' ? 1 : 0), 0);
                 const error = (targetGas - gasCount) / Math.max(1, targetGas);
                 return {
                     evapProbability: clampValue((0.10 + temp01 * 0.12) * vapourMultiplier * (1 + clampValue(error, -0.55, 0.9) * 0.9), 0.025, 0.48),
                     condenseProbability: clampValue((0.42 - temp01 * 0.08) * (1 - clampValue(error, -0.7, 0.7) * 0.55), 0.18, 0.72),
-                    allowVolatileSolute: currentSolute === 'Ethanol',
-                    volatileSoluteEvapFactor: currentSolute === 'Ethanol' ? 1.75 : 0,
-                    volatileSoluteCondenseFactor: currentSolute === 'Ethanol' ? 0.82 : 1
+                    allowVolatileSolute: allowVolatile,
+                    volatileSoluteEvapFactor: allowVolatile ? 1.75 : 0,
+                    volatileSoluteCondenseFactor: allowVolatile ? 0.82 : 1
                 };
             }
 
-            function enforceNonVolatileVapourGap() {
-                if (currentSolute !== 'Glucose') return;
-                const pureGasCount = vpState.pure.particles.filter(p => p.type === 'gas').length;
-                const allowedSolutionGas = Math.max(1, Math.floor(pureGasCount * 0.62));
-                const solutionGas = vpState.solution.particles.filter(p => p.type === 'gas');
-                const excess = Math.max(0, solutionGas.length - allowedSolutionGas);
-                for (let i = 0; i < excess; i++) {
-                    const p = solutionGas[i];
-                    p.type = 'solvent';
-                    p.liquidType = 'solvent';
-                    p.color = '#2563eb';
-                    p.radius = p.baseRadius || 4;
-                    p.x = clampValue(p.x, p.radius + 2, solObj.width - p.radius - 2);
-                    p.y = liquidLevelSol + p.radius + 2 + (i % 4) * 5;
-                    p.vy = Math.abs(p.vy || thermal.liquidSpeed * 0.3);
-                }
-            }
-
+            const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.56;
             const advance = makeFrameStepper((dt) => {
-                stepChamber(vpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermal, phaseSettings(vpState.pure, targetPure, 1));
-                stepChamber(vpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseSettings(vpState.solution, targetSolution, solutionVapourFactor));
-                enforceNonVolatileVapourGap();
+                if (!vpPurePaused) {
+                    stepChamber(vpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermalPure,
+                        phaseSettings(vpState.pure, targetPure, 1, temp01Pure, false));
+                }
+                if (!vpSolutionPaused) {
+                    stepChamber(vpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermalSolution,
+                        phaseSettings(vpState.solution, targetSolution, solutionVapourFactor, temp01Solution, currentSolute === 'Ethanol'));
+                }
             });
 
             function drawVP(now = performance.now()) {
                 if (activeTabId !== 'vapor-pressure') return;
-                if (!isPaused) AudioEngine.playVapor();
+                if (!isPaused && (!vpPurePaused || !vpSolutionPaused)) AudioEngine.playVapor();
                 advance(now);
 
                 pureObj.ctx.clearRect(0, 0, pureObj.width, pureObj.height);
                 drawChamberStructure(pureObj.ctx, pureObj.width, pureObj.height, liquidLevelPure);
                 vpState.pure.particles.forEach(p => p.draw(pureObj.ctx));
+                drawVPPressureOverlay(pureObj.ctx, pureObj.width, pureObj.height, liquidLevelPure, pureInternalPressureAtm);
 
                 solObj.ctx.clearRect(0, 0, solObj.width, solObj.height);
                 drawChamberStructure(solObj.ctx, solObj.width, solObj.height, liquidLevelSol);
@@ -6720,6 +7741,7 @@
                         solObj.ctx.stroke();
                     }
                 });
+                drawVPPressureOverlay(solObj.ctx, solObj.width, solObj.height, liquidLevelSol, solutionInternalPressureAtm);
 
                 animationFrameId = requestAnimationFrame(drawVP);
             }
@@ -6815,6 +7837,9 @@
             const deltaTb = bpSol - bpPure;
             updateText('metrics-bp-tb', bpSol.toFixed(2) + ' °C');
             updateText('metrics-bp-dt', (deltaTb >= 0 ? '+' : '') + deltaTb.toFixed(2) + ' °C');
+            const bpPureInternalPressureAtm = pureSolventVapourPressureAtm(temp);
+            // Shift the solution vapour-pressure curve by ΔTb so Pinternal reaches 1 atm at the elevated boiling point.
+            const bpSolutionInternalPressureAtm = pureSolventVapourPressureAtm(temp - deltaTb);
 
             const liquidLevelPure = pureObj.height * 0.45;
             const liquidLevelSol = solObj.height * 0.45;
@@ -6911,6 +7936,7 @@
                 drawChamberStructure(pureObj.ctx, pureObj.width, pureObj.height, liquidLevelPure);
                 drawBoilingBubbles(pureObj.ctx, bpState.pure.bubbles);
                 bpState.pure.particles.forEach(p => p.draw(pureObj.ctx));
+                drawVPPressureOverlay(pureObj.ctx, pureObj.width, pureObj.height, liquidLevelPure, bpPureInternalPressureAtm);
 
                 solObj.ctx.clearRect(0, 0, solObj.width, solObj.height);
                 drawChamberStructure(solObj.ctx, solObj.width, solObj.height, liquidLevelSol);
@@ -6926,6 +7952,7 @@
                         solObj.ctx.stroke();
                     }
                 });
+                drawVPPressureOverlay(solObj.ctx, solObj.width, solObj.height, liquidLevelSol, bpSolutionInternalPressureAtm);
 
                 animationFrameId = requestAnimationFrame(drawBP);
             }
@@ -7431,7 +8458,9 @@
         });
 
         function resetExperiment() {
-            const vpTempEl = document.getElementById('input-vp-temp'); if (vpTempEl) vpTempEl.value = "20.0";
+            const vpPureTempEl = document.getElementById('input-vp-temp-pure'); if (vpPureTempEl) vpPureTempEl.value = "20.0";
+            const vpSolutionTempEl = document.getElementById('input-vp-temp-solution'); if (vpSolutionTempEl) vpSolutionTempEl.value = "20.0";
+            vpPurePaused = false; vpSolutionPaused = false; updateVPPauseUI('pure'); updateVPPauseUI('solution');
             const bpTempEl = document.getElementById('input-bp-temp'); if (bpTempEl) bpTempEl.value = "20.0";
             const fpTempEl = document.getElementById('input-fp-temp'); if (fpTempEl) fpTempEl.value = "20.0";
             const osmoSpeedEl = document.getElementById('input-osmosis-speed'); if (osmoSpeedEl) osmoSpeedEl.value = "0";
@@ -7512,10 +8541,12 @@
             initSimulations();
         }
 
-        document.getElementById('input-vp-temp')?.addEventListener('input', (e) => {
-            learningProgress['vapor-pressure'].controlAdjusted = true;
-            updateProgressUI();
-            runVaporPressureSim();
+        ['input-vp-temp-pure', 'input-vp-temp-solution'].forEach((id) => {
+            document.getElementById(id)?.addEventListener('input', () => {
+                learningProgress['vapor-pressure'].controlAdjusted = true;
+                updateProgressUI();
+                runVaporPressureSim();
+            });
         });
         document.getElementById('input-bp-temp')?.addEventListener('input', (e) => {
             learningProgress['boiling-point'].controlAdjusted = true;
@@ -7538,7 +8569,7 @@
         });
 
 
-        ['input-vp-temp', 'input-bp-temp', 'input-fp-temp'].forEach((id) => {
+        ['input-vp-temp-pure', 'input-vp-temp-solution', 'input-bp-temp', 'input-fp-temp'].forEach((id) => {
             document.getElementById(id)?.addEventListener('change', () => LearningPoints.add('controls', 'Temperature control adjusted'));
         });
         document.getElementById('input-osmosis-speed')?.addEventListener('change', () => LearningPoints.add('controls', 'Flow-rate speed adjusted'));
@@ -7869,7 +8900,7 @@
 (() => {
     "use strict";
 
-    const translations = {"Freeze N' Flow - Interactive Colligative Properties":"Freeze N' Flow - Sifat Koligatif Interaktif","Home":"Laman Utama","Learn":"Belajar","Quiz Arena":"Arena Kuiz","Badges":"Lencana","Take the Tour Again":"Ikuti Lawatan Sekali Lagi","About Freeze N' Flow":"Tentang Freeze N' Flow","Toggle Sound":"Hidupkan atau matikan bunyi","Toggle Dark Mode":"Tukar mod gelap","Help Menu":"Menu Bantuan","Go to home":"Pergi ke laman utama","Switch language to Bahasa Melayu":"Tukar bahasa kepada Bahasa Melayu","Switch language to English":"Tukar bahasa kepada English","Language":"Bahasa","Chemistry Visualized Without Complexity":"Kimia Divisualkan Tanpa Kerumitan","Interactive Learning Platform for Colligative Properties. Experience microscopic particle dynamics and physical state changes in real-time.":"Platform Pembelajaran Interaktif untuk Sifat Koligatif. Alami dinamik zarah mikroskopik dan perubahan keadaan fizikal secara masa nyata.","Start Learning":"Mulakan Pembelajaran","Learning Progress":"Kemajuan Pembelajaran","Vapour Pressure":"Tekanan Wap","Vapor Pressure":"Tekanan Wap","Boiling Point":"Takat Didih","Freezing Point":"Takat Beku","Osmosis":"Osmosis","Colligative Laboratory":"Makmal Sifat Koligatif","Select a property below to interact, customize variables, and inspect results.":"Pilih satu sifat di bawah untuk berinteraksi, melaraskan pemboleh ubah dan meneliti hasil.","Learning Objective":"Objektif Pembelajaran","Did you know?":"Tahukah anda?","Next Fact":"Fakta Seterusnya","Quiz time!":"Masa Kuiz!","Control Center":"Pusat Kawalan","Select Solute":"Pilih Zat Terlarut","Select Solution Type":"Pilih Jenis Larutan","Solution Type":"Jenis Larutan","Temperature":"Suhu","Flow Rate Speed":"Kelajuan Kadar Aliran","Pause":"Jeda","Play":"Main","Reset":"Tetapkan Semula","Particle Simulation Arena":"Arena Simulasi Zarah","Crystalline Viewport":"Paparan Hablur","Osmotic Balance":"Keseimbangan Osmosis","Particle colour legend":"Petunjuk warna zarah","Simulation Tabs":"Tab Simulasi","Solvent (Water)":"Pelarut (Air)","Non-Volatile Solute":"Zat Terlarut Tidak Meruap","Non-Volatile Solution":"Larutan Tidak Meruap","Volatile Solution":"Larutan Meruap","Gas":"Gas","Solvent":"Pelarut","Solution":"Larutan","Solvent (Left)":"Pelarut (Kiri)","Solution (Right)":"Larutan (Kanan)","Equation":"Persamaan","Live Explanation":"Penerangan Langsung","Experiment Summary":"Ringkasan Eksperimen","Observation":"Pemerhatian","Real-life Application":"Aplikasi Kehidupan Sebenar","Net Directional Flux":"Fluks Arah Bersih","Left → Right":"Kiri → Kanan","Water Molecule":"Molekul Air","Solute Particle":"Zarah Zat Terlarut","Gas Particle":"Zarah Gas","Semi-Permeable Membrane":"Membran Separa Telap","State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan. Kira komposisi wap di atas larutan yang mengandungi zat terlarut dan pelarut meruap.","Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.":"Kira peningkatan takat didih sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data peningkatan takat didih.","Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.":"Kira penurunan takat beku sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data penurunan takat beku.","Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.":"Terangkan osmosis melalui membran separa telap dan hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.","According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.":"Menurut hukum Raoult, tekanan wap separa sesuatu komponen dalam larutan ideal adalah sama dengan pecahan molnya didarab dengan tekanan wap komponen tersebut dalam keadaan tulen.","For a non-volatile solute, the solute reduces the mole fraction of the solvent.":"Bagi zat terlarut tidak meruap, zat terlarut mengurangkan pecahan mol pelarut.","Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.":"Oleh itu, tekanan wap larutan lebih rendah daripada tekanan wap pelarut tulen. Bagi larutan yang mengandungi komponen meruap, jumlah tekanan wap diperoleh dengan menjumlahkan tekanan wap separa setiap komponen.","Glucose lowers the vapour pressure of water. Ethanol is volatile and contributes its own vapour, so the mixture may produce more vapour than pure water.":"Glukosa menurunkan tekanan wap air. Etanol bersifat meruap dan menyumbang wapnya sendiri, maka campuran mungkin menghasilkan lebih banyak wap berbanding air tulen.","A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.":"Tuala basah yang direndam dalam air laut masin mengambil masa lebih lama untuk kering di bawah cahaya matahari berbanding tuala yang direndam dalam air paip tulen kerana garam memperlahankan penyejatan air.","A liquid boils when its vapour pressure becomes equal to the external pressure.":"Cecair mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.","Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.":"Etanol bersifat meruap dan menyumbang tekanan wapnya sendiri. Oleh itu, campuran etanol–air mungkin mendidih pada suhu yang lebih rendah daripada air tulen.","A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.":"Larutan glukosa mendidih pada suhu lebih tinggi daripada air tulen, manakala campuran etanol–air mungkin mendidih di bawah 100 °C kerana etanol bersifat meruap.","Special liquids (coolants) are added to car water tanks. This raises the boiling point so the water inside the hot engine doesn't boil away easily.":"Cecair khas, iaitu bahan penyejuk, ditambahkan ke dalam sistem penyejukan kereta. Ini meningkatkan takat didih supaya air di dalam enjin panas tidak mudah mendidih dan tersejat.","Freezing occurs when the liquid and solid phases of a solvent are in equilibrium.":"Pembekuan berlaku apabila fasa cecair dan fasa pepejal pelarut berada dalam keseimbangan.","Dissolved solute particles lower the escaping tendency of solvent molecules in the liquid phase.":"Zarah zat terlarut yang terlarut mengurangkan kecenderungan molekul pelarut untuk terlepas daripada fasa cecair.","Therefore, the solution must be cooled below the freezing point of the pure solvent before the solid solvent can form. This decrease is called freezing-point depression.":"Oleh itu, larutan perlu disejukkan di bawah takat beku pelarut tulen sebelum pelarut pepejal dapat terbentuk. Penurunan ini dikenali sebagai penurunan takat beku.","Pure water freezes exactly at 0 °C and forms a neat grid. The mixture stays liquid at 0 °C and only freezes when it gets even colder.":"Air tulen membeku tepat pada 0 °C dan membentuk susunan teratur. Campuran kekal dalam keadaan cecair pada 0 °C dan hanya membeku apabila suhunya menjadi lebih rendah.","People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.":"Garam ditaburkan pada jalan berais ketika musim sejuk. Garam bercampur dengan ais dan menurunkan takat beku, lalu menyebabkan ais yang berbahaya mencair menjadi air.","Osmosis is the net movement of solvent molecules through a semipermeable membrane from a region of lower solute concentration to a region of higher solute concentration.":"Osmosis ialah pergerakan bersih molekul pelarut melalui membran separa telap dari kawasan berkepekatan zat terlarut rendah ke kawasan berkepekatan zat terlarut tinggi.","The membrane allows solvent molecules to pass but prevents solute particles from crossing.":"Membran membenarkan molekul pelarut melaluinya tetapi menghalang zarah zat terlarut daripada merentasinya.","The net movement continues until the concentration difference is balanced by the pressure difference across the membrane.":"Pergerakan bersih berterusan sehingga perbezaan kepekatan diseimbangkan oleh perbezaan tekanan merentasi membran.","Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.":"Molekul air bergerak dalam kedua-dua arah, tetapi lebih banyak air terkumpul pada bahagian campuran. Paras air pada bahagian campuran meningkat.","Plant roots soak up water from the soil using osmosis. If you put too much fertilizer (solid particles) in the soil, the plant cannot pull water in, and might die.":"Akar tumbuhan menyerap air daripada tanah melalui osmosis. Jika terlalu banyak baja, iaitu zarah pepejal, ditambahkan ke dalam tanah, tumbuhan tidak dapat menyerap air dan mungkin mati.","where;":"di mana;","= total vapour pressure of the mixture;":"= jumlah tekanan wap campuran;","= partial vapour pressure of component A;":"= tekanan wap separa komponen A;","= partial vapour pressure of component B;":"= tekanan wap separa komponen B;","= mole fraction of component A in the liquid;":"= pecahan mol komponen A dalam cecair;","= mole fraction of component B in the liquid;":"= pecahan mol komponen B dalam cecair;","= vapour pressure of pure component A;":"= tekanan wap komponen A tulen;","= vapour pressure of pure component B.":"= tekanan wap komponen B tulen.","= vapour pressure of solvent A in the solution;":"= tekanan wap pelarut A dalam larutan;","= mole fraction of solvent A;":"= pecahan mol pelarut A;","= vapour pressure of pure solvent A.":"= tekanan wap pelarut A tulen.","= molal boiling point elevation constant of the solvent (°C kg mol":"= pemalar peningkatan takat didih molal pelarut (°C kg mol","= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol","= molality of solution (mol kg":"= kemolalan larutan (mol kg","= Boiling point of pure solvent (°C)":"= takat didih pelarut tulen (°C)","= Boiling point of solution (°C)":"= takat didih larutan (°C)","= freezing point of pure solvent (°C)":"= takat beku pelarut tulen (°C)","= freezing point of solution (°C)":"= takat beku larutan (°C)","= osmotic pressure;":"= tekanan osmosis;","= van’t Hoff factor;":"= faktor van’t Hoff;","= molarity of the solution;":"= kemolaran larutan;","= gas constant;":"= pemalar gas;","= absolute temperature in kelvin.":"= suhu mutlak dalam kelvin.","Learning Points":"Mata Pembelajaran","Total Learning Points":"Jumlah Mata Pembelajaran","View Learning Points profile":"Lihat profil Mata Pembelajaran","Learner Profile":"Profil Pelajar","Guest Explorer":"Peneroka Tetamu","Quiz Rewards":"Ganjaran Kuiz","Facts Viewed":"Fakta Dilihat","Controls Used":"Kawalan Digunakan","Progress is saved automatically in this browser's learning database.":"Kemajuan disimpan secara automatik dalam pangkalan data pembelajaran pelayar ini.","+5 Learning Points":"+5 Mata Pembelajaran","Learning activity":"Aktiviti pembelajaran","Next fact viewed":"Fakta seterusnya dilihat","Correct Quiz Arena answer":"Jawapan Arena Kuiz yang betul","Correct live competition answer":"Jawapan pertandingan langsung yang betul","Temperature control adjusted":"Kawalan suhu dilaraskan","Flow-rate speed adjusted":"Kelajuan kadar aliran dilaraskan","My Badges":"Lencana Saya","Bronze":"Gangsa","Silver":"Perak","Gold":"Emas","Completed 1 module":"Selesai 1 modul","Completed 3 modules":"Selesai 3 modul","Completed 4 modules":"Selesai 4 modul","Freeze N' Flow Master":"Pakar Freeze N' Flow","All modules & Quiz Arena":"Semua modul dan Arena Kuiz","Badge Unlocked!":"Lencana Dibuka!","You have unlocked the Freeze N' Flow Certificate!":"Anda telah membuka Sijil Freeze N' Flow!","View Certificate":"Lihat Sijil","🎉 Congratulations!":"🎉 Tahniah!","You have successfully completed":"Anda telah berjaya menyelesaikan","lessons.":"pelajaran.","Check the Badges section to see your progress!":"Semak bahagian Lencana untuk melihat kemajuan anda!","Continue Learning":"Teruskan Pembelajaran","Your Achievement":"Pencapaian Anda","Certificate of Completion":"Sijil Penyempurnaan","This is to certify that":"Dengan ini diperakui bahawa","Master Chemist":"Pakar Kimia","has successfully mastered all colligative properties modules and conquered the Quiz Arena, demonstrating exceptional knowledge in physical chemistry.":"telah berjaya menguasai semua modul sifat koligatif dan menamatkan Arena Kuiz, sekali gus menunjukkan pengetahuan yang cemerlang dalam kimia fizik.","Date Awarded":"Tarikh Dianugerahkan","Authorized Signature":"Tandatangan Diberi Kuasa","Virtual Lab Admin":"Pentadbir Makmal Maya","Download PDF":"Muat Turun PDF","Download PNG":"Muat Turun PNG","Premium Interactive Colligative Properties Simulator.":"Simulator Sifat Koligatif Interaktif Premium.","Designed to make complex physical chemistry intuitive and accessible through real-time microscopic visualizations.":"Direka untuk menjadikan kimia fizik yang kompleks lebih intuitif dan mudah difahami melalui visualisasi mikroskopik masa nyata.","Close":"Tutup","Skip Tour":"Langkau Lawatan","Back":"Kembali","Next":"Seterusnya","Finish Tour":"Tamatkan Lawatan","Welcome to Freeze N' Flow!":"Selamat Datang ke Freeze N' Flow!","Experience interactive microscopic particle dynamics and learn colligative properties in real-time. Let's take a quick tour.":"Alami dinamik zarah mikroskopik secara interaktif dan pelajari sifat koligatif dalam masa nyata. Mari ikuti lawatan ringkas.","Choose a Property":"Pilih Satu Sifat","Select one of the four colligative properties to explore its unique molecular behaviour.":"Pilih satu daripada empat sifat koligatif untuk meneroka tingkah laku molekulnya yang unik.","Adjust Variables":"Laraskan Pemboleh Ubah","Interact with the simulation by changing the solute type, temperature, and observing the immediate effects.":"Berinteraksi dengan simulasi dengan menukar jenis zat terlarut dan suhu, kemudian perhatikan kesannya serta-merta.","Observe the Simulation":"Perhatikan Simulasi","Watch how particles react in real-time. The microscopic arena visualises the physics behind the equations.":"Perhatikan tindak balas zarah dalam masa nyata. Arena mikroskopik memvisualkan konsep fizik di sebalik persamaan.","Read a clear explanation of what is happening in the simulation and connect it to the equation shown below.":"Baca penerangan yang jelas tentang perkara yang berlaku dalam simulasi dan hubungkannya dengan persamaan yang ditunjukkan di bawah.","Test Your Knowledge":"Uji Pengetahuan Anda","Review the experiment summary and answer the quiz to solidify your understanding.":"Semak ringkasan eksperimen dan jawab kuiz untuk mengukuhkan pemahaman anda.","Track Your Mastery":"Jejaki Penguasaan Anda","Complete all four lessons to fill this progress bar and unlock your certificate. Let the learning begin!":"Lengkapkan keempat-empat pelajaran untuk memenuhi bar kemajuan ini dan membuka sijil anda. Mari mulakan pembelajaran!","Test Your Mastery":"Uji Penguasaan Anda","🏆 Quiz Arena":"🏆 Arena Kuiz","Race against the clock in this 16-question challenge with factual and calculation questions. Will you make it to the Hall of Fame?":"Berlumba dengan masa dalam cabaran 16 soalan yang merangkumi soalan fakta dan pengiraan. Mampukah anda memasuki Dewan Kemasyhuran?","Enter the Arena":"Masuk ke Arena","16 Questions • 30s Fact • 2.5 min Calculation":"16 Soalan • 30 saat Fakta • 2.5 minit Pengiraan","Nickname":"Nama Panggilan","Enter your nickname...":"Masukkan nama panggilan anda...","Start Challenge":"Mulakan Cabaran","Live Competition":"Pertandingan Langsung","Hall of Fame":"Dewan Kemasyhuran","Question":"Soalan","Quiz Progress":"Kemajuan Kuiz","Loading question...":"Memuatkan soalan...","Correct!":"Betul!","Incorrect":"Salah","Incorrect.":"Salah.","Time's Up!":"Masa Tamat!","Time expired.":"Masa tamat.","0 Points":"0 Mata","Correct — the highlighted principle matches the lesson.":"Betul — prinsip yang diserlahkan sepadan dengan pelajaran.","Review the correct answer marked in green.":"Semak jawapan betul yang ditandakan dengan warna hijau.","Arena Conquered!":"Arena Ditakluki!","Incredible performance.":"Prestasi yang luar biasa.","Final Score":"Skor Akhir","Accuracy":"Ketepatan","Correct / Wrong":"Betul / Salah","Avg Time":"Purata Masa","Play Again":"Main Lagi","Review Answers":"Semak Jawapan","Answer Review":"Semakan Jawapan","Review Every Question":"Semak Setiap Soalan","Compare your answer with the correct answer.":"Bandingkan jawapan anda dengan jawapan yang betul.","Back to Results":"Kembali ke Keputusan","Back to Arena":"Kembali ke Arena","Top 10 Chemistry Masters":"10 Pakar Kimia Terbaik","The arena is empty. Claim the first victory!":"Arena masih kosong. Jadilah pemenang pertama!","Chemistry Master!":"Pakar Kimia!","Flawless logic and incredible speed.":"Logik yang sempurna dan kepantasan yang luar biasa.","Great Job!":"Syabas!","You have a solid understanding of colligative properties.":"Anda mempunyai pemahaman yang kukuh tentang sifat koligatif.","Keep Practicing!":"Teruskan Berlatih!","Review the simulations to strengthen your foundations.":"Semak semula simulasi untuk mengukuhkan asas pemahaman anda.","Easy":"Mudah","Medium":"Sederhana","Calculation":"Pengiraan","Topic Quiz Complete!":"Kuiz Topik Selesai!","Incorrect — try again.":"Salah — cuba lagi.","The host creates a room code. Students join and answer simultaneously on their own devices.":"Hos menghasilkan kod bilik. Pelajar menyertai dan menjawab secara serentak menggunakan peranti masing-masing.","Host a Game":"Hoskan Permainan","Join a Game":"Sertai Permainan","Back to Quiz Arena":"Kembali ke Arena Kuiz","Live mode requires internet access and the same published website on every device.":"Mod langsung memerlukan akses internet dan laman web terbitan yang sama pada setiap peranti.","Host Dashboard":"Papan Pemuka Hos","Live Competition Room":"Bilik Pertandingan Langsung","Creating a secure room...":"Mewujudkan bilik yang selamat...","End Room":"Tamatkan Bilik","Room Code":"Kod Bilik","Students enter this code on their devices.":"Pelajar memasukkan kod ini pada peranti masing-masing.","Players in Lobby":"Pemain di Lobi","Waiting for students to join...":"Menunggu pelajar menyertai...","Start Live Quiz":"Mulakan Kuiz Langsung","Copy Code":"Salin Kod","Code Copied":"Kod Disalin","Answered":"Dijawab","Time":"Masa","Live Leaderboard":"Papan Kedudukan Langsung","Join Live Competition":"Sertai Pertandingan Langsung","Enter your nickname and the room code shown by the host.":"Masukkan nama panggilan anda dan kod bilik yang dipaparkan oleh hos.","Your nickname":"Nama panggilan anda","6-character room code":"Kod bilik 6 aksara","Join Room":"Sertai Bilik","Connected":"Disambungkan","You are in the lobby":"Anda berada di lobi","Waiting for the host to start...":"Menunggu hos memulakan pertandingan...","Leave Room":"Tinggalkan Bilik","Player":"Pemain","Get ready...":"Bersedia...","Waiting for question...":"Menunggu soalan...","Current Rank":"Kedudukan Semasa","Competition Complete!":"Pertandingan Selesai!","Opening the room...":"Membuka bilik...","Live service could not load. Check the internet connection and refresh.":"Perkhidmatan langsung tidak dapat dimuatkan. Semak sambungan internet dan muat semula halaman.","Room is open. Ask students to join using the code below.":"Bilik telah dibuka. Minta pelajar menyertai menggunakan kod di bawah.","Unable to open the live room. Check the internet connection and try again.":"Bilik langsung tidak dapat dibuka. Semak sambungan internet dan cuba lagi.","This competition has already started.":"Pertandingan ini telah pun bermula.","Competition in progress.":"Pertandingan sedang berlangsung.","Ready":"Bersedia","No scores yet.":"Belum ada skor.","Competition complete. Final results are shown below.":"Pertandingan selesai. Keputusan akhir ditunjukkan di bawah.","Done":"Selesai","The host ended the live room.":"Hos telah menamatkan bilik langsung.","Connecting...":"Sedang menyambung...","Connected. Waiting for the host to start...":"Disambungkan. Menunggu hos memulakan pertandingan...","The competition is starting...":"Pertandingan sedang bermula...","Answer submitted":"Jawapan dihantar","Time is up":"Masa telah tamat","Next question coming up...":"Soalan seterusnya akan dipaparkan...","Final leaderboard":"Papan kedudukan akhir","Enter a nickname and a valid 6-character room code.":"Masukkan nama panggilan dan kod bilik 6 aksara yang sah.","Connection to the host was closed.":"Sambungan kepada hos telah ditutup.","Unable to connect to the host.":"Tidak dapat menyambung kepada hos.","Room not found. Check the code and try again.":"Bilik tidak ditemui. Semak kod dan cuba lagi.","Unable to join the room. Check the internet connection.":"Tidak dapat menyertai bilik. Semak sambungan internet.","The correct answer is highlighted.":"Jawapan yang betul telah diserlahkan.","Sweaty skin feels cooler because evaporation removes heat from your body.":"Kulit yang berpeluh terasa lebih sejuk kerana penyejatan menyingkirkan haba daripada badan.","Perfume evaporates quickly because it contains highly volatile liquids.":"Minyak wangi menyejat dengan cepat kerana mengandungi cecair yang sangat meruap.","Nail polish remover feels cold on your skin because it has a high vapor pressure and evaporates rapidly.":"Pencuci pengilat kuku terasa sejuk pada kulit kerana mempunyai tekanan wap yang tinggi dan menyejat dengan cepat.","A hot cup of coffee loses heat partly because the highest energy water molecules escape as vapor.":"Secawan kopi panas kehilangan haba sebahagiannya kerana molekul air bertenaga paling tinggi terlepas sebagai wap.","Rubbing alcohol dries much faster than water because its intermolecular forces are weaker, leading to a higher vapor pressure.":"Alkohol sapuan kering lebih cepat daripada air kerana daya antara molekulnya lebih lemah, lalu menghasilkan tekanan wap yang lebih tinggi.","Car radiators use coolant to increase the boiling point so engines don't overheat.":"Radiator kereta menggunakan bahan penyejuk untuk meningkatkan takat didih supaya enjin tidak terlalu panas.","Cooking food at high altitudes takes longer because water boils at lower temperatures.":"Memasak makanan di kawasan altitud tinggi mengambil masa lebih lama kerana air mendidih pada suhu yang lebih rendah.","Adding salt to boiling water for pasta slightly increases the boiling point, though mainly it's for flavor.":"Menambahkan garam ke dalam air mendidih untuk memasak pasta sedikit meningkatkan takat didih, walaupun tujuan utamanya ialah untuk rasa.","Deep-sea hydrothermal vents have water hotter than 100°C that doesn't boil because of the immense pressure.":"Lohong hidroterma laut dalam mengandungi air bersuhu melebihi 100°C yang tidak mendidih kerana tekanan yang sangat tinggi.","Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.":"Periuk tekanan memasak makanan dengan lebih cepat dengan memerangkap wap, meningkatkan tekanan dan menaikkan takat didih air di dalamnya.","Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.":"Garam ditaburkan pada jalan bersalji kerana garam menurunkan takat beku air dan mencairkan ais.","Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.":"Aiskrim kekal lembut di dalam peti sejuk beku kerana kandungan gula yang tinggi menurunkan takat bekunya dengan ketara.","Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.":"Sesetengah katak dan ikan menghasilkan protein 'antibeku' semula jadi yang menurunkan takat beku darahnya.","Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.":"Vodka tidak membeku dalam peti sejuk beku rumah biasa kerana kandungan etanol yang tinggi menurunkan takat bekunya kepada kira-kira -27°C.","Ocean water freezes at a lower temperature than freshwater lakes because of the dissolved salt.":"Air laut membeku pada suhu yang lebih rendah berbanding tasik air tawar kerana garam yang terlarut.","Plant roots absorb water using osmosis to draw moisture from the surrounding soil.":"Akar tumbuhan menyerap air melalui osmosis untuk mendapatkan kelembapan daripada tanah di sekelilingnya.","Eating very salty food can make you thirsty because osmosis causes water to leave your cells.":"Makan makanan yang sangat masin boleh menyebabkan anda berasa dahaga kerana osmosis menyebabkan air keluar daripada sel.","Slugs shrivel up when sprinkled with salt because the salt draws water out of their bodies via osmosis.":"Lintah bulan mengecut apabila ditaburkan garam kerana garam menarik air keluar daripada badannya melalui osmosis.","Grocery stores spray vegetables with pure water to keep them crisp as water enters the plant cells through osmosis.":"Kedai runcit menyembur sayur-sayuran dengan air tulen supaya kekal rangup apabila air memasuki sel tumbuhan melalui osmosis.","Cholera causes severe dehydration because the bacteria alter the intestines, causing water to flood out of cells via osmosis.":"Kolera menyebabkan dehidrasi teruk kerana bakteria mengubah fungsi usus, lalu menyebabkan air keluar dengan banyak daripada sel melalui osmosis.","If we double the amount of glucose added to the water, the vapor pressure will:":"Jika jumlah glukosa yang ditambahkan ke dalam air digandakan, tekanan wap akan:","Increase":"Meningkat","Stay the same":"Kekal sama","Decrease further":"Menurun lagi","Why does adding a solute lower the vapor pressure?":"Mengapakah penambahan zat terlarut menurunkan tekanan wap?","Solute particles block the surface":"Zarah zat terlarut menghalang permukaan","Solute particles increase the temperature":"Zarah zat terlarut meningkatkan suhu","Solute particles turn into gas quickly":"Zarah zat terlarut bertukar menjadi gas dengan cepat","A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?":"Suatu larutan mempunyai pecahan mol air 0.80. Jika tekanan wap air tulen ialah 25 kPa, berapakah tekanan wap separa air?","Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?":"Jisim glukosa yang sama, iaitu lebih ringan, dan sukrosa, iaitu lebih berat, ditambahkan ke dalam bikar berbeza. Yang manakah meningkatkan takat didih dengan lebih banyak?","Glucose (more moles)":"Glukosa (lebih banyak mol)","Sucrose (less moles)":"Sukrosa (lebih sedikit mol)","They are identical":"Kedua-duanya sama","To make a solution boil, its vapor pressure must equal:":"Untuk membolehkan larutan mendidih, tekanan wapnya mesti sama dengan:","The atmospheric pressure":"Tekanan atmosfera","The freezing point":"Takat beku","The osmotic pressure":"Tekanan osmosis","For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?":"Bagi larutan glukosa 1.0 m dalam air, Kb = 0.512 °C kg mol⁻¹ dan i = 1. Berapakah ΔTb?","Why is salt spread on icy roads in winter?":"Mengapakah garam ditaburkan pada jalan berais ketika musim sejuk?","It provides heat":"Garam membekalkan haba","It lowers the freezing point":"Garam menurunkan takat beku","It creates friction":"Garam menghasilkan geseran","When a solution freezes, the solid that forms is typically:":"Apabila larutan membeku, pepejal yang terbentuk biasanya ialah:","Pure solute":"Zat terlarut tulen","Pure solvent (ice)":"Pelarut tulen (ais)","A mixture of both":"Campuran kedua-duanya","For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?":"Bagi larutan glukosa 0.50 m dalam air, Kf = 1.86 °C kg mol⁻¹ dan i = 1. Berapakah ΔTf?","If a plant cell (high solute conc.) is placed in pure water, what will happen?":"Jika sel tumbuhan yang mempunyai kepekatan zat terlarut tinggi diletakkan dalam air tulen, apakah yang akan berlaku?","Water flows into the cell":"Air mengalir masuk ke dalam sel","Water flows out of the cell":"Air mengalir keluar daripada sel","Nothing happens":"Tiada apa-apa berlaku","During osmosis, water flows naturally towards the side with:":"Semasa osmosis, air mengalir secara semula jadi ke bahagian yang mempunyai:","Fewer solid particles":"Lebih sedikit zarah pepejal","More solid particles":"Lebih banyak zarah pepejal","Lower temperature":"Suhu yang lebih rendah","For a 0.10 mol L⁻¹ glucose solution at 300 K, with R = 0.0821 L atm mol⁻¹ K⁻¹ and i = 1, what is the osmotic pressure?":"Bagi larutan glukosa 0.10 mol L⁻¹ pada 300 K, dengan R = 0.0821 L atm mol⁻¹ K⁻¹ dan i = 1, berapakah tekanan osmosis?","More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.":"Lebih banyak glukosa tidak meruap menyebabkan bilangan molekul air di permukaan berkurang, maka tekanan wap menurun lagi.","Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.":"Zarah zat terlarut mengurangkan pecahan molekul pelarut di permukaan cecair, maka lebih sedikit molekul pelarut terlepas ke fasa wap.","Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.":"Hukum Raoult memberikan Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.","Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.":"Bagi jisim yang sama, glukosa mengandungi lebih banyak mol berbanding sukrosa kerana jisim molarnya lebih rendah, lalu menghasilkan kesan koligatif yang lebih besar.","Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.":"Pendidihan bermula apabila tekanan wap cecair menjadi sama dengan tekanan atmosfera luar.","Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.":"Gunakan ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.","Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.":"Garam menurunkan takat beku air, membolehkan ais mencair pada suhu yang menyebabkan air tulen kekal beku.","During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.":"Semasa pembekuan, molekul pelarut membentuk kekisi hablur manakala kebanyakan zarah zat terlarut yang terlarut tersisih.","Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.":"Gunakan ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.","Pure water has lower solute concentration, so water moves into the more concentrated plant cell through the membrane.":"Air tulen mempunyai kepekatan zat terlarut yang lebih rendah, maka air bergerak melalui membran masuk ke dalam sel tumbuhan yang lebih pekat.","The net flow of water is toward the side with the higher solute-particle concentration.":"Aliran bersih air bergerak ke arah bahagian yang mempunyai kepekatan zarah zat terlarut lebih tinggi.","Use π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.":"Gunakan π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.","What does adding a non-volatile solute to a pure solvent do to its boiling point?":"Apakah kesan penambahan zat terlarut tidak meruap ke dalam pelarut tulen terhadap takat didihnya?","Increases it":"Meningkatkannya","Decreases it":"Menurunkannya","No change":"Tiada perubahan","Makes it evaporate instantly":"Menyebabkannya menyejat serta-merta","Which property causes ice to melt when salt is poured on it?":"Sifat manakah menyebabkan ais mencair apabila garam ditaburkan padanya?","Freezing-point depression":"Penurunan takat beku","Boiling-point elevation":"Peningkatan takat didih","Osmosis is the net movement of which substance across a semipermeable membrane?":"Osmosis ialah pergerakan bersih bahan manakah merentasi membran separa telap?","Water (solvent)":"Air (pelarut)","Solute":"Zat terlarut","Salt":"Garam","Sugar":"Gula","What happens to the vapour pressure of water when a non-volatile solute is dissolved in it?":"Apakah yang berlaku kepada tekanan wap air apabila zat terlarut tidak meruap dilarutkan di dalamnya?","It decreases":"Tekanan wap menurun","It increases":"Tekanan wap meningkat","It remains the same":"Tekanan wap kekal sama","It becomes zero":"Tekanan wap menjadi sifar","Which of these is NOT a colligative property?":"Yang manakah BUKAN sifat koligatif?","Density":"Ketumpatan","Osmotic pressure":"Tekanan osmosis","Why does a solution containing a non-volatile solute have a higher boiling point than the pure solvent?":"Mengapakah larutan yang mengandungi zat terlarut tidak meruap mempunyai takat didih lebih tinggi daripada pelarut tulen?","Its lower vapour pressure requires a higher temperature to equal atmospheric pressure":"Tekanan wapnya yang lebih rendah memerlukan suhu lebih tinggi untuk menyamai tekanan atmosfera","The solute heats up faster":"Zat terlarut menjadi panas dengan lebih cepat","The solute absorbs cold":"Zat terlarut menyerap kesejukan","A membrane blocks evaporation":"Membran menghalang penyejatan","If a cell is placed in a highly concentrated salt solution, what happens?":"Jika sel diletakkan dalam larutan garam yang sangat pekat, apakah yang berlaku?","It shrinks as water leaves":"Sel mengecut apabila air keluar","It swells as water enters":"Sel mengembang apabila air masuk","It stays exactly the same":"Sel kekal sama","It freezes solid":"Sel membeku menjadi pepejal","Colligative properties depend primarily on:":"Sifat koligatif bergantung terutamanya pada:","The number of dissolved particles":"Bilangan zarah terlarut","The colour of the solution":"Warna larutan","The size of the container":"Saiz bekas","The shape of the solute particles":"Bentuk zarah zat terlarut","Which sample would lower the freezing point of water the most, assuming complete dissolution?":"Sampel manakah paling banyak menurunkan takat beku air dengan andaian pelarutan lengkap?","2 moles of NaCl":"2 mol NaCl","1 mole of NaCl":"1 mol NaCl","1 mole of glucose":"1 mol glukosa","0.5 mole of glucose":"0.5 mol glukosa","What is the role of a semipermeable membrane in osmosis?":"Apakah peranan membran separa telap dalam osmosis?","It allows solvent molecules to pass while restricting solute particles":"Membran membenarkan molekul pelarut melaluinya sambil menghalang zarah zat terlarut","It allows only solute particles to pass":"Membran hanya membenarkan zarah zat terlarut melaluinya","It blocks all particles":"Membran menghalang semua zarah","It allows everything to pass equally":"Membran membenarkan semua bahan melaluinya secara sama rata","A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.":"Sebuah bekas 1.00 L pada 25 °C mengandungi CO₂ pada tekanan 730 torr. Selepas bertindak balas dengan campuran CaO/BaO berjisim 4.000 g, tekanan CO₂ yang berbaki ialah 150 torr. Berapakah mol CO₂ yang telah bertindak balas? Gunakan R = 0.0821 L atm mol⁻¹ K⁻¹.","The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?":"Campuran 4.000 g mengandungi CaO dan BaO, dan sejumlah 0.0312 mol CO₂ bertindak balas. Diberi M(CaO) = 56.08 g mol⁻¹ dan M(BaO) = 153.33 g mol⁻¹, berapakah jisim CaO dalam campuran itu?","At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?":"Pada 63.5 °C, H₂O tulen dan etanol tulen masing-masing mempunyai tekanan wap 175 torr dan 400 torr. Jisim H₂O dan etanol yang sama dicampurkan. Dengan menggunakan M(H₂O) = 18.02 g mol⁻¹ dan M(etanol) = 46.07 g mol⁻¹, berapakah pecahan mol etanol dalam larutan cecair?","For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?":"Bagi larutan H₂O–etanol berjisim sama pada 63.5 °C, x(etanol) = 0.281, P°(H₂O) = 175 torr dan P°(etanol) = 400 torr. Dengan mengandaikan tingkah laku ideal, berapakah jumlah tekanan wap?","For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?":"Bagi larutan ideal H₂O–etanol yang sama, tekanan separa etanol ialah x(etanol)P°(etanol) dan jumlah tekanan ialah 238 torr. Berapakah pecahan mol etanol dalam fasa wap?","Dissolving 1.32 g anthraquinone in 11.4 g camphor lowers the freezing point by 22.3 °C. Given Kf(camphor) = 40.0 °C kg mol⁻¹, what is the molar mass of anthraquinone?":"Melarutkan 1.32 g antrakuinon dalam 11.4 g kapur barus menurunkan takat beku sebanyak 22.3 °C. Diberi Kf(kapur barus) = 40.0 °C kg mol⁻¹, berapakah jisim molar antrakuinon?","A non-volatile solute lowers the solvent's vapour pressure, so the solution must reach a higher temperature before its vapour pressure equals atmospheric pressure.":"Zat terlarut tidak meruap menurunkan tekanan wap pelarut, maka larutan perlu mencapai suhu yang lebih tinggi sebelum tekanan wapnya menyamai tekanan atmosfera.","Salt creates freezing-point depression. The salt solution remains liquid below 0 °C, so ice begins to melt.":"Garam menyebabkan penurunan takat beku. Larutan garam kekal cair di bawah 0 °C, maka ais mula mencair.","Osmosis describes the net movement of solvent molecules, usually water, through a semipermeable membrane.":"Osmosis menerangkan pergerakan bersih molekul pelarut, biasanya air, melalui membran separa telap.","A non-volatile solute reduces the mole fraction of water at the surface, lowering water's vapour pressure according to Raoult's law.":"Zat terlarut tidak meruap mengurangkan pecahan mol air di permukaan, lalu menurunkan tekanan wap air menurut hukum Raoult.","Density is not a colligative property. The four standard colligative properties depend on the number of dissolved particles.":"Ketumpatan bukan sifat koligatif. Empat sifat koligatif piawai bergantung pada bilangan zarah terlarut.","Because the solution has lower vapour pressure, more heating is required before its vapour pressure can match atmospheric pressure.":"Oleh sebab larutan mempunyai tekanan wap yang lebih rendah, lebih banyak pemanasan diperlukan sebelum tekanan wapnya dapat menyamai tekanan atmosfera.","The surrounding salt solution is hypertonic, so water moves out of the cell by osmosis and the cell shrinks.":"Larutan garam di sekeliling bersifat hipertonik, maka air bergerak keluar daripada sel melalui osmosis dan sel mengecut.","Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.":"Kesan koligatif bergantung pada bilangan zarah zat terlarut yang hadir, bukan pada warna, saiz bekas atau bentuk zarah.","Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.":"Dua mol NaCl menghasilkan bilangan zarah terlarut paling banyak kerana setiap unit formula boleh terurai kepada dua ion.","A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.":"Membran separa telap membenarkan pergerakan pelarut sambil menghalang zarah zat terlarut, lalu menghasilkan aliran bersih yang didorong oleh perbezaan kepekatan.","Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.":"Gunakan n = ΔPV/RT. Penurunan tekanan ialah 580 torr atau 0.763 atm, lalu memberikan kira-kira 3.12 × 10⁻² mol CO₂ yang bertindak balas.","Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.":"Ambil x dan y sebagai mol CaO dan BaO. Selesaikan x + y = 0.0312 dan 56.08x + 153.33y = 4.000; jisim CaO ialah kira-kira 0.451 g.","For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.":"Bagi jisim yang sama, bilangan mol berkadar songsang dengan jisim molar. Etanol mempunyai mol yang lebih sedikit daripada air, lalu memberikan x(etanol) ≈ 0.281.","Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.":"Gunakan hukum Raoult pada kedua-dua cecair: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.","The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.":"Pecahan mol wap ialah yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.","Use ΔTf = Kfm to obtain molality, then convert the solvent mass to kilograms and solve for molar mass; the result is about 208 g mol⁻¹.":"Gunakan ΔTf = Kfm untuk mendapatkan kemolalan, kemudian tukarkan jisim pelarut kepada kilogram dan hitung jisim molar; hasilnya kira-kira 208 g mol⁻¹.","Review the highlighted correct answer and connect it to the lesson concept.":"Semak jawapan betul yang diserlahkan dan hubungkannya dengan konsep pelajaran.","© 2026 Freeze N' Flow. Premium Self-Directed Chemistry Simulation.":"© 2026 Freeze N' Flow. Simulasi Kimia Pembelajaran Kendiri Premium.","Interactive Chemistry Learning":"Pembelajaran Kimia Interaktif","Certificate Preview":"Pratonton Sijil","This certificate is proudly presented to":"Sijil ini dengan bangganya disampaikan kepada","For successfully completing the interactive learning modules and Quiz Arena on Colligative Properties.":"Atas kejayaan melengkapkan modul pembelajaran interaktif dan Arena Kuiz mengenai Sifat Koligatif.","Today's Date":"Tarikh Hari Ini","Learning Achievement":"Pencapaian Pembelajaran","Gold seal":"Mohor emas","Close":"Tutup","Certificate Locked":"Sijil Dikunci","Complete all learning modules and finish Quiz Arena to unlock your certificate.":"Lengkapkan semua modul pembelajaran dan tamatkan Arena Kuiz untuk membuka sijil anda.","Certificate Unlocked":"Sijil Dibuka","Your certificate is ready to preview and download.":"Sijil anda sedia untuk dipratonton dan dimuat turun.","Modules":"Modul","Pending":"Belum Selesai","Complete":"Selesai","You have successfully completed Freeze N' Flow.":"Anda telah berjaya melengkapkan Freeze N' Flow.","Thank you for exploring the four Colligative Properties through interactive learning.":"Terima kasih kerana meneroka empat Sifat Koligatif melalui pembelajaran interaktif.","Complete all four learning modules and Quiz Arena first.":"Lengkapkan keempat-empat modul pembelajaran dan Arena Kuiz terlebih dahulu.","Certificate download tools are unavailable. Please check your internet connection and try again.":"Alat muat turun sijil tidak tersedia. Sila semak sambungan internet anda dan cuba lagi.","The certificate could not be generated. Please try again.":"Sijil tidak dapat dijana. Sila cuba lagi.","View Learning Points profile":"Lihat profil Mata Pembelajaran"};
+    const translations = {"Freeze N' Flow - Interactive Colligative Properties":"Freeze N' Flow - Sifat Koligatif Interaktif","Home":"Laman Utama","Learn":"Belajar","Quiz Arena":"Arena Kuiz","Badges":"Lencana","Take the Tour Again":"Ikuti Lawatan Sekali Lagi","About Freeze N' Flow":"Tentang Freeze N' Flow","Toggle Sound":"Hidupkan atau matikan bunyi","Toggle Dark Mode":"Tukar mod gelap","Help Menu":"Menu Bantuan","Go to home":"Pergi ke laman utama","Switch language to Bahasa Melayu":"Tukar bahasa kepada Bahasa Melayu","Switch language to English":"Tukar bahasa kepada English","Language":"Bahasa","Chemistry Visualized Without Complexity":"Kimia Divisualkan Tanpa Kerumitan","Interactive Learning Platform for Colligative Properties. Experience microscopic particle dynamics and physical state changes in real-time.":"Platform Pembelajaran Interaktif untuk Sifat Koligatif. Alami dinamik zarah mikroskopik dan perubahan keadaan fizikal secara masa nyata.","Start Learning":"Mulakan Pembelajaran","Learning Progress":"Kemajuan Pembelajaran","Vapour Pressure":"Tekanan Wap","Vapor Pressure":"Tekanan Wap","Boiling Point":"Takat Didih","Boiling Point of Pure Solvent":"Takat Didih Pelarut Tulen","Boiling Point of Solution":"Takat Didih Larutan","Freezing Point":"Takat Beku","Osmosis":"Osmosis","Colligative Laboratory":"Makmal Sifat Koligatif","Select a property below to interact, customize variables, and inspect results.":"Pilih satu sifat di bawah untuk berinteraksi, melaraskan pemboleh ubah dan meneliti hasil.","Learning Objective":"Objektif Pembelajaran","Did you know?":"Tahukah anda?","Next Fact":"Fakta Seterusnya","Quiz time!":"Masa Kuiz!","Control Center":"Pusat Kawalan","Select Solute":"Pilih Zat Terlarut","Select Solute Type":"Pilih Jenis Zat Terlarut","Select Solution Type":"Pilih Jenis Larutan","Solution Type":"Jenis Larutan","Temperature":"Suhu","Flow Rate Speed":"Kelajuan Kadar Aliran","Pause":"Jeda","Play":"Main","Reset":"Tetapkan Semula","Particle Simulation Arena":"Arena Simulasi Zarah","Crystalline Viewport":"Paparan Hablur","Osmotic Balance":"Keseimbangan Osmosis","Particle colour legend":"Petunjuk warna zarah","Simulation Tabs":"Tab Simulasi","Solvent (Water)":"Pelarut (Air)","Non-Volatile Solute":"Zat Terlarut Tidak Meruap","Non-Volatile Solution":"Larutan Tidak Meruap","Volatile Solution":"Larutan Meruap","Gas":"Gas","Vapour":"Wap","P external":"P luar","P internal":"P dalaman","Solvent":"Pelarut","Pure Solvent":"Pelarut Tulen","Solution":"Larutan","Solvent (Left)":"Pelarut (Kiri)","Solution (Right)":"Larutan (Kanan)","Equation":"Persamaan","Live Explanation":"Penerangan Langsung","Experiment Summary":"Ringkasan Eksperimen","Observation":"Pemerhatian","Real-life Application":"Aplikasi Kehidupan Sebenar","Net Directional Flux":"Fluks Arah Bersih","Left → Right":"Kiri → Kanan","Water Molecule":"Molekul Air","Solute Particle":"Zarah Zat Terlarut","Gas Particle":"Zarah Gas","Semi-Permeable Membrane":"Membran Separa Telap","State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan. Kira komposisi wap di atas larutan yang mengandungi zat terlarut dan pelarut meruap.","Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.":"Kira peningkatan takat didih sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data peningkatan takat didih.","Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.":"Kira penurunan takat beku sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data penurunan takat beku.","Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.":"Terangkan osmosis melalui membran separa telap dan hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.","According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.":"Menurut hukum Raoult, tekanan wap separa sesuatu komponen dalam larutan ideal adalah sama dengan pecahan molnya didarab dengan tekanan wap komponen tersebut dalam keadaan tulen.","For a non-volatile solute, the solute reduces the mole fraction of the solvent.":"Bagi zat terlarut tidak meruap, zat terlarut mengurangkan pecahan mol pelarut.","Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.":"Oleh itu, tekanan wap larutan lebih rendah daripada tekanan wap pelarut tulen. Bagi larutan yang mengandungi komponen meruap, jumlah tekanan wap diperoleh dengan menjumlahkan tekanan wap separa setiap komponen.","A non-volatile solute lowers the solvent vapour pressure. A volatile solute contributes its own vapour, so the total vapour pressure can be higher than in the non-volatile case.":"Glukosa menurunkan tekanan wap air. Etanol bersifat meruap dan menyumbang wapnya sendiri, maka campuran mungkin menghasilkan lebih banyak wap berbanding air tulen.","A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.":"Tuala basah yang direndam dalam air laut masin mengambil masa lebih lama untuk kering di bawah cahaya matahari berbanding tuala yang direndam dalam air paip tulen kerana garam memperlahankan penyejatan air.","A liquid boils when its vapour pressure becomes equal to the external pressure.":"Cecair mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.","Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.":"Etanol bersifat meruap dan menyumbang tekanan wapnya sendiri. Oleh itu, campuran etanol–air mungkin mendidih pada suhu yang lebih rendah daripada air tulen.","A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.":"Larutan glukosa mendidih pada suhu lebih tinggi daripada air tulen, manakala campuran etanol–air mungkin mendidih di bawah 100 °C kerana etanol bersifat meruap.","Special liquids (coolants) are added to car water tanks. This raises the boiling point so the water inside the hot engine doesn't boil away easily.":"Cecair khas, iaitu bahan penyejuk, ditambahkan ke dalam sistem penyejukan kereta. Ini meningkatkan takat didih supaya air di dalam enjin panas tidak mudah mendidih dan tersejat.","Freezing occurs when the liquid and solid phases of a solvent are in equilibrium.":"Pembekuan berlaku apabila fasa cecair dan fasa pepejal pelarut berada dalam keseimbangan.","Dissolved solute particles lower the escaping tendency of solvent molecules in the liquid phase.":"Zarah zat terlarut yang terlarut mengurangkan kecenderungan molekul pelarut untuk terlepas daripada fasa cecair.","Therefore, the solution must be cooled below the freezing point of the pure solvent before the solid solvent can form. This decrease is called freezing-point depression.":"Oleh itu, larutan perlu disejukkan di bawah takat beku pelarut tulen sebelum pelarut pepejal dapat terbentuk. Penurunan ini dikenali sebagai penurunan takat beku.","Pure water freezes exactly at 0 °C and forms a neat grid. The mixture stays liquid at 0 °C and only freezes when it gets even colder.":"Air tulen membeku tepat pada 0 °C dan membentuk susunan teratur. Campuran kekal dalam keadaan cecair pada 0 °C dan hanya membeku apabila suhunya menjadi lebih rendah.","People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.":"Garam ditaburkan pada jalan berais ketika musim sejuk. Garam bercampur dengan ais dan menurunkan takat beku, lalu menyebabkan ais yang berbahaya mencair menjadi air.","Osmosis is the net movement of solvent molecules through a semipermeable membrane from a region of lower solute concentration to a region of higher solute concentration.":"Osmosis ialah pergerakan bersih molekul pelarut melalui membran separa telap dari kawasan berkepekatan zat terlarut rendah ke kawasan berkepekatan zat terlarut tinggi.","The membrane allows solvent molecules to pass but prevents solute particles from crossing.":"Membran membenarkan molekul pelarut melaluinya tetapi menghalang zarah zat terlarut daripada merentasinya.","The net movement continues until the concentration difference is balanced by the pressure difference across the membrane.":"Pergerakan bersih berterusan sehingga perbezaan kepekatan diseimbangkan oleh perbezaan tekanan merentasi membran.","Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.":"Molekul air bergerak dalam kedua-dua arah, tetapi lebih banyak air terkumpul pada bahagian campuran. Paras air pada bahagian campuran meningkat.","Plant roots soak up water from the soil using osmosis. If you put too much fertilizer (solid particles) in the soil, the plant cannot pull water in, and might die.":"Akar tumbuhan menyerap air daripada tanah melalui osmosis. Jika terlalu banyak baja, iaitu zarah pepejal, ditambahkan ke dalam tanah, tumbuhan tidak dapat menyerap air dan mungkin mati.","where;":"di mana;","= total vapour pressure of the mixture;":"= jumlah tekanan wap campuran;","= partial vapour pressure of component A;":"= tekanan wap separa komponen A;","= partial vapour pressure of component B;":"= tekanan wap separa komponen B;","= mole fraction of component A in the liquid;":"= pecahan mol komponen A dalam cecair;","= mole fraction of component B in the liquid;":"= pecahan mol komponen B dalam cecair;","= vapour pressure of pure component A;":"= tekanan wap komponen A tulen;","= vapour pressure of pure component B.":"= tekanan wap komponen B tulen.","= vapour pressure of solvent A in the solution;":"= tekanan wap pelarut A dalam larutan;","= mole fraction of solvent A;":"= pecahan mol pelarut A;","= vapour pressure of pure solvent A.":"= tekanan wap pelarut A tulen.","= molal boiling point elevation constant of the solvent (°C kg mol":"= pemalar peningkatan takat didih molal pelarut (°C kg mol","= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol","= molality of solution (mol kg":"= kemolalan larutan (mol kg","= Boiling point of pure solvent (°C)":"= takat didih pelarut tulen (°C)","= Boiling point of solution (°C)":"= takat didih larutan (°C)","= freezing point of pure solvent (°C)":"= takat beku pelarut tulen (°C)","= freezing point of solution (°C)":"= takat beku larutan (°C)","= osmotic pressure;":"= tekanan osmosis;","= van’t Hoff factor;":"= faktor van’t Hoff;","= molarity of the solution;":"= kemolaran larutan;","= gas constant;":"= pemalar gas;","= absolute temperature in kelvin.":"= suhu mutlak dalam kelvin.","Learning Points":"Mata Pembelajaran","Total Learning Points":"Jumlah Mata Pembelajaran","View Learning Points profile":"Lihat profil Mata Pembelajaran","Learner Profile":"Profil Pelajar","Guest Explorer":"Peneroka Tetamu","Quiz Rewards":"Ganjaran Kuiz","Facts Viewed":"Fakta Dilihat","Controls Used":"Kawalan Digunakan","Progress is saved automatically in this browser's learning database.":"Kemajuan disimpan secara automatik dalam pangkalan data pembelajaran pelayar ini.","+5 Learning Points":"+5 Mata Pembelajaran","Learning activity":"Aktiviti pembelajaran","Next fact viewed":"Fakta seterusnya dilihat","Correct Quiz Arena answer":"Jawapan Arena Kuiz yang betul","Correct live competition answer":"Jawapan pertandingan langsung yang betul","Temperature control adjusted":"Kawalan suhu dilaraskan","Flow-rate speed adjusted":"Kelajuan kadar aliran dilaraskan","My Badges":"Lencana Saya","Bronze":"Gangsa","Silver":"Perak","Gold":"Emas","Completed 1 module":"Selesai 1 modul","Completed 3 modules":"Selesai 3 modul","Completed 4 modules":"Selesai 4 modul","Freeze N' Flow Master":"Pakar Freeze N' Flow","All modules & Quiz Arena":"Semua modul dan Arena Kuiz","Badge Unlocked!":"Lencana Dibuka!","You have unlocked the Freeze N' Flow Certificate!":"Anda telah membuka Sijil Freeze N' Flow!","View Certificate":"Lihat Sijil","🎉 Congratulations!":"🎉 Tahniah!","You have successfully completed":"Anda telah berjaya menyelesaikan","lessons.":"pelajaran.","Check the Badges section to see your progress!":"Semak bahagian Lencana untuk melihat kemajuan anda!","Continue Learning":"Teruskan Pembelajaran","Your Achievement":"Pencapaian Anda","Certificate of Completion":"Sijil Penyempurnaan","This is to certify that":"Dengan ini diperakui bahawa","Master Chemist":"Pakar Kimia","has successfully mastered all colligative properties modules and conquered the Quiz Arena, demonstrating exceptional knowledge in physical chemistry.":"telah berjaya menguasai semua modul sifat koligatif dan menamatkan Arena Kuiz, sekali gus menunjukkan pengetahuan yang cemerlang dalam kimia fizik.","Date Awarded":"Tarikh Dianugerahkan","Authorized Signature":"Tandatangan Diberi Kuasa","Virtual Lab Admin":"Pentadbir Makmal Maya","Download PDF":"Muat Turun PDF","Download PNG":"Muat Turun PNG","Premium Interactive Colligative Properties Simulator.":"Simulator Sifat Koligatif Interaktif Premium.","Designed to make complex physical chemistry intuitive and accessible through real-time microscopic visualizations.":"Direka untuk menjadikan kimia fizik yang kompleks lebih intuitif dan mudah difahami melalui visualisasi mikroskopik masa nyata.","Close":"Tutup","Skip Tour":"Langkau Lawatan","Back":"Kembali","Next":"Seterusnya","Finish Tour":"Tamatkan Lawatan","Welcome to Freeze N' Flow!":"Selamat Datang ke Freeze N' Flow!","Experience interactive microscopic particle dynamics and learn colligative properties in real-time. Let's take a quick tour.":"Alami dinamik zarah mikroskopik secara interaktif dan pelajari sifat koligatif dalam masa nyata. Mari ikuti lawatan ringkas.","Choose a Property":"Pilih Satu Sifat","Select one of the four colligative properties to explore its unique molecular behaviour.":"Pilih satu daripada empat sifat koligatif untuk meneroka tingkah laku molekulnya yang unik.","Adjust Variables":"Laraskan Pemboleh Ubah","Interact with the simulation by changing the solute type, temperature, and observing the immediate effects.":"Berinteraksi dengan simulasi dengan menukar jenis zat terlarut dan suhu, kemudian perhatikan kesannya serta-merta.","Observe the Simulation":"Perhatikan Simulasi","Watch how particles react in real-time. The microscopic arena visualises the physics behind the equations.":"Perhatikan tindak balas zarah dalam masa nyata. Arena mikroskopik memvisualkan konsep fizik di sebalik persamaan.","Read a clear explanation of what is happening in the simulation and connect it to the equation shown below.":"Baca penerangan yang jelas tentang perkara yang berlaku dalam simulasi dan hubungkannya dengan persamaan yang ditunjukkan di bawah.","Test Your Knowledge":"Uji Pengetahuan Anda","Review the experiment summary and answer the quiz to solidify your understanding.":"Semak ringkasan eksperimen dan jawab kuiz untuk mengukuhkan pemahaman anda.","Track Your Mastery":"Jejaki Penguasaan Anda","Complete all four lessons to fill this progress bar and unlock your certificate. Let the learning begin!":"Lengkapkan keempat-empat pelajaran untuk memenuhi bar kemajuan ini dan membuka sijil anda. Mari mulakan pembelajaran!","Test Your Mastery":"Uji Penguasaan Anda","🏆 Quiz Arena":"🏆 Arena Kuiz","Race against the clock in this 16-question challenge with factual and calculation questions. Will you make it to the Hall of Fame?":"Berlumba dengan masa dalam cabaran 16 soalan yang merangkumi soalan fakta dan pengiraan. Mampukah anda memasuki Dewan Kemasyhuran?","Enter the Arena":"Masuk ke Arena","16 Questions • 30s Fact • 2.5 min Calculation":"16 Soalan • 30 saat Fakta • 2.5 minit Pengiraan","Nickname":"Nama Panggilan","Enter your nickname...":"Masukkan nama panggilan anda...","Start Challenge":"Mulakan Cabaran","Live Competition":"Pertandingan Langsung","Hall of Fame":"Dewan Kemasyhuran","Question":"Soalan","Quiz Progress":"Kemajuan Kuiz","Loading question...":"Memuatkan soalan...","Correct!":"Betul!","Incorrect":"Salah","Incorrect.":"Salah.","Time's Up!":"Masa Tamat!","Time expired.":"Masa tamat.","0 Points":"0 Mata","Correct — the highlighted principle matches the lesson.":"Betul — prinsip yang diserlahkan sepadan dengan pelajaran.","Review the correct answer marked in green.":"Semak jawapan betul yang ditandakan dengan warna hijau.","Arena Conquered!":"Arena Ditakluki!","Incredible performance.":"Prestasi yang luar biasa.","Final Score":"Skor Akhir","Accuracy":"Ketepatan","Correct / Wrong":"Betul / Salah","Avg Time":"Purata Masa","Play Again":"Main Lagi","Review Answers":"Semak Jawapan","Answer Review":"Semakan Jawapan","Review Every Question":"Semak Setiap Soalan","Compare your answer with the correct answer.":"Bandingkan jawapan anda dengan jawapan yang betul.","Back to Results":"Kembali ke Keputusan","Back to Arena":"Kembali ke Arena","Top 10 Chemistry Masters":"10 Pakar Kimia Terbaik","The arena is empty. Claim the first victory!":"Arena masih kosong. Jadilah pemenang pertama!","Chemistry Master!":"Pakar Kimia!","Flawless logic and incredible speed.":"Logik yang sempurna dan kepantasan yang luar biasa.","Great Job!":"Syabas!","You have a solid understanding of colligative properties.":"Anda mempunyai pemahaman yang kukuh tentang sifat koligatif.","Keep Practicing!":"Teruskan Berlatih!","Review the simulations to strengthen your foundations.":"Semak semula simulasi untuk mengukuhkan asas pemahaman anda.","Easy":"Mudah","Medium":"Sederhana","Calculation":"Pengiraan","Topic Quiz Complete!":"Kuiz Topik Selesai!","Incorrect — try again.":"Salah — cuba lagi.","The host creates a room code. Students join and answer simultaneously on their own devices.":"Hos menghasilkan kod bilik. Pelajar menyertai dan menjawab secara serentak menggunakan peranti masing-masing.","Host a Game":"Hoskan Permainan","Join a Game":"Sertai Permainan","Back to Quiz Arena":"Kembali ke Arena Kuiz","Live mode requires internet access and the same published website on every device.":"Mod langsung memerlukan akses internet dan laman web terbitan yang sama pada setiap peranti.","Host Dashboard":"Papan Pemuka Hos","Live Competition Room":"Bilik Pertandingan Langsung","Creating a secure room...":"Mewujudkan bilik yang selamat...","End Room":"Tamatkan Bilik","Room Code":"Kod Bilik","Students enter this code on their devices.":"Pelajar memasukkan kod ini pada peranti masing-masing.","Players in Lobby":"Pemain di Lobi","Waiting for students to join...":"Menunggu pelajar menyertai...","Start Live Quiz":"Mulakan Kuiz Langsung","Copy Code":"Salin Kod","Code Copied":"Kod Disalin","Answered":"Dijawab","Time":"Masa","Live Leaderboard":"Papan Kedudukan Langsung","Join Live Competition":"Sertai Pertandingan Langsung","Enter your nickname and the room code shown by the host.":"Masukkan nama panggilan anda dan kod bilik yang dipaparkan oleh hos.","Your nickname":"Nama panggilan anda","6-character room code":"Kod bilik 6 aksara","Join Room":"Sertai Bilik","Connected":"Disambungkan","You are in the lobby":"Anda berada di lobi","Waiting for the host to start...":"Menunggu hos memulakan pertandingan...","Leave Room":"Tinggalkan Bilik","Player":"Pemain","Get ready...":"Bersedia...","Waiting for question...":"Menunggu soalan...","Current Rank":"Kedudukan Semasa","Competition Complete!":"Pertandingan Selesai!","Opening the room...":"Membuka bilik...","Live service could not load. Check the internet connection and refresh.":"Perkhidmatan langsung tidak dapat dimuatkan. Semak sambungan internet dan muat semula halaman.","Room is open. Ask students to join using the code below.":"Bilik telah dibuka. Minta pelajar menyertai menggunakan kod di bawah.","Unable to open the live room. Check the internet connection and try again.":"Bilik langsung tidak dapat dibuka. Semak sambungan internet dan cuba lagi.","This competition has already started.":"Pertandingan ini telah pun bermula.","Competition in progress.":"Pertandingan sedang berlangsung.","Ready":"Bersedia","No scores yet.":"Belum ada skor.","Competition complete. Final results are shown below.":"Pertandingan selesai. Keputusan akhir ditunjukkan di bawah.","Done":"Selesai","The host ended the live room.":"Hos telah menamatkan bilik langsung.","Connecting...":"Sedang menyambung...","Connected. Waiting for the host to start...":"Disambungkan. Menunggu hos memulakan pertandingan...","The competition is starting...":"Pertandingan sedang bermula...","Answer submitted":"Jawapan dihantar","Time is up":"Masa telah tamat","Next question coming up...":"Soalan seterusnya akan dipaparkan...","Final leaderboard":"Papan kedudukan akhir","Enter a nickname and a valid 6-character room code.":"Masukkan nama panggilan dan kod bilik 6 aksara yang sah.","Connection to the host was closed.":"Sambungan kepada hos telah ditutup.","Unable to connect to the host.":"Tidak dapat menyambung kepada hos.","Room not found. Check the code and try again.":"Bilik tidak ditemui. Semak kod dan cuba lagi.","Unable to join the room. Check the internet connection.":"Tidak dapat menyertai bilik. Semak sambungan internet.","The correct answer is highlighted.":"Jawapan yang betul telah diserlahkan.","Sweaty skin feels cooler because evaporation removes heat from your body.":"Kulit yang berpeluh terasa lebih sejuk kerana penyejatan menyingkirkan haba daripada badan.","Perfume evaporates quickly because it contains highly volatile liquids.":"Minyak wangi menyejat dengan cepat kerana mengandungi cecair yang sangat meruap.","Nail polish remover feels cold on your skin because it has a high vapor pressure and evaporates rapidly.":"Pencuci pengilat kuku terasa sejuk pada kulit kerana mempunyai tekanan wap yang tinggi dan menyejat dengan cepat.","A hot cup of coffee loses heat partly because the highest energy water molecules escape as vapor.":"Secawan kopi panas kehilangan haba sebahagiannya kerana molekul air bertenaga paling tinggi terlepas sebagai wap.","Rubbing alcohol dries much faster than water because its intermolecular forces are weaker, leading to a higher vapor pressure.":"Alkohol sapuan kering lebih cepat daripada air kerana daya antara molekulnya lebih lemah, lalu menghasilkan tekanan wap yang lebih tinggi.","Car radiators use coolant to increase the boiling point so engines don't overheat.":"Radiator kereta menggunakan bahan penyejuk untuk meningkatkan takat didih supaya enjin tidak terlalu panas.","Cooking food at high altitudes takes longer because water boils at lower temperatures.":"Memasak makanan di kawasan altitud tinggi mengambil masa lebih lama kerana air mendidih pada suhu yang lebih rendah.","Adding salt to boiling water for pasta slightly increases the boiling point, though mainly it's for flavor.":"Menambahkan garam ke dalam air mendidih untuk memasak pasta sedikit meningkatkan takat didih, walaupun tujuan utamanya ialah untuk rasa.","Deep-sea hydrothermal vents have water hotter than 100°C that doesn't boil because of the immense pressure.":"Lohong hidroterma laut dalam mengandungi air bersuhu melebihi 100°C yang tidak mendidih kerana tekanan yang sangat tinggi.","Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.":"Periuk tekanan memasak makanan dengan lebih cepat dengan memerangkap wap, meningkatkan tekanan dan menaikkan takat didih air di dalamnya.","Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.":"Garam ditaburkan pada jalan bersalji kerana garam menurunkan takat beku air dan mencairkan ais.","Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.":"Aiskrim kekal lembut di dalam peti sejuk beku kerana kandungan gula yang tinggi menurunkan takat bekunya dengan ketara.","Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.":"Sesetengah katak dan ikan menghasilkan protein 'antibeku' semula jadi yang menurunkan takat beku darahnya.","Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.":"Vodka tidak membeku dalam peti sejuk beku rumah biasa kerana kandungan etanol yang tinggi menurunkan takat bekunya kepada kira-kira -27°C.","Ocean water freezes at a lower temperature than freshwater lakes because of the dissolved salt.":"Air laut membeku pada suhu yang lebih rendah berbanding tasik air tawar kerana garam yang terlarut.","Plant roots absorb water using osmosis to draw moisture from the surrounding soil.":"Akar tumbuhan menyerap air melalui osmosis untuk mendapatkan kelembapan daripada tanah di sekelilingnya.","Eating very salty food can make you thirsty because osmosis causes water to leave your cells.":"Makan makanan yang sangat masin boleh menyebabkan anda berasa dahaga kerana osmosis menyebabkan air keluar daripada sel.","Slugs shrivel up when sprinkled with salt because the salt draws water out of their bodies via osmosis.":"Lintah bulan mengecut apabila ditaburkan garam kerana garam menarik air keluar daripada badannya melalui osmosis.","Grocery stores spray vegetables with pure water to keep them crisp as water enters the plant cells through osmosis.":"Kedai runcit menyembur sayur-sayuran dengan air tulen supaya kekal rangup apabila air memasuki sel tumbuhan melalui osmosis.","Cholera causes severe dehydration because the bacteria alter the intestines, causing water to flood out of cells via osmosis.":"Kolera menyebabkan dehidrasi teruk kerana bakteria mengubah fungsi usus, lalu menyebabkan air keluar dengan banyak daripada sel melalui osmosis.","If we double the amount of glucose added to the water, the vapor pressure will:":"Jika jumlah glukosa yang ditambahkan ke dalam air digandakan, tekanan wap akan:","Increase":"Meningkat","Stay the same":"Kekal sama","Decrease further":"Menurun lagi","Why does adding a solute lower the vapor pressure?":"Mengapakah penambahan zat terlarut menurunkan tekanan wap?","Solute particles block the surface":"Zarah zat terlarut menghalang permukaan","Solute particles increase the temperature":"Zarah zat terlarut meningkatkan suhu","Solute particles turn into gas quickly":"Zarah zat terlarut bertukar menjadi gas dengan cepat","A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?":"Suatu larutan mempunyai pecahan mol air 0.80. Jika tekanan wap air tulen ialah 25 kPa, berapakah tekanan wap separa air?","Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?":"Jisim glukosa yang sama, iaitu lebih ringan, dan sukrosa, iaitu lebih berat, ditambahkan ke dalam bikar berbeza. Yang manakah meningkatkan takat didih dengan lebih banyak?","Glucose (more moles)":"Glukosa (lebih banyak mol)","Sucrose (less moles)":"Sukrosa (lebih sedikit mol)","They are identical":"Kedua-duanya sama","To make a solution boil, its vapor pressure must equal:":"Untuk membolehkan larutan mendidih, tekanan wapnya mesti sama dengan:","The atmospheric pressure":"Tekanan atmosfera","The freezing point":"Takat beku","The osmotic pressure":"Tekanan osmosis","For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?":"Bagi larutan glukosa 1.0 m dalam air, Kb = 0.512 °C kg mol⁻¹ dan i = 1. Berapakah ΔTb?","Why is salt spread on icy roads in winter?":"Mengapakah garam ditaburkan pada jalan berais ketika musim sejuk?","It provides heat":"Garam membekalkan haba","It lowers the freezing point":"Garam menurunkan takat beku","It creates friction":"Garam menghasilkan geseran","When a solution freezes, the solid that forms is typically:":"Apabila larutan membeku, pepejal yang terbentuk biasanya ialah:","Pure solute":"Zat terlarut tulen","Pure solvent (ice)":"Pelarut tulen (ais)","A mixture of both":"Campuran kedua-duanya","For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?":"Bagi larutan glukosa 0.50 m dalam air, Kf = 1.86 °C kg mol⁻¹ dan i = 1. Berapakah ΔTf?","If a plant cell (high solute conc.) is placed in pure water, what will happen?":"Jika sel tumbuhan yang mempunyai kepekatan zat terlarut tinggi diletakkan dalam air tulen, apakah yang akan berlaku?","Water flows into the cell":"Air mengalir masuk ke dalam sel","Water flows out of the cell":"Air mengalir keluar daripada sel","Nothing happens":"Tiada apa-apa berlaku","During osmosis, water flows naturally towards the side with:":"Semasa osmosis, air mengalir secara semula jadi ke bahagian yang mempunyai:","Fewer solid particles":"Lebih sedikit zarah pepejal","More solid particles":"Lebih banyak zarah pepejal","Lower temperature":"Suhu yang lebih rendah","For a 0.10 mol L⁻¹ glucose solution at 300 K, with R = 0.0821 L atm mol⁻¹ K⁻¹ and i = 1, what is the osmotic pressure?":"Bagi larutan glukosa 0.10 mol L⁻¹ pada 300 K, dengan R = 0.0821 L atm mol⁻¹ K⁻¹ dan i = 1, berapakah tekanan osmosis?","More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.":"Lebih banyak glukosa tidak meruap menyebabkan bilangan molekul air di permukaan berkurang, maka tekanan wap menurun lagi.","Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.":"Zarah zat terlarut mengurangkan pecahan molekul pelarut di permukaan cecair, maka lebih sedikit molekul pelarut terlepas ke fasa wap.","Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.":"Hukum Raoult memberikan Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.","Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.":"Bagi jisim yang sama, glukosa mengandungi lebih banyak mol berbanding sukrosa kerana jisim molarnya lebih rendah, lalu menghasilkan kesan koligatif yang lebih besar.","Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.":"Pendidihan bermula apabila tekanan wap cecair menjadi sama dengan tekanan atmosfera luar.","Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.":"Gunakan ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.","Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.":"Garam menurunkan takat beku air, membolehkan ais mencair pada suhu yang menyebabkan air tulen kekal beku.","During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.":"Semasa pembekuan, molekul pelarut membentuk kekisi hablur manakala kebanyakan zarah zat terlarut yang terlarut tersisih.","Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.":"Gunakan ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.","Pure water has lower solute concentration, so water moves into the more concentrated plant cell through the membrane.":"Air tulen mempunyai kepekatan zat terlarut yang lebih rendah, maka air bergerak melalui membran masuk ke dalam sel tumbuhan yang lebih pekat.","The net flow of water is toward the side with the higher solute-particle concentration.":"Aliran bersih air bergerak ke arah bahagian yang mempunyai kepekatan zarah zat terlarut lebih tinggi.","Use π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.":"Gunakan π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.","What does adding a non-volatile solute to a pure solvent do to its boiling point?":"Apakah kesan penambahan zat terlarut tidak meruap ke dalam pelarut tulen terhadap takat didihnya?","Increases it":"Meningkatkannya","Decreases it":"Menurunkannya","No change":"Tiada perubahan","Makes it evaporate instantly":"Menyebabkannya menyejat serta-merta","Which property causes ice to melt when salt is poured on it?":"Sifat manakah menyebabkan ais mencair apabila garam ditaburkan padanya?","Freezing-point depression":"Penurunan takat beku","Boiling-point elevation":"Peningkatan takat didih","Osmosis is the net movement of which substance across a semipermeable membrane?":"Osmosis ialah pergerakan bersih bahan manakah merentasi membran separa telap?","Water (solvent)":"Air (pelarut)","Solute":"Zat terlarut","Salt":"Garam","Sugar":"Gula","What happens to the vapour pressure of water when a non-volatile solute is dissolved in it?":"Apakah yang berlaku kepada tekanan wap air apabila zat terlarut tidak meruap dilarutkan di dalamnya?","It decreases":"Tekanan wap menurun","It increases":"Tekanan wap meningkat","It remains the same":"Tekanan wap kekal sama","It becomes zero":"Tekanan wap menjadi sifar","Which of these is NOT a colligative property?":"Yang manakah BUKAN sifat koligatif?","Density":"Ketumpatan","Osmotic pressure":"Tekanan osmosis","Why does a solution containing a non-volatile solute have a higher boiling point than the pure solvent?":"Mengapakah larutan yang mengandungi zat terlarut tidak meruap mempunyai takat didih lebih tinggi daripada pelarut tulen?","Its lower vapour pressure requires a higher temperature to equal atmospheric pressure":"Tekanan wapnya yang lebih rendah memerlukan suhu lebih tinggi untuk menyamai tekanan atmosfera","The solute heats up faster":"Zat terlarut menjadi panas dengan lebih cepat","The solute absorbs cold":"Zat terlarut menyerap kesejukan","A membrane blocks evaporation":"Membran menghalang penyejatan","If a cell is placed in a highly concentrated salt solution, what happens?":"Jika sel diletakkan dalam larutan garam yang sangat pekat, apakah yang berlaku?","It shrinks as water leaves":"Sel mengecut apabila air keluar","It swells as water enters":"Sel mengembang apabila air masuk","It stays exactly the same":"Sel kekal sama","It freezes solid":"Sel membeku menjadi pepejal","Colligative properties depend primarily on:":"Sifat koligatif bergantung terutamanya pada:","The number of dissolved particles":"Bilangan zarah terlarut","The colour of the solution":"Warna larutan","The size of the container":"Saiz bekas","The shape of the solute particles":"Bentuk zarah zat terlarut","Which sample would lower the freezing point of water the most, assuming complete dissolution?":"Sampel manakah paling banyak menurunkan takat beku air dengan andaian pelarutan lengkap?","2 moles of NaCl":"2 mol NaCl","1 mole of NaCl":"1 mol NaCl","1 mole of glucose":"1 mol glukosa","0.5 mole of glucose":"0.5 mol glukosa","What is the role of a semipermeable membrane in osmosis?":"Apakah peranan membran separa telap dalam osmosis?","It allows solvent molecules to pass while restricting solute particles":"Membran membenarkan molekul pelarut melaluinya sambil menghalang zarah zat terlarut","It allows only solute particles to pass":"Membran hanya membenarkan zarah zat terlarut melaluinya","It blocks all particles":"Membran menghalang semua zarah","It allows everything to pass equally":"Membran membenarkan semua bahan melaluinya secara sama rata","A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.":"Sebuah bekas 1.00 L pada 25 °C mengandungi CO₂ pada tekanan 730 torr. Selepas bertindak balas dengan campuran CaO/BaO berjisim 4.000 g, tekanan CO₂ yang berbaki ialah 150 torr. Berapakah mol CO₂ yang telah bertindak balas? Gunakan R = 0.0821 L atm mol⁻¹ K⁻¹.","The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?":"Campuran 4.000 g mengandungi CaO dan BaO, dan sejumlah 0.0312 mol CO₂ bertindak balas. Diberi M(CaO) = 56.08 g mol⁻¹ dan M(BaO) = 153.33 g mol⁻¹, berapakah jisim CaO dalam campuran itu?","At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?":"Pada 63.5 °C, H₂O tulen dan etanol tulen masing-masing mempunyai tekanan wap 175 torr dan 400 torr. Jisim H₂O dan etanol yang sama dicampurkan. Dengan menggunakan M(H₂O) = 18.02 g mol⁻¹ dan M(etanol) = 46.07 g mol⁻¹, berapakah pecahan mol etanol dalam larutan cecair?","For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?":"Bagi larutan H₂O–etanol berjisim sama pada 63.5 °C, x(etanol) = 0.281, P°(H₂O) = 175 torr dan P°(etanol) = 400 torr. Dengan mengandaikan tingkah laku ideal, berapakah jumlah tekanan wap?","For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?":"Bagi larutan ideal H₂O–etanol yang sama, tekanan separa etanol ialah x(etanol)P°(etanol) dan jumlah tekanan ialah 238 torr. Berapakah pecahan mol etanol dalam fasa wap?","Dissolving 1.32 g anthraquinone in 11.4 g camphor lowers the freezing point by 22.3 °C. Given Kf(camphor) = 40.0 °C kg mol⁻¹, what is the molar mass of anthraquinone?":"Melarutkan 1.32 g antrakuinon dalam 11.4 g kapur barus menurunkan takat beku sebanyak 22.3 °C. Diberi Kf(kapur barus) = 40.0 °C kg mol⁻¹, berapakah jisim molar antrakuinon?","A non-volatile solute lowers the solvent's vapour pressure, so the solution must reach a higher temperature before its vapour pressure equals atmospheric pressure.":"Zat terlarut tidak meruap menurunkan tekanan wap pelarut, maka larutan perlu mencapai suhu yang lebih tinggi sebelum tekanan wapnya menyamai tekanan atmosfera.","Salt creates freezing-point depression. The salt solution remains liquid below 0 °C, so ice begins to melt.":"Garam menyebabkan penurunan takat beku. Larutan garam kekal cair di bawah 0 °C, maka ais mula mencair.","Osmosis describes the net movement of solvent molecules, usually water, through a semipermeable membrane.":"Osmosis menerangkan pergerakan bersih molekul pelarut, biasanya air, melalui membran separa telap.","A non-volatile solute reduces the mole fraction of water at the surface, lowering water's vapour pressure according to Raoult's law.":"Zat terlarut tidak meruap mengurangkan pecahan mol air di permukaan, lalu menurunkan tekanan wap air menurut hukum Raoult.","Density is not a colligative property. The four standard colligative properties depend on the number of dissolved particles.":"Ketumpatan bukan sifat koligatif. Empat sifat koligatif piawai bergantung pada bilangan zarah terlarut.","Because the solution has lower vapour pressure, more heating is required before its vapour pressure can match atmospheric pressure.":"Oleh sebab larutan mempunyai tekanan wap yang lebih rendah, lebih banyak pemanasan diperlukan sebelum tekanan wapnya dapat menyamai tekanan atmosfera.","The surrounding salt solution is hypertonic, so water moves out of the cell by osmosis and the cell shrinks.":"Larutan garam di sekeliling bersifat hipertonik, maka air bergerak keluar daripada sel melalui osmosis dan sel mengecut.","Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.":"Kesan koligatif bergantung pada bilangan zarah zat terlarut yang hadir, bukan pada warna, saiz bekas atau bentuk zarah.","Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.":"Dua mol NaCl menghasilkan bilangan zarah terlarut paling banyak kerana setiap unit formula boleh terurai kepada dua ion.","A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.":"Membran separa telap membenarkan pergerakan pelarut sambil menghalang zarah zat terlarut, lalu menghasilkan aliran bersih yang didorong oleh perbezaan kepekatan.","Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.":"Gunakan n = ΔPV/RT. Penurunan tekanan ialah 580 torr atau 0.763 atm, lalu memberikan kira-kira 3.12 × 10⁻² mol CO₂ yang bertindak balas.","Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.":"Ambil x dan y sebagai mol CaO dan BaO. Selesaikan x + y = 0.0312 dan 56.08x + 153.33y = 4.000; jisim CaO ialah kira-kira 0.451 g.","For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.":"Bagi jisim yang sama, bilangan mol berkadar songsang dengan jisim molar. Etanol mempunyai mol yang lebih sedikit daripada air, lalu memberikan x(etanol) ≈ 0.281.","Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.":"Gunakan hukum Raoult pada kedua-dua cecair: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.","The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.":"Pecahan mol wap ialah yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.","Use ΔTf = Kfm to obtain molality, then convert the solvent mass to kilograms and solve for molar mass; the result is about 208 g mol⁻¹.":"Gunakan ΔTf = Kfm untuk mendapatkan kemolalan, kemudian tukarkan jisim pelarut kepada kilogram dan hitung jisim molar; hasilnya kira-kira 208 g mol⁻¹.","Review the highlighted correct answer and connect it to the lesson concept.":"Semak jawapan betul yang diserlahkan dan hubungkannya dengan konsep pelajaran.","© 2026 Freeze N' Flow. Premium Self-Directed Chemistry Simulation.":"© 2026 Freeze N' Flow. Simulasi Kimia Pembelajaran Kendiri Premium.","Interactive Chemistry Learning":"Pembelajaran Kimia Interaktif","Certificate Preview":"Pratonton Sijil","This certificate is proudly presented to":"Sijil ini dengan bangganya disampaikan kepada","For successfully completing the interactive learning modules and Quiz Arena on Colligative Properties.":"Atas kejayaan melengkapkan modul pembelajaran interaktif dan Arena Kuiz mengenai Sifat Koligatif.","Today's Date":"Tarikh Hari Ini","Learning Achievement":"Pencapaian Pembelajaran","Gold seal":"Mohor emas","Close":"Tutup","Certificate Locked":"Sijil Dikunci","Complete all learning modules and finish Quiz Arena to unlock your certificate.":"Lengkapkan semua modul pembelajaran dan tamatkan Arena Kuiz untuk membuka sijil anda.","Certificate Unlocked":"Sijil Dibuka","Your certificate is ready to preview and download.":"Sijil anda sedia untuk dipratonton dan dimuat turun.","Modules":"Modul","Pending":"Belum Selesai","Complete":"Selesai","You have successfully completed Freeze N' Flow.":"Anda telah berjaya melengkapkan Freeze N' Flow.","Thank you for exploring the four Colligative Properties through interactive learning.":"Terima kasih kerana meneroka empat Sifat Koligatif melalui pembelajaran interaktif.","Complete all four learning modules and Quiz Arena first.":"Lengkapkan keempat-empat modul pembelajaran dan Arena Kuiz terlebih dahulu.","Certificate download tools are unavailable. Please check your internet connection and try again.":"Alat muat turun sijil tidak tersedia. Sila semak sambungan internet anda dan cuba lagi.","The certificate could not be generated. Please try again.":"Sijil tidak dapat dijana. Sila cuba lagi.","View Learning Points profile":"Lihat profil Mata Pembelajaran"};
     Object.assign(translations, {
         "Give Feedback":"Beri Maklum Balas",
         "Share your experience to help us improve the learning experience.":"Kongsikan pengalaman anda untuk membantu kami menambah baik pengalaman pembelajaran.",
@@ -7912,7 +8943,7 @@
         "Determine the molar mass of an unknown solute from freezing-point depression data.":"Tentukan jisim molar zat terlarut yang tidak diketahui daripada data penurunan takat beku.",
         "Explain osmosis through a semipermeable membrane.":"Terangkan osmosis melalui membran separa telap.",
         "Relate osmotic pressure to the concentration of solute particles in a solution.":"Hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.",
-        "A non-volatile solute such as glucose lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.",
+        "A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.",
         "The non-volatile solute remains in the liquid phase. As a result, the solution reaches the external pressure only at a temperature above the boiling point of the pure solvent.":"Zat terlarut tidak meruap kekal dalam fasa cecair. Oleh itu, larutan menyamai tekanan luar hanya pada suhu yang lebih tinggi daripada takat didih pelarut tulen.",
         "Solutions containing non-volatile solutes such as glucose or sucrose boil at a higher temperature than the pure solvent.":"Larutan yang mengandungi zat terlarut tidak meruap seperti glukosa atau sukrosa mendidih pada suhu yang lebih tinggi daripada pelarut tulen.",
         "Antifreeze is added to vehicle cooling systems in cold climates so the coolant remains liquid at temperatures where the pure solvent could freeze.":"Antibeku ditambahkan ke dalam sistem penyejukan kenderaan di kawasan sejuk supaya bahan penyejuk kekal cair pada suhu yang boleh membekukan pelarut tulen.",
