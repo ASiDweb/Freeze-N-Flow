@@ -6793,6 +6793,334 @@ input[type="range"]::-moz-range-thumb {
 #tab-content-boiling-point .vp-experiment-card .vp-equation-copy { line-height: 1.6; }
 </style>
 
+
+<style id="bp-solution-intro-mobile-align-fix">
+@media (max-width: 767px) {
+  #tab-content-boiling-point .vp-solution-experiment .vp-experiment-heading {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    column-gap: .55rem !important;
+    row-gap: .22rem !important;
+    align-items: center !important;
+    margin-bottom: .62rem !important;
+  }
+
+  #tab-content-boiling-point .vp-solution-experiment .vp-experiment-heading > div {
+    display: contents !important;
+  }
+
+  #tab-content-boiling-point .vp-solution-experiment .vp-section-title {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+
+  #tab-content-boiling-point .vp-solution-experiment .vp-mode-pill {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    margin: 0 !important;
+    align-self: center !important;
+    max-width: none !important;
+  }
+
+  #tab-content-boiling-point .vp-solution-experiment .vp-section-subtitle {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: .65rem !important;
+    line-height: 1.38 !important;
+  }
+}
+</style>
+
+
+<style id="osmosis-phone-readability-and-overlay-fix">
+  /* Readability uplift for the small explanatory copy under Water / Solution cards */
+  .vp-section-subtitle {
+    font-size: .78rem;
+    line-height: 1.55;
+    max-width: 34rem;
+  }
+
+  /* Osmosis overlay badges inside the simulation */
+  .osmosis-overlay-badge {
+    position: absolute;
+    z-index: 12;
+    padding: .34rem .62rem;
+    border-radius: 999px;
+    font: 800 .72rem/1 'Poppins', sans-serif;
+    letter-spacing: .01em;
+    color: #d1fae5;
+    background: rgba(6, 95, 70, .88);
+    border: 1px solid rgba(16, 185, 129, .9);
+    box-shadow: 0 10px 24px rgba(16, 185, 129, .18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .osmosis-level-arrow {
+    position: absolute;
+    z-index: 12;
+    width: 26px;
+    pointer-events: none;
+  }
+  .osmosis-level-arrow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, rgba(16,185,129,.15), rgba(16,185,129,.95), rgba(16,185,129,.15));
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(16,185,129,.35);
+  }
+  .osmosis-level-arrow::after {
+    content: '↕';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 900 1rem/1 'Inter', sans-serif;
+    color: #34d399;
+    text-shadow: 0 0 10px rgba(52,211,153,.45);
+  }
+
+  @media (max-width: 767px) {
+    .vp-section-title { font-size: 1.02rem; }
+    .vp-section-subtitle {
+      font-size: .84rem !important;
+      line-height: 1.58 !important;
+      max-width: none;
+    }
+
+    /* Keep the osmosis particle legend on one tidy row on phone */
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: .28rem !important;
+      font-size: .56rem !important;
+    }
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] > div {
+      display: inline-flex;
+      align-items: center;
+      gap: .22rem !important;
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] > div span:last-child {
+      white-space: nowrap;
+    }
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] > div:last-child span:last-child {
+      letter-spacing: -.02em;
+    }
+
+    .osmosis-overlay-badge {
+      font-size: .64rem;
+      padding: .3rem .52rem;
+    }
+    .osmosis-level-arrow {
+      width: 22px;
+    }
+    .osmosis-level-arrow::after {
+      font-size: .92rem;
+    }
+  }
+</style>
+
+
+<style id="freezing-simulation-live-values-restored">
+#tab-content-freezing-point .fp-sim-info {
+  position: absolute;
+  z-index: 12;
+  left: 50%;
+  top: 24%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100% - 24px);
+}
+#tab-content-freezing-point .fp-sim-pill {
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: Poppins, Inter, sans-serif;
+  font-size: 11px;
+  line-height: 1.15;
+  font-weight: 800;
+  white-space: nowrap;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 5px 16px rgba(15, 23, 42, .16);
+}
+#tab-content-freezing-point .fp-temp-pill {
+  color: #dbeafe;
+  background: rgba(30, 64, 175, .93);
+  border: 1px solid rgba(96, 165, 250, 1);
+}
+#tab-content-freezing-point .fp-delta-pill {
+  color: #fef3c7;
+  background: rgba(120, 53, 15, .94);
+  border: 1px solid rgba(251, 191, 36, 1);
+}
+@media (max-width: 640px) {
+  #tab-content-freezing-point .fp-sim-info { top: 22%; gap: 5px; }
+  #tab-content-freezing-point .fp-sim-pill { font-size: 12px; padding: 6px 13px; }
+}
+</style>
+
+
+<style id="osmosis-pi-air-zone-final">
+#tab-content-osmosis .simulation-panel { position: relative; }
+#tab-content-osmosis .osmosis-overlay-badge {
+  position: absolute;
+  z-index: 14;
+  left: 64%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  padding: .38rem .68rem;
+  border-radius: 999px;
+  font: 800 .72rem/1 'Poppins', sans-serif;
+  color: #d1fae5;
+  background: rgba(6, 78, 59, .93);
+  border: 1px solid rgba(52, 211, 153, .95);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, .20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  white-space: nowrap;
+}
+#tab-content-osmosis .osmosis-level-arrow {
+  position: absolute;
+  z-index: 13;
+  left: 82%;
+  top: 27%;
+  width: 22px;
+  min-height: 20px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity .22s ease, transform .22s ease;
+}
+#tab-content-osmosis .osmosis-level-arrow::before {
+  content: '⇅';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86efac;
+  font: 800 17px/1 'Inter', sans-serif;
+  text-shadow: 0 0 8px rgba(74, 222, 128, .30);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+#tab-content-osmosis .osmosis-level-arrow::after {
+  content: '';
+}
+#tab-content-osmosis .osmosis-level-arrow.level-changing {
+  animation: osmosisLevelArrowPulse 1.35s ease-in-out infinite;
+}
+@keyframes osmosisLevelArrowPulse {
+  0%, 100% { opacity: .78; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-2px); }
+}
+@media (max-width: 640px) {
+  #tab-content-osmosis .osmosis-overlay-badge {
+    left: 64%;
+    top: 19%;
+    font-size: .66rem;
+    padding: .34rem .58rem;
+  }
+  #tab-content-osmosis .osmosis-level-arrow {
+    left: 83%;
+    top: 27%;
+    width: 20px;
+    min-height: 18px;
+  }
+  #tab-content-osmosis .osmosis-level-arrow::before {
+    font-size: 16px;
+  }
+}
+</style>
+
+
+<style id="all-simulation-indicator-size-polish">
+  /* Slightly larger simulation indicators on phones, without changing desktop layout. */
+  @media (max-width: 767px) {
+    .vp-topic-name {
+      font-size: .76rem !important;
+      line-height: 1.25 !important;
+      gap: .58rem !important;
+    }
+    .vp-topic-dot,
+    .vp-legend-dot {
+      width: .72rem !important;
+      height: .72rem !important;
+      flex: 0 0 .72rem !important;
+    }
+    .vp-mini-legend {
+      font-size: .69rem !important;
+      line-height: 1.3 !important;
+      gap: .42rem .78rem !important;
+    }
+    .vp-mini-legend > div {
+      gap: .42rem !important;
+    }
+
+    .simulation-topic-header > div:first-child > span:last-child {
+      font-size: .76rem !important;
+      line-height: 1.25 !important;
+    }
+    .simulation-topic-header > [aria-label="Particle colour legend"] {
+      font-size: .68rem !important;
+      line-height: 1.28 !important;
+      gap: .42rem .72rem !important;
+    }
+    .simulation-topic-header > [aria-label="Particle colour legend"] > div {
+      gap: .38rem !important;
+    }
+    .simulation-topic-header > [aria-label="Particle colour legend"] > div > span:first-child:not([class*="border-t"]) {
+      width: .68rem !important;
+      height: .68rem !important;
+      flex: 0 0 .68rem !important;
+    }
+    .simulation-topic-header > [aria-label="Particle colour legend"] > div > span:first-child[class*="border-t"] {
+      width: .92rem !important;
+      flex: 0 0 .92rem !important;
+    }
+
+    /* Osmosis must remain a single row on phone, so enlarge it carefully. */
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] {
+      font-size: .60rem !important;
+      gap: .30rem !important;
+      justify-content: space-between !important;
+      flex-wrap: nowrap !important;
+    }
+    #tab-content-osmosis .simulation-topic-header > [aria-label="Particle colour legend"] > div {
+      gap: .25rem !important;
+    }
+  }
+</style>
+
+
+<style id="osmosis-arrow-removed-final">
+#tab-content-osmosis .osmosis-level-arrow,
+#tab-content-osmosis #osm-height-arrow { display: none !important; }
+</style>
 </head>
 <body class="bg-gradient-to-b from-[#EEF5FF] via-[#F8FAFC] to-[#FFFFFF] bg-fixed text-slate-800 dark:bg-none dark:bg-[#0B1220] dark:text-slate-200 antialiased transition-colors duration-500 min-h-screen flex flex-col">
 <!-- Global Toast Container for Badges -->
@@ -7562,6 +7890,7 @@ input[type="range"]::-moz-range-thumb {
 <div class="vp-equation-title text-amber-600 dark:text-amber-400">Solution Equation</div>
 <div class="vp-equation-formula text-slate-900 dark:text-white">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
 <div class="vp-equation-copy text-slate-600 dark:text-slate-400">\(K_b\) = molal boiling-point elevation constant, \(m\) = molality, \(T_b^\circ\) = boiling point of water, \(T_b\) = boiling point of the solution.</div>
+<div class="mt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed">For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>
 </div>
 </section>
 
@@ -7658,7 +7987,6 @@ input[type="range"]::-moz-range-thumb {
 <span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-fp-molality">1.00 m</span>
 </div>
 <input aria-label="Adjust freezing point solution molality" class="w-full" id="input-fp-molality" max="2.0" min="0" step="0.1" type="range" value="1.0"/>
-<div class="inquiry-effect-value text-brand-600 dark:text-brand-300" id="label-fp-effect">ΔTf = 1.86 °C</div>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -7686,10 +8014,17 @@ input[type="range"]::-moz-range-thumb {
 <div class="simulation-stage simulation-stage-dual flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-[#060A12] rounded-[16px] border border-slate-200/50 dark:border-white/5 p-4 min-h-[240px] shadow-inner">
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</span>
+<div class="fp-sim-info fp-sim-info-pure" aria-live="polite">
+  <div class="fp-sim-pill fp-temp-pill" id="fp-pure-temp-overlay">T = 20.0 °C</div>
+</div>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-fp-pure"></canvas>
 </div>
 <div class="simulation-panel flex flex-col relative h-full min-h-[150px]">
 <span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</span>
+<div class="fp-sim-info fp-sim-info-solution" aria-live="polite">
+  <div class="fp-sim-pill fp-temp-pill" id="fp-solution-temp-overlay">T = 20.0 °C</div>
+  <div class="fp-sim-pill fp-delta-pill" id="fp-solution-delta-overlay">ΔTf = 1.86 °C</div>
+</div>
 <canvas class="w-full flex-1 rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 cursor-crosshair shadow-sm" id="canvas-fp-solution"></canvas>
 </div>
 </div>
@@ -7702,6 +8037,7 @@ input[type="range"]::-moz-range-thumb {
 <strong>\(m\)</strong> = molality of solution (mol kg<sup>−1</sup>)<br/>
 <strong>\(T_f^\circ\)</strong> = freezing point of pure solvent (°C)<br/>
 <strong>\(T_f\)</strong> = freezing point of solution (°C)
+<div class="pt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed">For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>
                                     </div>
 </div>
 </div>
@@ -7786,7 +8122,6 @@ input[type="range"]::-moz-range-thumb {
 <span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-osmosis-concentration">0.00 mol L⁻¹</span>
 </div>
 <input aria-label="Adjust solute concentration" class="w-full" id="input-osmosis-concentration" max="1.0" min="0" step="0.05" type="range" value="0"/>
-<div class="mt-2 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400" id="label-osmosis-pressure">π = 0.00 atm</div>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -7816,9 +8151,11 @@ input[type="range"]::-moz-range-thumb {
 <div class="simulation-panel flex-1 relative h-full min-h-[150px]">
 <div class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-[10px] font-bold text-brand-600 dark:text-brand-300 uppercase tracking-wider font-heading backdrop-blur-sm">Solvent</div>
 <div class="absolute top-2.5 right-2.5 z-10 px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider font-heading backdrop-blur-sm">Solution</div>
+<div id="osm-pressure-overlay" class="osmosis-overlay-badge">π = 0.00 atm</div>
 <canvas class="w-full h-full rounded-[12px] bg-white dark:bg-[#0B1220] border border-slate-200 dark:border-white/5 shadow-sm" id="canvas-osmosis"></canvas>
 </div>
 </div>
+<div id="osmosis-scale-note" class="mt-2 text-[11px] sm:text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">Particle movement and liquid-level changes are conceptual visualisations and are not drawn to physical scale.</div>
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
 <div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
 <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\pi = iMRT\)</div>
@@ -7833,8 +8170,8 @@ input[type="range"]::-moz-range-thumb {
 </div>
 <div class="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
 <div class="bg-slate-50 dark:bg-[#060A12] p-4 rounded-[14px] border border-slate-100 dark:border-white/5 shadow-sm">
-<span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold font-heading tracking-wider">Net Directional Flux</span>
-<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">High Water Concentration → Low Water Concentration</div>
+<span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold font-heading tracking-wider">Net Solvent Flow</span>
+<div class="text-2xl font-bold text-stemPurple-600 dark:text-stemPurple-400 mt-1 font-heading" id="metrics-osmosis-flux">Pure Solvent → Solution</div>
 </div>
 </div>
 </div>
@@ -12260,7 +12597,9 @@ input[type="range"]::-moz-range-thumb {
             updateText('label-fp-molality', conc.toFixed(2) + ' m');
             const fpPure = 0.00;
             const deltaTf = conc * 1.86 * currentSoluteFactor;
-            updateText('label-fp-effect', `ΔTf = ${deltaTf.toFixed(2)} °C`);
+            updateText('fp-pure-temp-overlay', `T = ${temp.toFixed(1)} °C`);
+            updateText('fp-solution-temp-overlay', `T = ${temp.toFixed(1)} °C`);
+            updateText('fp-solution-delta-overlay', `ΔTf = ${deltaTf.toFixed(2)} °C`);
             const fpSol = fpPure - deltaTf;
             prepareBucket(fpState.pure, 0xFEE20001);
             prepareBucket(fpState.solution, 0xFEE20002);
@@ -12389,10 +12728,11 @@ input[type="range"]::-moz-range-thumb {
             const osmoticPressure = vantHoff * conc * gasConstant * temperatureK;
             updateText('label-osmosis-concentration', conc.toFixed(2) + ' mol L⁻¹');
             updateText('label-osmosis-pressure', `π = ${osmoticPressure.toFixed(2)} atm`);
+            updateText('osm-pressure-overlay', `π = ${osmoticPressure.toFixed(2)} atm`);
             updateText('metrics-osmosis-pressure', `At 298 K: π = ${osmoticPressure.toFixed(2)} atm`);
             updateText('metrics-osmosis-flux', conc > 0.001
-                ? 'High Water Concentration → Low Water Concentration'
-                : 'Dynamic Equilibrium — No Concentration Gradient');
+                ? 'Pure Solvent → Solution'
+                : 'Dynamic Equilibrium — No Net Solvent Flow');
 
             const membraneX = osmObj.width / 2;
             const floorY = osmObj.height;
@@ -12541,6 +12881,21 @@ input[type="range"]::-moz-range-thumb {
                 updateText('metrics-osmosis-height', '+' + finalHeightDiff + ' cm');
 
                 osmObj.ctx.clearRect(0, 0, osmObj.width, osmObj.height);
+                const pressureBadge = document.getElementById('osm-pressure-overlay');
+                const heightArrow = document.getElementById('osm-height-arrow');
+                if (pressureBadge) {
+                    // Keep π in the empty air zone, never on top of the liquid.
+                    pressureBadge.textContent = `π = ${osmoticPressure.toFixed(2)} atm`;
+                }
+                if (heightArrow) {
+                    // Two-headed arrow grows/shrinks with the live difference in water levels.
+                    const levelGap = Math.abs(currentWaterLeft - currentWaterRight);
+                    const arrowHeight = 24 + clampValue(levelGap * 0.65, 0, 30);
+                    heightArrow.style.height = `${arrowHeight}px`;
+                    heightArrow.classList.toggle('level-changing', conc > 0.001 && !isPaused);
+                    heightArrow.style.opacity = conc > 0.001 ? '1' : '.5';
+                }
+
                 osmObj.ctx.fillStyle = 'rgba(37, 99, 235, 0.2)';
                 osmObj.ctx.fillRect(0, currentWaterLeft, membraneX, floorY - currentWaterLeft);
                 osmObj.ctx.fillStyle = 'rgba(124, 58, 237, 0.15)';
@@ -13142,6 +13497,11 @@ input[type="range"]::-moz-range-thumb {
         "A higher temperature":"Suhu yang lebih tinggi",
         "A non-volatile solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.":"Zat terlarut tidak meruap menyebabkan penurunan takat beku, maka larutan membeku pada suhu yang lebih rendah daripada pelarut tulen.",
         "Solvent → Solution":"Pelarut → Larutan","High Water Concentration → Low Water Concentration":"Kepekatan Air Tinggi → Kepekatan Air Rendah",
+        "Net Solvent Flow":"Aliran Bersih Pelarut",
+        "Pure Solvent → Solution":"Pelarut Tulen → Larutan",
+        "Dynamic Equilibrium — No Net Solvent Flow":"Keseimbangan Dinamik — Tiada Aliran Bersih Pelarut",
+        "For the non-electrolyte model used in this simulation, i = 1.":"Bagi model bukan elektrolit yang digunakan dalam simulasi ini, i = 1.",
+        "Particle movement and liquid-level changes are conceptual visualisations and are not drawn to physical scale.":"Pergerakan zarah dan perubahan aras cecair ialah visualisasi konseptual dan tidak dilukis mengikut skala fizikal sebenar.",
         "vapour pressure of the pure solvent at the selected temperature.":"tekanan wap pelarut tulen pada suhu yang dipilih.",
         "are the partial vapour pressures of the solvent and the volatile component. Both volatile components contribute to the vapour phase.":"ialah tekanan wap separa pelarut dan etanol meruap. Kedua-dua komponen menyumbang kepada fasa wap.",
         "is the mole fraction of solvent in the non-volatile solution. The non-volatile solute does not contribute to the vapour phase, so only the solvent contributes to the vapour pressure.":"ialah pecahan mol pelarut dalam larutan glukosa. Glukosa tidak meruap, maka hanya pelarut menyumbang kepada tekanan wap.",
