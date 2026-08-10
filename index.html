@@ -1338,13 +1338,15 @@
                 height: 1rem !important;
             }
             nav > div > div > div[aria-label="Go to home"] > span {
-                font-size: .88rem !important;
-                line-height: 1.08 !important;
+                font-size: .82rem !important;
+                line-height: 1.02 !important;
                 letter-spacing: -.02em !important;
                 white-space: normal !important;
-                width: 4.75rem !important;
-                max-width: 4.75rem !important;
-                flex: 0 0 4.75rem !important;
+                overflow-wrap: normal !important;
+                word-break: normal !important;
+                width: 5.65rem !important;
+                max-width: 5.65rem !important;
+                flex: 0 0 5.65rem !important;
                 overflow: visible !important;
             }
 
@@ -2490,6 +2492,19 @@
                 font-weight: 700 !important;
             }
         }
+
+        /* INQUIRY CONTROLS — concentration/molality is a first-class experimental variable */
+        #input-vp-solute-fraction,
+        #input-bp-molality,
+        #input-fp-molality,
+        #input-osmosis-concentration { accent-color: #7c3aed; }
+        @media (min-width: 768px) {
+            #tab-content-boiling-point .simulation-controls-card .controls-body > div:first-child,
+            #tab-content-freezing-point .simulation-controls-card .controls-body > div:first-child,
+            #tab-content-osmosis .simulation-controls-card .controls-body > div:first-child {
+                align-self: stretch !important;
+            }
+        }
 </style>
 
 <style id="fp-osmosis-no-solution-type-layout">
@@ -2622,7 +2637,7 @@
     letter-spacing: .08em !important;
   }
   #tab-content-freezing-point .simulation-controls-card #label-fp-temp,
-  #tab-content-osmosis .simulation-controls-card #label-osmosis-speed {
+  #tab-content-osmosis .simulation-controls-card #label-osmosis-concentration {
     font-size: 12px !important;
     line-height: 1 !important;
     white-space: nowrap !important;
@@ -2639,7 +2654,7 @@
     min-width: 44px !important;
   }
 
-  #tab-content-osmosis .simulation-controls-card #input-osmosis-speed {
+  #tab-content-osmosis .simulation-controls-card #input-osmosis-concentration {
     width: 100% !important;
     min-width: 180px !important;
   }
@@ -2768,6 +2783,309 @@
     .fact-mini-visual > svg.fact-art > * {
         transform-box: fill-box;
     }
+}
+</style>
+
+
+<style id="bp-fp-inquiry-control-layout-final">
+/* BP + FP — deliberate two-variable inquiry layout; removes the floating/dead-space look. */
+#tab-content-boiling-point .simulation-controls-card .controls-body.inquiry-variable-layout,
+#tab-content-freezing-point .simulation-controls-card .controls-body.inquiry-variable-layout {
+  grid-area: auto !important;
+}
+
+#tab-content-boiling-point .inquiry-variable-panel,
+#tab-content-freezing-point .inquiry-variable-panel {
+  min-width: 0;
+  border: 1px solid rgba(148,163,184,.20);
+  background: rgba(248,250,252,.58);
+  border-radius: 16px;
+  padding: .95rem 1rem;
+}
+.dark #tab-content-boiling-point .inquiry-variable-panel,
+.dark #tab-content-freezing-point .inquiry-variable-panel {
+  border-color: rgba(255,255,255,.07);
+  background: rgba(15,23,42,.42);
+}
+
+#tab-content-boiling-point .inquiry-effect-value,
+#tab-content-freezing-point .inquiry-effect-value {
+  margin-top: .55rem;
+  font-size: .68rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+@media (min-width: 768px) {
+  #tab-content-boiling-point .simulation-controls-card,
+  #tab-content-freezing-point .simulation-controls-card {
+    display: block !important;
+    padding: 1.25rem 1.4rem 1.2rem !important;
+  }
+
+  #tab-content-boiling-point .simulation-controls-card .controls-header,
+  #tab-content-freezing-point .simulation-controls-card .controls-header {
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  #tab-content-boiling-point .simulation-controls-card .control-title-row,
+  #tab-content-freezing-point .simulation-controls-card .control-title-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: .7rem !important;
+    padding: 0 0 .85rem !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  #tab-content-boiling-point .simulation-controls-card .controls-body.inquiry-variable-layout,
+  #tab-content-freezing-point .simulation-controls-card .controls-body.inquiry-variable-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0,1.12fr) minmax(0,.88fr) !important;
+    gap: .85rem 1rem !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    padding: .95rem 0 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid rgba(148,163,184,.20) !important;
+  }
+  .dark #tab-content-boiling-point .simulation-controls-card .controls-body.inquiry-variable-layout,
+  .dark #tab-content-freezing-point .simulation-controls-card .controls-body.inquiry-variable-layout {
+    border-top-color: rgba(255,255,255,.08) !important;
+  }
+
+  #tab-content-boiling-point .inquiry-temperature-panel,
+  #tab-content-freezing-point .inquiry-temperature-panel,
+  #tab-content-boiling-point .inquiry-molality-panel,
+  #tab-content-freezing-point .inquiry-molality-panel {
+    grid-row: 1 !important;
+    align-self: stretch !important;
+  }
+  #tab-content-boiling-point .inquiry-temperature-panel,
+  #tab-content-freezing-point .inquiry-temperature-panel { grid-column: 1 !important; }
+  #tab-content-boiling-point .inquiry-molality-panel,
+  #tab-content-freezing-point .inquiry-molality-panel { grid-column: 2 !important; }
+
+  #tab-content-boiling-point .inquiry-variable-panel label,
+  #tab-content-freezing-point .inquiry-variable-panel label {
+    font-size: .68rem !important;
+    letter-spacing: .075em !important;
+  }
+  #tab-content-boiling-point .inquiry-variable-panel > .flex > span,
+  #tab-content-freezing-point .inquiry-variable-panel > .flex > span {
+    font-size: .74rem !important;
+    white-space: nowrap !important;
+  }
+
+  #tab-content-boiling-point .inquiry-temperature-panel .temperature-stepper,
+  #tab-content-freezing-point .inquiry-temperature-panel .temperature-stepper {
+    grid-template-columns: 42px minmax(120px,1fr) 42px !important;
+    gap: .65rem !important;
+  }
+  #tab-content-boiling-point .inquiry-temperature-panel .temperature-step-button,
+  #tab-content-freezing-point .inquiry-temperature-panel .temperature-step-button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  #tab-content-boiling-point .simulation-controls-card .control-action-row,
+  #tab-content-freezing-point .simulation-controls-card .control-action-row {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: .65rem !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+    align-self: center !important;
+  }
+  #tab-content-boiling-point .simulation-controls-card .control-action-row > button,
+  #tab-content-freezing-point .simulation-controls-card .control-action-row > button {
+    width: 126px !important;
+    min-height: 42px !important;
+    padding: .68rem .9rem !important;
+    font-size: .75rem !important;
+    border-radius: 13px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #tab-content-boiling-point .simulation-controls-card .controls-body.inquiry-variable-layout,
+  #tab-content-freezing-point .simulation-controls-card .controls-body.inquiry-variable-layout {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .72rem !important;
+  }
+  #tab-content-boiling-point .inquiry-variable-panel,
+  #tab-content-freezing-point .inquiry-variable-panel {
+    padding: .78rem .82rem !important;
+    border-radius: 14px !important;
+  }
+  #tab-content-boiling-point .simulation-controls-card .control-action-row,
+  #tab-content-freezing-point .simulation-controls-card .control-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: .6rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+</style>
+
+
+<style id="bp-fp-action-row-balance-fix">
+@media (min-width: 768px) {
+  #tab-content-boiling-point .simulation-controls-card .control-action-row,
+  #tab-content-freezing-point .simulation-controls-card .control-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    justify-content: stretch !important;
+    align-items: stretch !important;
+    gap: .85rem !important;
+    width: 100% !important;
+  }
+  #tab-content-boiling-point .simulation-controls-card .control-action-row > button,
+  #tab-content-freezing-point .simulation-controls-card .control-action-row > button {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 44px !important;
+  }
+}
+</style>
+
+<style id="osmosis-single-control-seragam">
+/* Osmosis — match BP/FP premium inquiry layout, but with one full-width control panel only. */
+#tab-content-osmosis .osmosis-variable-panel {
+  min-width: 0;
+  border: 1px solid rgba(148,163,184,.20);
+  background: rgba(248,250,252,.58);
+  border-radius: 16px;
+  padding: .95rem 1rem;
+}
+.dark #tab-content-osmosis .osmosis-variable-panel {
+  border-color: rgba(255,255,255,.07);
+  background: rgba(15,23,42,.42);
+}
+@media (min-width: 768px) {
+  #tab-content-osmosis .simulation-controls-card {
+    display: block !important;
+    padding: 1.25rem 1.4rem 1.2rem !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .controls-header {
+    display: block !important;
+    margin: 0 !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-title-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: .7rem !important;
+    padding: 0 0 .85rem !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .85rem !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    padding: .95rem 0 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid rgba(148,163,184,.20) !important;
+  }
+  .dark #tab-content-osmosis .simulation-controls-card .controls-body {
+    border-top-color: rgba(255,255,255,.08) !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .controls-body label {
+    font-size: .68rem !important;
+    letter-spacing: .075em !important;
+  }
+  #tab-content-osmosis .simulation-controls-card #label-osmosis-concentration {
+    font-size: .74rem !important;
+    white-space: nowrap !important;
+  }
+  #tab-content-osmosis .simulation-controls-card #label-osmosis-pressure {
+    margin-top: .55rem !important;
+    font-size: .68rem !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: .01em !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    justify-content: stretch !important;
+    align-items: stretch !important;
+    gap: .85rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-action-row > button {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 44px !important;
+    padding: .68rem .9rem !important;
+    font-size: .75rem !important;
+    border-radius: 13px !important;
+  }
+}
+@media (max-width: 767px) {
+  #tab-content-osmosis .osmosis-variable-panel {
+    padding: .78rem .82rem !important;
+    border-radius: 14px !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .72rem !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .6rem !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+</style>
+
+
+<style id="osmosis-action-row-below-fix">
+/* Force Osmosis action buttons to sit BELOW the single control bar, matching BP/FP style. */
+@media (min-width: 768px) {
+  #tab-content-osmosis .simulation-controls-card .controls-body {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    align-items: stretch !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .controls-body > .osmosis-variable-panel {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-action-row {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: .05rem !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: .85rem !important;
+    justify-self: stretch !important;
+  }
+  #tab-content-osmosis .simulation-controls-card .control-action-row > button {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 44px !important;
+  }
 }
 </style>
 
@@ -3064,7 +3382,7 @@
 <i class="w-5 h-5 animate-pulse" data-lucide="snowflake"></i>
 </div>
 <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white font-heading">
-                        SoluEffect360
+                        SoluEffect<wbr/>360
                     </span>
 </div>
 <div class="hidden md:flex items-center space-x-8">
@@ -3210,8 +3528,8 @@
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
 <ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
-<li>State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution.</li>
-<li>Calculate the vapour composition above a solution containing a volatile solute and solvent.</li>
+<li>Investigate how solute mole fraction changes the vapour pressure of a solution.</li>
+<li>Use Raoult’s law to compare non-volatile and ideal volatile solutions.</li>
 </ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter" id="tour-fact-vp">
@@ -3313,6 +3631,14 @@
 </div>
 <div class="vp-control-block">
 <div class="flex justify-between items-center mb-2">
+<label class="vp-control-label" for="input-vp-solute-fraction">Solute Mole Fraction</label>
+<span class="vp-control-value text-stemPurple-600 dark:text-stemPurple-300" id="label-vp-solute-fraction">0.22</span>
+</div>
+<input aria-label="Adjust solute mole fraction" class="w-full" id="input-vp-solute-fraction" max="0.40" min="0.05" step="0.01" type="range" value="0.22"/>
+<div class="vp-control-hint">Increase the fraction to add more solute particles and strengthen the composition effect.</div>
+</div>
+<div class="vp-control-block">
+<div class="flex justify-between items-center mb-2">
 <label class="vp-control-label" for="input-vp-temp-solution">Temperature</label>
 <span class="vp-control-value text-amber-600 dark:text-amber-400" id="label-vp-temp-solution">20.0 °C</span>
 </div>
@@ -3343,6 +3669,7 @@
 <div class="vp-equation-title text-amber-600 dark:text-amber-400">Solution Equation</div>
 <div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-equation-formula"></div>
 <div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-equation-explanation"></div>
+<div class="mt-2 text-[9px] font-semibold text-stemPurple-600 dark:text-stemPurple-300 hidden" id="vp-ideal-model-note">Ideal-solution model used for instructional purposes.</div>
 </div>
 </section>
 
@@ -3373,7 +3700,7 @@
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
-<p>A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.</p>
+<p>A wet towel soaked in salty water can dry more slowly because dissolved salt lowers the mole fraction and vapour pressure of the solvent, reducing its tendency to evaporate.</p>
 </div>
 </div>
 
@@ -3391,8 +3718,8 @@
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
 <ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
-<li>Calculate the boiling-point elevation of a solution containing a non-volatile solute.</li>
-<li>Determine the molar mass of an unknown non-volatile solute from boiling-point elevation data.</li>
+<li>Investigate how solute molality changes boiling-point elevation.</li>
+<li>Use ΔTb = Kbm to predict the boiling point of a solution.</li>
 </ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter">
@@ -3421,8 +3748,8 @@
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
 </div>
 </div>
-<div class="controls-body">
-<div>
+<div class="controls-body inquiry-variable-layout">
+<div class="inquiry-variable-panel inquiry-temperature-panel">
 <div class="flex justify-between items-center mb-3">
 <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-bp-temp">Temperature</label>
 <span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-bp-temp">20.0 °C</span>
@@ -3432,6 +3759,14 @@
 <input aria-label="Adjust Temperature" class="w-full" id="input-bp-temp" max="120" min="20" step="0.1" type="range" value="20.0"/>
 <button aria-label="Increase temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-bp-temp', 0.1)" type="button">+</button>
 </div>
+</div>
+<div class="inquiry-variable-panel inquiry-molality-panel">
+<div class="flex justify-between items-center mb-3">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-bp-molality">Solute Molality</label>
+<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-bp-molality">1.00 m</span>
+</div>
+<input aria-label="Adjust boiling point solution molality" class="w-full" id="input-bp-molality" max="2.0" min="0" step="0.1" type="range" value="1.0"/>
+<div class="inquiry-effect-value text-amber-600 dark:text-amber-400" id="label-bp-effect">ΔTb = +0.51 °C</div>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -3516,7 +3851,7 @@
 <div class="space-y-5 text-[13px] text-slate-700 dark:text-slate-300">
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 mb-1.5 font-heading">Observation</h4>
-<p>A glucose solution boils at a higher temperature than the pure solvent because glucose is non-volatile.</p>
+<p>A solution containing a non-volatile solute boils at a higher temperature than the pure solvent because the solute lowers the solvent vapour pressure.</p>
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
@@ -3538,8 +3873,8 @@
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Learning Objective</h3>
 </div>
 <ol class="list-decimal pl-5 space-y-2 text-[13px] text-slate-700 dark:text-slate-300">
-<li>Calculate the freezing-point depression of a solution.</li>
-<li>Determine the molar mass of an unknown solute from freezing-point depression data.</li>
+<li>Investigate how solute molality changes freezing-point depression.</li>
+<li>Use ΔTf = Kfm to predict the freezing point of a solution.</li>
 </ol>
 </div>
 <div class="p-7 notion-card bg-gradient-to-br from-brand-50/50 to-stemPurple-50/50 dark:from-brand-900/10 dark:to-stemPurple-900/10 backdrop-blur-md relative overflow-hidden group fact-card-anim fact-card-enter">
@@ -3568,8 +3903,8 @@
 <h3 class="font-bold text-[13px] uppercase tracking-wider font-heading">Control Center</h3>
 </div>
 </div>
-<div class="controls-body">
-<div>
+<div class="controls-body inquiry-variable-layout">
+<div class="inquiry-variable-panel inquiry-temperature-panel">
 <div class="flex justify-between items-center mb-3">
 <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-fp-temp">Temperature</label>
 <span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-fp-temp">20.0 °C</span>
@@ -3579,6 +3914,14 @@
 <input aria-label="Adjust Temperature" class="w-full" id="input-fp-temp" max="20" min="-20" step="0.1" type="range" value="20.0"/>
 <button aria-label="Increase temperature by 0.1 degrees Celsius" class="temperature-step-button" onclick="adjustTemperature('input-fp-temp', 0.1)" type="button">+</button>
 </div>
+</div>
+<div class="inquiry-variable-panel inquiry-molality-panel">
+<div class="flex justify-between items-center mb-3">
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-fp-molality">Solute Molality</label>
+<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-fp-molality">1.00 m</span>
+</div>
+<input aria-label="Adjust freezing point solution molality" class="w-full" id="input-fp-molality" max="2.0" min="0" step="0.1" type="range" value="1.0"/>
+<div class="inquiry-effect-value text-brand-600 dark:text-brand-300" id="label-fp-effect">ΔTf = 1.86 °C</div>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -3700,12 +4043,13 @@
 </div>
 </div>
 <div class="controls-body">
-<div>
+<div class="osmosis-variable-panel">
 <div class="flex justify-between items-center mb-3">
-<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-osmosis-speed">Flow Rate Speed</label>
-<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-osmosis-speed">0x</span>
+<label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-heading" for="input-osmosis-concentration">Solute Concentration</label>
+<span class="text-xs font-bold text-stemPurple-600 dark:text-stemPurple-400" id="label-osmosis-concentration">0.00 mol L⁻¹</span>
 </div>
-<input aria-label="Adjust Flow Rate Speed" class="w-full" id="input-osmosis-speed" max="10" min="0" step="1" type="range" value="0"/>
+<input aria-label="Adjust solute concentration" class="w-full" id="input-osmosis-concentration" max="1.0" min="0" step="0.05" type="range" value="0"/>
+<div class="mt-2 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400" id="label-osmosis-pressure">π = 0.00 atm</div>
 </div>
 <div class="control-action-row">
 <button class="w-full py-3.5 px-4 bg-slate-100 dark:bg-[#1e293b] text-slate-700 dark:text-slate-300 rounded-[14px] font-semibold text-[13px] flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" onclick="togglePlayPause()">
@@ -3741,9 +4085,14 @@
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
 <div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
 <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\pi = iMRT\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-<strong>\(\pi\)</strong> = osmotic pressure; <strong>\(i\)</strong> = van’t Hoff factor; <strong>\(M\)</strong> = molarity of the solution; <strong>\(R\)</strong> = gas constant; <strong>\(T\)</strong> = absolute temperature in kelvin.
-                                    </div>
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed space-y-1">
+<div><strong>\(\pi\)</strong> = osmotic pressure</div>
+<div><strong>\(i\)</strong> = van’t Hoff factor</div>
+<div><strong>\(M\)</strong> = molarity of the solution</div>
+<div><strong>\(R\)</strong> = gas constant</div>
+<div><strong>\(T\)</strong> = absolute temperature in kelvin</div>
+<div class="pt-1 font-bold text-stemPurple-600 dark:text-stemPurple-300" id="metrics-osmosis-pressure">At 298 K: π = 0.00 atm</div>
+</div>
 </div>
 <div class="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
 <div class="bg-slate-50 dark:bg-[#060A12] p-4 rounded-[14px] border border-slate-100 dark:border-white/5 shadow-sm">
@@ -3774,7 +4123,7 @@
 <div class="space-y-5 text-[13px] text-slate-700 dark:text-slate-300">
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-brand-500 pl-3 mb-1.5 font-heading">Observation</h4>
-<p>Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.</p>
+<p>Water molecules move in both directions. The net movement causes water to accumulate on the solution side until the pressure difference balances the osmotic tendency.</p>
 </div>
 <div>
 <h4 class="font-bold text-slate-900 dark:text-white border-l-2 border-amber-500 pl-3 mb-1.5 font-heading">Real-life Application</h4>
@@ -5553,9 +5902,9 @@
             { q: "Which sample would lower the freezing point of water the most, assuming complete dissolution?", opts: [{t:"2 moles of NaCl",c:true}, {t:"1 mole of NaCl",c:false}, {t:"1 mole of glucose",c:false}, {t:"0.5 mole of glucose",c:false}], diff: "Medium", type: "fact" },
             { q: "What is the role of a semipermeable membrane in osmosis?", opts: [{t:"It allows solvent molecules to pass while restricting solute particles",c:true}, {t:"It allows only solute particles to pass",c:false}, {t:"It blocks all particles",c:false}, {t:"It allows everything to pass equally",c:false}], diff: "Medium", type: "fact" },
 
-            // Calculation questions adapted from the attached exam page — 2.5 minutes each
-            { q: "A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.", opts: [{t:"3.12 × 10⁻² mol",c:true}, {t:"3.93 × 10⁻² mol",c:false}, {t:"9.84 × 10⁻³ mol",c:false}, {t:"2.44 × 10⁻³ mol",c:false}], diff: "Calculation", type: "calculation" },
-            { q: "The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?", opts: [{t:"0.451 g",c:true}, {t:"1.75 g",c:false}, {t:"2.25 g",c:false}, {t:"3.55 g",c:false}], diff: "Calculation", type: "calculation" },
+            // Colligative-property calculation questions — 2.5 minutes each
+            { q: "A 2.00 g non-volatile solute is dissolved in 50.0 g of water and raises the boiling point by 0.40 °C. If Kb = 0.512 °C kg mol⁻¹ and i = 1, what is the molar mass of the solute?", opts: [{t:"51.2 g mol⁻¹",c:true}, {t:"102.4 g mol⁻¹",c:false}, {t:"25.6 g mol⁻¹",c:false}, {t:"78.1 g mol⁻¹",c:false}], diff: "Calculation", type: "calculation" },
+            { q: "What is the osmotic pressure of a 0.200 mol L⁻¹ glucose solution at 298 K? Use i = 1 and R = 0.0821 L atm mol⁻¹ K⁻¹.", opts: [{t:"4.89 atm",c:true}, {t:"2.45 atm",c:false}, {t:"24.5 atm",c:false}, {t:"0.489 atm",c:false}], diff: "Calculation", type: "calculation" },
             { q: "At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?", opts: [{t:"0.281",c:true}, {t:"0.500",c:false}, {t:"0.719",c:false}, {t:"0.391",c:false}], diff: "Calculation", type: "calculation" },
             { q: "For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?", opts: [{t:"238 torr",c:true}, {t:"175 torr",c:false}, {t:"288 torr",c:false}, {t:"400 torr",c:false}], diff: "Calculation", type: "calculation" },
             { q: "For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?", opts: [{t:"0.472",c:true}, {t:"0.281",c:false}, {t:"0.719",c:false}, {t:"0.528",c:false}], diff: "Calculation", type: "calculation" },
@@ -5573,8 +5922,8 @@
             "Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.",
             "Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.",
             "A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.",
-            "Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.",
-            "Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.",
+            "Use ΔTb = Kbm: m = 0.40/0.512 = 0.781 mol kg⁻¹. Moles of solute = 0.781 × 0.0500 = 0.0391 mol, so molar mass = 2.00/0.0391 ≈ 51.2 g mol⁻¹.",
+            "Use π = iMRT = 1 × 0.200 × 0.0821 × 298 ≈ 4.89 atm.",
             "For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.",
             "Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.",
             "The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.",
@@ -6785,8 +7134,8 @@
 
         const quizzes = {
             'vp': [
-                { question: "If we double the amount of glucose added to the water, the vapor pressure will:", options: ["Increase", "Stay the same", "Decrease further"], answer: 2 },
-                { question: "Why does adding a solute lower the vapor pressure?", options: ["Solute particles block the surface", "Solute particles increase the temperature", "Solute particles turn into gas quickly"], answer: 0 },
+                { question: "If the mole fraction of a non-volatile solute increases, the vapour pressure will:", options: ["Increase", "Stay the same", "Decrease further"], answer: 2 },
+                { question: "Why does adding a non-volatile solute lower the vapour pressure?", options: ["It lowers the mole fraction of solvent, reducing the solvent partial vapour pressure", "It increases the external pressure", "It makes the solvent molecules heavier"], answer: 0 },
                 { question: "A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?", options: ["20 kPa", "25 kPa", "5 kPa", "31.25 kPa"], answer: 0 }
             ],
             'bp': [
@@ -6808,8 +7157,8 @@
 
         const miniQuizExplanations = {
             vp: [
-                "More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.",
-                "Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.",
+                "Increasing the non-volatile-solute mole fraction lowers the solvent mole fraction, so the solvent vapour pressure decreases further.",
+                "A non-volatile solute lowers the mole fraction of solvent. By Raoult’s law, the solvent partial vapour pressure therefore decreases.",
                 "Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa."
             ],
             bp: [
@@ -6992,6 +7341,9 @@
             const vpVapourLegend = document.getElementById('vp-vapour-legend-label');
             const vpPanelTitle = document.getElementById('vp-solution-panel-title');
             const vpBehaviourHint = document.getElementById('vp-solute-behaviour-hint');
+            const vpIdealModelNote = document.getElementById('vp-ideal-model-note');
+            const xSolute = readVPSoluteFraction();
+            const xSolvent = 1 - xSolute;
 
             if (vpSolventFormula && vpSolventExplanation) {
                 vpSolventFormula.innerHTML = '\\(P_{\\text{solvent}} = P_A^\\circ\\)';
@@ -7004,15 +7356,17 @@
                     if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
                     if (vpPanelTitle) vpPanelTitle.textContent = 'Volatile Solute';
                     if (vpBehaviourHint) vpBehaviourHint.textContent = 'Both the solvent and the volatile solute can enter the vapour phase.';
-                    vpFormula.innerHTML = '\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>\\(P_{\\text{total}} = P_A + P_B\\)';
-                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> and <strong>\\(P_B\\)</strong> are the partial vapour pressures of the solvent and the volatile component. Both volatile components contribute to the vapour phase.';
+                    vpFormula.innerHTML = `\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>\\(X_A=${xSolvent.toFixed(2)},\\;X_B=${xSolute.toFixed(2)}\\)`;
+                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> and <strong>\\(P_B\\)</strong> are partial vapour pressures. Increasing the volatile-solute mole fraction changes both Raoult-law contributions.';
+                    if (vpIdealModelNote) vpIdealModelNote.classList.remove('hidden');
                 } else {
                     if (vpLegend) vpLegend.textContent = 'Non-Volatile Solute';
                     if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
                     if (vpPanelTitle) vpPanelTitle.textContent = 'Non-Volatile Solute';
                     if (vpBehaviourHint) vpBehaviourHint.textContent = 'The solute stays in the liquid. Only solvent molecules enter the vapour phase.';
-                    vpFormula.innerHTML = '\\(P_A = X_A P_A^\\circ\\)<br>\\(\\Delta P = P_A^\\circ - P_A\\)';
-                    vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> is the mole fraction of solvent in the non-volatile solution. The non-volatile solute does not contribute to the vapour phase, so only the solvent contributes to the vapour pressure.';
+                    vpFormula.innerHTML = `\\(P_A = X_A P_A^\\circ\\)<br>\\(X_A=${xSolvent.toFixed(2)},\\;X_{solute}=${xSolute.toFixed(2)}\\)<br>\\(\\Delta P = P_A^\\circ - P_A\\)`;
+                    vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> is the solvent mole fraction. Increasing non-volatile solute lowers \\(X_A\\), so the solvent partial vapour pressure decreases.';
+                    if (vpIdealModelNote) vpIdealModelNote.classList.add('hidden');
                 }
             }
             if (window.MathJax && window.MathJax.typesetPromise) {
@@ -7076,6 +7430,8 @@
             } else {
                 vpSolutionPaused = false;
                 vpState.solution.particles = [];
+                const fraction = document.getElementById('input-vp-solute-fraction');
+                if (fraction) fraction.value = '0.22';
                 updateVPPauseUI('solution');
             }
             if (input) input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -7504,7 +7860,7 @@
             resetBucketRuntime(bucket, seed);
             const liquidRegion = { xMin: 5, xMax: canvasObj.width - 5, yMin: liquidLevel + 5, yMax: canvasObj.height - 5 };
             const gasRegion = { xMin: 7, xMax: canvasObj.width - 7, yMin: 7, yMax: Math.max(12, liquidLevel - 7) };
-            const initialGasCount = includeSolute ? (currentSolute === 'Ethanol' ? 4 : 1) : 3;
+            const initialGasCount = includeSolute ? (currentSolute === 'Ethanol' ? Math.max(2, Math.round(2 + conc * 8)) : 1) : 3;
             const totalSolventMolecules = 80;
 
             for (let i = 0; i < totalSolventMolecules - initialGasCount; i++) {
@@ -7517,7 +7873,7 @@
             }
             if (includeSolute) {
                 const solRadius = currentSolute === 'Ethanol' ? 4 : (currentSolute === 'Glucose' ? 5 : 7);
-                for (let i = 0; i < Math.round(conc * 8); i++) {
+                for (let i = 0; i < Math.round(clampValue(conc, 0.05, 0.40) * 40); i++) {
                     spawnParticle(bucket, liquidRegion, solRadius, '#f59e0b', 'solute', 12, 22);
                 }
             }
@@ -7544,16 +7900,21 @@
             return clampValue(mmHg / 760, 0, 5);
         }
 
-        function vapourPressureSolutionAtm(tempC) {
+        function readVPSoluteFraction() {
+            const raw = Number.parseFloat(document.getElementById('input-vp-solute-fraction')?.value);
+            return clampValue(Number.isFinite(raw) ? raw : 0.22, 0.05, 0.40);
+        }
+
+        function vapourPressureSolutionAtm(tempC, soluteFraction = readVPSoluteFraction()) {
             const pure = pureSolventVapourPressureAtm(tempC);
+            const xSolute = clampValue(soluteFraction, 0.05, 0.40);
+            const xSolvent = 1 - xSolute;
             if (currentSolute === 'Ethanol') {
-                // Idealized volatile binary mixture: both components contribute.
-                const xSolvent = 0.72;
-                const xVolatile = 0.28;
-                return xSolvent * pure + xVolatile * volatileSoluteVapourPressureAtm(tempC);
+                // Ideal-solution teaching model: both volatile components contribute.
+                return xSolvent * pure + xSolute * volatileSoluteVapourPressureAtm(tempC);
             }
-            // Non-volatile solute: only the solvent contributes, at a reduced mole fraction.
-            return 0.78 * pure;
+            // Non-volatile solute: only solvent contributes to vapour pressure.
+            return xSolvent * pure;
         }
 
         function updatePressureIndicator(id, valueAtm) {
@@ -7641,14 +8002,15 @@
             const solObj = setupCanvas('canvas-vp-solution');
             if (!pureObj || !solObj) return;
 
-            const conc = 1.0;
+            const conc = readVPSoluteFraction();
             const tempPure = readTemperatureValue('input-vp-temp-pure');
             const tempSolution = readTemperatureValue('input-vp-temp-solution');
             updateText('label-vp-temp-pure', tempPure.toFixed(1) + ' °C');
             updateText('label-vp-temp-solution', tempSolution.toFixed(1) + ' °C');
+            updateText('label-vp-solute-fraction', conc.toFixed(2));
 
             const pureInternalPressureAtm = pureSolventVapourPressureAtm(tempPure);
-            const solutionInternalPressureAtm = vapourPressureSolutionAtm(tempSolution);
+            const solutionInternalPressureAtm = vapourPressureSolutionAtm(tempSolution, conc);
             // Legacy DOM pressure fields may not exist; pressure is now rendered inside each chamber.
             updateText('vp-pure-p-external', '1.00 atm');
             updateText('vp-solution-p-external', '1.00 atm');
@@ -7678,9 +8040,12 @@
 
             const targetPure = gasTargetForTemperature(temp01Pure);
             const solutionBaseline = gasTargetForTemperature(temp01Solution);
+            const pureAtSolutionTemp = Math.max(0.001, pureSolventVapourPressureAtm(tempSolution));
+            const pressureRatio = clampValue(solutionInternalPressureAtm / pureAtSolutionTemp, 0.12, 2.2);
+            const ratioTarget = Math.max(1, Math.round(clampValue(solutionBaseline * pressureRatio, 1, 26)));
             const targetSolution = currentSolute === 'Ethanol'
-                ? Math.round(clampValue(solutionBaseline * 1.45, 2, 24))
-                : Math.max(1, Math.floor(solutionBaseline * 0.55));
+                ? ratioTarget
+                : Math.max(1, Math.min(ratioTarget, Math.max(1, solutionBaseline - 1)));
 
             function thermalFor(temp01) {
                 return {
@@ -7706,7 +8071,7 @@
                 };
             }
 
-            const solutionVapourFactor = currentSolute === 'Ethanol' ? 1.45 : 0.56;
+            const solutionVapourFactor = clampValue(pressureRatio, 0.28, 1.75);
             const advance = makeFrameStepper((dt) => {
                 if (!vpPurePaused) {
                     stepChamber(vpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermalPure,
@@ -7827,14 +8192,17 @@
             const solObj = setupCanvas('canvas-bp-solution');
             if (!pureObj || !solObj) return;
 
-            const molality = 1.0;
+            const molalityRaw = Number.parseFloat(document.getElementById('input-bp-molality')?.value);
+            const molality = clampValue(Number.isFinite(molalityRaw) ? molalityRaw : 1.0, 0, 2.0);
             const temp = readTemperatureValue('input-bp-temp');
             updateText('label-bp-temp', temp.toFixed(1) + ' °C');
+            updateText('label-bp-molality', molality.toFixed(2) + ' m');
             const bpPure = 100.00;
 
             // Boiling-point elevation is demonstrated with glucose as the fixed non-volatile solute.
             const bpSol = bpPure + (molality * 0.512);
             const deltaTb = bpSol - bpPure;
+            updateText('label-bp-effect', `ΔTb = +${deltaTb.toFixed(2)} °C`);
             updateText('metrics-bp-tb', bpSol.toFixed(2) + ' °C');
             updateText('metrics-bp-dt', (deltaTb >= 0 ? '+' : '') + deltaTb.toFixed(2) + ' °C');
             const bpPureInternalPressureAtm = pureSolventVapourPressureAtm(temp);
@@ -7887,12 +8255,13 @@
             }
 
             const targetPure = gasTarget(temp, bpPure, 1);
-            const rawSolutionTarget = gasTarget(temp, bpSol, 0.78);
-            // At the same temperature, a non-volatile solution must have visibly fewer
-            // vapour molecules than the pure solvent. Maintain at least a one-particle gap
-            // and roughly a 25% visual separation as the vapour population grows.
-            const minimumGap = Math.max(1, Math.ceil(targetPure * 0.25));
-            const targetSolution = Math.max(0, Math.min(rawSolutionTarget, targetPure - minimumGap));
+            const vapourReduction = clampValue(1 - 0.12 * molality, 0.58, 1);
+            const rawSolutionTarget = gasTarget(temp, bpSol, vapourReduction);
+            // The visual gap grows with molality and disappears at m = 0.
+            const concentrationGap = Math.ceil(targetPure * clampValue(0.12 * molality, 0, 0.38));
+            const targetSolution = molality <= 0.001
+                ? targetPure
+                : Math.max(0, Math.min(rawSolutionTarget, targetPure - Math.max(1, concentrationGap)));
             const pureBubbleRate = boilingBubbleRate(temp, bpPure, 1);
             const solutionBubbleRate = boilingBubbleRate(temp, bpSol, 1);
             const pureIntensity = clampValue((temp - (bpPure - 4)) / 12, 0, 1);
@@ -7902,8 +8271,9 @@
                 const pureGasCount = bpState.pure.particles.filter(p => p.type === 'gas').length;
                 // Never let the solution visually catch up with the pure solvent. This is a
                 // qualitative teaching model for boiling-point elevation by a non-volatile solute.
+                const allowedRatio = clampValue(1 - 0.12 * molality, 0.58, 1);
                 const allowedSolutionGas = pureGasCount > 0
-                    ? Math.max(0, Math.min(targetSolution, Math.floor(pureGasCount * 0.75)))
+                    ? Math.max(0, Math.min(targetSolution, Math.floor(pureGasCount * allowedRatio)))
                     : 0;
                 const solutionGas = bpState.solution.particles.filter(p => p.type === 'gas');
                 const excess = Math.max(0, solutionGas.length - allowedSolutionGas);
@@ -7921,7 +8291,7 @@
 
             const advance = makeFrameStepper((dt) => {
                 stepChamber(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, thermal, phaseForBoiling(bpState.pure, targetPure, bpPure, 1));
-                stepChamber(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseForBoiling(bpState.solution, targetSolution, bpSol, 0.82));
+                stepChamber(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, thermal, phaseForBoiling(bpState.solution, targetSolution, bpSol, clampValue(1 - 0.08 * molality, 0.68, 1)));
                 enforceBoilingVapourGap();
                 updateBoilingBubbles(bpState.pure, pureObj.width, pureObj.height, liquidLevelPure, dt, pureBubbleRate, pureIntensity);
                 updateBoilingBubbles(bpState.solution, solObj.width, solObj.height, liquidLevelSol, dt, solutionBubbleRate, solutionIntensity);
@@ -8101,11 +8471,14 @@
             const pureObj = setupCanvas('canvas-fp-pure');
             const solObj = setupCanvas('canvas-fp-solution');
             if (!pureObj || !solObj) return;
-            const conc = 1.0;
+            const molalityRaw = Number.parseFloat(document.getElementById('input-fp-molality')?.value);
+            const conc = clampValue(Number.isFinite(molalityRaw) ? molalityRaw : 1.0, 0, 2.0);
             const temp = readTemperatureValue('input-fp-temp');
             updateText('label-fp-temp', temp.toFixed(1) + " °C");
+            updateText('label-fp-molality', conc.toFixed(2) + ' m');
             const fpPure = 0.00;
             const deltaTf = conc * 1.86 * currentSoluteFactor;
+            updateText('label-fp-effect', `ΔTf = ${deltaTf.toFixed(2)} °C`);
             const fpSol = fpPure - deltaTf;
             prepareBucket(fpState.pure, 0xFEE20001);
             prepareBucket(fpState.solution, 0xFEE20002);
@@ -8226,14 +8599,26 @@
             const osmObj = setupCanvas('canvas-osmosis');
             if (!osmObj) return;
 
-            const conc = 2.0;
-            const speedMultiplier = parseFloat(document.getElementById('input-osmosis-speed')?.value || 0);
+            const concentrationRaw = Number.parseFloat(document.getElementById('input-osmosis-concentration')?.value);
+            const conc = clampValue(Number.isFinite(concentrationRaw) ? concentrationRaw : 0, 0, 1.0);
+            const temperatureK = 298;
+            const vantHoff = 1;
+            const gasConstant = 0.0821;
+            const osmoticPressure = vantHoff * conc * gasConstant * temperatureK;
+            updateText('label-osmosis-concentration', conc.toFixed(2) + ' mol L⁻¹');
+            updateText('label-osmosis-pressure', `π = ${osmoticPressure.toFixed(2)} atm`);
+            updateText('metrics-osmosis-pressure', `At 298 K: π = ${osmoticPressure.toFixed(2)} atm`);
+            updateText('metrics-osmosis-flux', conc > 0.001
+                ? 'High Water Concentration → Low Water Concentration'
+                : 'Dynamic Equilibrium — No Concentration Gradient');
+
             const membraneX = osmObj.width / 2;
             const floorY = osmObj.height;
-            const maxDisplacement = conc * 20 * currentSoluteFactor;
+            const concentrationStrength = clampValue(conc / 1.0, 0, 1);
+            const maxDisplacement = conc * 36;
             prepareBucket(osmosisState, 0x05A05151);
 
-            if (osmosisState.particles.length === 0 || osmosisState.lastConc !== conc) {
+            if (osmosisState.particles.length === 0 || Math.abs((osmosisState.lastConc ?? -1) - conc) > 0.0001) {
                 osmosisState.particles = [];
                 osmosisState.lastConc = conc;
                 osmosisState.progress = 0;
@@ -8241,16 +8626,17 @@
                 const leftRegion = { xMin: 5, xMax: membraneX - 8, yMin: osmObj.height * 0.5 + 5, yMax: osmObj.height - 5 };
                 const rightRegion = { xMin: membraneX + 8, xMax: osmObj.width - 5, yMin: osmObj.height * 0.5 + 5, yMax: osmObj.height - 5 };
 
-                for (let i = 0; i < 40; i++) {
+                // Equal solvent populations initially; solute concentration creates the composition gradient.
+                for (let i = 0; i < 36; i++) {
                     const p = spawnParticle(osmosisState, leftRegion, 3.5, '#2563eb', 'solvent', 18, 30);
                     p.side = 'left';
                 }
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 36; i++) {
                     const p = spawnParticle(osmosisState, rightRegion, 3.5, '#2563eb', 'solvent', 18, 30);
                     p.side = 'right';
                 }
-                const solRadius = currentSolute === 'Glucose' ? 5 : 7;
-                for (let i = 0; i < Math.round(conc * 5); i++) {
+                const solRadius = 5;
+                for (let i = 0; i < Math.round(conc * 18); i++) {
                     const p = spawnParticle(osmosisState, rightRegion, solRadius, '#f59e0b', 'solute', 10, 18);
                     p.side = 'right';
                 }
@@ -8261,45 +8647,35 @@
             let currentWaterRight = osmObj.height * 0.5;
 
             function updateWaterLevels(dt) {
-                // 0 = no net osmosis. Once the learner moves the slider, the
-                // water-level change increases linearly with the selected flow rate.
-                const flowSetting = clampValue(speedMultiplier, 0, 10);
-                if (flowSetting > 0 && osmosisState.progress < 1) {
-                    const progressPerSecond = 0.022 * flowSetting;
-                    osmosisState.progress = clampValue(
-                        osmosisState.progress + progressPerSecond * dt,
-                        0,
-                        1
-                    );
+                const targetProgress = conc > 0.001 ? 1 : 0;
+                if (!isPaused) {
+                    const responseRate = 0.08 + concentrationStrength * 0.08;
+                    osmosisState.progress += (targetProgress - osmosisState.progress) * responseRate * dt;
+                    osmosisState.progress = clampValue(osmosisState.progress, 0, 1);
                 }
-
                 const startLeft = osmObj.height * 0.5;
                 const startRight = osmObj.height * 0.5;
-                // Left = higher water concentration (pure solvent), so its level falls.
-                // Right = lower water concentration (solution), so its level rises.
                 currentWaterLeft = startLeft + (maxDisplacement / 2) * osmosisState.progress;
                 currentWaterRight = startRight - (maxDisplacement / 2) * osmosisState.progress;
             }
 
             function stepOsmosisParticle(p, dt) {
                 const waterTop = p.side === 'left' ? currentWaterLeft : currentWaterRight;
-                const flowSetting = clampValue(speedMultiplier, 0, 10);
-                const flowIntensity = flowSetting / 10;
-                const motionScale = 1 + flowIntensity * 0.5;
                 const baseSpeed = p.type === 'solute' ? 16 : 25;
-                applySmoothThermalMotion(p, baseSpeed * motionScale, dt, p.type === 'solute' ? 5.2 : 7.0);
+                applySmoothThermalMotion(p, baseSpeed, dt, p.type === 'solute' ? 5.2 : 7.0);
 
-                // Represent the NET osmotic flux visually as one-way movement only:
-                // high water concentration (left) → low water concentration (right).
-                if (p.type === 'solvent' && p.side === 'left' && flowSetting > 0 && osmosisState.progress < 1) {
-                    p.vx += 18 * flowIntensity * dt;
+                // Brownian motion is bidirectional. A small concentration-dependent bias
+                // creates NET left→right solvent flux without turning the membrane into one-way traffic.
+                if (p.type === 'solvent' && conc > 0.001) {
+                    const nonequilibrium = 1 - osmosisState.progress;
+                    const drift = 4.5 * concentrationStrength * nonequilibrium;
+                    p.vx += (p.side === 'left' ? drift : -drift * 0.28) * dt;
                 }
 
                 const oldX = p.x;
                 p.x += p.vx * dt;
                 p.y += p.vy * dt;
 
-                // Moving water surfaces and floor are handled smoothly with reflective contact.
                 if (p.y - p.radius < waterTop) {
                     p.y = waterTop + p.radius;
                     p.vy = Math.abs(p.vy);
@@ -8321,27 +8697,23 @@
                 const crossedRightToLeft = oldX >= membraneX && p.x < membraneX;
                 if (crossedLeftToRight || crossedRightToLeft) {
                     if (p.type === 'solute') {
-                        // Solute cannot cross the semipermeable membrane.
+                        // Semipermeable membrane rejects solute in both directions.
                         p.x = crossedLeftToRight ? membraneX - p.radius - 0.2 : membraneX + p.radius + 0.2;
                         p.vx *= -1;
-                    } else if (crossedRightToLeft) {
-                        // Keep the teaching visual strictly one-way: no solvent crosses
-                        // from the low-water-concentration side back to the high side.
-                        p.x = membraneX + p.radius + 0.2;
-                        p.vx = Math.abs(p.vx);
                     } else {
-                        // Left → right solvent crossing only. At slider = 0, crossing is disabled.
                         const commonSubmergedTop = Math.max(currentWaterLeft, currentWaterRight);
                         const membraneIsWetHere = p.y - p.radius >= commonSubmergedTop;
-                        const passProbability = (flowSetting <= 0 || osmosisState.progress >= 1)
-                            ? 0
-                            : clampValue(0.18 + 0.075 * flowSetting, 0, 0.93);
+                        const bias = concentrationStrength * (1 - osmosisState.progress);
+                        // Both directions remain possible. The higher-water-concentration side
+                        // has a larger successful crossing probability until pressure builds up.
+                        const passProbability = crossedLeftToRight
+                            ? clampValue(0.50 + 0.34 * bias, 0.50, 0.88)
+                            : clampValue(0.50 - 0.22 * bias, 0.20, 0.50);
                         if (!membraneIsWetHere || bucketRandom(osmosisState) >= passProbability) {
-                            p.x = membraneX - p.radius - 0.2;
-                            p.vx = -Math.abs(p.vx);
+                            p.x = crossedLeftToRight ? membraneX - p.radius - 0.2 : membraneX + p.radius + 0.2;
+                            p.vx *= -1;
                         } else {
-                            p.x = membraneX + p.radius + 0.2;
-                            p.vx = Math.abs(p.vx);
+                            p.x = crossedLeftToRight ? membraneX + p.radius + 0.2 : membraneX - p.radius - 0.2;
                         }
                     }
                 }
@@ -8358,7 +8730,7 @@
             const advance = makeFrameStepper((dt) => {
                 osmosisState.tick++;
                 updateWaterLevels(dt);
-                osmosisState.particles.forEach(p => stepOsmosisParticle(p, dt));
+                if (!isPaused) osmosisState.particles.forEach(p => stepOsmosisParticle(p, dt));
                 resolveParticleCollisions(
                     osmosisState.particles,
                     (a, b) => a.side === b.side && Math.abs(a.y - b.y) < (a.radius + b.radius + 3),
@@ -8383,8 +8755,7 @@
                 if (!isPaused) AudioEngine.playOsmosis();
                 advance(now);
 
-                // Keep the level readout and existing visual treatment unchanged.
-                const finalHeightDiff = (((currentWaterLeft - currentWaterRight) / osmObj.height) * 40).toFixed(1);
+                const finalHeightDiff = Math.max(0, ((currentWaterLeft - currentWaterRight) / osmObj.height) * 40).toFixed(1);
                 updateText('metrics-osmosis-height', '+' + finalHeightDiff + ' cm');
 
                 osmObj.ctx.clearRect(0, 0, osmObj.width, osmObj.height);
@@ -8403,7 +8774,6 @@
                 osmObj.ctx.setLineDash([]);
                 osmObj.ctx.fillStyle = '#10b981';
                 if (window.innerWidth <= 640) {
-                    // Mobile: keep the membrane label clear of the left/right badges.
                     osmObj.ctx.font = 'bold 8px Poppins';
                     osmObj.ctx.textAlign = 'center';
                     osmObj.ctx.fillText('Semi-Permeable', membraneX, 52);
@@ -8461,10 +8831,13 @@
             const vpPureTempEl = document.getElementById('input-vp-temp-pure'); if (vpPureTempEl) vpPureTempEl.value = "20.0";
             const vpSolutionTempEl = document.getElementById('input-vp-temp-solution'); if (vpSolutionTempEl) vpSolutionTempEl.value = "20.0";
             vpPurePaused = false; vpSolutionPaused = false; updateVPPauseUI('pure'); updateVPPauseUI('solution');
+            const vpFractionEl = document.getElementById('input-vp-solute-fraction'); if (vpFractionEl) vpFractionEl.value = '0.22';
             const bpTempEl = document.getElementById('input-bp-temp'); if (bpTempEl) bpTempEl.value = "20.0";
+            const bpMolalityEl = document.getElementById('input-bp-molality'); if (bpMolalityEl) bpMolalityEl.value = '1.0';
             const fpTempEl = document.getElementById('input-fp-temp'); if (fpTempEl) fpTempEl.value = "20.0";
-            const osmoSpeedEl = document.getElementById('input-osmosis-speed'); if (osmoSpeedEl) osmoSpeedEl.value = "0";
-            updateText('label-osmosis-speed', '0x');
+            const fpMolalityEl = document.getElementById('input-fp-molality'); if (fpMolalityEl) fpMolalityEl.value = '1.0';
+            const osmoConcEl = document.getElementById('input-osmosis-concentration'); if (osmoConcEl) osmoConcEl.value = '0';
+            updateText('label-osmosis-concentration', '0.00 mol L⁻¹');
             vpState.pure.particles = []; vpState.solution.particles = [];
             bpState.pure.particles = []; bpState.solution.particles = [];
             fpState.pure.particles = []; fpState.solution.particles = [];
@@ -8541,38 +8914,41 @@
             initSimulations();
         }
 
-        ['input-vp-temp-pure', 'input-vp-temp-solution'].forEach((id) => {
+        ['input-vp-temp-pure', 'input-vp-temp-solution', 'input-vp-solute-fraction'].forEach((id) => {
             document.getElementById(id)?.addEventListener('input', () => {
                 learningProgress['vapor-pressure'].controlAdjusted = true;
                 updateProgressUI();
+                updateEquationPanels();
                 runVaporPressureSim();
             });
         });
-        document.getElementById('input-bp-temp')?.addEventListener('input', (e) => {
-            learningProgress['boiling-point'].controlAdjusted = true;
-            updateProgressUI();
-            runBoilingPointSim();
-        });
-        document.getElementById('input-fp-temp')?.addEventListener('input', (e) => {
-            learningProgress['freezing-point'].controlAdjusted = true;
-            updateProgressUI();
-            runFreezingPointSim();
-        });
-        document.getElementById('input-osmosis-speed')?.addEventListener('input', (e) => {
-            const flowValue = clampValue(parseFloat(e.target.value || 0), 0, 10);
-            updateText('label-osmosis-speed', `${flowValue}x`);
-            if (flowValue > 0) {
-                learningProgress['osmosis'].controlAdjusted = true;
+        ['input-bp-temp', 'input-bp-molality'].forEach((id) => {
+            document.getElementById(id)?.addEventListener('input', () => {
+                learningProgress['boiling-point'].controlAdjusted = true;
                 updateProgressUI();
-            }
+                runBoilingPointSim();
+            });
+        });
+        ['input-fp-temp', 'input-fp-molality'].forEach((id) => {
+            document.getElementById(id)?.addEventListener('input', () => {
+                learningProgress['freezing-point'].controlAdjusted = true;
+                updateProgressUI();
+                runFreezingPointSim();
+            });
+        });
+        document.getElementById('input-osmosis-concentration')?.addEventListener('input', (e) => {
+            const concentration = clampValue(parseFloat(e.target.value || 0), 0, 1);
+            updateText('label-osmosis-concentration', `${concentration.toFixed(2)} mol L⁻¹`);
+            learningProgress['osmosis'].controlAdjusted = true;
+            updateProgressUI();
             runOsmosisSim();
         });
 
 
-        ['input-vp-temp-pure', 'input-vp-temp-solution', 'input-bp-temp', 'input-fp-temp'].forEach((id) => {
+        ['input-vp-temp-pure', 'input-vp-temp-solution', 'input-vp-solute-fraction', 'input-bp-temp', 'input-bp-molality', 'input-fp-temp', 'input-fp-molality'].forEach((id) => {
             document.getElementById(id)?.addEventListener('change', () => LearningPoints.add('controls', 'Temperature control adjusted'));
         });
-        document.getElementById('input-osmosis-speed')?.addEventListener('change', () => LearningPoints.add('controls', 'Flow-rate speed adjusted'));
+        document.getElementById('input-osmosis-concentration')?.addEventListener('change', () => LearningPoints.add('controls', 'Solute concentration adjusted'));
 
 
         // PHONE-ONLY LESSON CONTENT ORDER
@@ -8900,8 +9276,38 @@
 (() => {
     "use strict";
 
-    const translations = {"SoluEffect360 - Interactive Colligative Properties":"SoluEffect360 - Sifat Koligatif Interaktif","Home":"Laman Utama","Learn":"Belajar","Quiz Arena":"Arena Kuiz","Badges":"Lencana","Take the Tour Again":"Ikuti Lawatan Sekali Lagi","About SoluEffect360":"Tentang SoluEffect360","Toggle Sound":"Hidupkan atau matikan bunyi","Toggle Dark Mode":"Tukar mod gelap","Help Menu":"Menu Bantuan","Go to home":"Pergi ke laman utama","Switch language to Bahasa Melayu":"Tukar bahasa kepada Bahasa Melayu","Switch language to English":"Tukar bahasa kepada English","Language":"Bahasa","Chemistry Visualized Without Complexity":"Kimia Divisualkan Tanpa Kerumitan","Interactive Learning Platform for Colligative Properties. Experience microscopic particle dynamics and physical state changes in real-time.":"Platform Pembelajaran Interaktif untuk Sifat Koligatif. Alami dinamik zarah mikroskopik dan perubahan keadaan fizikal secara masa nyata.","Start Learning":"Mulakan Pembelajaran","Learning Progress":"Kemajuan Pembelajaran","Vapour Pressure":"Tekanan Wap","Vapor Pressure":"Tekanan Wap","Boiling Point":"Takat Didih","Boiling Point of Pure Solvent":"Takat Didih Pelarut Tulen","Boiling Point of Solution":"Takat Didih Larutan","Freezing Point":"Takat Beku","Osmosis":"Osmosis","Colligative Laboratory":"Makmal Sifat Koligatif","Select a property below to interact, customize variables, and inspect results.":"Pilih satu sifat di bawah untuk berinteraksi, melaraskan pemboleh ubah dan meneliti hasil.","Learning Objective":"Objektif Pembelajaran","Did you know?":"Tahukah anda?","Next Fact":"Fakta Seterusnya","Quiz time!":"Masa Kuiz!","Control Center":"Pusat Kawalan","Select Solute":"Pilih Zat Terlarut","Select Solute Type":"Pilih Jenis Zat Terlarut","Select Solution Type":"Pilih Jenis Larutan","Solution Type":"Jenis Larutan","Temperature":"Suhu","Flow Rate Speed":"Kelajuan Kadar Aliran","Pause":"Jeda","Play":"Main","Reset":"Tetapkan Semula","Particle Simulation Arena":"Arena Simulasi Zarah","Crystalline Viewport":"Paparan Hablur","Osmotic Balance":"Keseimbangan Osmosis","Particle colour legend":"Petunjuk warna zarah","Simulation Tabs":"Tab Simulasi","Solvent (Water)":"Pelarut (Air)","Non-Volatile Solute":"Zat Terlarut Tidak Meruap","Non-Volatile Solution":"Larutan Tidak Meruap","Volatile Solution":"Larutan Meruap","Gas":"Gas","Vapour":"Wap","P external":"P luar","P internal":"P dalaman","Solvent":"Pelarut","Pure Solvent":"Pelarut Tulen","Solution":"Larutan","Solvent (Left)":"Pelarut (Kiri)","Solution (Right)":"Larutan (Kanan)","Equation":"Persamaan","Live Explanation":"Penerangan Langsung","Experiment Summary":"Ringkasan Eksperimen","Observation":"Pemerhatian","Real-life Application":"Aplikasi Kehidupan Sebenar","Net Directional Flux":"Fluks Arah Bersih","Left → Right":"Kiri → Kanan","Water Molecule":"Molekul Air","Solute Particle":"Zarah Zat Terlarut","Gas Particle":"Zarah Gas","Semi-Permeable Membrane":"Membran Separa Telap","State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan. Kira komposisi wap di atas larutan yang mengandungi zat terlarut dan pelarut meruap.","Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.":"Kira peningkatan takat didih sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data peningkatan takat didih.","Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.":"Kira penurunan takat beku sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data penurunan takat beku.","Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.":"Terangkan osmosis melalui membran separa telap dan hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.","According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.":"Menurut hukum Raoult, tekanan wap separa sesuatu komponen dalam larutan ideal adalah sama dengan pecahan molnya didarab dengan tekanan wap komponen tersebut dalam keadaan tulen.","For a non-volatile solute, the solute reduces the mole fraction of the solvent.":"Bagi zat terlarut tidak meruap, zat terlarut mengurangkan pecahan mol pelarut.","Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.":"Oleh itu, tekanan wap larutan lebih rendah daripada tekanan wap pelarut tulen. Bagi larutan yang mengandungi komponen meruap, jumlah tekanan wap diperoleh dengan menjumlahkan tekanan wap separa setiap komponen.","A non-volatile solute lowers the solvent vapour pressure. A volatile solute contributes its own vapour, so the total vapour pressure can be higher than in the non-volatile case.":"Glukosa menurunkan tekanan wap air. Etanol bersifat meruap dan menyumbang wapnya sendiri, maka campuran mungkin menghasilkan lebih banyak wap berbanding air tulen.","A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.":"Tuala basah yang direndam dalam air laut masin mengambil masa lebih lama untuk kering di bawah cahaya matahari berbanding tuala yang direndam dalam air paip tulen kerana garam memperlahankan penyejatan air.","A liquid boils when its vapour pressure becomes equal to the external pressure.":"Cecair mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.","Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.":"Etanol bersifat meruap dan menyumbang tekanan wapnya sendiri. Oleh itu, campuran etanol–air mungkin mendidih pada suhu yang lebih rendah daripada air tulen.","A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.":"Larutan glukosa mendidih pada suhu lebih tinggi daripada air tulen, manakala campuran etanol–air mungkin mendidih di bawah 100 °C kerana etanol bersifat meruap.","Special liquids (coolants) are added to car water tanks. This raises the boiling point so the water inside the hot engine doesn't boil away easily.":"Cecair khas, iaitu bahan penyejuk, ditambahkan ke dalam sistem penyejukan kereta. Ini meningkatkan takat didih supaya air di dalam enjin panas tidak mudah mendidih dan tersejat.","Freezing occurs when the liquid and solid phases of a solvent are in equilibrium.":"Pembekuan berlaku apabila fasa cecair dan fasa pepejal pelarut berada dalam keseimbangan.","Dissolved solute particles lower the escaping tendency of solvent molecules in the liquid phase.":"Zarah zat terlarut yang terlarut mengurangkan kecenderungan molekul pelarut untuk terlepas daripada fasa cecair.","Therefore, the solution must be cooled below the freezing point of the pure solvent before the solid solvent can form. This decrease is called freezing-point depression.":"Oleh itu, larutan perlu disejukkan di bawah takat beku pelarut tulen sebelum pelarut pepejal dapat terbentuk. Penurunan ini dikenali sebagai penurunan takat beku.","Pure water freezes exactly at 0 °C and forms a neat grid. The mixture stays liquid at 0 °C and only freezes when it gets even colder.":"Air tulen membeku tepat pada 0 °C dan membentuk susunan teratur. Campuran kekal dalam keadaan cecair pada 0 °C dan hanya membeku apabila suhunya menjadi lebih rendah.","People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.":"Garam ditaburkan pada jalan berais ketika musim sejuk. Garam bercampur dengan ais dan menurunkan takat beku, lalu menyebabkan ais yang berbahaya mencair menjadi air.","Osmosis is the net movement of solvent molecules through a semipermeable membrane from a region of lower solute concentration to a region of higher solute concentration.":"Osmosis ialah pergerakan bersih molekul pelarut melalui membran separa telap dari kawasan berkepekatan zat terlarut rendah ke kawasan berkepekatan zat terlarut tinggi.","The membrane allows solvent molecules to pass but prevents solute particles from crossing.":"Membran membenarkan molekul pelarut melaluinya tetapi menghalang zarah zat terlarut daripada merentasinya.","The net movement continues until the concentration difference is balanced by the pressure difference across the membrane.":"Pergerakan bersih berterusan sehingga perbezaan kepekatan diseimbangkan oleh perbezaan tekanan merentasi membran.","Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.":"Molekul air bergerak dalam kedua-dua arah, tetapi lebih banyak air terkumpul pada bahagian campuran. Paras air pada bahagian campuran meningkat.","Plant roots soak up water from the soil using osmosis. If you put too much fertilizer (solid particles) in the soil, the plant cannot pull water in, and might die.":"Akar tumbuhan menyerap air daripada tanah melalui osmosis. Jika terlalu banyak baja, iaitu zarah pepejal, ditambahkan ke dalam tanah, tumbuhan tidak dapat menyerap air dan mungkin mati.","where;":"di mana;","= total vapour pressure of the mixture;":"= jumlah tekanan wap campuran;","= partial vapour pressure of component A;":"= tekanan wap separa komponen A;","= partial vapour pressure of component B;":"= tekanan wap separa komponen B;","= mole fraction of component A in the liquid;":"= pecahan mol komponen A dalam cecair;","= mole fraction of component B in the liquid;":"= pecahan mol komponen B dalam cecair;","= vapour pressure of pure component A;":"= tekanan wap komponen A tulen;","= vapour pressure of pure component B.":"= tekanan wap komponen B tulen.","= vapour pressure of solvent A in the solution;":"= tekanan wap pelarut A dalam larutan;","= mole fraction of solvent A;":"= pecahan mol pelarut A;","= vapour pressure of pure solvent A.":"= tekanan wap pelarut A tulen.","= molal boiling point elevation constant of the solvent (°C kg mol":"= pemalar peningkatan takat didih molal pelarut (°C kg mol","= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol","= molality of solution (mol kg":"= kemolalan larutan (mol kg","= Boiling point of pure solvent (°C)":"= takat didih pelarut tulen (°C)","= Boiling point of solution (°C)":"= takat didih larutan (°C)","= freezing point of pure solvent (°C)":"= takat beku pelarut tulen (°C)","= freezing point of solution (°C)":"= takat beku larutan (°C)","= osmotic pressure;":"= tekanan osmosis;","= van’t Hoff factor;":"= faktor van’t Hoff;","= molarity of the solution;":"= kemolaran larutan;","= gas constant;":"= pemalar gas;","= absolute temperature in kelvin.":"= suhu mutlak dalam kelvin.","Learning Points":"Mata Pembelajaran","Total Learning Points":"Jumlah Mata Pembelajaran","View Learning Points profile":"Lihat profil Mata Pembelajaran","Learner Profile":"Profil Pelajar","Guest Explorer":"Peneroka Tetamu","Quiz Rewards":"Ganjaran Kuiz","Facts Viewed":"Fakta Dilihat","Controls Used":"Kawalan Digunakan","Progress is saved automatically in this browser's learning database.":"Kemajuan disimpan secara automatik dalam pangkalan data pembelajaran pelayar ini.","+5 Learning Points":"+5 Mata Pembelajaran","Learning activity":"Aktiviti pembelajaran","Next fact viewed":"Fakta seterusnya dilihat","Correct Quiz Arena answer":"Jawapan Arena Kuiz yang betul","Correct live competition answer":"Jawapan pertandingan langsung yang betul","Temperature control adjusted":"Kawalan suhu dilaraskan","Flow-rate speed adjusted":"Kelajuan kadar aliran dilaraskan","My Badges":"Lencana Saya","Bronze":"Gangsa","Silver":"Perak","Gold":"Emas","Completed 1 module":"Selesai 1 modul","Completed 3 modules":"Selesai 3 modul","Completed 4 modules":"Selesai 4 modul","SoluEffect360 Master":"Pakar SoluEffect360","All modules & Quiz Arena":"Semua modul dan Arena Kuiz","Badge Unlocked!":"Lencana Dibuka!","You have unlocked the SoluEffect360 Certificate!":"Anda telah membuka Sijil SoluEffect360!","View Certificate":"Lihat Sijil","🎉 Congratulations!":"🎉 Tahniah!","You have successfully completed":"Anda telah berjaya menyelesaikan","lessons.":"pelajaran.","Check the Badges section to see your progress!":"Semak bahagian Lencana untuk melihat kemajuan anda!","Continue Learning":"Teruskan Pembelajaran","Your Achievement":"Pencapaian Anda","Certificate of Completion":"Sijil Penyempurnaan","This is to certify that":"Dengan ini diperakui bahawa","Master Chemist":"Pakar Kimia","has successfully mastered all colligative properties modules and conquered the Quiz Arena, demonstrating exceptional knowledge in physical chemistry.":"telah berjaya menguasai semua modul sifat koligatif dan menamatkan Arena Kuiz, sekali gus menunjukkan pengetahuan yang cemerlang dalam kimia fizik.","Date Awarded":"Tarikh Dianugerahkan","Authorized Signature":"Tandatangan Diberi Kuasa","Virtual Lab Admin":"Pentadbir Makmal Maya","Download PDF":"Muat Turun PDF","Download PNG":"Muat Turun PNG","Premium Interactive Colligative Properties Simulator.":"Simulator Sifat Koligatif Interaktif Premium.","Designed to make complex physical chemistry intuitive and accessible through real-time microscopic visualizations.":"Direka untuk menjadikan kimia fizik yang kompleks lebih intuitif dan mudah difahami melalui visualisasi mikroskopik masa nyata.","Close":"Tutup","Skip Tour":"Langkau Lawatan","Back":"Kembali","Next":"Seterusnya","Finish Tour":"Tamatkan Lawatan","Welcome to SoluEffect360!":"Selamat Datang ke SoluEffect360!","Experience interactive microscopic particle dynamics and learn colligative properties in real-time. Let's take a quick tour.":"Alami dinamik zarah mikroskopik secara interaktif dan pelajari sifat koligatif dalam masa nyata. Mari ikuti lawatan ringkas.","Choose a Property":"Pilih Satu Sifat","Select one of the four colligative properties to explore its unique molecular behaviour.":"Pilih satu daripada empat sifat koligatif untuk meneroka tingkah laku molekulnya yang unik.","Adjust Variables":"Laraskan Pemboleh Ubah","Interact with the simulation by changing the solute type, temperature, and observing the immediate effects.":"Berinteraksi dengan simulasi dengan menukar jenis zat terlarut dan suhu, kemudian perhatikan kesannya serta-merta.","Observe the Simulation":"Perhatikan Simulasi","Watch how particles react in real-time. The microscopic arena visualises the physics behind the equations.":"Perhatikan tindak balas zarah dalam masa nyata. Arena mikroskopik memvisualkan konsep fizik di sebalik persamaan.","Read a clear explanation of what is happening in the simulation and connect it to the equation shown below.":"Baca penerangan yang jelas tentang perkara yang berlaku dalam simulasi dan hubungkannya dengan persamaan yang ditunjukkan di bawah.","Test Your Knowledge":"Uji Pengetahuan Anda","Review the experiment summary and answer the quiz to solidify your understanding.":"Semak ringkasan eksperimen dan jawab kuiz untuk mengukuhkan pemahaman anda.","Track Your Mastery":"Jejaki Penguasaan Anda","Complete all four lessons to fill this progress bar and unlock your certificate. Let the learning begin!":"Lengkapkan keempat-empat pelajaran untuk memenuhi bar kemajuan ini dan membuka sijil anda. Mari mulakan pembelajaran!","Test Your Mastery":"Uji Penguasaan Anda","🏆 Quiz Arena":"🏆 Arena Kuiz","Race against the clock in this 16-question challenge with factual and calculation questions. Will you make it to the Hall of Fame?":"Berlumba dengan masa dalam cabaran 16 soalan yang merangkumi soalan fakta dan pengiraan. Mampukah anda memasuki Dewan Kemasyhuran?","Enter the Arena":"Masuk ke Arena","16 Questions • 30s Fact • 2.5 min Calculation":"16 Soalan • 30 saat Fakta • 2.5 minit Pengiraan","Nickname":"Nama Panggilan","Enter your nickname...":"Masukkan nama panggilan anda...","Start Challenge":"Mulakan Cabaran","Live Competition":"Pertandingan Langsung","Hall of Fame":"Dewan Kemasyhuran","Question":"Soalan","Quiz Progress":"Kemajuan Kuiz","Loading question...":"Memuatkan soalan...","Correct!":"Betul!","Incorrect":"Salah","Incorrect.":"Salah.","Time's Up!":"Masa Tamat!","Time expired.":"Masa tamat.","0 Points":"0 Mata","Correct — the highlighted principle matches the lesson.":"Betul — prinsip yang diserlahkan sepadan dengan pelajaran.","Review the correct answer marked in green.":"Semak jawapan betul yang ditandakan dengan warna hijau.","Arena Conquered!":"Arena Ditakluki!","Incredible performance.":"Prestasi yang luar biasa.","Final Score":"Skor Akhir","Accuracy":"Ketepatan","Correct / Wrong":"Betul / Salah","Avg Time":"Purata Masa","Play Again":"Main Lagi","Review Answers":"Semak Jawapan","Answer Review":"Semakan Jawapan","Review Every Question":"Semak Setiap Soalan","Compare your answer with the correct answer.":"Bandingkan jawapan anda dengan jawapan yang betul.","Back to Results":"Kembali ke Keputusan","Back to Arena":"Kembali ke Arena","Top 10 Chemistry Masters":"10 Pakar Kimia Terbaik","The arena is empty. Claim the first victory!":"Arena masih kosong. Jadilah pemenang pertama!","Chemistry Master!":"Pakar Kimia!","Flawless logic and incredible speed.":"Logik yang sempurna dan kepantasan yang luar biasa.","Great Job!":"Syabas!","You have a solid understanding of colligative properties.":"Anda mempunyai pemahaman yang kukuh tentang sifat koligatif.","Keep Practicing!":"Teruskan Berlatih!","Review the simulations to strengthen your foundations.":"Semak semula simulasi untuk mengukuhkan asas pemahaman anda.","Easy":"Mudah","Medium":"Sederhana","Calculation":"Pengiraan","Topic Quiz Complete!":"Kuiz Topik Selesai!","Incorrect — try again.":"Salah — cuba lagi.","The host creates a room code. Students join and answer simultaneously on their own devices.":"Hos menghasilkan kod bilik. Pelajar menyertai dan menjawab secara serentak menggunakan peranti masing-masing.","Host a Game":"Hoskan Permainan","Join a Game":"Sertai Permainan","Back to Quiz Arena":"Kembali ke Arena Kuiz","Live mode requires internet access and the same published website on every device.":"Mod langsung memerlukan akses internet dan laman web terbitan yang sama pada setiap peranti.","Host Dashboard":"Papan Pemuka Hos","Live Competition Room":"Bilik Pertandingan Langsung","Creating a secure room...":"Mewujudkan bilik yang selamat...","End Room":"Tamatkan Bilik","Room Code":"Kod Bilik","Students enter this code on their devices.":"Pelajar memasukkan kod ini pada peranti masing-masing.","Players in Lobby":"Pemain di Lobi","Waiting for students to join...":"Menunggu pelajar menyertai...","Start Live Quiz":"Mulakan Kuiz Langsung","Copy Code":"Salin Kod","Code Copied":"Kod Disalin","Answered":"Dijawab","Time":"Masa","Live Leaderboard":"Papan Kedudukan Langsung","Join Live Competition":"Sertai Pertandingan Langsung","Enter your nickname and the room code shown by the host.":"Masukkan nama panggilan anda dan kod bilik yang dipaparkan oleh hos.","Your nickname":"Nama panggilan anda","6-character room code":"Kod bilik 6 aksara","Join Room":"Sertai Bilik","Connected":"Disambungkan","You are in the lobby":"Anda berada di lobi","Waiting for the host to start...":"Menunggu hos memulakan pertandingan...","Leave Room":"Tinggalkan Bilik","Player":"Pemain","Get ready...":"Bersedia...","Waiting for question...":"Menunggu soalan...","Current Rank":"Kedudukan Semasa","Competition Complete!":"Pertandingan Selesai!","Opening the room...":"Membuka bilik...","Live service could not load. Check the internet connection and refresh.":"Perkhidmatan langsung tidak dapat dimuatkan. Semak sambungan internet dan muat semula halaman.","Room is open. Ask students to join using the code below.":"Bilik telah dibuka. Minta pelajar menyertai menggunakan kod di bawah.","Unable to open the live room. Check the internet connection and try again.":"Bilik langsung tidak dapat dibuka. Semak sambungan internet dan cuba lagi.","This competition has already started.":"Pertandingan ini telah pun bermula.","Competition in progress.":"Pertandingan sedang berlangsung.","Ready":"Bersedia","No scores yet.":"Belum ada skor.","Competition complete. Final results are shown below.":"Pertandingan selesai. Keputusan akhir ditunjukkan di bawah.","Done":"Selesai","The host ended the live room.":"Hos telah menamatkan bilik langsung.","Connecting...":"Sedang menyambung...","Connected. Waiting for the host to start...":"Disambungkan. Menunggu hos memulakan pertandingan...","The competition is starting...":"Pertandingan sedang bermula...","Answer submitted":"Jawapan dihantar","Time is up":"Masa telah tamat","Next question coming up...":"Soalan seterusnya akan dipaparkan...","Final leaderboard":"Papan kedudukan akhir","Enter a nickname and a valid 6-character room code.":"Masukkan nama panggilan dan kod bilik 6 aksara yang sah.","Connection to the host was closed.":"Sambungan kepada hos telah ditutup.","Unable to connect to the host.":"Tidak dapat menyambung kepada hos.","Room not found. Check the code and try again.":"Bilik tidak ditemui. Semak kod dan cuba lagi.","Unable to join the room. Check the internet connection.":"Tidak dapat menyertai bilik. Semak sambungan internet.","The correct answer is highlighted.":"Jawapan yang betul telah diserlahkan.","Sweaty skin feels cooler because evaporation removes heat from your body.":"Kulit yang berpeluh terasa lebih sejuk kerana penyejatan menyingkirkan haba daripada badan.","Perfume evaporates quickly because it contains highly volatile liquids.":"Minyak wangi menyejat dengan cepat kerana mengandungi cecair yang sangat meruap.","Nail polish remover feels cold on your skin because it has a high vapor pressure and evaporates rapidly.":"Pencuci pengilat kuku terasa sejuk pada kulit kerana mempunyai tekanan wap yang tinggi dan menyejat dengan cepat.","A hot cup of coffee loses heat partly because the highest energy water molecules escape as vapor.":"Secawan kopi panas kehilangan haba sebahagiannya kerana molekul air bertenaga paling tinggi terlepas sebagai wap.","Rubbing alcohol dries much faster than water because its intermolecular forces are weaker, leading to a higher vapor pressure.":"Alkohol sapuan kering lebih cepat daripada air kerana daya antara molekulnya lebih lemah, lalu menghasilkan tekanan wap yang lebih tinggi.","Car radiators use coolant to increase the boiling point so engines don't overheat.":"Radiator kereta menggunakan bahan penyejuk untuk meningkatkan takat didih supaya enjin tidak terlalu panas.","Cooking food at high altitudes takes longer because water boils at lower temperatures.":"Memasak makanan di kawasan altitud tinggi mengambil masa lebih lama kerana air mendidih pada suhu yang lebih rendah.","Adding salt to boiling water for pasta slightly increases the boiling point, though mainly it's for flavor.":"Menambahkan garam ke dalam air mendidih untuk memasak pasta sedikit meningkatkan takat didih, walaupun tujuan utamanya ialah untuk rasa.","Deep-sea hydrothermal vents have water hotter than 100°C that doesn't boil because of the immense pressure.":"Lohong hidroterma laut dalam mengandungi air bersuhu melebihi 100°C yang tidak mendidih kerana tekanan yang sangat tinggi.","Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.":"Periuk tekanan memasak makanan dengan lebih cepat dengan memerangkap wap, meningkatkan tekanan dan menaikkan takat didih air di dalamnya.","Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.":"Garam ditaburkan pada jalan bersalji kerana garam menurunkan takat beku air dan mencairkan ais.","Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.":"Aiskrim kekal lembut di dalam peti sejuk beku kerana kandungan gula yang tinggi menurunkan takat bekunya dengan ketara.","Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.":"Sesetengah katak dan ikan menghasilkan protein 'antibeku' semula jadi yang menurunkan takat beku darahnya.","Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.":"Vodka tidak membeku dalam peti sejuk beku rumah biasa kerana kandungan etanol yang tinggi menurunkan takat bekunya kepada kira-kira -27°C.","Ocean water freezes at a lower temperature than freshwater lakes because of the dissolved salt.":"Air laut membeku pada suhu yang lebih rendah berbanding tasik air tawar kerana garam yang terlarut.","Plant roots absorb water using osmosis to draw moisture from the surrounding soil.":"Akar tumbuhan menyerap air melalui osmosis untuk mendapatkan kelembapan daripada tanah di sekelilingnya.","Eating very salty food can make you thirsty because osmosis causes water to leave your cells.":"Makan makanan yang sangat masin boleh menyebabkan anda berasa dahaga kerana osmosis menyebabkan air keluar daripada sel.","Slugs shrivel up when sprinkled with salt because the salt draws water out of their bodies via osmosis.":"Lintah bulan mengecut apabila ditaburkan garam kerana garam menarik air keluar daripada badannya melalui osmosis.","Grocery stores spray vegetables with pure water to keep them crisp as water enters the plant cells through osmosis.":"Kedai runcit menyembur sayur-sayuran dengan air tulen supaya kekal rangup apabila air memasuki sel tumbuhan melalui osmosis.","Cholera causes severe dehydration because the bacteria alter the intestines, causing water to flood out of cells via osmosis.":"Kolera menyebabkan dehidrasi teruk kerana bakteria mengubah fungsi usus, lalu menyebabkan air keluar dengan banyak daripada sel melalui osmosis.","If we double the amount of glucose added to the water, the vapor pressure will:":"Jika jumlah glukosa yang ditambahkan ke dalam air digandakan, tekanan wap akan:","Increase":"Meningkat","Stay the same":"Kekal sama","Decrease further":"Menurun lagi","Why does adding a solute lower the vapor pressure?":"Mengapakah penambahan zat terlarut menurunkan tekanan wap?","Solute particles block the surface":"Zarah zat terlarut menghalang permukaan","Solute particles increase the temperature":"Zarah zat terlarut meningkatkan suhu","Solute particles turn into gas quickly":"Zarah zat terlarut bertukar menjadi gas dengan cepat","A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?":"Suatu larutan mempunyai pecahan mol air 0.80. Jika tekanan wap air tulen ialah 25 kPa, berapakah tekanan wap separa air?","Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?":"Jisim glukosa yang sama, iaitu lebih ringan, dan sukrosa, iaitu lebih berat, ditambahkan ke dalam bikar berbeza. Yang manakah meningkatkan takat didih dengan lebih banyak?","Glucose (more moles)":"Glukosa (lebih banyak mol)","Sucrose (less moles)":"Sukrosa (lebih sedikit mol)","They are identical":"Kedua-duanya sama","To make a solution boil, its vapor pressure must equal:":"Untuk membolehkan larutan mendidih, tekanan wapnya mesti sama dengan:","The atmospheric pressure":"Tekanan atmosfera","The freezing point":"Takat beku","The osmotic pressure":"Tekanan osmosis","For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?":"Bagi larutan glukosa 1.0 m dalam air, Kb = 0.512 °C kg mol⁻¹ dan i = 1. Berapakah ΔTb?","Why is salt spread on icy roads in winter?":"Mengapakah garam ditaburkan pada jalan berais ketika musim sejuk?","It provides heat":"Garam membekalkan haba","It lowers the freezing point":"Garam menurunkan takat beku","It creates friction":"Garam menghasilkan geseran","When a solution freezes, the solid that forms is typically:":"Apabila larutan membeku, pepejal yang terbentuk biasanya ialah:","Pure solute":"Zat terlarut tulen","Pure solvent (ice)":"Pelarut tulen (ais)","A mixture of both":"Campuran kedua-duanya","For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?":"Bagi larutan glukosa 0.50 m dalam air, Kf = 1.86 °C kg mol⁻¹ dan i = 1. Berapakah ΔTf?","If a plant cell (high solute conc.) is placed in pure water, what will happen?":"Jika sel tumbuhan yang mempunyai kepekatan zat terlarut tinggi diletakkan dalam air tulen, apakah yang akan berlaku?","Water flows into the cell":"Air mengalir masuk ke dalam sel","Water flows out of the cell":"Air mengalir keluar daripada sel","Nothing happens":"Tiada apa-apa berlaku","During osmosis, water flows naturally towards the side with:":"Semasa osmosis, air mengalir secara semula jadi ke bahagian yang mempunyai:","Fewer solid particles":"Lebih sedikit zarah pepejal","More solid particles":"Lebih banyak zarah pepejal","Lower temperature":"Suhu yang lebih rendah","For a 0.10 mol L⁻¹ glucose solution at 300 K, with R = 0.0821 L atm mol⁻¹ K⁻¹ and i = 1, what is the osmotic pressure?":"Bagi larutan glukosa 0.10 mol L⁻¹ pada 300 K, dengan R = 0.0821 L atm mol⁻¹ K⁻¹ dan i = 1, berapakah tekanan osmosis?","More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.":"Lebih banyak glukosa tidak meruap menyebabkan bilangan molekul air di permukaan berkurang, maka tekanan wap menurun lagi.","Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.":"Zarah zat terlarut mengurangkan pecahan molekul pelarut di permukaan cecair, maka lebih sedikit molekul pelarut terlepas ke fasa wap.","Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.":"Hukum Raoult memberikan Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.","Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.":"Bagi jisim yang sama, glukosa mengandungi lebih banyak mol berbanding sukrosa kerana jisim molarnya lebih rendah, lalu menghasilkan kesan koligatif yang lebih besar.","Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.":"Pendidihan bermula apabila tekanan wap cecair menjadi sama dengan tekanan atmosfera luar.","Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.":"Gunakan ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.","Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.":"Garam menurunkan takat beku air, membolehkan ais mencair pada suhu yang menyebabkan air tulen kekal beku.","During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.":"Semasa pembekuan, molekul pelarut membentuk kekisi hablur manakala kebanyakan zarah zat terlarut yang terlarut tersisih.","Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.":"Gunakan ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.","Pure water has lower solute concentration, so water moves into the more concentrated plant cell through the membrane.":"Air tulen mempunyai kepekatan zat terlarut yang lebih rendah, maka air bergerak melalui membran masuk ke dalam sel tumbuhan yang lebih pekat.","The net flow of water is toward the side with the higher solute-particle concentration.":"Aliran bersih air bergerak ke arah bahagian yang mempunyai kepekatan zarah zat terlarut lebih tinggi.","Use π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.":"Gunakan π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.","What does adding a non-volatile solute to a pure solvent do to its boiling point?":"Apakah kesan penambahan zat terlarut tidak meruap ke dalam pelarut tulen terhadap takat didihnya?","Increases it":"Meningkatkannya","Decreases it":"Menurunkannya","No change":"Tiada perubahan","Makes it evaporate instantly":"Menyebabkannya menyejat serta-merta","Which property causes ice to melt when salt is poured on it?":"Sifat manakah menyebabkan ais mencair apabila garam ditaburkan padanya?","Freezing-point depression":"Penurunan takat beku","Boiling-point elevation":"Peningkatan takat didih","Osmosis is the net movement of which substance across a semipermeable membrane?":"Osmosis ialah pergerakan bersih bahan manakah merentasi membran separa telap?","Water (solvent)":"Air (pelarut)","Solute":"Zat terlarut","Salt":"Garam","Sugar":"Gula","What happens to the vapour pressure of water when a non-volatile solute is dissolved in it?":"Apakah yang berlaku kepada tekanan wap air apabila zat terlarut tidak meruap dilarutkan di dalamnya?","It decreases":"Tekanan wap menurun","It increases":"Tekanan wap meningkat","It remains the same":"Tekanan wap kekal sama","It becomes zero":"Tekanan wap menjadi sifar","Which of these is NOT a colligative property?":"Yang manakah BUKAN sifat koligatif?","Density":"Ketumpatan","Osmotic pressure":"Tekanan osmosis","Why does a solution containing a non-volatile solute have a higher boiling point than the pure solvent?":"Mengapakah larutan yang mengandungi zat terlarut tidak meruap mempunyai takat didih lebih tinggi daripada pelarut tulen?","Its lower vapour pressure requires a higher temperature to equal atmospheric pressure":"Tekanan wapnya yang lebih rendah memerlukan suhu lebih tinggi untuk menyamai tekanan atmosfera","The solute heats up faster":"Zat terlarut menjadi panas dengan lebih cepat","The solute absorbs cold":"Zat terlarut menyerap kesejukan","A membrane blocks evaporation":"Membran menghalang penyejatan","If a cell is placed in a highly concentrated salt solution, what happens?":"Jika sel diletakkan dalam larutan garam yang sangat pekat, apakah yang berlaku?","It shrinks as water leaves":"Sel mengecut apabila air keluar","It swells as water enters":"Sel mengembang apabila air masuk","It stays exactly the same":"Sel kekal sama","It freezes solid":"Sel membeku menjadi pepejal","Colligative properties depend primarily on:":"Sifat koligatif bergantung terutamanya pada:","The number of dissolved particles":"Bilangan zarah terlarut","The colour of the solution":"Warna larutan","The size of the container":"Saiz bekas","The shape of the solute particles":"Bentuk zarah zat terlarut","Which sample would lower the freezing point of water the most, assuming complete dissolution?":"Sampel manakah paling banyak menurunkan takat beku air dengan andaian pelarutan lengkap?","2 moles of NaCl":"2 mol NaCl","1 mole of NaCl":"1 mol NaCl","1 mole of glucose":"1 mol glukosa","0.5 mole of glucose":"0.5 mol glukosa","What is the role of a semipermeable membrane in osmosis?":"Apakah peranan membran separa telap dalam osmosis?","It allows solvent molecules to pass while restricting solute particles":"Membran membenarkan molekul pelarut melaluinya sambil menghalang zarah zat terlarut","It allows only solute particles to pass":"Membran hanya membenarkan zarah zat terlarut melaluinya","It blocks all particles":"Membran menghalang semua zarah","It allows everything to pass equally":"Membran membenarkan semua bahan melaluinya secara sama rata","A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.":"Sebuah bekas 1.00 L pada 25 °C mengandungi CO₂ pada tekanan 730 torr. Selepas bertindak balas dengan campuran CaO/BaO berjisim 4.000 g, tekanan CO₂ yang berbaki ialah 150 torr. Berapakah mol CO₂ yang telah bertindak balas? Gunakan R = 0.0821 L atm mol⁻¹ K⁻¹.","The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?":"Campuran 4.000 g mengandungi CaO dan BaO, dan sejumlah 0.0312 mol CO₂ bertindak balas. Diberi M(CaO) = 56.08 g mol⁻¹ dan M(BaO) = 153.33 g mol⁻¹, berapakah jisim CaO dalam campuran itu?","At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?":"Pada 63.5 °C, H₂O tulen dan etanol tulen masing-masing mempunyai tekanan wap 175 torr dan 400 torr. Jisim H₂O dan etanol yang sama dicampurkan. Dengan menggunakan M(H₂O) = 18.02 g mol⁻¹ dan M(etanol) = 46.07 g mol⁻¹, berapakah pecahan mol etanol dalam larutan cecair?","For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?":"Bagi larutan H₂O–etanol berjisim sama pada 63.5 °C, x(etanol) = 0.281, P°(H₂O) = 175 torr dan P°(etanol) = 400 torr. Dengan mengandaikan tingkah laku ideal, berapakah jumlah tekanan wap?","For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?":"Bagi larutan ideal H₂O–etanol yang sama, tekanan separa etanol ialah x(etanol)P°(etanol) dan jumlah tekanan ialah 238 torr. Berapakah pecahan mol etanol dalam fasa wap?","Dissolving 1.32 g anthraquinone in 11.4 g camphor lowers the freezing point by 22.3 °C. Given Kf(camphor) = 40.0 °C kg mol⁻¹, what is the molar mass of anthraquinone?":"Melarutkan 1.32 g antrakuinon dalam 11.4 g kapur barus menurunkan takat beku sebanyak 22.3 °C. Diberi Kf(kapur barus) = 40.0 °C kg mol⁻¹, berapakah jisim molar antrakuinon?","A non-volatile solute lowers the solvent's vapour pressure, so the solution must reach a higher temperature before its vapour pressure equals atmospheric pressure.":"Zat terlarut tidak meruap menurunkan tekanan wap pelarut, maka larutan perlu mencapai suhu yang lebih tinggi sebelum tekanan wapnya menyamai tekanan atmosfera.","Salt creates freezing-point depression. The salt solution remains liquid below 0 °C, so ice begins to melt.":"Garam menyebabkan penurunan takat beku. Larutan garam kekal cair di bawah 0 °C, maka ais mula mencair.","Osmosis describes the net movement of solvent molecules, usually water, through a semipermeable membrane.":"Osmosis menerangkan pergerakan bersih molekul pelarut, biasanya air, melalui membran separa telap.","A non-volatile solute reduces the mole fraction of water at the surface, lowering water's vapour pressure according to Raoult's law.":"Zat terlarut tidak meruap mengurangkan pecahan mol air di permukaan, lalu menurunkan tekanan wap air menurut hukum Raoult.","Density is not a colligative property. The four standard colligative properties depend on the number of dissolved particles.":"Ketumpatan bukan sifat koligatif. Empat sifat koligatif piawai bergantung pada bilangan zarah terlarut.","Because the solution has lower vapour pressure, more heating is required before its vapour pressure can match atmospheric pressure.":"Oleh sebab larutan mempunyai tekanan wap yang lebih rendah, lebih banyak pemanasan diperlukan sebelum tekanan wapnya dapat menyamai tekanan atmosfera.","The surrounding salt solution is hypertonic, so water moves out of the cell by osmosis and the cell shrinks.":"Larutan garam di sekeliling bersifat hipertonik, maka air bergerak keluar daripada sel melalui osmosis dan sel mengecut.","Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.":"Kesan koligatif bergantung pada bilangan zarah zat terlarut yang hadir, bukan pada warna, saiz bekas atau bentuk zarah.","Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.":"Dua mol NaCl menghasilkan bilangan zarah terlarut paling banyak kerana setiap unit formula boleh terurai kepada dua ion.","A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.":"Membran separa telap membenarkan pergerakan pelarut sambil menghalang zarah zat terlarut, lalu menghasilkan aliran bersih yang didorong oleh perbezaan kepekatan.","Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.":"Gunakan n = ΔPV/RT. Penurunan tekanan ialah 580 torr atau 0.763 atm, lalu memberikan kira-kira 3.12 × 10⁻² mol CO₂ yang bertindak balas.","Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.":"Ambil x dan y sebagai mol CaO dan BaO. Selesaikan x + y = 0.0312 dan 56.08x + 153.33y = 4.000; jisim CaO ialah kira-kira 0.451 g.","For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.":"Bagi jisim yang sama, bilangan mol berkadar songsang dengan jisim molar. Etanol mempunyai mol yang lebih sedikit daripada air, lalu memberikan x(etanol) ≈ 0.281.","Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.":"Gunakan hukum Raoult pada kedua-dua cecair: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.","The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.":"Pecahan mol wap ialah yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.","Use ΔTf = Kfm to obtain molality, then convert the solvent mass to kilograms and solve for molar mass; the result is about 208 g mol⁻¹.":"Gunakan ΔTf = Kfm untuk mendapatkan kemolalan, kemudian tukarkan jisim pelarut kepada kilogram dan hitung jisim molar; hasilnya kira-kira 208 g mol⁻¹.","Review the highlighted correct answer and connect it to the lesson concept.":"Semak jawapan betul yang diserlahkan dan hubungkannya dengan konsep pelajaran.","© 2026 SoluEffect360. Premium Self-Directed Chemistry Simulation.":"© 2026 SoluEffect360. Simulasi Kimia Pembelajaran Kendiri Premium.","Interactive Chemistry Learning":"Pembelajaran Kimia Interaktif","Certificate Preview":"Pratonton Sijil","This certificate is proudly presented to":"Sijil ini dengan bangganya disampaikan kepada","For successfully completing the interactive learning modules and Quiz Arena on Colligative Properties.":"Atas kejayaan melengkapkan modul pembelajaran interaktif dan Arena Kuiz mengenai Sifat Koligatif.","Today's Date":"Tarikh Hari Ini","Learning Achievement":"Pencapaian Pembelajaran","Gold seal":"Mohor emas","Close":"Tutup","Certificate Locked":"Sijil Dikunci","Complete all learning modules and finish Quiz Arena to unlock your certificate.":"Lengkapkan semua modul pembelajaran dan tamatkan Arena Kuiz untuk membuka sijil anda.","Certificate Unlocked":"Sijil Dibuka","Your certificate is ready to preview and download.":"Sijil anda sedia untuk dipratonton dan dimuat turun.","Modules":"Modul","Pending":"Belum Selesai","Complete":"Selesai","You have successfully completed SoluEffect360.":"Anda telah berjaya melengkapkan SoluEffect360.","Thank you for exploring the four Colligative Properties through interactive learning.":"Terima kasih kerana meneroka empat Sifat Koligatif melalui pembelajaran interaktif.","Complete all four learning modules and Quiz Arena first.":"Lengkapkan keempat-empat modul pembelajaran dan Arena Kuiz terlebih dahulu.","Certificate download tools are unavailable. Please check your internet connection and try again.":"Alat muat turun sijil tidak tersedia. Sila semak sambungan internet anda dan cuba lagi.","The certificate could not be generated. Please try again.":"Sijil tidak dapat dijana. Sila cuba lagi.","View Learning Points profile":"Lihat profil Mata Pembelajaran"};
+    const translations = {"SoluEffect360 - Interactive Colligative Properties":"SoluEffect360 - Sifat Koligatif Interaktif","Home":"Laman Utama","Learn":"Belajar","Quiz Arena":"Arena Kuiz","Badges":"Lencana","Take the Tour Again":"Ikuti Lawatan Sekali Lagi","About SoluEffect360":"Tentang SoluEffect360","Toggle Sound":"Hidupkan atau matikan bunyi","Toggle Dark Mode":"Tukar mod gelap","Help Menu":"Menu Bantuan","Go to home":"Pergi ke laman utama","Switch language to Bahasa Melayu":"Tukar bahasa kepada Bahasa Melayu","Switch language to English":"Tukar bahasa kepada English","Language":"Bahasa","Chemistry Visualized Without Complexity":"Kimia Divisualkan Tanpa Kerumitan","Interactive Learning Platform for Colligative Properties. Experience microscopic particle dynamics and physical state changes in real-time.":"Platform Pembelajaran Interaktif untuk Sifat Koligatif. Alami dinamik zarah mikroskopik dan perubahan keadaan fizikal secara masa nyata.","Start Learning":"Mulakan Pembelajaran","Learning Progress":"Kemajuan Pembelajaran","Vapour Pressure":"Tekanan Wap","Vapor Pressure":"Tekanan Wap","Boiling Point":"Takat Didih","Boiling Point of Pure Solvent":"Takat Didih Pelarut Tulen","Boiling Point of Solution":"Takat Didih Larutan","Freezing Point":"Takat Beku","Osmosis":"Osmosis","Colligative Laboratory":"Makmal Sifat Koligatif","Select a property below to interact, customize variables, and inspect results.":"Pilih satu sifat di bawah untuk berinteraksi, melaraskan pemboleh ubah dan meneliti hasil.","Learning Objective":"Objektif Pembelajaran","Did you know?":"Tahukah anda?","Next Fact":"Fakta Seterusnya","Quiz time!":"Masa Kuiz!","Control Center":"Pusat Kawalan","Select Solute":"Pilih Zat Terlarut","Select Solute Type":"Pilih Jenis Zat Terlarut","Select Solution Type":"Pilih Jenis Larutan","Solution Type":"Jenis Larutan","Temperature":"Suhu","Flow Rate Speed":"Kelajuan Simulasi","Pause":"Jeda","Play":"Main","Reset":"Tetapkan Semula","Particle Simulation Arena":"Arena Simulasi Zarah","Crystalline Viewport":"Paparan Hablur","Osmotic Balance":"Keseimbangan Osmosis","Particle colour legend":"Petunjuk warna zarah","Simulation Tabs":"Tab Simulasi","Solvent (Water)":"Pelarut (Air)","Non-Volatile Solute":"Zat Terlarut Tidak Meruap","Non-Volatile Solution":"Larutan Tidak Meruap","Volatile Solution":"Larutan Meruap","Gas":"Gas","Vapour":"Wap","P external":"P luar","P internal":"P dalaman","Solvent":"Pelarut","Pure Solvent":"Pelarut Tulen","Solution":"Larutan","Solvent (Left)":"Pelarut (Kiri)","Solution (Right)":"Larutan (Kanan)","Equation":"Persamaan","Live Explanation":"Penerangan Langsung","Experiment Summary":"Ringkasan Eksperimen","Observation":"Pemerhatian","Real-life Application":"Aplikasi Kehidupan Sebenar","Net Directional Flux":"Fluks Arah Bersih","Left → Right":"Kiri → Kanan","Water Molecule":"Molekul Air","Solute Particle":"Zarah Zat Terlarut","Gas Particle":"Zarah Gas","Semi-Permeable Membrane":"Membran Separa Telap","State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan. Kira komposisi wap di atas larutan yang mengandungi zat terlarut dan pelarut meruap.","Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.":"Kira peningkatan takat didih sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data peningkatan takat didih.","Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.":"Kira penurunan takat beku sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data penurunan takat beku.","Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.":"Terangkan osmosis melalui membran separa telap dan hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.","According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.":"Menurut hukum Raoult, tekanan wap separa sesuatu komponen dalam larutan ideal adalah sama dengan pecahan molnya didarab dengan tekanan wap komponen tersebut dalam keadaan tulen.","For a non-volatile solute, the solute reduces the mole fraction of the solvent.":"Bagi zat terlarut tidak meruap, zat terlarut mengurangkan pecahan mol pelarut.","Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.":"Oleh itu, tekanan wap larutan lebih rendah daripada tekanan wap pelarut tulen. Bagi larutan yang mengandungi komponen meruap, jumlah tekanan wap diperoleh dengan menjumlahkan tekanan wap separa setiap komponen.","A non-volatile solute lowers the solvent vapour pressure. A volatile solute contributes its own vapour, so the total vapour pressure can be higher than in the non-volatile case.":"Glukosa menurunkan tekanan wap air. Etanol bersifat meruap dan menyumbang wapnya sendiri, maka campuran mungkin menghasilkan lebih banyak wap berbanding air tulen.","A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.":"Tuala basah yang direndam dalam air laut masin mengambil masa lebih lama untuk kering di bawah cahaya matahari berbanding tuala yang direndam dalam air paip tulen kerana garam memperlahankan penyejatan air.","A liquid boils when its vapour pressure becomes equal to the external pressure.":"Cecair mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.","Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.":"Etanol bersifat meruap dan menyumbang tekanan wapnya sendiri. Oleh itu, campuran etanol–air mungkin mendidih pada suhu yang lebih rendah daripada air tulen.","A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.":"Larutan glukosa mendidih pada suhu lebih tinggi daripada air tulen, manakala campuran etanol–air mungkin mendidih di bawah 100 °C kerana etanol bersifat meruap.","Special liquids (coolants) are added to car water tanks. This raises the boiling point so the water inside the hot engine doesn't boil away easily.":"Cecair khas, iaitu bahan penyejuk, ditambahkan ke dalam sistem penyejukan kereta. Ini meningkatkan takat didih supaya air di dalam enjin panas tidak mudah mendidih dan tersejat.","Freezing occurs when the liquid and solid phases of a solvent are in equilibrium.":"Pembekuan berlaku apabila fasa cecair dan fasa pepejal pelarut berada dalam keseimbangan.","Dissolved solute particles lower the escaping tendency of solvent molecules in the liquid phase.":"Zarah zat terlarut yang terlarut mengurangkan kecenderungan molekul pelarut untuk terlepas daripada fasa cecair.","Therefore, the solution must be cooled below the freezing point of the pure solvent before the solid solvent can form. This decrease is called freezing-point depression.":"Oleh itu, larutan perlu disejukkan di bawah takat beku pelarut tulen sebelum pelarut pepejal dapat terbentuk. Penurunan ini dikenali sebagai penurunan takat beku.","Pure water freezes exactly at 0 °C and forms a neat grid. The mixture stays liquid at 0 °C and only freezes when it gets even colder.":"Air tulen membeku tepat pada 0 °C dan membentuk susunan teratur. Campuran kekal dalam keadaan cecair pada 0 °C dan hanya membeku apabila suhunya menjadi lebih rendah.","People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.":"Garam ditaburkan pada jalan berais ketika musim sejuk. Garam bercampur dengan ais dan menurunkan takat beku, lalu menyebabkan ais yang berbahaya mencair menjadi air.","Osmosis is the net movement of solvent molecules through a semipermeable membrane from a region of lower solute concentration to a region of higher solute concentration.":"Osmosis ialah pergerakan bersih molekul pelarut melalui membran separa telap dari kawasan berkepekatan zat terlarut rendah ke kawasan berkepekatan zat terlarut tinggi.","The membrane allows solvent molecules to pass but prevents solute particles from crossing.":"Membran membenarkan molekul pelarut melaluinya tetapi menghalang zarah zat terlarut daripada merentasinya.","The net movement continues until the concentration difference is balanced by the pressure difference across the membrane.":"Pergerakan bersih berterusan sehingga perbezaan kepekatan diseimbangkan oleh perbezaan tekanan merentasi membran.","Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.":"Molekul air bergerak dalam kedua-dua arah, tetapi lebih banyak air terkumpul pada bahagian campuran. Paras air pada bahagian campuran meningkat.","Plant roots soak up water from the soil using osmosis. If you put too much fertilizer (solid particles) in the soil, the plant cannot pull water in, and might die.":"Akar tumbuhan menyerap air daripada tanah melalui osmosis. Jika terlalu banyak baja, iaitu zarah pepejal, ditambahkan ke dalam tanah, tumbuhan tidak dapat menyerap air dan mungkin mati.","where;":"di mana;","= total vapour pressure of the mixture;":"= jumlah tekanan wap campuran;","= partial vapour pressure of component A;":"= tekanan wap separa komponen A;","= partial vapour pressure of component B;":"= tekanan wap separa komponen B;","= mole fraction of component A in the liquid;":"= pecahan mol komponen A dalam cecair;","= mole fraction of component B in the liquid;":"= pecahan mol komponen B dalam cecair;","= vapour pressure of pure component A;":"= tekanan wap komponen A tulen;","= vapour pressure of pure component B.":"= tekanan wap komponen B tulen.","= vapour pressure of solvent A in the solution;":"= tekanan wap pelarut A dalam larutan;","= mole fraction of solvent A;":"= pecahan mol pelarut A;","= vapour pressure of pure solvent A.":"= tekanan wap pelarut A tulen.","= molal boiling point elevation constant of the solvent (°C kg mol":"= pemalar peningkatan takat didih molal pelarut (°C kg mol","= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol","= molality of solution (mol kg":"= kemolalan larutan (mol kg","= Boiling point of pure solvent (°C)":"= takat didih pelarut tulen (°C)","= Boiling point of solution (°C)":"= takat didih larutan (°C)","= freezing point of pure solvent (°C)":"= takat beku pelarut tulen (°C)","= freezing point of solution (°C)":"= takat beku larutan (°C)","= osmotic pressure;":"= tekanan osmosis;","= van’t Hoff factor;":"= faktor van’t Hoff;","= molarity of the solution;":"= kemolaran larutan;","= gas constant;":"= pemalar gas;","= absolute temperature in kelvin.":"= suhu mutlak dalam kelvin.","Learning Points":"Mata Pembelajaran","Total Learning Points":"Jumlah Mata Pembelajaran","View Learning Points profile":"Lihat profil Mata Pembelajaran","Learner Profile":"Profil Pelajar","Guest Explorer":"Peneroka Tetamu","Quiz Rewards":"Ganjaran Kuiz","Facts Viewed":"Fakta Dilihat","Controls Used":"Kawalan Digunakan","Progress is saved automatically in this browser's learning database.":"Kemajuan disimpan secara automatik dalam pangkalan data pembelajaran pelayar ini.","+5 Learning Points":"+5 Mata Pembelajaran","Learning activity":"Aktiviti pembelajaran","Next fact viewed":"Fakta seterusnya dilihat","Correct Quiz Arena answer":"Jawapan Arena Kuiz yang betul","Correct live competition answer":"Jawapan pertandingan langsung yang betul","Temperature control adjusted":"Kawalan suhu dilaraskan","Flow-rate speed adjusted":"Kelajuan kadar aliran dilaraskan","My Badges":"Lencana Saya","Bronze":"Gangsa","Silver":"Perak","Gold":"Emas","Completed 1 module":"Selesai 1 modul","Completed 3 modules":"Selesai 3 modul","Completed 4 modules":"Selesai 4 modul","SoluEffect360 Master":"Pakar SoluEffect360","All modules & Quiz Arena":"Semua modul dan Arena Kuiz","Badge Unlocked!":"Lencana Dibuka!","You have unlocked the SoluEffect360 Certificate!":"Anda telah membuka Sijil SoluEffect360!","View Certificate":"Lihat Sijil","🎉 Congratulations!":"🎉 Tahniah!","You have successfully completed":"Anda telah berjaya menyelesaikan","lessons.":"pelajaran.","Check the Badges section to see your progress!":"Semak bahagian Lencana untuk melihat kemajuan anda!","Continue Learning":"Teruskan Pembelajaran","Your Achievement":"Pencapaian Anda","Certificate of Completion":"Sijil Penyempurnaan","This is to certify that":"Dengan ini diperakui bahawa","Master Chemist":"Pakar Kimia","has successfully mastered all colligative properties modules and conquered the Quiz Arena, demonstrating exceptional knowledge in physical chemistry.":"telah berjaya menguasai semua modul sifat koligatif dan menamatkan Arena Kuiz, sekali gus menunjukkan pengetahuan yang cemerlang dalam kimia fizik.","Date Awarded":"Tarikh Dianugerahkan","Authorized Signature":"Tandatangan Diberi Kuasa","Virtual Lab Admin":"Pentadbir Makmal Maya","Download PDF":"Muat Turun PDF","Download PNG":"Muat Turun PNG","Premium Interactive Colligative Properties Simulator.":"Simulator Sifat Koligatif Interaktif Premium.","Designed to make complex physical chemistry intuitive and accessible through real-time microscopic visualizations.":"Direka untuk menjadikan kimia fizik yang kompleks lebih intuitif dan mudah difahami melalui visualisasi mikroskopik masa nyata.","Close":"Tutup","Skip Tour":"Langkau Lawatan","Back":"Kembali","Next":"Seterusnya","Finish Tour":"Tamatkan Lawatan","Welcome to SoluEffect360!":"Selamat Datang ke SoluEffect360!","Experience interactive microscopic particle dynamics and learn colligative properties in real-time. Let's take a quick tour.":"Alami dinamik zarah mikroskopik secara interaktif dan pelajari sifat koligatif dalam masa nyata. Mari ikuti lawatan ringkas.","Choose a Property":"Pilih Satu Sifat","Select one of the four colligative properties to explore its unique molecular behaviour.":"Pilih satu daripada empat sifat koligatif untuk meneroka tingkah laku molekulnya yang unik.","Adjust Variables":"Laraskan Pemboleh Ubah","Interact with the simulation by changing the solute type, temperature, and observing the immediate effects.":"Berinteraksi dengan simulasi dengan menukar jenis zat terlarut dan suhu, kemudian perhatikan kesannya serta-merta.","Observe the Simulation":"Perhatikan Simulasi","Watch how particles react in real-time. The microscopic arena visualises the physics behind the equations.":"Perhatikan tindak balas zarah dalam masa nyata. Arena mikroskopik memvisualkan konsep fizik di sebalik persamaan.","Read a clear explanation of what is happening in the simulation and connect it to the equation shown below.":"Baca penerangan yang jelas tentang perkara yang berlaku dalam simulasi dan hubungkannya dengan persamaan yang ditunjukkan di bawah.","Test Your Knowledge":"Uji Pengetahuan Anda","Review the experiment summary and answer the quiz to solidify your understanding.":"Semak ringkasan eksperimen dan jawab kuiz untuk mengukuhkan pemahaman anda.","Track Your Mastery":"Jejaki Penguasaan Anda","Complete all four lessons to fill this progress bar and unlock your certificate. Let the learning begin!":"Lengkapkan keempat-empat pelajaran untuk memenuhi bar kemajuan ini dan membuka sijil anda. Mari mulakan pembelajaran!","Test Your Mastery":"Uji Penguasaan Anda","🏆 Quiz Arena":"🏆 Arena Kuiz","Race against the clock in this 16-question challenge with factual and calculation questions. Will you make it to the Hall of Fame?":"Berlumba dengan masa dalam cabaran 16 soalan yang merangkumi soalan fakta dan pengiraan. Mampukah anda memasuki Dewan Kemasyhuran?","Enter the Arena":"Masuk ke Arena","16 Questions • 30s Fact • 2.5 min Calculation":"16 Soalan • 30 saat Fakta • 2.5 minit Pengiraan","Nickname":"Nama Panggilan","Enter your nickname...":"Masukkan nama panggilan anda...","Start Challenge":"Mulakan Cabaran","Live Competition":"Pertandingan Langsung","Hall of Fame":"Dewan Kemasyhuran","Question":"Soalan","Quiz Progress":"Kemajuan Kuiz","Loading question...":"Memuatkan soalan...","Correct!":"Betul!","Incorrect":"Salah","Incorrect.":"Salah.","Time's Up!":"Masa Tamat!","Time expired.":"Masa tamat.","0 Points":"0 Mata","Correct — the highlighted principle matches the lesson.":"Betul — prinsip yang diserlahkan sepadan dengan pelajaran.","Review the correct answer marked in green.":"Semak jawapan betul yang ditandakan dengan warna hijau.","Arena Conquered!":"Arena Ditakluki!","Incredible performance.":"Prestasi yang luar biasa.","Final Score":"Skor Akhir","Accuracy":"Ketepatan","Correct / Wrong":"Betul / Salah","Avg Time":"Purata Masa","Play Again":"Main Lagi","Review Answers":"Semak Jawapan","Answer Review":"Semakan Jawapan","Review Every Question":"Semak Setiap Soalan","Compare your answer with the correct answer.":"Bandingkan jawapan anda dengan jawapan yang betul.","Back to Results":"Kembali ke Keputusan","Back to Arena":"Kembali ke Arena","Top 10 Chemistry Masters":"10 Pakar Kimia Terbaik","The arena is empty. Claim the first victory!":"Arena masih kosong. Jadilah pemenang pertama!","Chemistry Master!":"Pakar Kimia!","Flawless logic and incredible speed.":"Logik yang sempurna dan kepantasan yang luar biasa.","Great Job!":"Syabas!","You have a solid understanding of colligative properties.":"Anda mempunyai pemahaman yang kukuh tentang sifat koligatif.","Keep Practicing!":"Teruskan Berlatih!","Review the simulations to strengthen your foundations.":"Semak semula simulasi untuk mengukuhkan asas pemahaman anda.","Easy":"Mudah","Medium":"Sederhana","Calculation":"Pengiraan","Topic Quiz Complete!":"Kuiz Topik Selesai!","Incorrect — try again.":"Salah — cuba lagi.","The host creates a room code. Students join and answer simultaneously on their own devices.":"Hos menghasilkan kod bilik. Pelajar menyertai dan menjawab secara serentak menggunakan peranti masing-masing.","Host a Game":"Hoskan Permainan","Join a Game":"Sertai Permainan","Back to Quiz Arena":"Kembali ke Arena Kuiz","Live mode requires internet access and the same published website on every device.":"Mod langsung memerlukan akses internet dan laman web terbitan yang sama pada setiap peranti.","Host Dashboard":"Papan Pemuka Hos","Live Competition Room":"Bilik Pertandingan Langsung","Creating a secure room...":"Mewujudkan bilik yang selamat...","End Room":"Tamatkan Bilik","Room Code":"Kod Bilik","Students enter this code on their devices.":"Pelajar memasukkan kod ini pada peranti masing-masing.","Players in Lobby":"Pemain di Lobi","Waiting for students to join...":"Menunggu pelajar menyertai...","Start Live Quiz":"Mulakan Kuiz Langsung","Copy Code":"Salin Kod","Code Copied":"Kod Disalin","Answered":"Dijawab","Time":"Masa","Live Leaderboard":"Papan Kedudukan Langsung","Join Live Competition":"Sertai Pertandingan Langsung","Enter your nickname and the room code shown by the host.":"Masukkan nama panggilan anda dan kod bilik yang dipaparkan oleh hos.","Your nickname":"Nama panggilan anda","6-character room code":"Kod bilik 6 aksara","Join Room":"Sertai Bilik","Connected":"Disambungkan","You are in the lobby":"Anda berada di lobi","Waiting for the host to start...":"Menunggu hos memulakan pertandingan...","Leave Room":"Tinggalkan Bilik","Player":"Pemain","Get ready...":"Bersedia...","Waiting for question...":"Menunggu soalan...","Current Rank":"Kedudukan Semasa","Competition Complete!":"Pertandingan Selesai!","Opening the room...":"Membuka bilik...","Live service could not load. Check the internet connection and refresh.":"Perkhidmatan langsung tidak dapat dimuatkan. Semak sambungan internet dan muat semula halaman.","Room is open. Ask students to join using the code below.":"Bilik telah dibuka. Minta pelajar menyertai menggunakan kod di bawah.","Unable to open the live room. Check the internet connection and try again.":"Bilik langsung tidak dapat dibuka. Semak sambungan internet dan cuba lagi.","This competition has already started.":"Pertandingan ini telah pun bermula.","Competition in progress.":"Pertandingan sedang berlangsung.","Ready":"Bersedia","No scores yet.":"Belum ada skor.","Competition complete. Final results are shown below.":"Pertandingan selesai. Keputusan akhir ditunjukkan di bawah.","Done":"Selesai","The host ended the live room.":"Hos telah menamatkan bilik langsung.","Connecting...":"Sedang menyambung...","Connected. Waiting for the host to start...":"Disambungkan. Menunggu hos memulakan pertandingan...","The competition is starting...":"Pertandingan sedang bermula...","Answer submitted":"Jawapan dihantar","Time is up":"Masa telah tamat","Next question coming up...":"Soalan seterusnya akan dipaparkan...","Final leaderboard":"Papan kedudukan akhir","Enter a nickname and a valid 6-character room code.":"Masukkan nama panggilan dan kod bilik 6 aksara yang sah.","Connection to the host was closed.":"Sambungan kepada hos telah ditutup.","Unable to connect to the host.":"Tidak dapat menyambung kepada hos.","Room not found. Check the code and try again.":"Bilik tidak ditemui. Semak kod dan cuba lagi.","Unable to join the room. Check the internet connection.":"Tidak dapat menyertai bilik. Semak sambungan internet.","The correct answer is highlighted.":"Jawapan yang betul telah diserlahkan.","Sweaty skin feels cooler because evaporation removes heat from your body.":"Kulit yang berpeluh terasa lebih sejuk kerana penyejatan menyingkirkan haba daripada badan.","Perfume evaporates quickly because it contains highly volatile liquids.":"Minyak wangi menyejat dengan cepat kerana mengandungi cecair yang sangat meruap.","Nail polish remover feels cold on your skin because it has a high vapor pressure and evaporates rapidly.":"Pencuci pengilat kuku terasa sejuk pada kulit kerana mempunyai tekanan wap yang tinggi dan menyejat dengan cepat.","A hot cup of coffee loses heat partly because the highest energy water molecules escape as vapor.":"Secawan kopi panas kehilangan haba sebahagiannya kerana molekul air bertenaga paling tinggi terlepas sebagai wap.","Rubbing alcohol dries much faster than water because its intermolecular forces are weaker, leading to a higher vapor pressure.":"Alkohol sapuan kering lebih cepat daripada air kerana daya antara molekulnya lebih lemah, lalu menghasilkan tekanan wap yang lebih tinggi.","Car radiators use coolant to increase the boiling point so engines don't overheat.":"Radiator kereta menggunakan bahan penyejuk untuk meningkatkan takat didih supaya enjin tidak terlalu panas.","Cooking food at high altitudes takes longer because water boils at lower temperatures.":"Memasak makanan di kawasan altitud tinggi mengambil masa lebih lama kerana air mendidih pada suhu yang lebih rendah.","Adding salt to boiling water for pasta slightly increases the boiling point, though mainly it's for flavor.":"Menambahkan garam ke dalam air mendidih untuk memasak pasta sedikit meningkatkan takat didih, walaupun tujuan utamanya ialah untuk rasa.","Deep-sea hydrothermal vents have water hotter than 100°C that doesn't boil because of the immense pressure.":"Lohong hidroterma laut dalam mengandungi air bersuhu melebihi 100°C yang tidak mendidih kerana tekanan yang sangat tinggi.","Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.":"Periuk tekanan memasak makanan dengan lebih cepat dengan memerangkap wap, meningkatkan tekanan dan menaikkan takat didih air di dalamnya.","Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.":"Garam ditaburkan pada jalan bersalji kerana garam menurunkan takat beku air dan mencairkan ais.","Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.":"Aiskrim kekal lembut di dalam peti sejuk beku kerana kandungan gula yang tinggi menurunkan takat bekunya dengan ketara.","Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.":"Sesetengah katak dan ikan menghasilkan protein 'antibeku' semula jadi yang menurunkan takat beku darahnya.","Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.":"Vodka tidak membeku dalam peti sejuk beku rumah biasa kerana kandungan etanol yang tinggi menurunkan takat bekunya kepada kira-kira -27°C.","Ocean water freezes at a lower temperature than freshwater lakes because of the dissolved salt.":"Air laut membeku pada suhu yang lebih rendah berbanding tasik air tawar kerana garam yang terlarut.","Plant roots absorb water using osmosis to draw moisture from the surrounding soil.":"Akar tumbuhan menyerap air melalui osmosis untuk mendapatkan kelembapan daripada tanah di sekelilingnya.","Eating very salty food can make you thirsty because osmosis causes water to leave your cells.":"Makan makanan yang sangat masin boleh menyebabkan anda berasa dahaga kerana osmosis menyebabkan air keluar daripada sel.","Slugs shrivel up when sprinkled with salt because the salt draws water out of their bodies via osmosis.":"Lintah bulan mengecut apabila ditaburkan garam kerana garam menarik air keluar daripada badannya melalui osmosis.","Grocery stores spray vegetables with pure water to keep them crisp as water enters the plant cells through osmosis.":"Kedai runcit menyembur sayur-sayuran dengan air tulen supaya kekal rangup apabila air memasuki sel tumbuhan melalui osmosis.","Cholera causes severe dehydration because the bacteria alter the intestines, causing water to flood out of cells via osmosis.":"Kolera menyebabkan dehidrasi teruk kerana bakteria mengubah fungsi usus, lalu menyebabkan air keluar dengan banyak daripada sel melalui osmosis.","If we double the amount of glucose added to the water, the vapor pressure will:":"Jika jumlah glukosa yang ditambahkan ke dalam air digandakan, tekanan wap akan:","Increase":"Meningkat","Stay the same":"Kekal sama","Decrease further":"Menurun lagi","Why does adding a solute lower the vapor pressure?":"Mengapakah penambahan zat terlarut menurunkan tekanan wap?","Solute particles block the surface":"Zarah zat terlarut menghalang permukaan","Solute particles increase the temperature":"Zarah zat terlarut meningkatkan suhu","Solute particles turn into gas quickly":"Zarah zat terlarut bertukar menjadi gas dengan cepat","A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?":"Suatu larutan mempunyai pecahan mol air 0.80. Jika tekanan wap air tulen ialah 25 kPa, berapakah tekanan wap separa air?","Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?":"Jisim glukosa yang sama, iaitu lebih ringan, dan sukrosa, iaitu lebih berat, ditambahkan ke dalam bikar berbeza. Yang manakah meningkatkan takat didih dengan lebih banyak?","Glucose (more moles)":"Glukosa (lebih banyak mol)","Sucrose (less moles)":"Sukrosa (lebih sedikit mol)","They are identical":"Kedua-duanya sama","To make a solution boil, its vapor pressure must equal:":"Untuk membolehkan larutan mendidih, tekanan wapnya mesti sama dengan:","The atmospheric pressure":"Tekanan atmosfera","The freezing point":"Takat beku","The osmotic pressure":"Tekanan osmosis","For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?":"Bagi larutan glukosa 1.0 m dalam air, Kb = 0.512 °C kg mol⁻¹ dan i = 1. Berapakah ΔTb?","Why is salt spread on icy roads in winter?":"Mengapakah garam ditaburkan pada jalan berais ketika musim sejuk?","It provides heat":"Garam membekalkan haba","It lowers the freezing point":"Garam menurunkan takat beku","It creates friction":"Garam menghasilkan geseran","When a solution freezes, the solid that forms is typically:":"Apabila larutan membeku, pepejal yang terbentuk biasanya ialah:","Pure solute":"Zat terlarut tulen","Pure solvent (ice)":"Pelarut tulen (ais)","A mixture of both":"Campuran kedua-duanya","For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?":"Bagi larutan glukosa 0.50 m dalam air, Kf = 1.86 °C kg mol⁻¹ dan i = 1. Berapakah ΔTf?","If a plant cell (high solute conc.) is placed in pure water, what will happen?":"Jika sel tumbuhan yang mempunyai kepekatan zat terlarut tinggi diletakkan dalam air tulen, apakah yang akan berlaku?","Water flows into the cell":"Air mengalir masuk ke dalam sel","Water flows out of the cell":"Air mengalir keluar daripada sel","Nothing happens":"Tiada apa-apa berlaku","During osmosis, water flows naturally towards the side with:":"Semasa osmosis, air mengalir secara semula jadi ke bahagian yang mempunyai:","Fewer solid particles":"Lebih sedikit zarah pepejal","More solid particles":"Lebih banyak zarah pepejal","Lower temperature":"Suhu yang lebih rendah","For a 0.10 mol L⁻¹ glucose solution at 300 K, with R = 0.0821 L atm mol⁻¹ K⁻¹ and i = 1, what is the osmotic pressure?":"Bagi larutan glukosa 0.10 mol L⁻¹ pada 300 K, dengan R = 0.0821 L atm mol⁻¹ K⁻¹ dan i = 1, berapakah tekanan osmosis?","More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.":"Lebih banyak glukosa tidak meruap menyebabkan bilangan molekul air di permukaan berkurang, maka tekanan wap menurun lagi.","Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.":"Zarah zat terlarut mengurangkan pecahan molekul pelarut di permukaan cecair, maka lebih sedikit molekul pelarut terlepas ke fasa wap.","Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.":"Hukum Raoult memberikan Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.","Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.":"Bagi jisim yang sama, glukosa mengandungi lebih banyak mol berbanding sukrosa kerana jisim molarnya lebih rendah, lalu menghasilkan kesan koligatif yang lebih besar.","Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.":"Pendidihan bermula apabila tekanan wap cecair menjadi sama dengan tekanan atmosfera luar.","Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.":"Gunakan ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.","Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.":"Garam menurunkan takat beku air, membolehkan ais mencair pada suhu yang menyebabkan air tulen kekal beku.","During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.":"Semasa pembekuan, molekul pelarut membentuk kekisi hablur manakala kebanyakan zarah zat terlarut yang terlarut tersisih.","Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.":"Gunakan ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.","Pure water has lower solute concentration, so water moves into the more concentrated plant cell through the membrane.":"Air tulen mempunyai kepekatan zat terlarut yang lebih rendah, maka air bergerak melalui membran masuk ke dalam sel tumbuhan yang lebih pekat.","The net flow of water is toward the side with the higher solute-particle concentration.":"Aliran bersih air bergerak ke arah bahagian yang mempunyai kepekatan zarah zat terlarut lebih tinggi.","Use π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.":"Gunakan π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.","What does adding a non-volatile solute to a pure solvent do to its boiling point?":"Apakah kesan penambahan zat terlarut tidak meruap ke dalam pelarut tulen terhadap takat didihnya?","Increases it":"Meningkatkannya","Decreases it":"Menurunkannya","No change":"Tiada perubahan","Makes it evaporate instantly":"Menyebabkannya menyejat serta-merta","Which property causes ice to melt when salt is poured on it?":"Sifat manakah menyebabkan ais mencair apabila garam ditaburkan padanya?","Freezing-point depression":"Penurunan takat beku","Boiling-point elevation":"Peningkatan takat didih","Osmosis is the net movement of which substance across a semipermeable membrane?":"Osmosis ialah pergerakan bersih bahan manakah merentasi membran separa telap?","Water (solvent)":"Air (pelarut)","Solute":"Zat terlarut","Salt":"Garam","Sugar":"Gula","What happens to the vapour pressure of water when a non-volatile solute is dissolved in it?":"Apakah yang berlaku kepada tekanan wap air apabila zat terlarut tidak meruap dilarutkan di dalamnya?","It decreases":"Tekanan wap menurun","It increases":"Tekanan wap meningkat","It remains the same":"Tekanan wap kekal sama","It becomes zero":"Tekanan wap menjadi sifar","Which of these is NOT a colligative property?":"Yang manakah BUKAN sifat koligatif?","Density":"Ketumpatan","Osmotic pressure":"Tekanan osmosis","Why does a solution containing a non-volatile solute have a higher boiling point than the pure solvent?":"Mengapakah larutan yang mengandungi zat terlarut tidak meruap mempunyai takat didih lebih tinggi daripada pelarut tulen?","Its lower vapour pressure requires a higher temperature to equal atmospheric pressure":"Tekanan wapnya yang lebih rendah memerlukan suhu lebih tinggi untuk menyamai tekanan atmosfera","The solute heats up faster":"Zat terlarut menjadi panas dengan lebih cepat","The solute absorbs cold":"Zat terlarut menyerap kesejukan","A membrane blocks evaporation":"Membran menghalang penyejatan","If a cell is placed in a highly concentrated salt solution, what happens?":"Jika sel diletakkan dalam larutan garam yang sangat pekat, apakah yang berlaku?","It shrinks as water leaves":"Sel mengecut apabila air keluar","It swells as water enters":"Sel mengembang apabila air masuk","It stays exactly the same":"Sel kekal sama","It freezes solid":"Sel membeku menjadi pepejal","Colligative properties depend primarily on:":"Sifat koligatif bergantung terutamanya pada:","The number of dissolved particles":"Bilangan zarah terlarut","The colour of the solution":"Warna larutan","The size of the container":"Saiz bekas","The shape of the solute particles":"Bentuk zarah zat terlarut","Which sample would lower the freezing point of water the most, assuming complete dissolution?":"Sampel manakah paling banyak menurunkan takat beku air dengan andaian pelarutan lengkap?","2 moles of NaCl":"2 mol NaCl","1 mole of NaCl":"1 mol NaCl","1 mole of glucose":"1 mol glukosa","0.5 mole of glucose":"0.5 mol glukosa","What is the role of a semipermeable membrane in osmosis?":"Apakah peranan membran separa telap dalam osmosis?","It allows solvent molecules to pass while restricting solute particles":"Membran membenarkan molekul pelarut melaluinya sambil menghalang zarah zat terlarut","It allows only solute particles to pass":"Membran hanya membenarkan zarah zat terlarut melaluinya","It blocks all particles":"Membran menghalang semua zarah","It allows everything to pass equally":"Membran membenarkan semua bahan melaluinya secara sama rata","A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.":"Sebuah bekas 1.00 L pada 25 °C mengandungi CO₂ pada tekanan 730 torr. Selepas bertindak balas dengan campuran CaO/BaO berjisim 4.000 g, tekanan CO₂ yang berbaki ialah 150 torr. Berapakah mol CO₂ yang telah bertindak balas? Gunakan R = 0.0821 L atm mol⁻¹ K⁻¹.","The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?":"Campuran 4.000 g mengandungi CaO dan BaO, dan sejumlah 0.0312 mol CO₂ bertindak balas. Diberi M(CaO) = 56.08 g mol⁻¹ dan M(BaO) = 153.33 g mol⁻¹, berapakah jisim CaO dalam campuran itu?","At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?":"Pada 63.5 °C, H₂O tulen dan etanol tulen masing-masing mempunyai tekanan wap 175 torr dan 400 torr. Jisim H₂O dan etanol yang sama dicampurkan. Dengan menggunakan M(H₂O) = 18.02 g mol⁻¹ dan M(etanol) = 46.07 g mol⁻¹, berapakah pecahan mol etanol dalam larutan cecair?","For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?":"Bagi larutan H₂O–etanol berjisim sama pada 63.5 °C, x(etanol) = 0.281, P°(H₂O) = 175 torr dan P°(etanol) = 400 torr. Dengan mengandaikan tingkah laku ideal, berapakah jumlah tekanan wap?","For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?":"Bagi larutan ideal H₂O–etanol yang sama, tekanan separa etanol ialah x(etanol)P°(etanol) dan jumlah tekanan ialah 238 torr. Berapakah pecahan mol etanol dalam fasa wap?","Dissolving 1.32 g anthraquinone in 11.4 g camphor lowers the freezing point by 22.3 °C. Given Kf(camphor) = 40.0 °C kg mol⁻¹, what is the molar mass of anthraquinone?":"Melarutkan 1.32 g antrakuinon dalam 11.4 g kapur barus menurunkan takat beku sebanyak 22.3 °C. Diberi Kf(kapur barus) = 40.0 °C kg mol⁻¹, berapakah jisim molar antrakuinon?","A non-volatile solute lowers the solvent's vapour pressure, so the solution must reach a higher temperature before its vapour pressure equals atmospheric pressure.":"Zat terlarut tidak meruap menurunkan tekanan wap pelarut, maka larutan perlu mencapai suhu yang lebih tinggi sebelum tekanan wapnya menyamai tekanan atmosfera.","Salt creates freezing-point depression. The salt solution remains liquid below 0 °C, so ice begins to melt.":"Garam menyebabkan penurunan takat beku. Larutan garam kekal cair di bawah 0 °C, maka ais mula mencair.","Osmosis describes the net movement of solvent molecules, usually water, through a semipermeable membrane.":"Osmosis menerangkan pergerakan bersih molekul pelarut, biasanya air, melalui membran separa telap.","A non-volatile solute reduces the mole fraction of water at the surface, lowering water's vapour pressure according to Raoult's law.":"Zat terlarut tidak meruap mengurangkan pecahan mol air di permukaan, lalu menurunkan tekanan wap air menurut hukum Raoult.","Density is not a colligative property. The four standard colligative properties depend on the number of dissolved particles.":"Ketumpatan bukan sifat koligatif. Empat sifat koligatif piawai bergantung pada bilangan zarah terlarut.","Because the solution has lower vapour pressure, more heating is required before its vapour pressure can match atmospheric pressure.":"Oleh sebab larutan mempunyai tekanan wap yang lebih rendah, lebih banyak pemanasan diperlukan sebelum tekanan wapnya dapat menyamai tekanan atmosfera.","The surrounding salt solution is hypertonic, so water moves out of the cell by osmosis and the cell shrinks.":"Larutan garam di sekeliling bersifat hipertonik, maka air bergerak keluar daripada sel melalui osmosis dan sel mengecut.","Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.":"Kesan koligatif bergantung pada bilangan zarah zat terlarut yang hadir, bukan pada warna, saiz bekas atau bentuk zarah.","Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.":"Dua mol NaCl menghasilkan bilangan zarah terlarut paling banyak kerana setiap unit formula boleh terurai kepada dua ion.","A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.":"Membran separa telap membenarkan pergerakan pelarut sambil menghalang zarah zat terlarut, lalu menghasilkan aliran bersih yang didorong oleh perbezaan kepekatan.","Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.":"Gunakan n = ΔPV/RT. Penurunan tekanan ialah 580 torr atau 0.763 atm, lalu memberikan kira-kira 3.12 × 10⁻² mol CO₂ yang bertindak balas.","Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.":"Ambil x dan y sebagai mol CaO dan BaO. Selesaikan x + y = 0.0312 dan 56.08x + 153.33y = 4.000; jisim CaO ialah kira-kira 0.451 g.","For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.":"Bagi jisim yang sama, bilangan mol berkadar songsang dengan jisim molar. Etanol mempunyai mol yang lebih sedikit daripada air, lalu memberikan x(etanol) ≈ 0.281.","Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.":"Gunakan hukum Raoult pada kedua-dua cecair: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.","The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.":"Pecahan mol wap ialah yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.","Use ΔTf = Kfm to obtain molality, then convert the solvent mass to kilograms and solve for molar mass; the result is about 208 g mol⁻¹.":"Gunakan ΔTf = Kfm untuk mendapatkan kemolalan, kemudian tukarkan jisim pelarut kepada kilogram dan hitung jisim molar; hasilnya kira-kira 208 g mol⁻¹.","Review the highlighted correct answer and connect it to the lesson concept.":"Semak jawapan betul yang diserlahkan dan hubungkannya dengan konsep pelajaran.","© 2026 SoluEffect360. Premium Self-Directed Chemistry Simulation.":"© 2026 SoluEffect360. Simulasi Kimia Pembelajaran Kendiri Premium.","Interactive Chemistry Learning":"Pembelajaran Kimia Interaktif","Certificate Preview":"Pratonton Sijil","This certificate is proudly presented to":"Sijil ini dengan bangganya disampaikan kepada","For successfully completing the interactive learning modules and Quiz Arena on Colligative Properties.":"Atas kejayaan melengkapkan modul pembelajaran interaktif dan Arena Kuiz mengenai Sifat Koligatif.","Today's Date":"Tarikh Hari Ini","Learning Achievement":"Pencapaian Pembelajaran","Gold seal":"Mohor emas","Close":"Tutup","Certificate Locked":"Sijil Dikunci","Complete all learning modules and finish Quiz Arena to unlock your certificate.":"Lengkapkan semua modul pembelajaran dan tamatkan Arena Kuiz untuk membuka sijil anda.","Certificate Unlocked":"Sijil Dibuka","Your certificate is ready to preview and download.":"Sijil anda sedia untuk dipratonton dan dimuat turun.","Modules":"Modul","Pending":"Belum Selesai","Complete":"Selesai","You have successfully completed SoluEffect360.":"Anda telah berjaya melengkapkan SoluEffect360.","Thank you for exploring the four Colligative Properties through interactive learning.":"Terima kasih kerana meneroka empat Sifat Koligatif melalui pembelajaran interaktif.","Complete all four learning modules and Quiz Arena first.":"Lengkapkan keempat-empat modul pembelajaran dan Arena Kuiz terlebih dahulu.","Certificate download tools are unavailable. Please check your internet connection and try again.":"Alat muat turun sijil tidak tersedia. Sila semak sambungan internet anda dan cuba lagi.","The certificate could not be generated. Please try again.":"Sijil tidak dapat dijana. Sila cuba lagi.","View Learning Points profile":"Lihat profil Mata Pembelajaran"};
     Object.assign(translations, {
+        "If the mole fraction of a non-volatile solute increases, the vapour pressure will:":"Jika pecahan mol zat terlarut tidak meruap meningkat, tekanan wap akan:",
+        "Increasing the non-volatile-solute mole fraction lowers the solvent mole fraction, so the solvent vapour pressure decreases further.":"Peningkatan pecahan mol zat terlarut tidak meruap menurunkan pecahan mol pelarut, maka tekanan wap pelarut semakin berkurang.",
+        "A solution containing a non-volatile solute boils at a higher temperature than the pure solvent because the solute lowers the solvent vapour pressure.":"Larutan yang mengandungi zat terlarut tidak meruap mendidih pada suhu lebih tinggi daripada pelarut tulen kerana zat terlarut menurunkan tekanan wap pelarut.",
+        "Solute Mole Fraction":"Pecahan Mol Zat Terlarut",
+        "Solute Molality":"Kemolalan Zat Terlarut",
+        "Solute Concentration":"Kepekatan Zat Terlarut",
+        "Ideal-solution model used for instructional purposes.":"Model larutan ideal digunakan untuk tujuan pengajaran.",
+        "Dynamic Equilibrium — No Concentration Gradient":"Keseimbangan Dinamik — Tiada Kecerunan Kepekatan",
+        "Investigate how solute mole fraction changes the vapour pressure of a solution.":"Kaji bagaimana pecahan mol zat terlarut mengubah tekanan wap larutan.",
+        "Use Raoult’s law to compare non-volatile and ideal volatile solutions.":"Gunakan hukum Raoult untuk membandingkan larutan tidak meruap dan larutan meruap ideal.",
+        "Investigate how solute molality changes boiling-point elevation.":"Kaji bagaimana kemolalan zat terlarut mengubah peningkatan takat didih.",
+        "Use ΔTb = Kbm to predict the boiling point of a solution.":"Gunakan ΔTb = Kbm untuk meramal takat didih larutan.",
+        "Investigate how solute molality changes freezing-point depression.":"Kaji bagaimana kemolalan zat terlarut mengubah penurunan takat beku.",
+        "Use ΔTf = Kfm to predict the freezing point of a solution.":"Gunakan ΔTf = Kfm untuk meramal takat beku larutan.",
+        "A wet towel soaked in salty water can dry more slowly because dissolved salt lowers the mole fraction and vapour pressure of the solvent, reducing its tendency to evaporate.":"Tuala yang direndam dalam air masin boleh kering lebih perlahan kerana garam terlarut menurunkan pecahan mol dan tekanan wap pelarut, lalu mengurangkan kecenderungannya untuk menyejat.",
+        "Water molecules move in both directions. The net movement causes water to accumulate on the solution side until the pressure difference balances the osmotic tendency.":"Molekul air bergerak dalam kedua-dua arah. Pergerakan bersih menyebabkan air terkumpul di bahagian larutan sehingga perbezaan tekanan mengimbangi kecenderungan osmosis.",
+        "Why does adding a non-volatile solute lower the vapour pressure?":"Mengapakah penambahan zat terlarut tidak meruap menurunkan tekanan wap?",
+        "It lowers the mole fraction of solvent, reducing the solvent partial vapour pressure":"Ia menurunkan pecahan mol pelarut, lalu mengurangkan tekanan wap separa pelarut",
+        "It increases the external pressure":"Ia meningkatkan tekanan luar",
+        "It makes the solvent molecules heavier":"Ia menjadikan molekul pelarut lebih berat",
+        "A 2.00 g non-volatile solute is dissolved in 50.0 g of water and raises the boiling point by 0.40 °C. If Kb = 0.512 °C kg mol⁻¹ and i = 1, what is the molar mass of the solute?":"Sebanyak 2.00 g zat terlarut tidak meruap dilarutkan dalam 50.0 g air dan meningkatkan takat didih sebanyak 0.40 °C. Jika Kb = 0.512 °C kg mol⁻¹ dan i = 1, berapakah jisim molar zat terlarut itu?",
+        "What is the osmotic pressure of a 0.200 mol L⁻¹ glucose solution at 298 K? Use i = 1 and R = 0.0821 L atm mol⁻¹ K⁻¹.":"Berapakah tekanan osmosis bagi larutan glukosa 0.200 mol L⁻¹ pada 298 K? Gunakan i = 1 dan R = 0.0821 L atm mol⁻¹ K⁻¹.",
+        "51.2 g mol⁻¹":"51.2 g mol⁻¹",
+        "102.4 g mol⁻¹":"102.4 g mol⁻¹",
+        "25.6 g mol⁻¹":"25.6 g mol⁻¹",
+        "78.1 g mol⁻¹":"78.1 g mol⁻¹",
+        "4.89 atm":"4.89 atm",
+        "2.45 atm":"2.45 atm",
+        "24.5 atm":"24.5 atm",
+        "0.489 atm":"0.489 atm",
         "Give Feedback":"Beri Maklum Balas",
         "Share your experience to help us improve the learning experience.":"Kongsikan pengalaman anda untuk membantu kami menambah baik pengalaman pembelajaran.",
         "Overall experience":"Pengalaman keseluruhan",
