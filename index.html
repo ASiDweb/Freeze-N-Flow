@@ -7121,6 +7121,21 @@ input[type="range"]::-moz-range-thumb {
 #tab-content-osmosis .osmosis-level-arrow,
 #tab-content-osmosis #osm-height-arrow { display: none !important; }
 </style>
+
+<style id="osmosis-pi-mobile-position-final-fix">
+@media (max-width: 640px) {
+  #tab-content-osmosis #osm-pressure-overlay.osmosis-overlay-badge {
+    left: 76% !important;
+    top: 36% !important;
+    transform: translate(-50%, -50%) !important;
+    font-size: .60rem !important;
+    padding: .30rem .52rem !important;
+    white-space: nowrap !important;
+    box-shadow: 0 5px 14px rgba(16,185,129,.14) !important;
+  }
+}
+</style>
+<style id="osmosis-arrow-hard-off">#tab-content-osmosis #osm-height-arrow{display:none!important}</style>
 </head>
 <body class="bg-gradient-to-b from-[#EEF5FF] via-[#F8FAFC] to-[#FFFFFF] bg-fixed text-slate-800 dark:bg-none dark:bg-[#0B1220] dark:text-slate-200 antialiased transition-colors duration-500 min-h-screen flex flex-col">
 <!-- Global Toast Container for Badges -->
