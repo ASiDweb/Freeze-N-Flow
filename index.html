@@ -7204,6 +7204,261 @@ input[type="range"]::-moz-range-thumb {
   }
 </style>
 
+
+
+<style id="learning-reflection-modal-viewport-fit-fix">
+/* Learning Reflection must always live inside the visible browser viewport. */
+#feedback-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  box-sizing: border-box !important;
+  padding: 20px 16px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  overscroll-behavior: contain !important;
+}
+
+#feedback-modal > div {
+  width: min(42rem, calc(100vw - 32px)) !important;
+  max-width: 42rem !important;
+  max-height: calc(100dvh - 40px) !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-gutter: stable;
+}
+
+#feedback-modal.feedback-success-compact > div {
+  width: min(31rem, calc(100vw - 32px)) !important;
+  max-width: 31rem !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success {
+  padding: .25rem 0 .1rem !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success .w-16.h-16 {
+  width: 3.35rem !important;
+  height: 3.35rem !important;
+  margin-bottom: .95rem !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success .w-16.h-16 .lucide {
+  width: 1.55rem !important;
+  height: 1.55rem !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success h4 {
+  max-width: 24rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem !important;
+  line-height: 1.22 !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success .max-w-md {
+  max-width: 25rem !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: .7rem !important;
+}
+
+#feedback-modal.feedback-success-compact #reflection-success button {
+  margin-top: 1.2rem !important;
+  padding: .7rem 1.15rem !important;
+}
+
+/* Keep the decorative glows clipped while allowing the form to scroll. */
+#feedback-modal > div > .relative.z-10 {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  /* On iPhone, use the overlay as the one native scroller. This prevents
+     tall reflection forms from being vertically centred off-screen. */
+  #feedback-modal {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: max(10px, env(safe-area-inset-top)) 10px max(14px, env(safe-area-inset-bottom)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
+  }
+
+  #feedback-modal > div {
+    width: min(430px, calc(100vw - 20px)) !important;
+    max-width: 430px !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+    overscroll-behavior: auto !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  #feedback-modal.feedback-success-compact {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(14px, env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+  }
+
+  #feedback-modal.feedback-success-compact > div {
+    width: min(24rem, calc(100vw - 24px)) !important;
+    max-width: 24rem !important;
+    overflow: hidden !important;
+  }
+
+  #feedback-modal.feedback-success-compact #reflection-success h4 {
+    font-size: 1.28rem !important;
+  }
+}
+</style>
+
+
+<style id="reflection-compact-insights-layer-final">
+/* Compact post-submit confirmation: intentionally small and focused. */
+#feedback-modal.feedback-success-compact {
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  padding: 16px !important;
+}
+#feedback-modal.feedback-success-compact > div {
+  width: min(26rem, calc(100vw - 32px)) !important;
+  max-width: 26rem !important;
+  max-height: none !important;
+  padding: 1.45rem 1.55rem !important;
+  border-radius: 1.45rem !important;
+  overflow: hidden !important;
+}
+#feedback-modal.feedback-success-compact > div > .absolute {
+  opacity: .55;
+}
+#feedback-modal.feedback-success-compact #reflection-success {
+  padding: 0 !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .w-16.h-16 {
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  border-radius: .9rem !important;
+  margin-bottom: .8rem !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .w-16.h-16 .lucide {
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success h4 {
+  max-width: 21rem !important;
+  margin-inline: auto !important;
+  font-size: 1.08rem !important;
+  line-height: 1.3 !important;
+  letter-spacing: -.015em !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .max-w-md {
+  max-width: 21rem !important;
+  margin-top: 1rem !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .space-y-3 > div {
+  gap: .6rem !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: .55rem !important;
+}
+#feedback-modal.feedback-success-compact .reflection-success-check {
+  width: 1.65rem !important;
+  height: 1.65rem !important;
+}
+#feedback-modal.feedback-success-compact .reflection-success-check .lucide {
+  width: .82rem !important;
+  height: .82rem !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success .text-sm {
+  font-size: .78rem !important;
+  line-height: 1.35 !important;
+}
+#feedback-modal.feedback-success-compact #reflection-success button {
+  margin-top: 1rem !important;
+  padding: .58rem 1rem !important;
+  border-radius: .72rem !important;
+  font-size: .76rem !important;
+}
+
+/* User Insights must always behave as a real top-level modal. */
+#insights-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10050 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  padding: 18px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  pointer-events: auto !important;
+  isolation: isolate !important;
+}
+#insights-modal:not(.hidden) {
+  display: flex !important;
+}
+#insights-modal > div {
+  width: min(34rem, calc(100vw - 36px)) !important;
+  max-width: 34rem !important;
+  margin: auto !important;
+  padding: 1.45rem !important;
+  border-radius: 1.4rem !important;
+  max-height: calc(100dvh - 36px) !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+#insights-modal #insights-grid {
+  gap: .7rem !important;
+}
+#insights-modal .insight-stat {
+  padding: .78rem .85rem !important;
+  border-radius: .85rem !important;
+}
+#insights-modal .insight-value {
+  font-size: 1.08rem !important;
+}
+#insights-modal .insight-label {
+  font-size: .56rem !important;
+  margin-top: .28rem !important;
+}
+
+@media (max-width: 640px) {
+  #feedback-modal.feedback-success-compact > div {
+    width: min(22.5rem, calc(100vw - 28px)) !important;
+    padding: 1.25rem 1.2rem !important;
+  }
+  #feedback-modal.feedback-success-compact #reflection-success h4 {
+    font-size: 1rem !important;
+  }
+  #insights-modal {
+    padding: 12px !important;
+  }
+  #insights-modal > div {
+    width: min(26rem, calc(100vw - 24px)) !important;
+    max-width: 26rem !important;
+    padding: 1.2rem !important;
+    max-height: calc(100dvh - 24px) !important;
+  }
+}
+</style>
+
 </head>
 <body class="bg-gradient-to-b from-[#EEF5FF] via-[#F8FAFC] to-[#FFFFFF] bg-fixed text-slate-800 dark:bg-none dark:bg-[#0B1220] dark:text-slate-200 antialiased transition-colors duration-500 min-h-screen flex flex-col">
 <!-- Global Toast Container for Badges -->
@@ -13346,6 +13601,7 @@ input[type="range"]::-moz-range-thumb {
   function resetReflectionForm(){
     document.getElementById('feedback-form')?.reset(); updateStars(0); Object.keys(likert).forEach(k=>setLikert(k,0)); setFeature(''); clearStatus();
     document.getElementById('feedback-form')?.classList.remove('hidden'); document.getElementById('reflection-success')?.classList.add('hidden');
+    document.getElementById('feedback-modal')?.classList.remove('feedback-success-compact');
   }
   function configureMode(mode,moduleOverride){
     const info=moduleOverride ? {key:moduleOverride,label:MODULE_LABELS[moduleOverride]||moduleOverride} : currentModule();
@@ -13365,7 +13621,9 @@ input[type="range"]::-moz-range-thumb {
 
   window.openFeedbackModal=function(mode='auto',moduleOverride=null){
     const modal=document.getElementById('feedback-modal'); if(!modal)return;
+    if (modal.parentElement !== document.body) document.body.appendChild(modal);
     resetReflectionForm(); configureMode(mode,moduleOverride); modal.classList.remove('hidden'); modal.classList.add('flex'); modal.scrollTop=0;
+    const card=modal.querySelector(':scope > div'); if(card) card.scrollTop=0;
     requestAnimationFrame(()=>{ modal.classList.remove('opacity-0'); const card=modal.querySelector(':scope > div'); card?.classList.remove('scale-95'); card?.classList.add('scale-100'); });
   };
 
@@ -13394,6 +13652,7 @@ input[type="range"]::-moz-range-thumb {
     if(FEEDBACK_CONFIG.endpoint&&navigator.onLine){ try{ sent=await transmitFeedback(payload); if(sent)removeQueuedFeedback(payload.id); }catch(e){ console.warn('Reflection queued for later sync.',e); } }
     rememberSubmission(final?'final':reflectionModuleKey);
     document.getElementById('feedback-form')?.classList.add('hidden'); document.getElementById('reflection-success')?.classList.remove('hidden');
+    document.getElementById('feedback-modal')?.classList.add('feedback-success-compact');
     if(btn)btn.disabled=false; if(window.lucide?.createIcons) lucide.createIcons();
   }
 
@@ -13424,8 +13683,12 @@ input[type="range"]::-moz-range-thumb {
     });
   }
   window.openUserInsights=async function(){
-    const modal=document.getElementById('insights-modal'); if(!modal)return; modal.classList.remove('hidden'); modal.classList.add('flex');
-    requestAnimationFrame(()=>{ modal.classList.remove('opacity-0'); const card=modal.querySelector(':scope > div'); card?.classList.remove('scale-95'); card?.classList.add('scale-100'); });
+    const modal=document.getElementById('insights-modal'); if(!modal)return;
+    if(modal.parentElement!==document.body) document.body.appendChild(modal);
+    modal.style.zIndex='10050';
+    modal.classList.remove('hidden'); modal.classList.add('flex');
+    modal.scrollTop=0;
+    requestAnimationFrame(()=>{ modal.classList.remove('opacity-0'); const card=modal.querySelector(':scope > div'); if(card){ card.scrollTop=0; card.classList.remove('scale-95'); card.classList.add('scale-100'); } });
     const status=document.getElementById('insights-status'); if(status)status.textContent=t('Loading learner feedback…');
     try{ const data=await loadInsightsJSONP(); if(data?.success===false)throw new Error(data.error||'Unable to load insights'); renderInsights(data); }
     catch(e){ setInsight('insight-overall','—');setInsight('insight-understanding','—');setInsight('insight-feature','—');setInsight('insight-module','—'); if(status)status.textContent=t('Update the supplied Apps Script and redeploy it to enable aggregate User Insights.'); }
