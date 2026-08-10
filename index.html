@@ -7159,6 +7159,51 @@ input[type="range"]::-moz-range-thumb {
 }
 </style>
 <style id="osmosis-arrow-hard-off">#tab-content-osmosis #osm-height-arrow{display:none!important}</style>
+
+<style id="learning-reflection-upgrade">
+  .reflection-context-chip {
+    display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .65rem;
+    border-radius: 999px; font: 800 .62rem/1 'Poppins',sans-serif; letter-spacing:.055em;
+    text-transform: uppercase; color: rgb(37 99 235); background: rgba(37,99,235,.08);
+    border: 1px solid rgba(37,99,235,.18);
+  }
+  .dark .reflection-context-chip { color: rgb(147 197 253); background: rgba(37,99,235,.13); }
+  .reflection-likert-scale { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.42rem; }
+  .reflection-likert-btn {
+    min-height: 2.55rem; border-radius: 12px; border:1px solid rgb(226 232 240);
+    background:rgb(248 250 252); color:rgb(100 116 139); font-size:.72rem; font-weight:800;
+    transition:all .18s ease;
+  }
+  .dark .reflection-likert-btn { background:rgba(15,23,42,.7); border-color:rgb(51 65 85); color:rgb(148 163 184); }
+  .reflection-likert-btn.is-selected { color:#fff; border-color:transparent; background:linear-gradient(135deg,#2563eb,#7c3aed); box-shadow:0 7px 18px rgba(124,58,237,.22); }
+  .reflection-scale-ends { display:flex; justify-content:space-between; gap:1rem; margin-top:.42rem; color:rgb(148 163 184); font-size:.61rem; font-weight:650; }
+  .reflection-feature-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; }
+  .reflection-feature-btn {
+    min-height:2.7rem; padding:.6rem .72rem; border-radius:12px; border:1px solid rgb(226 232 240);
+    background:rgb(248 250 252); color:rgb(71 85 105); font-size:.72rem; font-weight:750; text-align:left;
+    display:flex; align-items:center; gap:.48rem; transition:all .18s ease;
+  }
+  .dark .reflection-feature-btn { background:rgba(15,23,42,.65); border-color:rgb(51 65 85); color:rgb(203 213 225); }
+  .reflection-feature-btn.is-selected { color:rgb(37 99 235); border-color:rgba(37,99,235,.36); background:rgba(37,99,235,.08); box-shadow:0 7px 18px rgba(37,99,235,.1); }
+  .dark .reflection-feature-btn.is-selected { color:rgb(147 197 253); background:rgba(37,99,235,.15); }
+  .reflection-question-card { padding:1rem; border-radius:16px; border:1px solid rgba(148,163,184,.17); background:rgba(248,250,252,.68); }
+  .dark .reflection-question-card { background:rgba(2,6,23,.28); border-color:rgba(255,255,255,.07); }
+  .reflection-success-check { width:2.15rem;height:2.15rem;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(16,185,129,.12);color:rgb(5 150 105);flex:0 0 auto; }
+  .insight-stat { padding:1rem; border-radius:16px; border:1px solid rgba(148,163,184,.16); background:rgba(248,250,252,.72); }
+  .dark .insight-stat { background:rgba(2,6,23,.32); border-color:rgba(255,255,255,.07); }
+  .insight-value { font:800 1.35rem/1.1 'Poppins',sans-serif; color:rgb(15 23 42); }
+  .dark .insight-value { color:#fff; }
+  .insight-label { margin-top:.35rem; font-size:.64rem; line-height:1.35; font-weight:750; color:rgb(100 116 139); text-transform:uppercase; letter-spacing:.055em; }
+  @media (max-width:640px) {
+    #feedback-modal > div { max-width: calc(100vw - 1.25rem); }
+    .reflection-question-card { padding:.82rem; }
+    .reflection-feature-grid { grid-template-columns:1fr 1fr; gap:.42rem; }
+    .reflection-feature-btn { min-height:2.45rem; padding:.5rem .55rem; font-size:.66rem; }
+    .reflection-likert-btn { min-height:2.35rem; font-size:.68rem; }
+    .reflection-scale-ends { font-size:.57rem; }
+  }
+</style>
+
 </head>
 <body class="bg-gradient-to-b from-[#EEF5FF] via-[#F8FAFC] to-[#FFFFFF] bg-fixed text-slate-800 dark:bg-none dark:bg-[#0B1220] dark:text-slate-200 antialiased transition-colors duration-500 min-h-screen flex flex-col">
 <!-- Global Toast Container for Badges -->
@@ -7188,30 +7233,27 @@ input[type="range"]::-moz-range-thumb {
 <div class="absolute pointer-events-none hidden z-[100] px-3 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold rounded-[10px] shadow-2xl transform -translate-x-1/2 -translate-y-full mt-[-12px] whitespace-nowrap border border-slate-700 dark:border-slate-200" id="sim-tooltip">
 </div>
 <!-- Modals -->
-<!-- USER FEEDBACK: Integrated feedback modal -->
+<!-- USER FEEDBACK: Learning Reflection -->
 <div class="fixed inset-0 z-[275] hidden items-center justify-center bg-slate-900/60 backdrop-blur-md opacity-0 transition-opacity duration-500 overflow-y-auto py-6" id="feedback-modal">
 <div class="bg-white dark:bg-[#131E32] rounded-3xl p-6 sm:p-8 max-w-2xl w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-500 relative overflow-hidden z-10 border border-slate-200 dark:border-white/10">
 <div class="absolute -top-28 -right-20 w-56 h-56 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
 <div class="absolute -bottom-32 -left-20 w-64 h-64 bg-stemPurple-500/10 rounded-full blur-3xl pointer-events-none"></div>
 <div class="relative z-10">
-<div class="flex items-start justify-between gap-4 mb-6">
-<div class="flex items-start gap-3">
-<div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-500 to-stemPurple-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/20 shrink-0">
-<i class="w-5 h-5" data-lucide="message-square-heart"></i>
-</div>
-<div>
+<div class="flex items-start justify-between gap-4 mb-5">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-500 to-stemPurple-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/20 shrink-0"><i class="w-5 h-5" data-lucide="brain-circuit"></i></div>
+<div class="min-w-0">
 <div class="text-[10px] font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400 mb-1">SoluEffect360</div>
-<h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">Give Feedback</h3>
-<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Share your experience to help us improve the learning experience.</p>
+<h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight" id="reflection-title">Learning Reflection</h3>
+<p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1" id="reflection-subtitle">Tell us what supported your learning.</p>
+</div></div>
+<button aria-label="Close" class="p-2.5 rounded-xl text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0" onclick="closeModal('feedback-modal')" type="button"><i class="w-5 h-5" data-lucide="x"></i></button>
 </div>
-</div>
-<button aria-label="Close" class="p-2.5 rounded-xl text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0" onclick="closeModal('feedback-modal')" type="button">
-<i class="w-5 h-5" data-lucide="x"></i>
-</button>
-</div>
-<form class="space-y-5" id="feedback-form" novalidate>
+<div class="mb-4"><span class="reflection-context-chip"><i class="w-3.5 h-3.5" data-lucide="book-open-check"></i><span id="reflection-context">Vapour Pressure</span></span></div>
+
+<form class="space-y-4" id="feedback-form" novalidate>
 <div>
-<label class="block text-sm font-extrabold text-slate-800 dark:text-slate-200 mb-2">Overall experience <span class="text-red-500">*</span></label>
+<label class="block text-sm font-extrabold text-slate-800 dark:text-slate-200 mb-2" id="reflection-rating-question">How was your learning experience? <span class="text-red-500">*</span></label>
 <div class="flex items-center gap-1" id="feedback-rating" role="radiogroup" aria-label="Overall experience rating">
 <button type="button" class="feedback-star p-1.5 rounded-lg text-slate-300 dark:text-slate-600 hover:text-amber-400 transition-colors" data-rating="1" aria-label="1 star"><i class="w-7 h-7" data-lucide="star"></i></button>
 <button type="button" class="feedback-star p-1.5 rounded-lg text-slate-300 dark:text-slate-600 hover:text-amber-400 transition-colors" data-rating="2" aria-label="2 stars"><i class="w-7 h-7" data-lucide="star"></i></button>
@@ -7219,55 +7261,53 @@ input[type="range"]::-moz-range-thumb {
 <button type="button" class="feedback-star p-1.5 rounded-lg text-slate-300 dark:text-slate-600 hover:text-amber-400 transition-colors" data-rating="4" aria-label="4 stars"><i class="w-7 h-7" data-lucide="star"></i></button>
 <button type="button" class="feedback-star p-1.5 rounded-lg text-slate-300 dark:text-slate-600 hover:text-amber-400 transition-colors" data-rating="5" aria-label="5 stars"><i class="w-7 h-7" data-lucide="star"></i></button>
 <span class="ml-2 text-xs font-bold text-slate-500 dark:text-slate-400" id="feedback-rating-label">Select a rating</span>
-</div>
-<input id="feedback-rating-value" name="rating" type="hidden" value=""/>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div>
-<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="feedback-module">Which part did you use? <span class="text-red-500">*</span></label>
-<select class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500" id="feedback-module" name="module" required>
-<option value="">Choose a module</option>
-<option value="Vapour Pressure">Vapour Pressure</option>
-<option value="Boiling Point">Boiling Point</option>
-<option value="Freezing Point">Freezing Point</option>
-<option value="Osmosis">Osmosis</option>
-<option value="Quiz Arena">Quiz Arena</option>
-<option value="Whole Website">Whole Website</option>
-</select>
+</div><input id="feedback-rating-value" type="hidden" value=""/></div>
+
+<div id="module-reflection-fields" class="space-y-4">
+<div class="reflection-question-card">
+<label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">This simulation helped me understand the concept better. <span class="text-red-500">*</span></label>
+<div class="reflection-likert-scale" data-likert-group="understanding">
+<button class="reflection-likert-btn" type="button" data-value="1">1</button><button class="reflection-likert-btn" type="button" data-value="2">2</button><button class="reflection-likert-btn" type="button" data-value="3">3</button><button class="reflection-likert-btn" type="button" data-value="4">4</button><button class="reflection-likert-btn" type="button" data-value="5">5</button>
+</div><div class="reflection-scale-ends"><span>Strongly Disagree</span><span>Strongly Agree</span></div>
 </div>
 <div>
-<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="feedback-understanding">Was it easy to understand? <span class="text-red-500">*</span></label>
-<select class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500" id="feedback-understanding" name="understanding" required>
-<option value="">Choose an answer</option>
-<option value="Yes">Yes</option>
-<option value="Somewhat">Somewhat</option>
-<option value="No">No</option>
-</select>
+<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2">What helped you most? <span class="text-red-500">*</span></label>
+<div class="reflection-feature-grid" id="reflection-feature-grid">
+<button type="button" class="reflection-feature-btn" data-feature="Particle Simulation"><i class="w-4 h-4 text-brand-500" data-lucide="atom"></i><span>Particle Simulation</span></button>
+<button type="button" class="reflection-feature-btn" data-feature="Variable Controls"><i class="w-4 h-4 text-stemPurple-500" data-lucide="sliders-horizontal"></i><span>Variable Controls</span></button>
+<button type="button" class="reflection-feature-btn" data-feature="Explanation"><i class="w-4 h-4 text-emerald-500" data-lucide="book-open-text"></i><span>Explanation</span></button>
+<button type="button" class="reflection-feature-btn" data-feature="Quiz"><i class="w-4 h-4 text-amber-500" data-lucide="circle-help"></i><span>Quiz</span></button>
+</div></div>
+<div><label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="reflection-comment">One thing we can improve <span class="font-medium text-slate-400">(optional)</span></label><textarea class="w-full min-h-[82px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 resize-y" id="reflection-comment" maxlength="500" placeholder="Optional comment..."></textarea></div>
 </div>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="feedback-liked">What did you like most?</label>
-<textarea class="w-full min-h-[92px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 resize-y" id="feedback-liked" maxlength="500" name="liked" placeholder="Tell us what worked well..."></textarea>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="feedback-improve">What should we improve?</label>
-<textarea class="w-full min-h-[92px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 resize-y" id="feedback-improve" maxlength="500" name="improve" placeholder="Share a suggestion or issue..."></textarea>
-</div>
-<div>
-<label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="feedback-name">Name / nickname <span class="font-medium text-slate-400">(optional)</span></label>
-<input class="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500" id="feedback-name" maxlength="60" name="name" placeholder="Optional" type="text"/>
+
+<div id="final-reflection-fields" class="hidden space-y-4">
+<div class="reflection-question-card"><label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">SoluEffect360 was easy to navigate. <span class="text-red-500">*</span></label><div class="reflection-likert-scale" data-likert-group="navigation"><button class="reflection-likert-btn" type="button" data-value="1">1</button><button class="reflection-likert-btn" type="button" data-value="2">2</button><button class="reflection-likert-btn" type="button" data-value="3">3</button><button class="reflection-likert-btn" type="button" data-value="4">4</button><button class="reflection-likert-btn" type="button" data-value="5">5</button></div><div class="reflection-scale-ends"><span>Strongly Disagree</span><span>Strongly Agree</span></div></div>
+<div class="reflection-question-card"><label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">The simulations were scientifically clear. <span class="text-red-500">*</span></label><div class="reflection-likert-scale" data-likert-group="scientificClarity"><button class="reflection-likert-btn" type="button" data-value="1">1</button><button class="reflection-likert-btn" type="button" data-value="2">2</button><button class="reflection-likert-btn" type="button" data-value="3">3</button><button class="reflection-likert-btn" type="button" data-value="4">4</button><button class="reflection-likert-btn" type="button" data-value="5">5</button></div><div class="reflection-scale-ends"><span>Strongly Disagree</span><span>Strongly Agree</span></div></div>
+<div class="reflection-question-card"><label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">I would recommend SoluEffect360 to other students. <span class="text-red-500">*</span></label><div class="reflection-likert-scale" data-likert-group="recommend"><button class="reflection-likert-btn" type="button" data-value="1">1</button><button class="reflection-likert-btn" type="button" data-value="2">2</button><button class="reflection-likert-btn" type="button" data-value="3">3</button><button class="reflection-likert-btn" type="button" data-value="4">4</button><button class="reflection-likert-btn" type="button" data-value="5">5</button></div><div class="reflection-scale-ends"><span>Strongly Disagree</span><span>Strongly Agree</span></div></div>
+<div><label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="final-liked">What did you like most?</label><textarea class="w-full min-h-[78px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 resize-y" id="final-liked" maxlength="500" placeholder="Tell us what worked well..."></textarea></div>
+<div><label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2" for="final-improve">What should we improve?</label><textarea class="w-full min-h-[78px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0B1220] text-slate-800 dark:text-slate-200 px-3.5 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 resize-y" id="final-improve" maxlength="500" placeholder="Share a suggestion..."></textarea></div>
 </div>
 <div class="hidden rounded-xl border px-4 py-3 text-sm font-semibold" id="feedback-status" role="status" aria-live="polite"></div>
-<div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-1">
-<p class="text-[10px] text-slate-400 dark:text-slate-500 font-medium leading-relaxed">Only the information entered in this form is submitted.</p>
-<button class="btn-modern px-6 py-3 text-sm font-bold flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed" id="feedback-submit" type="submit">
-<i class="w-4 h-4" data-lucide="send"></i><span>Submit Feedback</span>
-</button>
-</div>
+<div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-1"><p class="text-[10px] text-slate-400 dark:text-slate-500 font-medium leading-relaxed">Learner feedback is self-reported and used for continuous improvement.</p><button class="btn-modern px-6 py-3 text-sm font-bold flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed" id="feedback-submit" type="submit"><i class="w-4 h-4" data-lucide="send"></i><span id="reflection-submit-label">Submit Reflection</span></button></div>
 </form>
+
+<div class="hidden py-4" id="reflection-success">
+<div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-5"><i class="w-8 h-8" data-lucide="badge-check"></i></div>
+<h4 class="text-xl font-extrabold text-slate-900 dark:text-white text-center font-heading">Thanks for helping us improve SoluEffect360!</h4>
+<div class="mt-5 space-y-3 max-w-md mx-auto"><div class="flex items-center gap-3"><span class="reflection-success-check"><i class="w-4 h-4" data-lucide="check"></i></span><span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Learning experience recorded</span></div><div class="flex items-center gap-3"><span class="reflection-success-check"><i class="w-4 h-4" data-lucide="check"></i></span><span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Your reflection contributes to future improvements</span></div></div>
+<button type="button" class="mt-6 mx-auto flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold" onclick="closeModal('feedback-modal')">Done</button>
 </div>
-</div>
-</div>
+</div></div></div>
+
+<!-- USER INSIGHTS: self-reported learner feedback analytics -->
+<div class="fixed inset-0 z-[280] hidden items-center justify-center bg-slate-900/65 backdrop-blur-md opacity-0 transition-opacity duration-500 overflow-y-auto py-6" id="insights-modal">
+<div class="bg-white dark:bg-[#131E32] rounded-3xl p-6 sm:p-8 max-w-2xl w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-500 relative overflow-hidden z-10 border border-slate-200 dark:border-white/10">
+<div class="flex items-start justify-between gap-4 mb-6"><div><div class="text-[10px] font-bold uppercase tracking-widest text-stemPurple-600 dark:text-stemPurple-400 mb-1">Learner Feedback • Self-reported</div><h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">User Insights</h3><p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Learning experience analytics from submitted reflections.</p></div><button aria-label="Close" class="p-2.5 rounded-xl text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800" onclick="closeModal('insights-modal')"><i class="w-5 h-5" data-lucide="x"></i></button></div>
+<div class="grid grid-cols-2 gap-3 sm:gap-4" id="insights-grid"><div class="insight-stat"><div class="insight-value" id="insight-overall">—</div><div class="insight-label">Overall Experience</div></div><div class="insight-stat"><div class="insight-value" id="insight-understanding">—</div><div class="insight-label">Agree Simulation Helped Understanding</div></div><div class="insight-stat"><div class="insight-value text-base" id="insight-feature">—</div><div class="insight-label">Most Useful Feature</div></div><div class="insight-stat"><div class="insight-value text-base" id="insight-module">—</div><div class="insight-label">Most Reflected Module</div></div></div>
+<div class="mt-4 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-3 text-xs text-slate-500 dark:text-slate-400" id="insights-status">Loading learner feedback…</div>
+<p class="mt-3 text-[10px] leading-relaxed text-slate-400 dark:text-slate-500">These metrics describe self-reported learner experience. They are not labelled as learning impact or proof of mastery.</p>
+</div></div>
 <!-- CERTIFICATE COMPLETION: Celebration Modal -->
 <div class="fixed inset-0 z-[200] hidden items-center justify-center bg-slate-900/55 dark:bg-slate-900/75 backdrop-blur-md opacity-0 transition-opacity duration-500" id="completion-modal">
 <div class="bg-white dark:bg-[#131E32] rounded-3xl p-8 sm:p-9 max-w-md w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-500 text-center relative overflow-hidden z-10 border border-slate-200 dark:border-white/10">
@@ -7282,6 +7322,7 @@ input[type="range"]::-moz-range-thumb {
 <button class="w-full py-3.5 px-4 btn-modern text-sm font-semibold shadow-lg relative z-10 flex items-center justify-center gap-2" onclick="viewCertificateFromCelebration()">
 <i class="w-4 h-4" data-lucide="file-check-2"></i><span>View Certificate</span>
 </button>
+<button class="w-full mt-3 py-3 px-4 rounded-[14px] bg-white dark:bg-[#1e293b] text-stemPurple-600 dark:text-stemPurple-300 text-sm font-bold border border-stemPurple-200 dark:border-stemPurple-500/25 relative z-10 flex items-center justify-center gap-2" onclick="closeModal('completion-modal'); setTimeout(() => openFeedbackModal('final'), 520)"><i class="w-4 h-4" data-lucide="message-square-heart"></i><span>Share Final Reflection</span></button>
 </div>
 <canvas class="absolute inset-0 pointer-events-none z-0" id="confetti-canvas"></canvas>
 </div>
@@ -7487,7 +7528,8 @@ input[type="range"]::-moz-range-thumb {
 <div class="absolute right-0 mt-2 w-52 bg-white dark:bg-[#131E32] rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 hidden flex-col overflow-hidden z-50 transform origin-top-right transition-all scale-95 opacity-0" id="help-dropdown">
 <button class="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full border-b border-slate-100 dark:border-slate-700 flex items-center gap-2" onclick="forceStartTour(); toggleHelpMenu();"><i class="w-4 h-4 text-brand-500" data-lucide="map"></i><span>Take the Tour Again</span></button>
 <button class="md:hidden text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full border-b border-slate-100 dark:border-slate-700 flex items-center gap-2" onclick="openBadgesModal(); toggleHelpMenu();"><i class="w-4 h-4 text-amber-500" data-lucide="medal"></i><span>My Badges</span></button>
-<button class="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full border-b border-slate-100 dark:border-slate-700 flex items-center gap-2" onclick="openFeedbackModal(); toggleHelpMenu();"><i class="w-4 h-4 text-stemPurple-500" data-lucide="message-square-text"></i><span>Give Feedback</span></button>
+<button class="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full border-b border-slate-100 dark:border-slate-700 flex items-center gap-2" onclick="openFeedbackModal(); toggleHelpMenu();"><i class="w-4 h-4 text-stemPurple-500" data-lucide="message-square-text"></i><span>Learning Reflection</span></button>
+<button class="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full border-b border-slate-100 dark:border-slate-700 flex items-center gap-2" onclick="openUserInsights(); toggleHelpMenu();"><i class="w-4 h-4 text-emerald-500" data-lucide="chart-no-axes-combined"></i><span>User Insights</span></button>
 <button class="text-left px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors w-full flex items-center gap-2" onclick="openAboutModal(); toggleHelpMenu();"><i class="w-4 h-4 text-slate-500" data-lucide="info"></i><span>About SoluEffect360</span></button>
 </div>
 </div>
@@ -8592,7 +8634,7 @@ input[type="range"]::-moz-range-thumb {
                 © 2026 SoluEffect360. Premium Self-Directed Chemistry Simulation.
             </p>
 <button class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-300 dark:hover:border-brand-500/40 transition-all flex items-center gap-2 shadow-sm" onclick="openFeedbackModal()" type="button" id="tour-feedback-button">
-<i class="w-4 h-4" data-lucide="message-square-heart"></i><span>Give Feedback</span>
+<i class="w-4 h-4" data-lucide="message-square-heart"></i><span>Learning Reflection</span>
 </button>
 </div>
 </footer>
@@ -9639,10 +9681,10 @@ input[type="range"]::-moz-range-thumb {
             },
             {
                 target: 'tour-feedback-button', view: 'quiz', fallbackTarget: 'quiz-arena-section',
-                title: 'Give Feedback',
-                desc: 'Share a quick rating or suggestion here.',
+                title: 'Learning Reflection',
+                desc: 'Capture a short learner reflection or final learning-experience evaluation here.',
                 titleMs: 'Beri Maklum Balas',
-                descMs: 'Kongsi rating atau cadangan ringkas di sini.'
+                descMs: 'Rekod refleksi pembelajaran ringkas atau penilaian pengalaman keseluruhan di sini.'
             }
         ];
 
@@ -11087,7 +11129,11 @@ input[type="range"]::-moz-range-thumb {
             const keys = Object.keys(learningProgress);
             keys.forEach(key => {
                 const state = learningProgress[key];
+                const wasCompleted = Boolean(state.completed);
                 state.completed = state.visited && state.controlAdjusted && state.quizPassed;
+                if (state.completed && !wasCompleted && typeof window.maybePromptLearningReflection === 'function') {
+                    window.maybePromptLearningReflection(key);
+                }
                 if (state.completed) {
                     completedCount++;
                     const shortKey = Object.keys(tabMap).find(k => tabMap[k] === key);
@@ -13250,201 +13296,150 @@ input[type="range"]::-moz-range-thumb {
 
 <script id="fnf-feedback-script">
 (() => {
-    "use strict";
+  "use strict";
+  const FEEDBACK_CONFIG = {
+    endpoint: 'https://script.google.com/macros/s/AKfycbxY7BSUn15GUenR-lUrlumxkEw5WDbDJxWXlBK3-eCMPd1PvB6M06dZwFSDQcy9Nr6L/exec',
+    queueKey: 'fnf_feedback_queue_v1',
+    maxQueuedItems: 50,
+    promptedKey: 'solueffect360_reflection_prompted_v1',
+    submittedKey: 'solueffect360_reflection_submitted_v1'
+  };
+  const MODULE_LABELS = { 'vapor-pressure':'Vapour Pressure', 'boiling-point':'Boiling Point', 'freezing-point':'Freezing Point', 'osmosis':'Osmosis' };
+  let feedbackRating = 0;
+  let reflectionMode = 'module';
+  let reflectionModuleKey = 'vapor-pressure';
+  let selectedFeature = '';
+  let likert = { understanding:0, navigation:0, scientificClarity:0, recommend:0 };
 
-    // Paste the deployed Google Apps Script Web App URL here.
-    // Until configured, feedback is safely queued in this browser.
-    const FEEDBACK_CONFIG = {
-        endpoint: 'https://script.google.com/macros/s/AKfycbxY7BSUn15GUenR-lUrlumxkEw5WDbDJxWXlBK3-eCMPd1PvB6M06dZwFSDQcy9Nr6L/exec',
-        queueKey: 'fnf_feedback_queue_v1',
-        maxQueuedItems: 50
+  const t = (value) => window.FNF_I18N?.t ? window.FNF_I18N.t(value) : value;
+  function readJSON(key, fallback) { try { const v=JSON.parse(localStorage.getItem(key)||''); return v ?? fallback; } catch(_) { return fallback; } }
+  function writeJSON(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch(_) {} }
+  function getQueue(){ const v=readJSON(FEEDBACK_CONFIG.queueKey,[]); return Array.isArray(v)?v:[]; }
+  function saveQueue(q){ writeJSON(FEEDBACK_CONFIG.queueKey,q.slice(-FEEDBACK_CONFIG.maxQueuedItems)); }
+  function queueFeedback(p){ const q=getQueue(); if(!q.some(x=>x.id===p.id))q.push(p); saveQueue(q); }
+  function removeQueuedFeedback(id){ saveQueue(getQueue().filter(x=>x.id!==id)); }
+  function createFeedbackId(){ return window.crypto?.randomUUID ? crypto.randomUUID() : `reflection-${Date.now()}-${Math.random().toString(36).slice(2,10)}`; }
+
+  function isQuizVisible(){ const el=document.getElementById('quiz-arena-section'); return el && !el.classList.contains('hidden'); }
+  function currentModule(){
+    if(isQuizVisible()) return { key:'quiz-arena', label:'Quiz Arena' };
+    const key = window.activeTabId || (typeof activeTabId !== 'undefined' ? activeTabId : 'vapor-pressure');
+    return { key, label: MODULE_LABELS[key] || 'Vapour Pressure' };
+  }
+  function clearStatus(){ document.getElementById('feedback-status')?.classList.add('hidden'); }
+  function showStatus(message, kind='error'){
+    const box=document.getElementById('feedback-status'); if(!box)return;
+    const map={error:'border-red-200 dark:border-red-500/25 bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300',info:'border-brand-200 dark:border-brand-500/25 bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300'};
+    box.className=`rounded-xl border px-4 py-3 text-sm font-semibold ${map[kind]||map.error}`; box.textContent=t(message); box.classList.remove('hidden');
+  }
+  function updateStars(value){
+    feedbackRating=Math.max(0,Math.min(5,Number(value)||0));
+    const input=document.getElementById('feedback-rating-value'); if(input)input.value=feedbackRating?String(feedbackRating):'';
+    document.querySelectorAll('.feedback-star').forEach(btn=>{ const active=Number(btn.dataset.rating)<=feedbackRating; btn.classList.toggle('text-amber-400',active); btn.classList.toggle('text-slate-300',!active); btn.classList.toggle('dark:text-slate-600',!active); btn.setAttribute('aria-checked',String(Number(btn.dataset.rating)===feedbackRating)); const svg=btn.querySelector('svg'); if(svg)svg.classList.toggle('fill-current',active); });
+    const label=document.getElementById('feedback-rating-label'); if(label)label.textContent=feedbackRating?`${feedbackRating} / 5`:t('Select a rating');
+  }
+  function setLikert(group,value){
+    value=Number(value)||0; likert[group]=value;
+    document.querySelectorAll(`[data-likert-group="${group}"] .reflection-likert-btn`).forEach(btn=>btn.classList.toggle('is-selected',Number(btn.dataset.value)===value));
+  }
+  function setFeature(value){ selectedFeature=value||''; document.querySelectorAll('.reflection-feature-btn').forEach(btn=>btn.classList.toggle('is-selected',btn.dataset.feature===selectedFeature)); }
+  function resetReflectionForm(){
+    document.getElementById('feedback-form')?.reset(); updateStars(0); Object.keys(likert).forEach(k=>setLikert(k,0)); setFeature(''); clearStatus();
+    document.getElementById('feedback-form')?.classList.remove('hidden'); document.getElementById('reflection-success')?.classList.add('hidden');
+  }
+  function configureMode(mode,moduleOverride){
+    const info=moduleOverride ? {key:moduleOverride,label:MODULE_LABELS[moduleOverride]||moduleOverride} : currentModule();
+    const eligible = typeof window.hasCompletedCourse !== 'undefined' && window.hasCompletedCourse && window.hasCompletedQuiz;
+    reflectionMode = mode==='final' ? 'final' : (mode==='auto' && isQuizVisible() && eligible ? 'final' : 'module');
+    reflectionModuleKey=info.key;
+    const final=reflectionMode==='final';
+    document.getElementById('module-reflection-fields')?.classList.toggle('hidden',final);
+    document.getElementById('final-reflection-fields')?.classList.toggle('hidden',!final);
+    const title=document.getElementById('reflection-title'); const subtitle=document.getElementById('reflection-subtitle'); const context=document.getElementById('reflection-context'); const rq=document.getElementById('reflection-rating-question'); const submit=document.getElementById('reflection-submit-label');
+    if(title) title.textContent=t(final?'Final Learning Reflection':'Learning Reflection');
+    if(subtitle) subtitle.textContent=t(final?'Tell us about your overall SoluEffect360 experience.':'Tell us what supported your learning.');
+    if(context) context.textContent=t(final?'Whole SoluEffect360':info.label);
+    if(rq) rq.innerHTML=`${t(final?'Overall experience':'How was your learning experience?')} <span class="text-red-500">*</span>`;
+    if(submit) submit.textContent=t(final?'Submit Final Reflection':'Submit Reflection');
+  }
+
+  window.openFeedbackModal=function(mode='auto',moduleOverride=null){
+    const modal=document.getElementById('feedback-modal'); if(!modal)return;
+    resetReflectionForm(); configureMode(mode,moduleOverride); modal.classList.remove('hidden'); modal.classList.add('flex'); modal.scrollTop=0;
+    requestAnimationFrame(()=>{ modal.classList.remove('opacity-0'); const card=modal.querySelector(':scope > div'); card?.classList.remove('scale-95'); card?.classList.add('scale-100'); });
+  };
+
+  async function transmitFeedback(payload){ if(!FEEDBACK_CONFIG.endpoint)return false; const body=new URLSearchParams(); Object.entries(payload).forEach(([k,v])=>body.set(k,v==null?'':String(v))); await fetch(FEEDBACK_CONFIG.endpoint,{method:'POST',mode:'no-cors',cache:'no-store',body}); return true; }
+  async function flushFeedbackQueue(){ if(!FEEDBACK_CONFIG.endpoint||!navigator.onLine)return; for(const item of getQueue()){ try{ await transmitFeedback(item); removeQueuedFeedback(item.id); }catch(e){ console.warn('Reflection sync paused.',e); break; } } }
+
+  function rememberSubmission(key){ const s=readJSON(FEEDBACK_CONFIG.submittedKey,{}); s[key]=true; writeJSON(FEEDBACK_CONFIG.submittedKey,s); }
+  async function handleSubmit(event){
+    event.preventDefault(); clearStatus();
+    const final=reflectionMode==='final';
+    if(!feedbackRating){ showStatus('Please select an experience rating.'); return; }
+    if(!final && (!likert.understanding || !selectedFeature)){ showStatus('Please complete the learning statement and most useful feature.'); return; }
+    if(final && (!likert.navigation || !likert.scientificClarity || !likert.recommend)){ showStatus('Please complete all three learning-experience statements.'); return; }
+    const btn=document.getElementById('feedback-submit'); if(btn)btn.disabled=true;
+    const moduleLabel=final?'Whole Website':(MODULE_LABELS[reflectionModuleKey]|| (reflectionModuleKey==='quiz-arena'?'Quiz Arena':reflectionModuleKey));
+    const payload={
+      id:createFeedbackId(), submittedAt:new Date().toISOString(), name:'', rating:feedbackRating, module:moduleLabel,
+      understanding: final ? likert.scientificClarity : likert.understanding,
+      liked: final ? (document.getElementById('final-liked')?.value||'').trim().slice(0,500) : selectedFeature,
+      improve: final ? (document.getElementById('final-improve')?.value||'').trim().slice(0,500) : (document.getElementById('reflection-comment')?.value||'').trim().slice(0,500),
+      language:document.documentElement.lang||'en', source:'SoluEffect360 Learning Reflection',
+      reflectionType:final?'Final':'Module', mostUseful:final?'':selectedFeature,
+      navigation:final?likert.navigation:'', scientificClarity:final?likert.scientificClarity:'', recommend:final?likert.recommend:''
     };
+    queueFeedback(payload); let sent=false;
+    if(FEEDBACK_CONFIG.endpoint&&navigator.onLine){ try{ sent=await transmitFeedback(payload); if(sent)removeQueuedFeedback(payload.id); }catch(e){ console.warn('Reflection queued for later sync.',e); } }
+    rememberSubmission(final?'final':reflectionModuleKey);
+    document.getElementById('feedback-form')?.classList.add('hidden'); document.getElementById('reflection-success')?.classList.remove('hidden');
+    if(btn)btn.disabled=false; if(window.lucide?.createIcons) lucide.createIcons();
+  }
 
-    let feedbackRating = 0;
+  window.maybePromptLearningReflection=function(moduleKey){
+    if(!MODULE_LABELS[moduleKey])return;
+    const submitted=readJSON(FEEDBACK_CONFIG.submittedKey,{}); if(submitted[moduleKey])return;
+    const prompted=readJSON(FEEDBACK_CONFIG.promptedKey,{}); if(prompted[moduleKey])return;
+    prompted[moduleKey]=true; writeJSON(FEEDBACK_CONFIG.promptedKey,prompted);
+    setTimeout(()=>{ const completion=document.getElementById('completion-modal'); if(completion && !completion.classList.contains('hidden')) return; window.openFeedbackModal('module',moduleKey); },850);
+  };
 
-    function t(value) {
-        return window.FNF_I18N?.t ? window.FNF_I18N.t(value) : value;
-    }
+  function setInsight(id,value){ const el=document.getElementById(id); if(el)el.textContent=value||'—'; }
+  function renderInsights(data){
+    setInsight('insight-overall', data.avgOverall ? `${Number(data.avgOverall).toFixed(1)}/5` : '—');
+    setInsight('insight-understanding', Number.isFinite(Number(data.helpedUnderstandingPct)) ? `${Math.round(Number(data.helpedUnderstandingPct))}%` : '—');
+    setInsight('insight-feature', data.mostUsefulFeature || '—'); setInsight('insight-module', data.mostReflectedModule || '—');
+    const status=document.getElementById('insights-status'); if(status)status.textContent=data.totalResponses ? `${data.totalResponses} submitted reflection${data.totalResponses===1?'':'s'} included.` : 'No learner reflections have been recorded yet.';
+  }
+  function loadInsightsJSONP(){
+    return new Promise((resolve,reject)=>{
+      if(!FEEDBACK_CONFIG.endpoint){ reject(new Error('No endpoint')); return; }
+      const callback=`__soluInsights_${Date.now()}_${Math.random().toString(36).slice(2,7)}`; const script=document.createElement('script'); let done=false;
+      const cleanup=()=>{ if(done)return; done=true; delete window[callback]; script.remove(); };
+      const timer=setTimeout(()=>{ cleanup(); reject(new Error('Insights endpoint timeout')); },7000);
+      window[callback]=(data)=>{ clearTimeout(timer); cleanup(); resolve(data); };
+      script.onerror=()=>{ clearTimeout(timer); cleanup(); reject(new Error('Insights endpoint unavailable')); };
+      script.src=`${FEEDBACK_CONFIG.endpoint}?action=insights&callback=${encodeURIComponent(callback)}&_=${Date.now()}`; document.head.appendChild(script);
+    });
+  }
+  window.openUserInsights=async function(){
+    const modal=document.getElementById('insights-modal'); if(!modal)return; modal.classList.remove('hidden'); modal.classList.add('flex');
+    requestAnimationFrame(()=>{ modal.classList.remove('opacity-0'); const card=modal.querySelector(':scope > div'); card?.classList.remove('scale-95'); card?.classList.add('scale-100'); });
+    const status=document.getElementById('insights-status'); if(status)status.textContent=t('Loading learner feedback…');
+    try{ const data=await loadInsightsJSONP(); if(data?.success===false)throw new Error(data.error||'Unable to load insights'); renderInsights(data); }
+    catch(e){ setInsight('insight-overall','—');setInsight('insight-understanding','—');setInsight('insight-feature','—');setInsight('insight-module','—'); if(status)status.textContent=t('Update the supplied Apps Script and redeploy it to enable aggregate User Insights.'); }
+  };
 
-    function getQueue() {
-        try {
-            const value = JSON.parse(localStorage.getItem(FEEDBACK_CONFIG.queueKey) || '[]');
-            return Array.isArray(value) ? value : [];
-        } catch (_) {
-            return [];
-        }
-    }
-
-    function saveQueue(queue) {
-        try {
-            localStorage.setItem(FEEDBACK_CONFIG.queueKey, JSON.stringify(queue.slice(-FEEDBACK_CONFIG.maxQueuedItems)));
-        } catch (error) {
-            console.warn('Could not save feedback queue.', error);
-        }
-    }
-
-    function queueFeedback(payload) {
-        const queue = getQueue();
-        if (!queue.some(item => item.id === payload.id)) queue.push(payload);
-        saveQueue(queue);
-    }
-
-    function removeQueuedFeedback(id) {
-        saveQueue(getQueue().filter(item => item.id !== id));
-    }
-
-    function showFeedbackStatus(message, kind = 'info') {
-        const box = document.getElementById('feedback-status');
-        if (!box) return;
-        const classes = {
-            success: ['border-emerald-200', 'dark:border-emerald-500/25', 'bg-emerald-50', 'dark:bg-emerald-500/10', 'text-emerald-700', 'dark:text-emerald-300'],
-            error: ['border-red-200', 'dark:border-red-500/25', 'bg-red-50', 'dark:bg-red-500/10', 'text-red-700', 'dark:text-red-300'],
-            info: ['border-brand-200', 'dark:border-brand-500/25', 'bg-brand-50', 'dark:bg-brand-500/10', 'text-brand-700', 'dark:text-brand-300']
-        };
-        box.className = 'rounded-xl border px-4 py-3 text-sm font-semibold';
-        (classes[kind] || classes.info).forEach(c => box.classList.add(c));
-        box.textContent = t(message);
-        box.classList.remove('hidden');
-    }
-
-    function clearFeedbackStatus() {
-        document.getElementById('feedback-status')?.classList.add('hidden');
-    }
-
-    function updateStars(rating) {
-        feedbackRating = Math.max(0, Math.min(5, Number(rating) || 0));
-        const input = document.getElementById('feedback-rating-value');
-        if (input) input.value = feedbackRating ? String(feedbackRating) : '';
-        document.querySelectorAll('.feedback-star').forEach(button => {
-            const active = Number(button.dataset.rating) <= feedbackRating;
-            button.classList.toggle('text-amber-400', active);
-            button.classList.toggle('text-slate-300', !active);
-            button.classList.toggle('dark:text-slate-600', !active);
-            button.setAttribute('aria-checked', String(Number(button.dataset.rating) === feedbackRating));
-            const icon = button.querySelector('svg');
-            if (icon) icon.classList.toggle('fill-current', active);
-        });
-        const label = document.getElementById('feedback-rating-label');
-        if (label) label.textContent = feedbackRating ? `${feedbackRating} / 5` : t('Select a rating');
-    }
-
-    window.openFeedbackModal = function openFeedbackModal() {
-        const modal = document.getElementById('feedback-modal');
-        if (!modal) return;
-        clearFeedbackStatus();
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        // Mobile Safari: reset the single modal scroller without touching body scroll.
-        modal.scrollTop = 0;
-        requestAnimationFrame(() => {
-            modal.classList.remove('opacity-0');
-            const card = modal.querySelector(':scope > div');
-            card?.classList.remove('scale-95');
-            card?.classList.add('scale-100');
-        });
-        // Icons are already initialized on page load. Avoid rescanning the entire
-        // document here; that is noticeably expensive on mobile devices.
-    };
-
-    async function transmitFeedback(payload) {
-        if (!FEEDBACK_CONFIG.endpoint) return false;
-        const body = new URLSearchParams();
-        Object.entries(payload).forEach(([key, value]) => body.set(key, value == null ? '' : String(value)));
-        await fetch(FEEDBACK_CONFIG.endpoint, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'no-store',
-            body
-        });
-        return true;
-    }
-
-    async function flushFeedbackQueue() {
-        if (!FEEDBACK_CONFIG.endpoint || !navigator.onLine) return;
-        const queue = getQueue();
-        for (const item of queue) {
-            try {
-                await transmitFeedback(item);
-                removeQueuedFeedback(item.id);
-            } catch (error) {
-                console.warn('Feedback sync paused.', error);
-                break;
-            }
-        }
-    }
-
-    function createFeedbackId() {
-        if (window.crypto?.randomUUID) return crypto.randomUUID();
-        return `feedback-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-    }
-
-    async function handleFeedbackSubmit(event) {
-        event.preventDefault();
-        clearFeedbackStatus();
-        const form = event.currentTarget;
-        const module = document.getElementById('feedback-module')?.value || '';
-        const understanding = document.getElementById('feedback-understanding')?.value || '';
-        if (!feedbackRating || !module || !understanding) {
-            showFeedbackStatus('Please complete the rating, module and understanding fields.', 'error');
-            return;
-        }
-
-        const button = document.getElementById('feedback-submit');
-        if (button) button.disabled = true;
-        const payload = {
-            id: createFeedbackId(),
-            submittedAt: new Date().toISOString(),
-            name: (document.getElementById('feedback-name')?.value || '').trim().slice(0, 60),
-            rating: feedbackRating,
-            module,
-            understanding,
-            liked: (document.getElementById('feedback-liked')?.value || '').trim().slice(0, 500),
-            improve: (document.getElementById('feedback-improve')?.value || '').trim().slice(0, 500),
-            language: document.documentElement.lang || 'en',
-            source: "SoluEffect360"
-        };
-
-        queueFeedback(payload);
-        let sent = false;
-        if (FEEDBACK_CONFIG.endpoint && navigator.onLine) {
-            try {
-                sent = await transmitFeedback(payload);
-                if (sent) removeQueuedFeedback(payload.id);
-            } catch (error) {
-                console.warn('Feedback will remain queued for later sync.', error);
-            }
-        }
-
-        if (sent) {
-            showFeedbackStatus('Thank you! Your feedback has been submitted.', 'success');
-        } else if (FEEDBACK_CONFIG.endpoint) {
-            showFeedbackStatus('Thank you! Your feedback is saved and will sync when the connection is available.', 'success');
-        } else {
-            showFeedbackStatus('Feedback saved on this device. Connect the Google Sheets endpoint before publishing to collect responses centrally.', 'info');
-        }
-
-        form.reset();
-        updateStars(0);
-        if (button) button.disabled = false;
-    }
-
-    function initFeedback() {
-        document.querySelectorAll('.feedback-star').forEach(button => {
-            button.setAttribute('role', 'radio');
-            button.addEventListener('click', () => updateStars(button.dataset.rating));
-        });
-        document.getElementById('feedback-form')?.addEventListener('submit', handleFeedbackSubmit);
-        const modal = document.getElementById('feedback-modal');
-        modal?.addEventListener('click', event => {
-            if (event.target === modal && typeof window.closeModal === 'function') window.closeModal('feedback-modal');
-        });
-        window.addEventListener('online', flushFeedbackQueue);
-        updateStars(0);
-        flushFeedbackQueue();
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFeedback);
-    else initFeedback();
+  function init(){
+    document.querySelectorAll('.feedback-star').forEach(btn=>{ btn.setAttribute('role','radio'); btn.addEventListener('click',()=>updateStars(btn.dataset.rating)); });
+    document.querySelectorAll('[data-likert-group]').forEach(group=>group.querySelectorAll('.reflection-likert-btn').forEach(btn=>btn.addEventListener('click',()=>setLikert(group.dataset.likertGroup,btn.dataset.value))));
+    document.querySelectorAll('.reflection-feature-btn').forEach(btn=>btn.addEventListener('click',()=>setFeature(btn.dataset.feature)));
+    document.getElementById('feedback-form')?.addEventListener('submit',handleSubmit);
+    ['feedback-modal','insights-modal'].forEach(id=>{ const modal=document.getElementById(id); modal?.addEventListener('click',e=>{ if(e.target===modal&&typeof window.closeModal==='function')window.closeModal(id); }); });
+    window.addEventListener('online',flushFeedbackQueue); updateStars(0); flushFeedbackQueue();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
 })();
 </script>
 
@@ -13453,6 +13448,48 @@ input[type="range"]::-moz-range-thumb {
     "use strict";
 
     const translations = {"SoluEffect360 - Interactive Colligative Properties":"SoluEffect360 - Sifat Koligatif Interaktif","Home":"Laman Utama","Learn":"Belajar","Quiz Arena":"Arena Kuiz","Badges":"Lencana","Take the Tour Again":"Ikuti Lawatan Sekali Lagi","About SoluEffect360":"Tentang SoluEffect360","Toggle Sound":"Hidupkan atau matikan bunyi","Toggle Dark Mode":"Tukar mod gelap","Help Menu":"Menu Bantuan","Go to home":"Pergi ke laman utama","Switch language to Bahasa Melayu":"Tukar bahasa kepada Bahasa Melayu","Switch language to English":"Tukar bahasa kepada English","Language":"Bahasa","Chemistry Visualized Without Complexity":"Kimia Divisualkan Tanpa Kerumitan","Interactive Learning Platform for Colligative Properties. Experience microscopic particle dynamics and physical state changes in real-time.":"Platform Pembelajaran Interaktif untuk Sifat Koligatif. Alami dinamik zarah mikroskopik dan perubahan keadaan fizikal secara masa nyata.","Start Learning":"Mulakan Pembelajaran","Learning Progress":"Kemajuan Pembelajaran","Vapour Pressure":"Tekanan Wap","Vapor Pressure":"Tekanan Wap","Boiling Point":"Takat Didih","Boiling Point of Pure Solvent":"Takat Didih Pelarut Tulen","Boiling Point of Solution":"Takat Didih Larutan","Freezing Point":"Takat Beku","Osmosis":"Osmosis","Colligative Laboratory":"Makmal Sifat Koligatif","Select a property below to interact, customize variables, and inspect results.":"Pilih satu sifat di bawah untuk berinteraksi, melaraskan pemboleh ubah dan meneliti hasil.","Learning Objective":"Objektif Pembelajaran","Did you know?":"Tahukah anda?","Next Fact":"Fakta Seterusnya","Quiz time!":"Masa Kuiz!","Control Center":"Pusat Kawalan","Select Solute":"Pilih Zat Terlarut","Select Solute Type":"Pilih Jenis Zat Terlarut","Select Solution Type":"Pilih Jenis Larutan","Solution Type":"Jenis Larutan","Temperature":"Suhu","Flow Rate Speed":"Kelajuan Simulasi","Pause":"Jeda","Play":"Main","Reset":"Tetapkan Semula","Particle Simulation Arena":"Arena Simulasi Zarah","Crystalline Viewport":"Paparan Hablur","Osmotic Balance":"Keseimbangan Osmosis","Particle colour legend":"Petunjuk warna zarah","Simulation Tabs":"Tab Simulasi","Solvent (Water)":"Pelarut (Air)","Non-Volatile Solute":"Zat Terlarut Tidak Meruap","Non-Volatile Solution":"Larutan Tidak Meruap","Volatile Solution":"Larutan Meruap","Gas":"Gas","Vapour":"Wap","P external":"P luar","P internal":"P dalaman","Water":"Air","Solvent":"Pelarut","Pure Solvent":"Pelarut Tulen","Solution":"Larutan","Solvent (Left)":"Pelarut (Kiri)","Solution (Right)":"Larutan (Kanan)","Equation":"Persamaan","Live Explanation":"Penerangan Langsung","Experiment Summary":"Ringkasan Eksperimen","Observation":"Pemerhatian","Real-life Application":"Aplikasi Kehidupan Sebenar","Net Directional Flux":"Fluks Arah Bersih","Left → Right":"Kiri → Kanan","Water Molecule":"Molekul Air","Solute Particle":"Zarah Zat Terlarut","Gas Particle":"Zarah Gas","Semi-Permeable Membrane":"Membran Separa Telap","State Raoult’s law and use it to calculate the vapour-pressure lowering of a solution. Calculate the vapour composition above a solution containing a volatile solute and solvent.":"Nyatakan hukum Raoult dan gunakannya untuk mengira penurunan tekanan wap sesuatu larutan. Kira komposisi wap di atas larutan yang mengandungi zat terlarut dan pelarut meruap.","Calculate the boiling-point elevation of a solution and determine the molar mass of an unknown solute from boiling-point elevation data.":"Kira peningkatan takat didih sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data peningkatan takat didih.","Calculate the freezing-point depression of a solution and determine the molar mass of an unknown solute from freezing-point depression data.":"Kira penurunan takat beku sesuatu larutan dan tentukan jisim molar zat terlarut yang tidak diketahui berdasarkan data penurunan takat beku.","Explain osmosis through a semipermeable membrane and relate osmotic pressure to the concentration of solute particles in a solution.":"Terangkan osmosis melalui membran separa telap dan hubungkan tekanan osmosis dengan kepekatan zarah zat terlarut dalam sesuatu larutan.","According to Raoult’s law, the partial vapour pressure of a component in an ideal solution is equal to its mole fraction multiplied by its vapour pressure in the pure state.":"Menurut hukum Raoult, tekanan wap separa sesuatu komponen dalam larutan ideal adalah sama dengan pecahan molnya didarab dengan tekanan wap komponen tersebut dalam keadaan tulen.","For a non-volatile solute, the solute reduces the mole fraction of the solvent.":"Bagi zat terlarut tidak meruap, zat terlarut mengurangkan pecahan mol pelarut.","Therefore, the vapour pressure of the solution is lower than that of the pure solvent. For a solution containing volatile components, the total vapour pressure is obtained by adding the partial vapour pressures of the components.":"Oleh itu, tekanan wap larutan lebih rendah daripada tekanan wap pelarut tulen. Bagi larutan yang mengandungi komponen meruap, jumlah tekanan wap diperoleh dengan menjumlahkan tekanan wap separa setiap komponen.","A non-volatile solute lowers the solvent vapour pressure. A volatile solute contributes its own vapour, so the total vapour pressure can be higher than in the non-volatile case.":"Glukosa menurunkan tekanan wap air. Etanol bersifat meruap dan menyumbang wapnya sendiri, maka campuran mungkin menghasilkan lebih banyak wap berbanding air tulen.","A wet towel soaked in salty sea water takes longer to dry in the sun than a towel soaked in pure tap water, because the salt blocks the water from evaporating quickly.":"Tuala basah yang direndam dalam air laut masin mengambil masa lebih lama untuk kering di bawah cahaya matahari berbanding tuala yang direndam dalam air paip tulen kerana garam memperlahankan penyejatan air.","A liquid boils when its vapour pressure becomes equal to the external pressure.":"Cecair mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","A non-volatile solute lowers the solvent vapour pressure, so a higher temperature is needed.":"Zat terlarut tidak meruap seperti glukosa menurunkan tekanan wap pelarut, maka suhu yang lebih tinggi diperlukan.","Ethanol is volatile and adds its own vapour pressure. Therefore, an ethanol–water mixture may boil at a lower temperature than pure water.":"Etanol bersifat meruap dan menyumbang tekanan wapnya sendiri. Oleh itu, campuran etanol–air mungkin mendidih pada suhu yang lebih rendah daripada air tulen.","A glucose solution boils above pure water, while an ethanol–water mixture may boil below 100 °C because ethanol is volatile.":"Larutan glukosa mendidih pada suhu lebih tinggi daripada air tulen, manakala campuran etanol–air mungkin mendidih di bawah 100 °C kerana etanol bersifat meruap.","Special liquids (coolants) are added to car water tanks. This raises the boiling point so the water inside the hot engine doesn't boil away easily.":"Cecair khas, iaitu bahan penyejuk, ditambahkan ke dalam sistem penyejukan kereta. Ini meningkatkan takat didih supaya air di dalam enjin panas tidak mudah mendidih dan tersejat.","Freezing occurs when the liquid and solid phases of a solvent are in equilibrium.":"Pembekuan berlaku apabila fasa cecair dan fasa pepejal pelarut berada dalam keseimbangan.","Dissolved solute particles lower the escaping tendency of solvent molecules in the liquid phase.":"Zarah zat terlarut yang terlarut mengurangkan kecenderungan molekul pelarut untuk terlepas daripada fasa cecair.","Therefore, the solution must be cooled below the freezing point of the pure solvent before the solid solvent can form. This decrease is called freezing-point depression.":"Oleh itu, larutan perlu disejukkan di bawah takat beku pelarut tulen sebelum pelarut pepejal dapat terbentuk. Penurunan ini dikenali sebagai penurunan takat beku.","Pure water freezes exactly at 0 °C and forms a neat grid. The mixture stays liquid at 0 °C and only freezes when it gets even colder.":"Air tulen membeku tepat pada 0 °C dan membentuk susunan teratur. Campuran kekal dalam keadaan cecair pada 0 °C dan hanya membeku apabila suhunya menjadi lebih rendah.","People throw salt on snowy icy roads in winter. The salt mixes with ice and lowers the freezing point, causing dangerous ice to melt into water.":"Garam ditaburkan pada jalan berais ketika musim sejuk. Garam bercampur dengan ais dan menurunkan takat beku, lalu menyebabkan ais yang berbahaya mencair menjadi air.","Osmosis is the net movement of solvent molecules through a semipermeable membrane from a region of lower solute concentration to a region of higher solute concentration.":"Osmosis ialah pergerakan bersih molekul pelarut melalui membran separa telap dari kawasan berkepekatan zat terlarut rendah ke kawasan berkepekatan zat terlarut tinggi.","The membrane allows solvent molecules to pass but prevents solute particles from crossing.":"Membran membenarkan molekul pelarut melaluinya tetapi menghalang zarah zat terlarut daripada merentasinya.","The net movement continues until the concentration difference is balanced by the pressure difference across the membrane.":"Pergerakan bersih berterusan sehingga perbezaan kepekatan diseimbangkan oleh perbezaan tekanan merentasi membran.","Water molecules move both ways, but more water gets trapped on the mixture side. The water level on the mixture side goes up.":"Molekul air bergerak dalam kedua-dua arah, tetapi lebih banyak air terkumpul pada bahagian campuran. Paras air pada bahagian campuran meningkat.","Plant roots soak up water from the soil using osmosis. If you put too much fertilizer (solid particles) in the soil, the plant cannot pull water in, and might die.":"Akar tumbuhan menyerap air daripada tanah melalui osmosis. Jika terlalu banyak baja, iaitu zarah pepejal, ditambahkan ke dalam tanah, tumbuhan tidak dapat menyerap air dan mungkin mati.","where;":"di mana;","= total vapour pressure of the mixture;":"= jumlah tekanan wap campuran;","= partial vapour pressure of component A;":"= tekanan wap separa komponen A;","= partial vapour pressure of component B;":"= tekanan wap separa komponen B;","= mole fraction of component A in the liquid;":"= pecahan mol komponen A dalam cecair;","= mole fraction of component B in the liquid;":"= pecahan mol komponen B dalam cecair;","= vapour pressure of pure component A;":"= tekanan wap komponen A tulen;","= vapour pressure of pure component B.":"= tekanan wap komponen B tulen.","= vapour pressure of solvent A in the solution;":"= tekanan wap pelarut A dalam larutan;","= mole fraction of solvent A;":"= pecahan mol pelarut A;","= vapour pressure of pure solvent A.":"= tekanan wap pelarut A tulen.","= molal boiling point elevation constant of the solvent (°C kg mol":"= pemalar peningkatan takat didih molal pelarut (°C kg mol","= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol","= molality of solution (mol kg":"= kemolalan larutan (mol kg","= Boiling point of pure solvent (°C)":"= takat didih pelarut tulen (°C)","= Boiling point of solution (°C)":"= takat didih larutan (°C)","= freezing point of pure solvent (°C)":"= takat beku pelarut tulen (°C)","= freezing point of solution (°C)":"= takat beku larutan (°C)","= osmotic pressure;":"= tekanan osmosis;","= van’t Hoff factor;":"= faktor van’t Hoff;","= molarity of the solution;":"= kemolaran larutan;","= gas constant;":"= pemalar gas;","= absolute temperature in kelvin.":"= suhu mutlak dalam kelvin.","Learning Points":"Mata Pembelajaran","Total Learning Points":"Jumlah Mata Pembelajaran","View Learning Points profile":"Lihat profil Mata Pembelajaran","Learner Profile":"Profil Pelajar","Guest Explorer":"Peneroka Tetamu","Quiz Rewards":"Ganjaran Kuiz","Facts Viewed":"Fakta Dilihat","Controls Used":"Kawalan Digunakan","Progress is saved automatically in this browser's learning database.":"Kemajuan disimpan secara automatik dalam pangkalan data pembelajaran pelayar ini.","+5 Learning Points":"+5 Mata Pembelajaran","Learning activity":"Aktiviti pembelajaran","Next fact viewed":"Fakta seterusnya dilihat","Correct Quiz Arena answer":"Jawapan Arena Kuiz yang betul","Correct live competition answer":"Jawapan pertandingan langsung yang betul","Temperature control adjusted":"Kawalan suhu dilaraskan","Flow-rate speed adjusted":"Kelajuan kadar aliran dilaraskan","My Badges":"Lencana Saya","Bronze":"Gangsa","Silver":"Perak","Gold":"Emas","Completed 1 module":"Selesai 1 modul","Completed 3 modules":"Selesai 3 modul","Completed 4 modules":"Selesai 4 modul","SoluEffect360 Master":"Pakar SoluEffect360","All modules & Quiz Arena":"Semua modul dan Arena Kuiz","Badge Unlocked!":"Lencana Dibuka!","You have unlocked the SoluEffect360 Certificate!":"Anda telah membuka Sijil SoluEffect360!","View Certificate":"Lihat Sijil","🎉 Congratulations!":"🎉 Tahniah!","You have successfully completed":"Anda telah berjaya menyelesaikan","lessons.":"pelajaran.","Check the Badges section to see your progress!":"Semak bahagian Lencana untuk melihat kemajuan anda!","Continue Learning":"Teruskan Pembelajaran","Your Achievement":"Pencapaian Anda","Certificate of Completion":"Sijil Penyempurnaan","This is to certify that":"Dengan ini diperakui bahawa","Master Chemist":"Pakar Kimia","has successfully mastered all colligative properties modules and conquered the Quiz Arena, demonstrating exceptional knowledge in physical chemistry.":"telah berjaya menguasai semua modul sifat koligatif dan menamatkan Arena Kuiz, sekali gus menunjukkan pengetahuan yang cemerlang dalam kimia fizik.","Date Awarded":"Tarikh Dianugerahkan","Authorized Signature":"Tandatangan Diberi Kuasa","Virtual Lab Admin":"Pentadbir Makmal Maya","Download PDF":"Muat Turun PDF","Download PNG":"Muat Turun PNG","Premium Interactive Colligative Properties Simulator.":"Simulator Sifat Koligatif Interaktif Premium.","Designed to make complex physical chemistry intuitive and accessible through real-time microscopic visualizations.":"Direka untuk menjadikan kimia fizik yang kompleks lebih intuitif dan mudah difahami melalui visualisasi mikroskopik masa nyata.","Close":"Tutup","Skip Tour":"Langkau Lawatan","Back":"Kembali","Next":"Seterusnya","Finish Tour":"Tamatkan Lawatan","Welcome to SoluEffect360!":"Selamat Datang ke SoluEffect360!","Experience interactive microscopic particle dynamics and learn colligative properties in real-time. Let's take a quick tour.":"Alami dinamik zarah mikroskopik secara interaktif dan pelajari sifat koligatif dalam masa nyata. Mari ikuti lawatan ringkas.","Choose a Property":"Pilih Satu Sifat","Select one of the four colligative properties to explore its unique molecular behaviour.":"Pilih satu daripada empat sifat koligatif untuk meneroka tingkah laku molekulnya yang unik.","Adjust Variables":"Laraskan Pemboleh Ubah","Interact with the simulation by changing the solute type, temperature, and observing the immediate effects.":"Berinteraksi dengan simulasi dengan menukar jenis zat terlarut dan suhu, kemudian perhatikan kesannya serta-merta.","Observe the Simulation":"Perhatikan Simulasi","Watch how particles react in real-time. The microscopic arena visualises the physics behind the equations.":"Perhatikan tindak balas zarah dalam masa nyata. Arena mikroskopik memvisualkan konsep fizik di sebalik persamaan.","Read a clear explanation of what is happening in the simulation and connect it to the equation shown below.":"Baca penerangan yang jelas tentang perkara yang berlaku dalam simulasi dan hubungkannya dengan persamaan yang ditunjukkan di bawah.","Test Your Knowledge":"Uji Pengetahuan Anda","Review the experiment summary and answer the quiz to solidify your understanding.":"Semak ringkasan eksperimen dan jawab kuiz untuk mengukuhkan pemahaman anda.","Track Your Mastery":"Jejaki Penguasaan Anda","Complete all four lessons to fill this progress bar and unlock your certificate. Let the learning begin!":"Lengkapkan keempat-empat pelajaran untuk memenuhi bar kemajuan ini dan membuka sijil anda. Mari mulakan pembelajaran!","Test Your Mastery":"Uji Penguasaan Anda","🏆 Quiz Arena":"🏆 Arena Kuiz","Race against the clock in this 16-question challenge with factual and calculation questions. Will you make it to the Hall of Fame?":"Berlumba dengan masa dalam cabaran 16 soalan yang merangkumi soalan fakta dan pengiraan. Mampukah anda memasuki Dewan Kemasyhuran?","Enter the Arena":"Masuk ke Arena","16 Questions • 30s Fact • 2.5 min Calculation":"16 Soalan • 30 saat Fakta • 2.5 minit Pengiraan","Nickname":"Nama Panggilan","Enter your nickname...":"Masukkan nama panggilan anda...","Start Challenge":"Mulakan Cabaran","Live Competition":"Pertandingan Langsung","Hall of Fame":"Dewan Kemasyhuran","Question":"Soalan","Quiz Progress":"Kemajuan Kuiz","Loading question...":"Memuatkan soalan...","Correct!":"Betul!","Incorrect":"Salah","Incorrect.":"Salah.","Time's Up!":"Masa Tamat!","Time expired.":"Masa tamat.","0 Points":"0 Mata","Correct — the highlighted principle matches the lesson.":"Betul — prinsip yang diserlahkan sepadan dengan pelajaran.","Review the correct answer marked in green.":"Semak jawapan betul yang ditandakan dengan warna hijau.","Arena Conquered!":"Arena Ditakluki!","Incredible performance.":"Prestasi yang luar biasa.","Final Score":"Skor Akhir","Accuracy":"Ketepatan","Correct / Wrong":"Betul / Salah","Avg Time":"Purata Masa","Play Again":"Main Lagi","Review Answers":"Semak Jawapan","Answer Review":"Semakan Jawapan","Review Every Question":"Semak Setiap Soalan","Compare your answer with the correct answer.":"Bandingkan jawapan anda dengan jawapan yang betul.","Back to Results":"Kembali ke Keputusan","Back to Arena":"Kembali ke Arena","Top 10 Chemistry Masters":"10 Pakar Kimia Terbaik","The arena is empty. Claim the first victory!":"Arena masih kosong. Jadilah pemenang pertama!","Chemistry Master!":"Pakar Kimia!","Flawless logic and incredible speed.":"Logik yang sempurna dan kepantasan yang luar biasa.","Great Job!":"Syabas!","You have a solid understanding of colligative properties.":"Anda mempunyai pemahaman yang kukuh tentang sifat koligatif.","Keep Practicing!":"Teruskan Berlatih!","Review the simulations to strengthen your foundations.":"Semak semula simulasi untuk mengukuhkan asas pemahaman anda.","Easy":"Mudah","Medium":"Sederhana","Calculation":"Pengiraan","Topic Quiz Complete!":"Kuiz Topik Selesai!","Incorrect — try again.":"Salah — cuba lagi.","The host creates a room code. Students join and answer simultaneously on their own devices.":"Hos menghasilkan kod bilik. Pelajar menyertai dan menjawab secara serentak menggunakan peranti masing-masing.","Host a Game":"Hoskan Permainan","Join a Game":"Sertai Permainan","Back to Quiz Arena":"Kembali ke Arena Kuiz","Live mode requires internet access and the same published website on every device.":"Mod langsung memerlukan akses internet dan laman web terbitan yang sama pada setiap peranti.","Host Dashboard":"Papan Pemuka Hos","Live Competition Room":"Bilik Pertandingan Langsung","Creating a secure room...":"Mewujudkan bilik yang selamat...","End Room":"Tamatkan Bilik","Room Code":"Kod Bilik","Students enter this code on their devices.":"Pelajar memasukkan kod ini pada peranti masing-masing.","Players in Lobby":"Pemain di Lobi","Waiting for students to join...":"Menunggu pelajar menyertai...","Start Live Quiz":"Mulakan Kuiz Langsung","Copy Code":"Salin Kod","Code Copied":"Kod Disalin","Answered":"Dijawab","Time":"Masa","Live Leaderboard":"Papan Kedudukan Langsung","Join Live Competition":"Sertai Pertandingan Langsung","Enter your nickname and the room code shown by the host.":"Masukkan nama panggilan anda dan kod bilik yang dipaparkan oleh hos.","Your nickname":"Nama panggilan anda","6-character room code":"Kod bilik 6 aksara","Join Room":"Sertai Bilik","Connected":"Disambungkan","You are in the lobby":"Anda berada di lobi","Waiting for the host to start...":"Menunggu hos memulakan pertandingan...","Leave Room":"Tinggalkan Bilik","Player":"Pemain","Get ready...":"Bersedia...","Waiting for question...":"Menunggu soalan...","Current Rank":"Kedudukan Semasa","Competition Complete!":"Pertandingan Selesai!","Opening the room...":"Membuka bilik...","Live service could not load. Check the internet connection and refresh.":"Perkhidmatan langsung tidak dapat dimuatkan. Semak sambungan internet dan muat semula halaman.","Room is open. Ask students to join using the code below.":"Bilik telah dibuka. Minta pelajar menyertai menggunakan kod di bawah.","Unable to open the live room. Check the internet connection and try again.":"Bilik langsung tidak dapat dibuka. Semak sambungan internet dan cuba lagi.","This competition has already started.":"Pertandingan ini telah pun bermula.","Competition in progress.":"Pertandingan sedang berlangsung.","Ready":"Bersedia","No scores yet.":"Belum ada skor.","Competition complete. Final results are shown below.":"Pertandingan selesai. Keputusan akhir ditunjukkan di bawah.","Done":"Selesai","The host ended the live room.":"Hos telah menamatkan bilik langsung.","Connecting...":"Sedang menyambung...","Connected. Waiting for the host to start...":"Disambungkan. Menunggu hos memulakan pertandingan...","The competition is starting...":"Pertandingan sedang bermula...","Answer submitted":"Jawapan dihantar","Time is up":"Masa telah tamat","Next question coming up...":"Soalan seterusnya akan dipaparkan...","Final leaderboard":"Papan kedudukan akhir","Enter a nickname and a valid 6-character room code.":"Masukkan nama panggilan dan kod bilik 6 aksara yang sah.","Connection to the host was closed.":"Sambungan kepada hos telah ditutup.","Unable to connect to the host.":"Tidak dapat menyambung kepada hos.","Room not found. Check the code and try again.":"Bilik tidak ditemui. Semak kod dan cuba lagi.","Unable to join the room. Check the internet connection.":"Tidak dapat menyertai bilik. Semak sambungan internet.","The correct answer is highlighted.":"Jawapan yang betul telah diserlahkan.","Sweaty skin feels cooler because evaporation removes heat from your body.":"Kulit yang berpeluh terasa lebih sejuk kerana penyejatan menyingkirkan haba daripada badan.","Perfume evaporates quickly because it contains highly volatile liquids.":"Minyak wangi menyejat dengan cepat kerana mengandungi cecair yang sangat meruap.","Nail polish remover feels cold on your skin because it has a high vapor pressure and evaporates rapidly.":"Pencuci pengilat kuku terasa sejuk pada kulit kerana mempunyai tekanan wap yang tinggi dan menyejat dengan cepat.","A hot cup of coffee loses heat partly because the highest energy water molecules escape as vapor.":"Secawan kopi panas kehilangan haba sebahagiannya kerana molekul air bertenaga paling tinggi terlepas sebagai wap.","Rubbing alcohol dries much faster than water because its intermolecular forces are weaker, leading to a higher vapor pressure.":"Alkohol sapuan kering lebih cepat daripada air kerana daya antara molekulnya lebih lemah, lalu menghasilkan tekanan wap yang lebih tinggi.","Car radiators use coolant to increase the boiling point so engines don't overheat.":"Radiator kereta menggunakan bahan penyejuk untuk meningkatkan takat didih supaya enjin tidak terlalu panas.","Cooking food at high altitudes takes longer because water boils at lower temperatures.":"Memasak makanan di kawasan altitud tinggi mengambil masa lebih lama kerana air mendidih pada suhu yang lebih rendah.","Adding salt to boiling water for pasta slightly increases the boiling point, though mainly it's for flavor.":"Menambahkan garam ke dalam air mendidih untuk memasak pasta sedikit meningkatkan takat didih, walaupun tujuan utamanya ialah untuk rasa.","Deep-sea hydrothermal vents have water hotter than 100°C that doesn't boil because of the immense pressure.":"Lohong hidroterma laut dalam mengandungi air bersuhu melebihi 100°C yang tidak mendidih kerana tekanan yang sangat tinggi.","Pressure cookers cook food faster by trapping steam, increasing the pressure and raising the boiling point of water inside.":"Periuk tekanan memasak makanan dengan lebih cepat dengan memerangkap wap, meningkatkan tekanan dan menaikkan takat didih air di dalamnya.","Salt is spread on snowy roads because it lowers the freezing point of water and melts ice.":"Garam ditaburkan pada jalan bersalji kerana garam menurunkan takat beku air dan mencairkan ais.","Ice cream stays soft in the freezer because the high sugar content significantly lowers its freezing point.":"Aiskrim kekal lembut di dalam peti sejuk beku kerana kandungan gula yang tinggi menurunkan takat bekunya dengan ketara.","Some frogs and fish produce natural 'antifreeze' proteins that lower the freezing point of their blood.":"Sesetengah katak dan ikan menghasilkan protein 'antibeku' semula jadi yang menurunkan takat beku darahnya.","Vodka doesn't freeze in a standard home freezer because its high ethanol content lowers the freezing point to around -27°C.":"Vodka tidak membeku dalam peti sejuk beku rumah biasa kerana kandungan etanol yang tinggi menurunkan takat bekunya kepada kira-kira -27°C.","Ocean water freezes at a lower temperature than freshwater lakes because of the dissolved salt.":"Air laut membeku pada suhu yang lebih rendah berbanding tasik air tawar kerana garam yang terlarut.","Plant roots absorb water using osmosis to draw moisture from the surrounding soil.":"Akar tumbuhan menyerap air melalui osmosis untuk mendapatkan kelembapan daripada tanah di sekelilingnya.","Eating very salty food can make you thirsty because osmosis causes water to leave your cells.":"Makan makanan yang sangat masin boleh menyebabkan anda berasa dahaga kerana osmosis menyebabkan air keluar daripada sel.","Slugs shrivel up when sprinkled with salt because the salt draws water out of their bodies via osmosis.":"Lintah bulan mengecut apabila ditaburkan garam kerana garam menarik air keluar daripada badannya melalui osmosis.","Grocery stores spray vegetables with pure water to keep them crisp as water enters the plant cells through osmosis.":"Kedai runcit menyembur sayur-sayuran dengan air tulen supaya kekal rangup apabila air memasuki sel tumbuhan melalui osmosis.","Cholera causes severe dehydration because the bacteria alter the intestines, causing water to flood out of cells via osmosis.":"Kolera menyebabkan dehidrasi teruk kerana bakteria mengubah fungsi usus, lalu menyebabkan air keluar dengan banyak daripada sel melalui osmosis.","If we double the amount of glucose added to the water, the vapor pressure will:":"Jika jumlah glukosa yang ditambahkan ke dalam air digandakan, tekanan wap akan:","Increase":"Meningkat","Stay the same":"Kekal sama","Decrease further":"Menurun lagi","Why does adding a solute lower the vapor pressure?":"Mengapakah penambahan zat terlarut menurunkan tekanan wap?","Solute particles block the surface":"Zarah zat terlarut menghalang permukaan","Solute particles increase the temperature":"Zarah zat terlarut meningkatkan suhu","Solute particles turn into gas quickly":"Zarah zat terlarut bertukar menjadi gas dengan cepat","A solution has a water mole fraction of 0.80. If the vapour pressure of pure water is 25 kPa, what is the partial vapour pressure of water?":"Suatu larutan mempunyai pecahan mol air 0.80. Jika tekanan wap air tulen ialah 25 kPa, berapakah tekanan wap separa air?","Equal masses of Glucose (lighter) and Sucrose (heavier) are added to different beakers. Which elevates the boiling point more?":"Jisim glukosa yang sama, iaitu lebih ringan, dan sukrosa, iaitu lebih berat, ditambahkan ke dalam bikar berbeza. Yang manakah meningkatkan takat didih dengan lebih banyak?","Glucose (more moles)":"Glukosa (lebih banyak mol)","Sucrose (less moles)":"Sukrosa (lebih sedikit mol)","They are identical":"Kedua-duanya sama","To make a solution boil, its vapor pressure must equal:":"Untuk membolehkan larutan mendidih, tekanan wapnya mesti sama dengan:","The atmospheric pressure":"Tekanan atmosfera","The freezing point":"Takat beku","The osmotic pressure":"Tekanan osmosis","For a 1.0 m glucose solution in water, Kb = 0.512 °C kg mol⁻¹ and i = 1. What is ΔTb?":"Bagi larutan glukosa 1.0 m dalam air, Kb = 0.512 °C kg mol⁻¹ dan i = 1. Berapakah ΔTb?","Why is salt spread on icy roads in winter?":"Mengapakah garam ditaburkan pada jalan berais ketika musim sejuk?","It provides heat":"Garam membekalkan haba","It lowers the freezing point":"Garam menurunkan takat beku","It creates friction":"Garam menghasilkan geseran","When a solution freezes, the solid that forms is typically:":"Apabila larutan membeku, pepejal yang terbentuk biasanya ialah:","Pure solute":"Zat terlarut tulen","Pure solvent (ice)":"Pelarut tulen (ais)","A mixture of both":"Campuran kedua-duanya","For a 0.50 m glucose solution in water, Kf = 1.86 °C kg mol⁻¹ and i = 1. What is ΔTf?":"Bagi larutan glukosa 0.50 m dalam air, Kf = 1.86 °C kg mol⁻¹ dan i = 1. Berapakah ΔTf?","If a plant cell (high solute conc.) is placed in pure water, what will happen?":"Jika sel tumbuhan yang mempunyai kepekatan zat terlarut tinggi diletakkan dalam air tulen, apakah yang akan berlaku?","Water flows into the cell":"Air mengalir masuk ke dalam sel","Water flows out of the cell":"Air mengalir keluar daripada sel","Nothing happens":"Tiada apa-apa berlaku","During osmosis, water flows naturally towards the side with:":"Semasa osmosis, air mengalir secara semula jadi ke bahagian yang mempunyai:","Fewer solid particles":"Lebih sedikit zarah pepejal","More solid particles":"Lebih banyak zarah pepejal","Lower temperature":"Suhu yang lebih rendah","For a 0.10 mol L⁻¹ glucose solution at 300 K, with R = 0.0821 L atm mol⁻¹ K⁻¹ and i = 1, what is the osmotic pressure?":"Bagi larutan glukosa 0.10 mol L⁻¹ pada 300 K, dengan R = 0.0821 L atm mol⁻¹ K⁻¹ dan i = 1, berapakah tekanan osmosis?","More non-volatile glucose means fewer water molecules at the surface, so vapour pressure decreases further.":"Lebih banyak glukosa tidak meruap menyebabkan bilangan molekul air di permukaan berkurang, maka tekanan wap menurun lagi.","Solute particles reduce the fraction of solvent molecules at the liquid surface, so fewer solvent molecules escape into the vapour phase.":"Zarah zat terlarut mengurangkan pecahan molekul pelarut di permukaan cecair, maka lebih sedikit molekul pelarut terlepas ke fasa wap.","Raoult's law gives Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.":"Hukum Raoult memberikan Pwater = xwaterP°water = 0.80 × 25 kPa = 20 kPa.","Equal masses of glucose contain more moles than sucrose because glucose has the lower molar mass, producing a larger colligative effect.":"Bagi jisim yang sama, glukosa mengandungi lebih banyak mol berbanding sukrosa kerana jisim molarnya lebih rendah, lalu menghasilkan kesan koligatif yang lebih besar.","Boiling begins when the liquid's vapour pressure becomes equal to the external atmospheric pressure.":"Pendidihan bermula apabila tekanan wap cecair menjadi sama dengan tekanan atmosfera luar.","Use ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.":"Gunakan ΔTb = iKbm = 1 × 0.512 × 1.0 = 0.512 °C.","Salt lowers water's freezing point, allowing ice to melt at temperatures where pure water would remain frozen.":"Garam menurunkan takat beku air, membolehkan ais mencair pada suhu yang menyebabkan air tulen kekal beku.","During freezing, solvent molecules form the crystal lattice while dissolved solute particles are mostly excluded.":"Semasa pembekuan, molekul pelarut membentuk kekisi hablur manakala kebanyakan zarah zat terlarut yang terlarut tersisih.","Use ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.":"Gunakan ΔTf = iKfm = 1 × 1.86 × 0.50 = 0.93 °C.","Pure water has lower solute concentration, so water moves into the more concentrated plant cell through the membrane.":"Air tulen mempunyai kepekatan zat terlarut yang lebih rendah, maka air bergerak melalui membran masuk ke dalam sel tumbuhan yang lebih pekat.","The net flow of water is toward the side with the higher solute-particle concentration.":"Aliran bersih air bergerak ke arah bahagian yang mempunyai kepekatan zarah zat terlarut lebih tinggi.","Use π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.":"Gunakan π = iMRT = 1 × 0.10 × 0.0821 × 300 = 2.46 atm.","What does adding a non-volatile solute to a pure solvent do to its boiling point?":"Apakah kesan penambahan zat terlarut tidak meruap ke dalam pelarut tulen terhadap takat didihnya?","Increases it":"Meningkatkannya","Decreases it":"Menurunkannya","No change":"Tiada perubahan","Makes it evaporate instantly":"Menyebabkannya menyejat serta-merta","Which property causes ice to melt when salt is poured on it?":"Sifat manakah menyebabkan ais mencair apabila garam ditaburkan padanya?","Freezing-point depression":"Penurunan takat beku","Boiling-point elevation":"Peningkatan takat didih","Osmosis is the net movement of which substance across a semipermeable membrane?":"Osmosis ialah pergerakan bersih bahan manakah merentasi membran separa telap?","Water (solvent)":"Air (pelarut)","Solute":"Zat terlarut","Salt":"Garam","Sugar":"Gula","What happens to the vapour pressure of water when a non-volatile solute is dissolved in it?":"Apakah yang berlaku kepada tekanan wap air apabila zat terlarut tidak meruap dilarutkan di dalamnya?","It decreases":"Tekanan wap menurun","It increases":"Tekanan wap meningkat","It remains the same":"Tekanan wap kekal sama","It becomes zero":"Tekanan wap menjadi sifar","Which of these is NOT a colligative property?":"Yang manakah BUKAN sifat koligatif?","Density":"Ketumpatan","Osmotic pressure":"Tekanan osmosis","Why does a solution containing a non-volatile solute have a higher boiling point than the pure solvent?":"Mengapakah larutan yang mengandungi zat terlarut tidak meruap mempunyai takat didih lebih tinggi daripada pelarut tulen?","Its lower vapour pressure requires a higher temperature to equal atmospheric pressure":"Tekanan wapnya yang lebih rendah memerlukan suhu lebih tinggi untuk menyamai tekanan atmosfera","The solute heats up faster":"Zat terlarut menjadi panas dengan lebih cepat","The solute absorbs cold":"Zat terlarut menyerap kesejukan","A membrane blocks evaporation":"Membran menghalang penyejatan","If a cell is placed in a highly concentrated salt solution, what happens?":"Jika sel diletakkan dalam larutan garam yang sangat pekat, apakah yang berlaku?","It shrinks as water leaves":"Sel mengecut apabila air keluar","It swells as water enters":"Sel mengembang apabila air masuk","It stays exactly the same":"Sel kekal sama","It freezes solid":"Sel membeku menjadi pepejal","Colligative properties depend primarily on:":"Sifat koligatif bergantung terutamanya pada:","The number of dissolved particles":"Bilangan zarah terlarut","The colour of the solution":"Warna larutan","The size of the container":"Saiz bekas","The shape of the solute particles":"Bentuk zarah zat terlarut","Which sample would lower the freezing point of water the most, assuming complete dissolution?":"Sampel manakah paling banyak menurunkan takat beku air dengan andaian pelarutan lengkap?","2 moles of NaCl":"2 mol NaCl","1 mole of NaCl":"1 mol NaCl","1 mole of glucose":"1 mol glukosa","0.5 mole of glucose":"0.5 mol glukosa","What is the role of a semipermeable membrane in osmosis?":"Apakah peranan membran separa telap dalam osmosis?","It allows solvent molecules to pass while restricting solute particles":"Membran membenarkan molekul pelarut melaluinya sambil menghalang zarah zat terlarut","It allows only solute particles to pass":"Membran hanya membenarkan zarah zat terlarut melaluinya","It blocks all particles":"Membran menghalang semua zarah","It allows everything to pass equally":"Membran membenarkan semua bahan melaluinya secara sama rata","A 1.00 L vessel at 25 °C contains CO₂ at 730 torr. After reaction with a 4.000 g CaO/BaO mixture, the remaining CO₂ pressure is 150 torr. How many moles of CO₂ reacted? Use R = 0.0821 L atm mol⁻¹ K⁻¹.":"Sebuah bekas 1.00 L pada 25 °C mengandungi CO₂ pada tekanan 730 torr. Selepas bertindak balas dengan campuran CaO/BaO berjisim 4.000 g, tekanan CO₂ yang berbaki ialah 150 torr. Berapakah mol CO₂ yang telah bertindak balas? Gunakan R = 0.0821 L atm mol⁻¹ K⁻¹.","The 4.000 g mixture contains CaO and BaO, and 0.0312 mol of CO₂ reacts in total. Given M(CaO) = 56.08 g mol⁻¹ and M(BaO) = 153.33 g mol⁻¹, what is the mass of CaO in the mixture?":"Campuran 4.000 g mengandungi CaO dan BaO, dan sejumlah 0.0312 mol CO₂ bertindak balas. Diberi M(CaO) = 56.08 g mol⁻¹ dan M(BaO) = 153.33 g mol⁻¹, berapakah jisim CaO dalam campuran itu?","At 63.5 °C, pure H₂O and pure ethanol have vapour pressures of 175 torr and 400 torr. Equal masses of H₂O and ethanol are mixed. Using M(H₂O) = 18.02 g mol⁻¹ and M(ethanol) = 46.07 g mol⁻¹, what is the mole fraction of ethanol in the liquid solution?":"Pada 63.5 °C, H₂O tulen dan etanol tulen masing-masing mempunyai tekanan wap 175 torr dan 400 torr. Jisim H₂O dan etanol yang sama dicampurkan. Dengan menggunakan M(H₂O) = 18.02 g mol⁻¹ dan M(etanol) = 46.07 g mol⁻¹, berapakah pecahan mol etanol dalam larutan cecair?","For the equal-mass H₂O–ethanol solution at 63.5 °C, x(ethanol) = 0.281, P°(H₂O) = 175 torr and P°(ethanol) = 400 torr. Assuming ideal behaviour, what is the total vapour pressure?":"Bagi larutan H₂O–etanol berjisim sama pada 63.5 °C, x(etanol) = 0.281, P°(H₂O) = 175 torr dan P°(etanol) = 400 torr. Dengan mengandaikan tingkah laku ideal, berapakah jumlah tekanan wap?","For the same ideal H₂O–ethanol solution, the ethanol partial pressure is x(ethanol)P°(ethanol) and the total pressure is 238 torr. What is the mole fraction of ethanol in the vapour phase?":"Bagi larutan ideal H₂O–etanol yang sama, tekanan separa etanol ialah x(etanol)P°(etanol) dan jumlah tekanan ialah 238 torr. Berapakah pecahan mol etanol dalam fasa wap?","Dissolving 1.32 g anthraquinone in 11.4 g camphor lowers the freezing point by 22.3 °C. Given Kf(camphor) = 40.0 °C kg mol⁻¹, what is the molar mass of anthraquinone?":"Melarutkan 1.32 g antrakuinon dalam 11.4 g kapur barus menurunkan takat beku sebanyak 22.3 °C. Diberi Kf(kapur barus) = 40.0 °C kg mol⁻¹, berapakah jisim molar antrakuinon?","A non-volatile solute lowers the solvent's vapour pressure, so the solution must reach a higher temperature before its vapour pressure equals atmospheric pressure.":"Zat terlarut tidak meruap menurunkan tekanan wap pelarut, maka larutan perlu mencapai suhu yang lebih tinggi sebelum tekanan wapnya menyamai tekanan atmosfera.","Salt creates freezing-point depression. The salt solution remains liquid below 0 °C, so ice begins to melt.":"Garam menyebabkan penurunan takat beku. Larutan garam kekal cair di bawah 0 °C, maka ais mula mencair.","Osmosis describes the net movement of solvent molecules, usually water, through a semipermeable membrane.":"Osmosis menerangkan pergerakan bersih molekul pelarut, biasanya air, melalui membran separa telap.","A non-volatile solute reduces the mole fraction of water at the surface, lowering water's vapour pressure according to Raoult's law.":"Zat terlarut tidak meruap mengurangkan pecahan mol air di permukaan, lalu menurunkan tekanan wap air menurut hukum Raoult.","Density is not a colligative property. The four standard colligative properties depend on the number of dissolved particles.":"Ketumpatan bukan sifat koligatif. Empat sifat koligatif piawai bergantung pada bilangan zarah terlarut.","Because the solution has lower vapour pressure, more heating is required before its vapour pressure can match atmospheric pressure.":"Oleh sebab larutan mempunyai tekanan wap yang lebih rendah, lebih banyak pemanasan diperlukan sebelum tekanan wapnya dapat menyamai tekanan atmosfera.","The surrounding salt solution is hypertonic, so water moves out of the cell by osmosis and the cell shrinks.":"Larutan garam di sekeliling bersifat hipertonik, maka air bergerak keluar daripada sel melalui osmosis dan sel mengecut.","Colligative effects depend on how many solute particles are present, not on their colour, container size, or particle shape.":"Kesan koligatif bergantung pada bilangan zarah zat terlarut yang hadir, bukan pada warna, saiz bekas atau bentuk zarah.","Two moles of NaCl produce the greatest number of dissolved particles here because each formula unit can separate into two ions.":"Dua mol NaCl menghasilkan bilangan zarah terlarut paling banyak kerana setiap unit formula boleh terurai kepada dua ion.","A semipermeable membrane permits solvent movement while restricting solute particles, creating the concentration-driven net flow.":"Membran separa telap membenarkan pergerakan pelarut sambil menghalang zarah zat terlarut, lalu menghasilkan aliran bersih yang didorong oleh perbezaan kepekatan.","Use n = ΔPV/RT. The pressure drop is 580 torr, or 0.763 atm, giving about 3.12 × 10⁻² mol of reacted CO₂.":"Gunakan n = ΔPV/RT. Penurunan tekanan ialah 580 torr atau 0.763 atm, lalu memberikan kira-kira 3.12 × 10⁻² mol CO₂ yang bertindak balas.","Let x and y be moles of CaO and BaO. Solve x + y = 0.0312 and 56.08x + 153.33y = 4.000; the CaO mass is about 0.451 g.":"Ambil x dan y sebagai mol CaO dan BaO. Selesaikan x + y = 0.0312 dan 56.08x + 153.33y = 4.000; jisim CaO ialah kira-kira 0.451 g.","For equal masses, moles are inversely proportional to molar mass. Ethanol has fewer moles than water, giving x(ethanol) ≈ 0.281.":"Bagi jisim yang sama, bilangan mol berkadar songsang dengan jisim molar. Etanol mempunyai mol yang lebih sedikit daripada air, lalu memberikan x(etanol) ≈ 0.281.","Apply Raoult's law to both liquids: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.":"Gunakan hukum Raoult pada kedua-dua cecair: Ptotal = xwaterP°water + xethanolP°ethanol ≈ 238 torr.","The vapour mole fraction is yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.":"Pecahan mol wap ialah yethanol = Pethanol/Ptotal = (0.281 × 400)/238 ≈ 0.472.","Use ΔTf = Kfm to obtain molality, then convert the solvent mass to kilograms and solve for molar mass; the result is about 208 g mol⁻¹.":"Gunakan ΔTf = Kfm untuk mendapatkan kemolalan, kemudian tukarkan jisim pelarut kepada kilogram dan hitung jisim molar; hasilnya kira-kira 208 g mol⁻¹.","Review the highlighted correct answer and connect it to the lesson concept.":"Semak jawapan betul yang diserlahkan dan hubungkannya dengan konsep pelajaran.","© 2026 SoluEffect360. Premium Self-Directed Chemistry Simulation.":"© 2026 SoluEffect360. Simulasi Kimia Pembelajaran Kendiri Premium.","Interactive Chemistry Learning":"Pembelajaran Kimia Interaktif","Certificate Preview":"Pratonton Sijil","This certificate is proudly presented to":"Sijil ini dengan bangganya disampaikan kepada","For successfully completing the interactive learning modules and Quiz Arena on Colligative Properties.":"Atas kejayaan melengkapkan modul pembelajaran interaktif dan Arena Kuiz mengenai Sifat Koligatif.","Today's Date":"Tarikh Hari Ini","Learning Achievement":"Pencapaian Pembelajaran","Gold seal":"Mohor emas","Close":"Tutup","Certificate Locked":"Sijil Dikunci","Complete all learning modules and finish Quiz Arena to unlock your certificate.":"Lengkapkan semua modul pembelajaran dan tamatkan Arena Kuiz untuk membuka sijil anda.","Certificate Unlocked":"Sijil Dibuka","Your certificate is ready to preview and download.":"Sijil anda sedia untuk dipratonton dan dimuat turun.","Modules":"Modul","Pending":"Belum Selesai","Complete":"Selesai","You have successfully completed SoluEffect360.":"Anda telah berjaya melengkapkan SoluEffect360.","Thank you for exploring the four Colligative Properties through interactive learning.":"Terima kasih kerana meneroka empat Sifat Koligatif melalui pembelajaran interaktif.","Complete all four learning modules and Quiz Arena first.":"Lengkapkan keempat-empat modul pembelajaran dan Arena Kuiz terlebih dahulu.","Certificate download tools are unavailable. Please check your internet connection and try again.":"Alat muat turun sijil tidak tersedia. Sila semak sambungan internet anda dan cuba lagi.","The certificate could not be generated. Please try again.":"Sijil tidak dapat dijana. Sila cuba lagi.","View Learning Points profile":"Lihat profil Mata Pembelajaran"};
+    Object.assign(translations, {
+        "Learning Reflection":"Refleksi Pembelajaran",
+        "Final Learning Reflection":"Refleksi Pembelajaran Akhir",
+        "Tell us what supported your learning.":"Kongsikan perkara yang membantu pembelajaran anda.",
+        "Tell us about your overall SoluEffect360 experience.":"Kongsikan pengalaman keseluruhan anda menggunakan SoluEffect360.",
+        "Whole SoluEffect360":"Keseluruhan SoluEffect360",
+        "How was your learning experience?":"Bagaimanakah pengalaman pembelajaran anda?",
+        "Overall experience":"Pengalaman keseluruhan",
+        "This simulation helped me understand the concept better.":"Simulasi ini membantu saya memahami konsep dengan lebih baik.",
+        "Strongly Disagree":"Sangat Tidak Setuju",
+        "Strongly Agree":"Sangat Setuju",
+        "What helped you most?":"Apakah yang paling membantu anda?",
+        "Particle Simulation":"Simulasi Zarah",
+        "Variable Controls":"Kawalan Pemboleh Ubah",
+        "Explanation":"Penerangan",
+        "Quiz":"Kuiz",
+        "One thing we can improve":"Satu perkara yang boleh kami tambah baik",
+        "Optional comment...":"Komen pilihan...",
+        "SoluEffect360 was easy to navigate.":"SoluEffect360 mudah dinavigasi.",
+        "The simulations were scientifically clear.":"Simulasi diterangkan dengan jelas dari segi saintifik.",
+        "I would recommend SoluEffect360 to other students.":"Saya akan mengesyorkan SoluEffect360 kepada pelajar lain.",
+        "Submit Reflection":"Hantar Refleksi",
+        "Submit Final Reflection":"Hantar Refleksi Akhir",
+        "Learner feedback is self-reported and used for continuous improvement.":"Maklum balas pelajar ialah laporan kendiri dan digunakan untuk penambahbaikan berterusan.",
+        "Thanks for helping us improve SoluEffect360!":"Terima kasih kerana membantu kami menambah baik SoluEffect360!",
+        "Learning experience recorded":"Pengalaman pembelajaran telah direkodkan",
+        "Your reflection contributes to future improvements":"Refleksi anda menyumbang kepada penambahbaikan akan datang",
+        "Done":"Selesai",
+        "Share Final Reflection":"Kongsi Refleksi Akhir",
+        "User Insights":"Cerapan Pengguna",
+        "Learner Feedback • Self-reported":"Maklum Balas Pelajar • Laporan Kendiri",
+        "Learning experience analytics from submitted reflections.":"Analitik pengalaman pembelajaran daripada refleksi yang dihantar.",
+        "Overall Experience":"Pengalaman Keseluruhan",
+        "Agree Simulation Helped Understanding":"Setuju Simulasi Membantu Kefahaman",
+        "Most Useful Feature":"Ciri Paling Berguna",
+        "Most Reflected Module":"Modul Paling Banyak Direfleksi",
+        "Loading learner feedback…":"Memuatkan maklum balas pelajar…",
+        "Update the supplied Apps Script and redeploy it to enable aggregate User Insights.":"Kemas kini Apps Script yang disertakan dan deploy semula untuk mengaktifkan Cerapan Pengguna agregat.",
+        "Please select an experience rating.":"Sila pilih penilaian pengalaman.",
+        "Please complete the learning statement and most useful feature.":"Sila lengkapkan pernyataan pembelajaran dan pilih ciri paling berguna.",
+        "Please complete all three learning-experience statements.":"Sila lengkapkan ketiga-tiga pernyataan pengalaman pembelajaran."
+    });
     Object.assign(translations, {
         "If the mole fraction of a non-volatile solute increases, the vapour pressure will:":"Jika pecahan mol zat terlarut tidak meruap meningkat, tekanan wap akan:",
         "Increasing the non-volatile-solute mole fraction lowers the solvent mole fraction, so the solvent vapour pressure decreases further.":"Peningkatan pecahan mol zat terlarut tidak meruap menurunkan pecahan mol pelarut, maka tekanan wap pelarut semakin berkurang.",
