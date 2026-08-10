@@ -6944,7 +6944,8 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   z-index: 12;
   left: 50%;
-  top: 24%;
+  top: auto;
+  bottom: 7%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -6977,7 +6978,7 @@ input[type="range"]::-moz-range-thumb {
   border: 1px solid rgba(251, 191, 36, 1);
 }
 @media (max-width: 640px) {
-  #tab-content-freezing-point .fp-sim-info { top: 22%; gap: 5px; }
+  #tab-content-freezing-point .fp-sim-info { top: auto; bottom: 7%; gap: 5px; }
   #tab-content-freezing-point .fp-sim-pill { font-size: 12px; padding: 6px 13px; }
 }
 </style>
