@@ -7971,8 +7971,8 @@ input[type="range"]::-moz-range-thumb {
 <div class="vp-chamber-wrap"><canvas class="vp-chamber-canvas" id="canvas-vp-pure"></canvas></div>
 <div class="vp-equation-card vp-equation-solvent">
 <div class="vp-equation-title text-brand-600 dark:text-brand-300">Solvent Equation</div>
-<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-solvent-equation-formula"></div>
-<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-solvent-equation-explanation"></div>
+<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-solvent-equation-formula" data-i18n-ignore="true"></div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-solvent-equation-explanation" data-i18n-ignore="true"></div>
 </div>
 </section>
 
@@ -8040,9 +8040,9 @@ input[type="range"]::-moz-range-thumb {
 <div class="vp-chamber-wrap"><canvas class="vp-chamber-canvas" id="canvas-vp-solution"></canvas></div>
 <div class="vp-equation-card vp-equation-solution">
 <div class="vp-equation-title text-amber-600 dark:text-amber-400">Solution Equation</div>
-<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-equation-formula"></div>
-<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-equation-explanation"></div>
-<div class="mt-2 text-[9px] font-semibold text-stemPurple-600 dark:text-stemPurple-300 hidden" id="vp-ideal-model-note">Ideal-solution model used for instructional purposes.</div>
+<div class="vp-equation-formula text-slate-900 dark:text-white" id="vp-equation-formula" data-i18n-ignore="true"></div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="vp-equation-explanation" data-i18n-ignore="true"></div>
+<div class="mt-2 text-[9px] font-semibold text-stemPurple-600 dark:text-stemPurple-300 hidden" id="vp-ideal-model-note" data-i18n-ignore="true">Ideal-solution model used for instructional purposes.</div>
 </div>
 </section>
 
@@ -8165,7 +8165,7 @@ input[type="range"]::-moz-range-thumb {
 <div class="vp-equation-card vp-equation-solvent">
 <div class="vp-equation-title text-brand-600 dark:text-brand-300">Water Equation</div>
 <div class="vp-equation-formula text-slate-900 dark:text-white">\(T_b^\circ\)</div>
-<div class="vp-equation-copy text-slate-600 dark:text-slate-400">\(T_b^\circ\) = boiling point of water.</div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="bp-water-equation-copy" data-i18n-ignore="true">\(T_b^\circ\) = boiling point of water.</div>
 </div>
 </section>
 
@@ -8226,8 +8226,8 @@ input[type="range"]::-moz-range-thumb {
 <div class="vp-equation-card vp-equation-solution">
 <div class="vp-equation-title text-amber-600 dark:text-amber-400">Solution Equation</div>
 <div class="vp-equation-formula text-slate-900 dark:text-white">\(\Delta T_b = K_bm\)<br/>\(T_b = T_b^\circ + \Delta T_b\)</div>
-<div class="vp-equation-copy text-slate-600 dark:text-slate-400">\(K_b\) = molal boiling-point elevation constant, \(m\) = molality, \(T_b^\circ\) = boiling point of water, \(T_b\) = boiling point of the solution.</div>
-<div class="mt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed">For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>
+<div class="vp-equation-copy text-slate-600 dark:text-slate-400" id="bp-solution-equation-copy" data-i18n-ignore="true">\(K_b\) = molal boiling-point elevation constant, \(m\) = molality, \(T_b^\circ\) = boiling point of water, \(T_b\) = boiling point of the solution.</div>
+<div class="mt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed" id="bp-model-note" data-i18n-ignore="true">For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>
 </div>
 </section>
 
@@ -8368,7 +8368,7 @@ input[type="range"]::-moz-range-thumb {
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
 <div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
 <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\Delta T_f = K_fm\)<br/>\(\Delta T_f = T_f^\circ - T_f\)<br/>\(T_f^\circ &gt; T_f\;\text{and}\;\Delta T_f &gt; 0\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed" id="fp-equation-copy" data-i18n-ignore="true">
 <strong>where;</strong><br/>
 <strong>\(K_f\)</strong> = molal freezing point depression constant (°C kg mol<sup>−1</sup>)<br/>
 <strong>\(m\)</strong> = molality of solution (mol kg<sup>−1</sup>)<br/>
@@ -8496,7 +8496,7 @@ input[type="range"]::-moz-range-thumb {
 <div class="mt-4 p-4 rounded-[14px] bg-slate-50 dark:bg-[#060A12] border border-slate-100 dark:border-white/5 shadow-sm">
 <div class="text-[10px] font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider font-heading mb-2">Equation</div>
 <div class="text-sm font-bold text-slate-900 dark:text-white mb-2">\(\pi = iMRT\)</div>
-<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed space-y-1">
+<div class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed space-y-1" id="osmosis-equation-copy" data-i18n-ignore="true">
 <div><strong>\(\pi\)</strong> = osmotic pressure</div>
 <div><strong>\(i\)</strong> = van’t Hoff factor</div>
 <div><strong>\(M\)</strong> = molarity of the solution</div>
@@ -11789,6 +11789,7 @@ input[type="range"]::-moz-range-thumb {
         });
 
         function updateEquationPanels() {
+            const tr = (value) => window.FNF_I18N?.t ? window.FNF_I18N.t(value) : String(value);
             const vpSolventFormula = document.getElementById('vp-solvent-equation-formula');
             const vpSolventExplanation = document.getElementById('vp-solvent-equation-explanation');
             const vpFormula = document.getElementById('vp-equation-formula');
@@ -11800,28 +11801,29 @@ input[type="range"]::-moz-range-thumb {
             const vpIdealModelNote = document.getElementById('vp-ideal-model-note');
             const xSolute = readVPSoluteFraction();
             const xSolvent = 1 - xSolute;
+            if (vpIdealModelNote) vpIdealModelNote.textContent = tr('Ideal-solution model used for instructional purposes.');
 
             if (vpSolventFormula && vpSolventExplanation) {
                 vpSolventFormula.innerHTML = '\\(P_{\\text{solvent}} = P_A^\\circ\\)';
-                vpSolventExplanation.innerHTML = '<strong>\\(P_A^\\circ\\)</strong> = vapour pressure of the pure solvent at the selected temperature.';
+                vpSolventExplanation.innerHTML = '<strong>\\(P_A^\\circ\\)</strong> ' + tr('= vapour pressure of the pure solvent at the selected temperature.');
             }
 
             if (vpFormula && vpExplanation) {
                 if (currentSolute === 'Ethanol') {
-                    if (vpLegend) vpLegend.textContent = 'Volatile Solute';
-                    if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
-                    if (vpPanelTitle) vpPanelTitle.textContent = 'Volatile Solute';
-                    if (vpBehaviourHint) vpBehaviourHint.textContent = 'Both the solvent and the volatile solute can enter the vapour phase.';
+                    if (vpLegend) vpLegend.textContent = tr('Volatile Solute');
+                    if (vpVapourLegend) vpVapourLegend.textContent = tr('Vapour');
+                    if (vpPanelTitle) vpPanelTitle.textContent = tr('Volatile Solute');
+                    if (vpBehaviourHint) vpBehaviourHint.textContent = tr('Both the solvent and the volatile solute can enter the vapour phase.');
                     vpFormula.innerHTML = `\\(P_{\\text{total}} = X_A P_A^\\circ + X_B P_B^\\circ\\)<br>\\(X_A=${xSolvent.toFixed(2)},\\;X_B=${xSolute.toFixed(2)}\\)`;
-                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> and <strong>\\(P_B\\)</strong> are partial vapour pressures. Increasing the volatile-solute mole fraction changes both Raoult-law contributions.';
+                    vpExplanation.innerHTML = '<strong>\\(P_A\\)</strong> ' + tr('and') + ' <strong>\\(P_B\\)</strong> ' + tr('are partial vapour pressures. Increasing the volatile-solute mole fraction changes both Raoult-law contributions.');
                     if (vpIdealModelNote) vpIdealModelNote.classList.remove('hidden');
                 } else {
-                    if (vpLegend) vpLegend.textContent = 'Non-Volatile Solute';
-                    if (vpVapourLegend) vpVapourLegend.textContent = 'Vapour';
-                    if (vpPanelTitle) vpPanelTitle.textContent = 'Non-Volatile Solute';
-                    if (vpBehaviourHint) vpBehaviourHint.textContent = 'The solute stays in the liquid. Only solvent molecules enter the vapour phase.';
+                    if (vpLegend) vpLegend.textContent = tr('Non-Volatile Solute');
+                    if (vpVapourLegend) vpVapourLegend.textContent = tr('Vapour');
+                    if (vpPanelTitle) vpPanelTitle.textContent = tr('Non-Volatile Solute');
+                    if (vpBehaviourHint) vpBehaviourHint.textContent = tr('The solute stays in the liquid. Only solvent molecules enter the vapour phase.');
                     vpFormula.innerHTML = `\\(P_A = X_A P_A^\\circ\\)<br>\\(X_A=${xSolvent.toFixed(2)},\\;X_{solute}=${xSolute.toFixed(2)}\\)<br>\\(\\Delta P = P_A^\\circ - P_A\\)`;
-                    vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> is the solvent mole fraction. Increasing non-volatile solute lowers \\(X_A\\), so the solvent partial vapour pressure decreases.';
+                    vpExplanation.innerHTML = '<strong>\\(X_A\\)</strong> ' + tr('is the solvent mole fraction. Increasing non-volatile solute lowers \\(X_A\\), so the solvent partial vapour pressure decreases.');
                     if (vpIdealModelNote) vpIdealModelNote.classList.add('hidden');
                 }
             }
@@ -11856,6 +11858,8 @@ input[type="range"]::-moz-range-thumb {
             updateEquationPanels();
             initSimulations();
         }
+
+        window.__fnfUpdateEquationPanels = updateEquationPanels;
 
         function updateVPPauseUI(section) {
             const paused = section === 'pure' ? vpPurePaused : vpSolutionPaused;
@@ -12423,7 +12427,7 @@ input[type="range"]::-moz-range-thumb {
             };
 
             if (showExternal) {
-                const externalText = 'P external  1.00 atm';
+                const externalText = `${window.FNF_I18N?.t?.('P external') || 'P external'}  1.00 atm`;
                 const externalW = Math.ceil(ctx.measureText(externalText).width + padX * 2);
                 const externalX = Math.max(8, width - externalW - 9);
                 const externalY = Math.max(8, liquidY - pillH - 5);
@@ -12444,7 +12448,7 @@ input[type="range"]::-moz-range-thumb {
 
             const normalizedExtras = Array.isArray(extraLabels) ? extraLabels : [];
             const stackItems = [{
-                text: `P internal  ${formatPressureAtm(internalAtm)}`,
+                text: `${window.FNF_I18N?.t?.('P internal') || 'P internal'}  ${formatPressureAtm(internalAtm)}`,
                 fg: '#fbcfe8',
                 bg: 'rgba(80, 7, 36, .95)',
                 border: 'rgba(249, 168, 212, 1)'
@@ -13081,7 +13085,7 @@ input[type="range"]::-moz-range-thumb {
             updateText('label-osmosis-concentration', conc.toFixed(2) + ' mol L⁻¹');
             updateText('label-osmosis-pressure', `π = ${osmoticPressure.toFixed(2)} atm`);
             updateText('osm-pressure-overlay', `π = ${osmoticPressure.toFixed(2)} atm`);
-            updateText('metrics-osmosis-pressure', `At 298 K: π = ${osmoticPressure.toFixed(2)} atm`);
+            updateText('metrics-osmosis-pressure', `${window.FNF_I18N?.getLanguage?.() === 'ms' ? 'Pada' : 'At'} 298 K: π = ${osmoticPressure.toFixed(2)} atm`);
             updateText('metrics-osmosis-flux', conc > 0.001
                 ? 'Pure Solvent → Solution'
                 : 'Dynamic Equilibrium — No Net Solvent Flow');
@@ -13863,7 +13867,7 @@ input[type="range"]::-moz-range-thumb {
         "boiling point of the solution.":"takat didih larutan."
     });
     Object.assign(translations, {"(optional)":"(pilihan)","These metrics describe self-reported learner experience. They are not labelled as learning impact or proof of mastery.":"Metrik ini menerangkan pengalaman pelajar yang dilaporkan sendiri. Ia tidak dilabel sebagai impak pembelajaran atau bukti penguasaan.","🔒 Certificate Locked":"🔒 Sijil Dikunci","🏆 Certificate Unlocked":"🏆 Sijil Dibuka","Only water molecules can escape into the vapour phase.":"Hanya molekul air boleh terlepas ke fasa wap.","Vapour Pressure — Water":"Tekanan Wap — Air","Vapour Pressure — Solution":"Tekanan Wap — Larutan","Solvent Equation":"Persamaan Pelarut","Solution Equation":"Persamaan Larutan","Choose a solute type and observe its effect on vapour pressure.":"Pilih jenis zat terlarut dan perhatikan kesannya terhadap tekanan wap.","Increase the fraction to add more solute particles and strengthen the composition effect.":"Tingkatkan pecahan untuk menambah lebih banyak zarah zat terlarut dan menguatkan kesan komposisi.","Water:":"Air:","only water molecules are present, so only water molecules can enter the vapour phase.":"hanya molekul air hadir, jadi hanya molekul air boleh memasuki fasa wap.","Non-volatile solute:":"Zat terlarut tidak meruap:","the solute remains in the liquid; only the solvent contributes to vapour pressure.":"zat terlarut kekal dalam fasa cecair; hanya pelarut menyumbang kepada tekanan wap.","Volatile solute:":"Zat terlarut meruap:","both the solvent and volatile solute can enter the vapour phase, so both partial pressures contribute to the total vapour pressure.":"kedua-dua pelarut dan zat terlarut meruap boleh memasuki fasa wap, maka kedua-dua tekanan separa menyumbang kepada jumlah tekanan wap.","Water boils when its vapour pressure becomes equal to the external pressure.":"Air mendidih apabila tekanan wapnya menjadi sama dengan tekanan luar.","Boiling Point — Water":"Takat Didih — Air","Boiling Point — Solution":"Takat Didih — Larutan","Water Equation":"Persamaan Air","\\\\(T_b^\\\\circ\\\\) = boiling point of water.":"\\\\(T_b^\\\\circ\\\\) = takat didih air.","A non-volatile solute lowers vapour pressure, so the solution boils at a higher temperature.":"Zat terlarut tidak meruap menurunkan tekanan wap, maka larutan mendidih pada suhu yang lebih tinggi.","NON-VOLATILE SOLUTE":"ZAT TERLARUT TIDAK MERUAP","Increase molality to strengthen boiling-point elevation.":"Tingkatkan kemolalan untuk meningkatkan kesan kenaikan takat didih.","\\\\(K_b\\\\) = molal boiling-point elevation constant, \\\\(m\\\\) = molality, \\\\(T_b^\\\\circ\\\\) = boiling point of water, \\\\(T_b\\\\) = boiling point of the solution.":"\\\\(K_b\\\\) = pemalar kenaikan takat didih molal, \\\\(m\\\\) = kemolalan, \\\\(T_b^\\\\circ\\\\) = takat didih air, \\\\(T_b\\\\) = takat didih larutan.","For the non-electrolyte model used in this simulation,":"Bagi model bukan elektrolit yang digunakan dalam simulasi ini,","= osmotic pressure":"= tekanan osmosis","= van’t Hoff factor":"= faktor van’t Hoff","= molarity of the solution":"= kemolaran larutan","= gas constant":"= pemalar gas","= absolute temperature in kelvin":"= suhu mutlak dalam kelvin","Share a suggestion...":"Kongsikan cadangan...","Decrease pure solvent temperature by 0.1 degrees Celsius":"Kurangkan suhu pelarut tulen sebanyak 0.1 darjah Celsius","Adjust pure solvent temperature":"Laraskan suhu pelarut tulen","Increase pure solvent temperature by 0.1 degrees Celsius":"Naikkan suhu pelarut tulen sebanyak 0.1 darjah Celsius","Pure solvent particle colour legend":"Petunjuk warna zarah pelarut tulen","External pressure":"Tekanan luar","Decrease solution temperature by 0.1 degrees Celsius":"Kurangkan suhu larutan sebanyak 0.1 darjah Celsius","Adjust solution temperature":"Laraskan suhu larutan","Increase solution temperature by 0.1 degrees Celsius":"Naikkan suhu larutan sebanyak 0.1 darjah Celsius","Adjust solute mole fraction":"Laraskan pecahan mol zat terlarut","Solution particle colour legend":"Petunjuk warna zarah larutan","Decrease water temperature by 0.1 degrees Celsius":"Kurangkan suhu air sebanyak 0.1 darjah Celsius","Adjust water temperature":"Laraskan suhu air","Increase water temperature by 0.1 degrees Celsius":"Naikkan suhu air sebanyak 0.1 darjah Celsius","Water particle colour legend":"Petunjuk warna zarah air","Adjust boiling point solution molality":"Laraskan kemolalan larutan takat didih","Decrease temperature by 0.1 degrees Celsius":"Kurangkan suhu sebanyak 0.1 darjah Celsius","Adjust Temperature":"Laraskan suhu","Increase temperature by 0.1 degrees Celsius":"Naikkan suhu sebanyak 0.1 darjah Celsius","Adjust freezing point solution molality":"Laraskan kemolalan larutan takat beku","Adjust solute concentration":"Laraskan kepekatan zat terlarut","Welcome to SoluEffect360":"Selamat Datang ke SoluEffect360","Choose a Topic":"Pilih Topik","Did You Know?":"Tahukah Anda?","Quiz Time":"Masa Kuiz","Badges & Certificate":"Lencana & Sijil","Start here, then choose Learn or Quiz Arena.":"Mulakan di sini, kemudian pilih Belajar atau Arena Kuiz.","Switch between the four colligative-property modules here.":"Beralih antara empat modul sifat koligatif di sini.","Check what you should understand before experimenting.":"Semak perkara yang perlu anda fahami sebelum menjalankan eksperimen.","Explore short real-world facts and animations.":"Terokai fakta ringkas dunia sebenar dan animasi.","Answer the short practice questions for this topic.":"Jawab soalan latihan ringkas untuk topik ini.","Choose the solution type, adjust temperature, pause or reset.":"Pilih jenis larutan, laraskan suhu, jeda atau tetapkan semula.","Compare solvent and solution particles with their equations.":"Bandingkan zarah pelarut dan larutan bersama persamaannya.","Read the science behind what the simulation is showing.":"Baca penerangan saintifik di sebalik perkara yang ditunjukkan oleh simulasi.","Review the observation and real-life application.":"Semak pemerhatian dan aplikasi kehidupan sebenar.","Enter a nickname and take the full challenge.":"Masukkan nama panggilan dan mulakan cabaran penuh.","Create or join a room for a live class competition.":"Cipta atau sertai bilik untuk pertandingan kelas secara langsung.","Your points increase automatically as you learn and interact.":"Mata anda meningkat secara automatik semasa anda belajar dan berinteraksi.","Track badges and unlock the certificate after completion.":"Jejaki lencana dan buka sijil selepas selesai.","Capture a short learner reflection or final learning-experience evaluation here.":"Rekod refleksi ringkas pelajar atau penilaian akhir pengalaman pembelajaran di sini.","Why does adding glucose raise the boiling point of a solvent?":"Mengapakah penambahan glukosa menaikkan takat didih pelarut?","Glucose lowers the solvent vapour pressure, so more heating is needed to reach external pressure":"Glukosa menurunkan tekanan wap pelarut, maka lebih banyak pemanasan diperlukan untuk mencapai tekanan luar","Glucose increases the external pressure":"Glukosa meningkatkan tekanan luar","Glucose evaporates first and heats the solvent":"Glukosa menyejat terlebih dahulu dan memanaskan pelarut","Compared with a pure solvent, a solution containing a dissolved solute generally freezes at:":"Berbanding pelarut tulen, larutan yang mengandungi zat terlarut biasanya membeku pada:","A non-volatile solute lowers the mole fraction of solvent. By Raoult’s law, the solvent partial vapour pressure therefore decreases.":"Zat terlarut tidak meruap menurunkan pecahan mol pelarut. Menurut hukum Raoult, tekanan wap separa pelarut turut menurun.","Glucose is non-volatile and lowers the solvent vapour pressure. The solution therefore needs a higher temperature before its vapour pressure equals the external pressure.":"Glukosa tidak meruap dan menurunkan tekanan wap pelarut. Oleh itu, larutan memerlukan suhu lebih tinggi sebelum tekanan wapnya menyamai tekanan luar.","A dissolved solute causes freezing-point depression, so the solution freezes at a lower temperature than the pure solvent.":"Zat terlarut menyebabkan penurunan takat beku, maka larutan membeku pada suhu yang lebih rendah daripada pelarut tulen.","Quiz complete — swipe left or right to review previous questions.":"Kuiz selesai — leret ke kiri atau kanan untuk menyemak soalan sebelumnya.","Both the solvent and the volatile solute can enter the vapour phase.":"Kedua-dua pelarut dan zat terlarut meruap boleh memasuki fasa wap.","The solute stays in the liquid. Only solvent molecules enter the vapour phase.":"Zat terlarut kekal dalam cecair. Hanya molekul pelarut memasuki fasa wap.","are partial vapour pressures. Increasing the volatile-solute mole fraction changes both Raoult-law contributions.":"ialah tekanan wap separa. Peningkatan pecahan mol zat terlarut meruap mengubah kedua-dua sumbangan dalam hukum Raoult.","= vapour pressure of the pure solvent at the selected temperature.":"= tekanan wap pelarut tulen pada suhu yang dipilih.","is the solvent mole fraction. Increasing non-volatile solute lowers":"ialah pecahan mol pelarut. Peningkatan zat terlarut tidak meruap menurunkan","is the solvent mole fraction. Increasing non-volatile solute lowers \\(X_A\\), so the solvent partial vapour pressure decreases.":"ialah pecahan mol pelarut. Peningkatan zat terlarut tidak meruap menurunkan \\(X_A\\), maka tekanan wap separa pelarut berkurang.","Correct":"Betul","Time Expired":"Masa Tamat","No answer submitted":"Tiada jawapan dihantar","Fact":"Fakta","Your answer:":"Jawapan anda:","Correct answer:":"Jawapan betul:","Explanation:":"Penerangan:","No learner reflections have been recorded yet.":"Belum ada refleksi pelajar yang direkodkan.","Semi-Permeable":"Separa Telap","Membrane":"Membran","P external  1.00 atm":"P luar  1.00 atm","Solute concentration adjusted":"Kepekatan zat terlarut dilaraskan"});
-    Object.assign(translations, {"SOLVENT":"PELARUT","\\(T_b^\\circ\\) = boiling point of water.":"\\(T_b^\\circ\\) = takat didih air.","\\(K_b\\) = molal boiling-point elevation constant, \\(m\\) = molality, \\(T_b^\\circ\\) = boiling point of water, \\(T_b\\) = boiling point of the solution.":"\\(K_b\\) = pemalar kenaikan takat didih molal, \\(m\\) = kemolalan, \\(T_b^\\circ\\) = takat didih air, \\(T_b\\) = takat didih larutan.","\\(T_f^\\circ > T_f\\;\\text{and}\\;\\Delta T_f > 0\\)":"\\(T_f^\\circ > T_f\\;\\text{dan}\\;\\Delta T_f > 0\\)"});
+    Object.assign(translations, {"and":"dan","SOLVENT":"PELARUT","\\(T_b^\\circ\\) = boiling point of water.":"\\(T_b^\\circ\\) = takat didih air.","\\(K_b\\) = molal boiling-point elevation constant, \\(m\\) = molality, \\(T_b^\\circ\\) = boiling point of water, \\(T_b\\) = boiling point of the solution.":"\\(K_b\\) = pemalar kenaikan takat didih molal, \\(m\\) = kemolalan, \\(T_b^\\circ\\) = takat didih air, \\(T_b\\) = takat didih larutan.","\\(T_f^\\circ > T_f\\;\\text{and}\\;\\Delta T_f > 0\\)":"\\(T_f^\\circ > T_f\\;\\text{dan}\\;\\Delta T_f > 0\\)"});
     Object.assign(translations, {
         "where;":"di mana;",
         "= molal freezing point depression constant (°C kg mol":"= pemalar penurunan takat beku molal (°C kg mol",
@@ -13892,7 +13896,7 @@ input[type="range"]::-moz-range-thumb {
 
     function shouldIgnore(node) {
         const parent = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
-        return !parent || !!parent.closest('script, style, noscript, [data-i18n-ignore="true"]');
+        return !parent || !!parent.closest('script, style, noscript, mjx-container, mjx-assistive-mml, [data-i18n-ignore="true"]');
     }
 
     function translateDynamic(value) {
@@ -14044,6 +14048,74 @@ input[type="range"]::-moz-range-thumb {
         });
     }
 
+    function syncEquationLanguage() {
+        const ms = currentLanguage === 'ms';
+        const equationNodes = [];
+        const setHTML = (id, en, bm) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            try { window.MathJax?.typesetClear?.([el]); } catch (_) {}
+            el.innerHTML = ms ? bm : en;
+            equationNodes.push(el);
+        };
+
+        setHTML(
+            'bp-water-equation-copy',
+            String.raw`\(T_b^\circ\) = boiling point of water.`,
+            String.raw`\(T_b^\circ\) = takat didih air.`
+        );
+        setHTML(
+            'bp-solution-equation-copy',
+            String.raw`\(K_b\) = molal boiling-point elevation constant, \(m\) = molality, \(T_b^\circ\) = boiling point of water, \(T_b\) = boiling point of the solution.`,
+            String.raw`\(K_b\) = pemalar kenaikan takat didih molal, \(m\) = kemolalan, \(T_b^\circ\) = takat didih air, \(T_b\) = takat didih larutan.`
+        );
+        setHTML(
+            'bp-model-note',
+            `For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.`,
+            `Bagi model bukan elektrolit yang digunakan dalam simulasi ini, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.`
+        );
+        setHTML(
+            'fp-equation-copy',
+            String.raw`<strong>where;</strong><br/>
+<strong>\(K_f\)</strong> = molal freezing point depression constant (°C kg mol<sup>−1</sup>)<br/>
+<strong>\(m\)</strong> = molality of solution (mol kg<sup>−1</sup>)<br/>
+<strong>\(T_f^\circ\)</strong> = freezing point of pure solvent (°C)<br/>
+<strong>\(T_f\)</strong> = freezing point of solution (°C)
+<div class="pt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed">For the non-electrolyte model used in this simulation, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>`,
+            String.raw`<strong>di mana;</strong><br/>
+<strong>\(K_f\)</strong> = pemalar penurunan takat beku molal (°C kg mol<sup>−1</sup>)<br/>
+<strong>\(m\)</strong> = kemolalan larutan (mol kg<sup>−1</sup>)<br/>
+<strong>\(T_f^\circ\)</strong> = takat beku pelarut tulen (°C)<br/>
+<strong>\(T_f\)</strong> = takat beku larutan (°C)
+<div class="pt-2 text-[10px] font-semibold text-slate-500 dark:text-slate-400 leading-relaxed">Bagi model bukan elektrolit yang digunakan dalam simulasi ini, <strong class="text-slate-700 dark:text-slate-200">i = 1</strong>.</div>`
+        );
+
+        const metric = document.getElementById('metrics-osmosis-pressure');
+        const metricValue = metric?.textContent?.match(/π\s*=\s*([0-9.]+)\s*atm/i)?.[1] || '0.00';
+        setHTML(
+            'osmosis-equation-copy',
+            String.raw`<div><strong>\(\pi\)</strong> = osmotic pressure</div>
+<div><strong>\(i\)</strong> = van’t Hoff factor</div>
+<div><strong>\(M\)</strong> = molarity of the solution</div>
+<div><strong>\(R\)</strong> = gas constant</div>
+<div><strong>\(T\)</strong> = absolute temperature in kelvin</div>
+<div class="pt-1 font-bold text-stemPurple-600 dark:text-stemPurple-300" id="metrics-osmosis-pressure">At 298 K: π = ${metricValue} atm</div>`,
+            String.raw`<div><strong>\(\pi\)</strong> = tekanan osmosis</div>
+<div><strong>\(i\)</strong> = faktor van’t Hoff</div>
+<div><strong>\(M\)</strong> = kemolaran larutan</div>
+<div><strong>\(R\)</strong> = pemalar gas</div>
+<div><strong>\(T\)</strong> = suhu mutlak dalam kelvin</div>
+<div class="pt-1 font-bold text-stemPurple-600 dark:text-stemPurple-300" id="metrics-osmosis-pressure">Pada 298 K: π = ${metricValue} atm</div>`
+        );
+
+        // Vapour-pressure equations are generated dynamically; regenerate them in the active language.
+        try { window.__fnfUpdateEquationPanels?.(); } catch (_) {}
+
+        if (window.MathJax?.typesetPromise && equationNodes.length) {
+            requestAnimationFrame(() => window.MathJax.typesetPromise(equationNodes).catch(() => {}));
+        }
+    }
+
     function updateButton() {
         const button = document.getElementById('language-toggle');
         const label = document.getElementById('language-toggle-label');
@@ -14063,6 +14135,7 @@ input[type="range"]::-moz-range-thumb {
         if (observer) observer.disconnect();
         walk(document.documentElement);
         updateButton();
+        syncEquationLanguage();
         if (observer) startObserving();
         if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise().catch(() => {});
         setTimeout(() => {
